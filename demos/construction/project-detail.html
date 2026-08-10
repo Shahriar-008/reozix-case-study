@@ -214,8 +214,7 @@
 
   // Deterministic photo selection: (project index × photo count) + photo index
   function photoIdFor(index) {
-    var seed = projectIndex * project.photos + index;
-    return pool[seed % pool.length];
+    return pool[(projectIndex + index) % pool.length];
   }
   function photoSrc(id, w, h) {
     return 'https://images.unsplash.com/' + id + '?w=' + w + '&h=' + h + '&fit=crop';
