@@ -394,7 +394,7 @@
       <div class="tech-card">
         <div class="layer">Infrastructure</div>
         <div class="stack">Vercel · Cloudflare · GitHub Actions</div>
-        <div class="note">Edge-deployed. Automated Lighthouse budgets in CI — Performance gate at 95+. Content changes trigger ISR revalidation. No stale portfolio data, no manual cache invalidation.</div>
+        <div class="note">Edge-deployed. Automated Lighthouse budgets in CI — Performance target 95+ (current demo scores 93 on localhost; CDN deployment adds an estimated 2–5 points). Content changes trigger ISR revalidation. No stale portfolio data, no manual cache invalidation.</div>
       </div>
       <div class="tech-card">
         <div class="layer">Monitoring</div>
@@ -424,7 +424,7 @@
 
     <h3>Performance strategy</h3>
     <p>
-      Portfolio images — the heaviest payload and the most important content — run through a Sharp-based pipeline producing responsive variants at 400w, 800w, and 1600w in WebP/AVIF. Images are lazy-loaded with blur-up placeholders so the page is interactive before every photo loads. Lighthouse scores are enforced in CI at 95+ Performance; any pull request that drops below that threshold is blocked from merge. The performance budget is treated as seriously as the financial budget — because in construction, a slow site costs more than a cheap one.
+      Portfolio images — the heaviest payload and the most important content — run through a Sharp-based pipeline producing responsive variants at 400w, 800w, and 1600w in WebP/AVIF. Images are lazy-loaded with blur-up placeholders so the page is interactive before every photo loads. Lighthouse Performance is targeted at 95+ in CI; the current demo scores 93 on localhost, with CDN deployment expected to close the gap. The performance budget is treated as seriously as the financial budget — because in construction, a slow site costs more than a cheap one.
     </p>
 
     <div class="screenshot-placeholder">
