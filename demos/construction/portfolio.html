@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Portfolio — Reozix Construction, Brisbane</title>
+<meta name="description" content="Explore 18 commercial fit-outs, residential extensions, new builds and renovations delivered by Reozix Construction across Brisbane — with budgets, timelines and floor areas for every project.">
+<link rel="stylesheet" href="../shared/css/reset.css">
+<link rel="stylesheet" href="css/construction.css">
+<style>
+  /* Portfolio page additions — filter count + no-results state */
+  .ct-filter-count {
+    font-size: 0.875rem;
+    color: var(--ct-text-secondary);
+    margin: -20px 0 24px;
+  }
+  .ct-filter-count strong { color: var(--ct-accent-dark); }
+  .ct-no-results {
+    display: none;
+    margin-top: 24px;
+    padding: 48px 24px;
+    text-align: center;
+    background: var(--ct-surface);
+    border: 1px dashed var(--ct-border);
+    border-radius: 8px;
+    color: var(--ct-text-secondary);
+    font-size: 1rem;
+  }
+  .ct-no-results.show { display: block; }
+</style>
+</head>
+<body>
+
+<nav class="ct-nav">
+  <div class="ct-container">
+    <a href="index.html" class="logo">Reozix <span>Construction</span></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="portfolio.html" aria-current="page">Portfolio</a>
+      <a href="services.html">Services</a>
+      <a href="credentials.html">Credentials</a>
+      <a href="tel:+61731862400">+61 7 3186 2400</a>
+      <a href="quote.html" class="ct-btn">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Page header -->
+<section class="ct-page-header">
+  <div class="ct-container">
+    <span class="ct-page-kicker">Our Work</span>
+    <h1>Our Portfolio</h1>
+    <p>Eighteen commercial and residential projects delivered across Brisbane's inner suburbs — from full-floor fit-outs to heritage restorations. Filter by project type to find the work that matches your build.</p>
+  </div>
+</section>
+
+<!-- Portfolio -->
+<section class="ct-section">
+  <div class="ct-container">
+    <div class="ct-filter-bar">
+      <button class="filter-tab active" data-type="all">All</button>
+      <button class="filter-tab" data-type="Commercial Fit-Out">Commercial Fit-Out</button>
+      <button class="filter-tab" data-type="Residential Extension">Residential Extension</button>
+      <button class="filter-tab" data-type="New Build">New Build</button>
+      <button class="filter-tab" data-type="Renovation">Renovation</button>
+    </div>
+    <p class="ct-filter-count" id="filter-count" aria-live="polite">Showing <strong id="result-count">18</strong> of 18 projects</p>
+
+    <div class="ct-portfolio-grid">
+
+      <!-- proj-001 -->
+      <article class="project-card" data-type="Commercial Fit-Out">
+        <a href="project-detail.html?id=proj-001" class="ct-project-photo" aria-label="View Meridian Tower Executive Office Fit-Out">
+          <div class="photo-placeholder" aria-hidden="true">🏢</div>
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=60" alt="Meridian Tower executive office fit-out" loading="lazy">
+          <span class="ct-project-type">Commercial Fit-Out</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-001">Meridian Tower Executive Office Fit-Out</a></h3>
+          <p class="ct-project-suburb">Brisbane CBD</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$1,450,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:60%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 14 weeks</span>
+            <span class="ct-meta-item">📐 1,350 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-001" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-002 -->
+      <article class="project-card" data-type="Commercial Fit-Out">
+        <a href="project-detail.html?id=proj-002" class="ct-project-photo" aria-label="View The Foundry Retail Flagship Store">
+          <div class="photo-placeholder" aria-hidden="true">🏢</div>
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=60" alt="The Foundry retail flagship store fit-out" loading="lazy">
+          <span class="ct-project-type">Commercial Fit-Out</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-002">The Foundry Retail Flagship Store</a></h3>
+          <p class="ct-project-suburb">Fortitude Valley</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$620,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:26%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 10 weeks</span>
+            <span class="ct-meta-item">📐 420 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-002" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-003 -->
+      <article class="project-card" data-type="Commercial Fit-Out">
+        <a href="project-detail.html?id=proj-003" class="ct-project-photo" aria-label="View Wickham Street Medical Centre Fit-Out">
+          <div class="photo-placeholder" aria-hidden="true">🏢</div>
+          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=60" alt="Wickham Street medical centre fit-out" loading="lazy">
+          <span class="ct-project-type">Commercial Fit-Out</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-003">Wickham Street Medical Centre Fit-Out</a></h3>
+          <p class="ct-project-suburb">Fortitude Valley</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$1,100,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:46%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 16 weeks</span>
+            <span class="ct-meta-item">📐 780 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-003" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-004 -->
+      <article class="project-card" data-type="Commercial Fit-Out">
+        <a href="project-detail.html?id=proj-004" class="ct-project-photo" aria-label="View Milton Creative Agency Refurbishment">
+          <div class="photo-placeholder" aria-hidden="true">🏢</div>
+          <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=800&q=60" alt="Milton creative agency refurbishment" loading="lazy">
+          <span class="ct-project-type">Commercial Fit-Out</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-004">Milton Creative Agency Refurbishment</a></h3>
+          <p class="ct-project-suburb">Milton</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$480,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:20%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 8 weeks</span>
+            <span class="ct-meta-item">📐 560 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-004" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-005 -->
+      <article class="project-card" data-type="Residential Extension">
+        <a href="project-detail.html?id=proj-005" class="ct-project-photo" aria-label="View Latitude Street Second Storey Addition">
+          <div class="photo-placeholder" aria-hidden="true">🏠</div>
+          <img src="https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?auto=format&fit=crop&w=800&q=60" alt="Latitude Street second storey addition" loading="lazy">
+          <span class="ct-project-type">Residential Extension</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-005">Latitude Street Second Storey Addition</a></h3>
+          <p class="ct-project-suburb">Paddington</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$385,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:16%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 18 weeks</span>
+            <span class="ct-meta-item">📐 95 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-005" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-006 -->
+      <article class="project-card" data-type="Residential Extension">
+        <a href="project-detail.html?id=proj-006" class="ct-project-photo" aria-label="View Coorparoo Entertainer's Deck & Patio">
+          <div class="photo-placeholder" aria-hidden="true">🏠</div>
+          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=60" alt="Coorparoo entertainer's deck and patio" loading="lazy">
+          <span class="ct-project-type">Residential Extension</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-006">Coorparoo Entertainer's Deck & Patio</a></h3>
+          <p class="ct-project-suburb">Coorparoo</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$88,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:4%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 6 weeks</span>
+            <span class="ct-meta-item">📐 42 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-006" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-007 -->
+      <article class="project-card" data-type="Residential Extension">
+        <a href="project-detail.html?id=proj-007" class="ct-project-photo" aria-label="View Ashgrove Queenslander Rear Extension">
+          <div class="photo-placeholder" aria-hidden="true">🏠</div>
+          <img src="https://images.unsplash.com/photo-1416331108676-a22ccb276e35?auto=format&fit=crop&w=800&q=60" alt="Ashgrove Queenslander rear extension" loading="lazy">
+          <span class="ct-project-type">Residential Extension</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-007">Ashgrove Queenslander Rear Extension</a></h3>
+          <p class="ct-project-suburb">Ashgrove</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$240,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:10%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 12 weeks</span>
+            <span class="ct-meta-item">📐 68 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-007" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-008 -->
+      <article class="project-card" data-type="Residential Extension">
+        <a href="project-detail.html?id=proj-008" class="ct-project-photo" aria-label="View Paddington Kitchen & Living Extension">
+          <div class="photo-placeholder" aria-hidden="true">🏠</div>
+          <img src="https://images.unsplash.com/photo-1556912167-f556f1f39fdf?auto=format&fit=crop&w=800&q=60" alt="Paddington kitchen and living extension" loading="lazy">
+          <span class="ct-project-type">Residential Extension</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-008">Paddington Kitchen & Living Extension</a></h3>
+          <p class="ct-project-suburb">Paddington</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$320,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:13%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 14 weeks</span>
+            <span class="ct-meta-item">📐 75 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-008" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-009 -->
+      <article class="project-card" data-type="New Build">
+        <a href="project-detail.html?id=proj-009" class="ct-project-photo" aria-label="View New Farm Contemporary Custom Home">
+          <div class="photo-placeholder" aria-hidden="true">🏗️</div>
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=60" alt="New Farm contemporary custom home" loading="lazy">
+          <span class="ct-project-type">New Build</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-009">New Farm Contemporary Custom Home</a></h3>
+          <p class="ct-project-suburb">New Farm</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$2,400,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:100%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 34 weeks</span>
+            <span class="ct-meta-item">📐 420 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-009" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-010 -->
+      <article class="project-card" data-type="New Build">
+        <a href="project-detail.html?id=proj-010" class="ct-project-photo" aria-label="View Hamilton Dual-Living Duplex">
+          <div class="photo-placeholder" aria-hidden="true">🏗️</div>
+          <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=800&q=60" alt="Hamilton dual-living duplex" loading="lazy">
+          <span class="ct-project-type">New Build</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-010">Hamilton Dual-Living Duplex</a></h3>
+          <p class="ct-project-suburb">Hamilton</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$1,800,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:75%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 30 weeks</span>
+            <span class="ct-meta-item">📐 510 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-010" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-011 -->
+      <article class="project-card" data-type="New Build">
+        <a href="project-detail.html?id=proj-011" class="ct-project-photo" aria-label="View Chelmer Riverfront Residence">
+          <div class="photo-placeholder" aria-hidden="true">🏗️</div>
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=60" alt="Chelmer riverfront residence" loading="lazy">
+          <span class="ct-project-type">New Build</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-011">Chelmer Riverfront Residence</a></h3>
+          <p class="ct-project-suburb">Chelmer</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$2,800,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:100%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 40 weeks</span>
+            <span class="ct-meta-item">📐 480 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-011" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-012 -->
+      <article class="project-card" data-type="New Build">
+        <a href="project-detail.html?id=proj-012" class="ct-project-photo" aria-label="View Hamilton Townhouse Development">
+          <div class="photo-placeholder" aria-hidden="true">🏗️</div>
+          <img src="https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=800&q=60" alt="Hamilton townhouse development" loading="lazy">
+          <span class="ct-project-type">New Build</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-012">Hamilton Townhouse Development</a></h3>
+          <p class="ct-project-suburb">Hamilton</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$2,100,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:88%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 36 weeks</span>
+            <span class="ct-meta-item">📐 690 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-012" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-013 -->
+      <article class="project-card" data-type="New Build">
+        <a href="project-detail.html?id=proj-013" class="ct-project-photo" aria-label="View Chelmer Family Home on Large Lot">
+          <div class="photo-placeholder" aria-hidden="true">🏗️</div>
+          <img src="https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=800&q=60" alt="Chelmer family home on large lot" loading="lazy">
+          <span class="ct-project-type">New Build</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-013">Chelmer Family Home on Large Lot</a></h3>
+          <p class="ct-project-suburb">Chelmer</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$950,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:40%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 24 weeks</span>
+            <span class="ct-meta-item">📐 280 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-013" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-014 -->
+      <article class="project-card" data-type="Renovation">
+        <a href="project-detail.html?id=proj-014" class="ct-project-photo" aria-label="View Bulimba Queenslander Whole-Home Renovation">
+          <div class="photo-placeholder" aria-hidden="true">🔨</div>
+          <img src="https://images.unsplash.com/photo-1600585152915-d208bec867a1?auto=format&fit=crop&w=800&q=60" alt="Bulimba Queenslander whole-home renovation" loading="lazy">
+          <span class="ct-project-type">Renovation</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-014">Bulimba Queenslander Whole-Home Renovation</a></h3>
+          <p class="ct-project-suburb">Bulimba</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$580,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:24%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 20 weeks</span>
+            <span class="ct-meta-item">📐 250 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-014" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-015 -->
+      <article class="project-card" data-type="Renovation">
+        <a href="project-detail.html?id=proj-015" class="ct-project-photo" aria-label="View Newstead Kitchen & Bathroom Renovation">
+          <div class="photo-placeholder" aria-hidden="true">🔨</div>
+          <img src="https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=800&q=60" alt="Newstead kitchen and bathroom renovation" loading="lazy">
+          <span class="ct-project-type">Renovation</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-015">Newstead Kitchen & Bathroom Renovation</a></h3>
+          <p class="ct-project-suburb">Newstead</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$140,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:6%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 7 weeks</span>
+            <span class="ct-meta-item">📐 65 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-015" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-016 -->
+      <article class="project-card" data-type="Renovation">
+        <a href="project-detail.html?id=proj-016" class="ct-project-photo" aria-label="View West End Heritage Terrace Restoration">
+          <div class="photo-placeholder" aria-hidden="true">🔨</div>
+          <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=60" alt="West End heritage terrace restoration" loading="lazy">
+          <span class="ct-project-type">Renovation</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-016">West End Heritage Terrace Restoration</a></h3>
+          <p class="ct-project-suburb">West End</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$420,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:18%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 26 weeks</span>
+            <span class="ct-meta-item">📐 180 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-016" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-017 -->
+      <article class="project-card" data-type="Renovation">
+        <a href="project-detail.html?id=proj-017" class="ct-project-photo" aria-label="View Bulimba Modern Kitchen Renovation">
+          <div class="photo-placeholder" aria-hidden="true">🔨</div>
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=800&q=60" alt="Bulimba modern kitchen renovation" loading="lazy">
+          <span class="ct-project-type">Renovation</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-017">Bulimba Modern Kitchen Renovation</a></h3>
+          <p class="ct-project-suburb">Bulimba</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$95,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:4%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 5 weeks</span>
+            <span class="ct-meta-item">📐 40 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-017" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+      <!-- proj-018 -->
+      <article class="project-card" data-type="Renovation">
+        <a href="project-detail.html?id=proj-018" class="ct-project-photo" aria-label="View West End Bathroom & Laundry Renovation">
+          <div class="photo-placeholder" aria-hidden="true">🔨</div>
+          <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=800&q=60" alt="West End bathroom and laundry renovation" loading="lazy">
+          <span class="ct-project-type">Renovation</span>
+        </a>
+        <div class="ct-project-body">
+          <h3 class="ct-project-title"><a href="project-detail.html?id=proj-018">West End Bathroom & Laundry Renovation</a></h3>
+          <p class="ct-project-suburb">West End</p>
+          <div class="ct-budget-bar">
+            <div class="ct-budget-head">
+              <span class="ct-budget-label">Budget</span>
+              <span class="ct-budget-value">$120,000</span>
+            </div>
+            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:5%"></div></div>
+          </div>
+          <div class="ct-project-meta">
+            <span class="ct-meta-item">⏱ 6 weeks</span>
+            <span class="ct-meta-item">📐 35 sqm</span>
+          </div>
+          <a href="project-detail.html?id=proj-018" class="ct-project-link">View Project →</a>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="ct-no-results" id="no-results">No projects match this filter. Try another project type.</p>
+  </div>
+</section>
+
+<footer class="ct-footer">
+  <div class="ct-container">
+    <div class="ct-footer-agency">
+      <strong>Reozix <span>Construction</span></strong>
+      <p>Brisbane, QLD</p>
+      <a href="tel:+61731862400">+61 7 3186 2400</a>
+      <a href="mailto:build@reozix.com.au">build@reozix.com.au</a>
+    </div>
+    <div class="ct-footer-links">
+      <h4>Quick links</h4>
+      <a href="index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="services.html">Services</a>
+      <a href="credentials.html">Credentials</a>
+      <a href="quote.html">Get a Quote</a>
+    </div>
+  </div>
+  <div class="ct-container">
+    <p class="ct-footer-bottom">© 2026 Reozix Construction. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="../shared/js/utils.js"></script>
+<script src="js/data.js"></script>
+<script src="js/filters.js"></script>
+</body>
+</html>
