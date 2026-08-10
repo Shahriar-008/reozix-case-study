@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Property Search — Reozix Real Estate, Gold Coast</title>
+<meta name="description" content="Filter every Reozix Real Estate listing by property type, suburb, price range and bedrooms — apartments, houses, townhouses, penthouses and villas across the Gold Coast.">
+<link rel="stylesheet" href="../shared/css/reset.css">
+<link rel="stylesheet" href="css/realestate.css">
+<style>
+  /* Search page additions — price range inputs, beds select, no-results state */
+  .price-range { display: flex; align-items: center; gap: 8px; }
+  .price-range input {
+    width: 100%; min-width: 0; padding: 10px 12px;
+    border: 1px solid var(--re-border); border-radius: 8px;
+    font-family: inherit; font-size: 0.9375rem; color: var(--re-text);
+    background: var(--re-bg);
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .price-range input:focus {
+    outline: none; border-color: var(--re-accent); background: var(--re-surface);
+    box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.15);
+  }
+  .price-range .price-sep { color: var(--re-text-secondary); flex-shrink: 0; }
+  #filter-beds {
+    width: 100%; padding: 10px 12px;
+    border: 1px solid var(--re-border); border-radius: 8px;
+    font-family: inherit; font-size: 0.9375rem; color: var(--re-text);
+    background: var(--re-surface);
+  }
+  #filter-beds:focus { outline: none; border-color: var(--re-accent); }
+  .filter-sidebar .clear-filters { width: 100%; margin-top: 24px; }
+  .no-results {
+    display: none; padding: 48px 24px; text-align: center;
+    background: var(--re-surface); border: 1px dashed var(--re-border);
+    border-radius: 14px; color: var(--re-text-secondary); font-size: 1rem;
+  }
+  .no-results.show { display: block; }
+</style>
+</head>
+<body>
+
+<nav class="re-nav">
+  <div class="container">
+    <a href="index.html" class="logo">Reozix <span>Real Estate</span></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="search.html" aria-current="page">Search</a>
+      <a href="agents.html">Agents</a>
+      <a href="appraisal.html">Appraisal</a>
+      <a href="tel:+61755923400">+61 7 5592 3400</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Search results -->
+<section class="re-section">
+  <div class="container">
+    <div class="results-header">
+      <h1 class="re-section-title">Search Properties</h1>
+      <p class="results-count">Showing <strong id="result-count">20</strong> of 20 properties</p>
+    </div>
+
+    <div class="search-layout">
+      <!-- Filter sidebar -->
+      <aside class="filter-sidebar">
+        <h3>Filters</h3>
+
+        <div class="filter-group" data-filter-group="type">
+          <h4>Property type</h4>
+          <label>
+            <input type="checkbox" class="filter-input" data-filter="type" value="Apartment">
+            Apartment <span class="count">7</span>
+          </label>
+          <label>
+            <input type="checkbox" class="filter-input" data-filter="type" value="House">
+            House <span class="count">6</span>
+          </label>
+          <label>
+            <input type="checkbox" class="filter-input" data-filter="type" value="Townhouse">
+            Townhouse <span class="count">4</span>
+          </label>
+          <label>
+            <input type="checkbox" class="filter-input" data-filter="type" value="Penthouse">
+            Penthouse <span class="count">1</span>
+          </label>
+          <label>
+            <input type="checkbox" class="filter-input" data-filter="type" value="Villa">
+            Villa <span class="count">2</span>
+          </label>
+        </div>
+
+        <div class="filter-group" data-filter-group="suburb">
+          <h4>Suburb</h4>
+          <label>
+            <input type="checkbox" class="filter-input" data-filter="suburb" value="Surfers Paradise">
+            Surfers Paradise <span class="count">2</span>
+          </label>
+          <label>
+            <input type="checkbox" class="filter-input" data-filter="suburb" value="Broadbeach">
+            Broadbeach <span class="count">2</span>
+          </label>
+          <label>
+            <input type="checkbox" class="filter-input" data-filter="suburb" value="Burleigh Heads">
+            Burleigh Heads <span class="count">2</span>
+          </label>
+          <label>
+            <input type="checkbox" class="filter-input" data-filter="suburb" value="Main Beach">
+            Main Beach <span class="count">2</span>
+          </label>
+          <label>
+            <input type="checkbox" class="filter-input" data-filter="suburb" value="Mermaid Beach">
+            Mermaid Beach <span class="count">2</span>
+          </label>
+          <label>
+            <input type="checkbox" class="filter-input" data-filter="suburb" value="Palm Beach">
+            Palm Beach <span class="count">2</span>
+          </label>
+          <label>
+            <input type="checkbox" class="filter-input" data-filter="suburb" value="Coolangatta">
+            Coolangatta <span class="count">2</span>
+          </label>
+          <label>
+            <input type="checkbox" class="filter-input" data-filter="suburb" value="Southport">
+            Southport <span class="count">2</span>
+          </label>
+        </div>
+
+        <div class="filter-group">
+          <h4>Price range</h4>
+          <div class="price-range">
+            <input type="number" id="filter-min-price" min="0" step="50000" placeholder="Min price" aria-label="Minimum price">
+            <span class="price-sep">–</span>
+            <input type="number" id="filter-max-price" min="0" step="50000" placeholder="Max price" aria-label="Maximum price">
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <h4>Beds</h4>
+          <select id="filter-beds" aria-label="Minimum bedrooms">
+            <option value="">Any</option>
+            <option value="1">1+</option>
+            <option value="2">2+</option>
+            <option value="3">3+</option>
+            <option value="4">4+</option>
+            <option value="5">5+</option>
+          </select>
+        </div>
+
+        <button type="button" class="re-btn outline clear-filters" id="clear-filters">Clear Filters</button>
+      </aside>
+
+      <!-- Results -->
+      <div class="results-area">
+        <div class="property-grid">
+
+          <!-- prop-001 -->
+          <div class="property-card" data-type="Apartment" data-suburb="Surfers Paradise" data-beds="3" data-baths="2" data-price="1850000">
+            <a href="property-detail.html?id=prop-001" class="property-photo-wrap" aria-label="View 12/14 The Esplanade, Surfers Paradise">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏢</div>
+                <span class="price-badge">$1,850,000</span>
+                <span class="type-badge">Apartment</span>
+                <span class="photo-count">5 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-001" class="prop-address">12/14 The Esplanade</a>
+              <p class="prop-suburb">Surfers Paradise QLD 4217</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 3</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Ocean views</span>
+                <span class="feature">Pool</span>
+                <span class="feature">Gym</span>
+              </div>
+              <a href="agent-detail.html?id=agent-001" class="agent-link">Listed by Michael Chen →</a>
+            </div>
+          </div>
+
+          <!-- prop-002 -->
+          <div class="property-card" data-type="Penthouse" data-suburb="Surfers Paradise" data-beds="4" data-baths="3" data-price="2800000">
+            <a href="property-detail.html?id=prop-002" class="property-photo-wrap" aria-label="View Level 47, 6 Hollywood Way, Surfers Paradise">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏙</div>
+                <span class="price-badge">$2,800,000</span>
+                <span class="type-badge">Penthouse</span>
+                <span class="photo-count">7 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-002" class="prop-address">Level 47, 6 Hollywood Way</a>
+              <p class="prop-suburb">Surfers Paradise QLD 4217</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 4</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 3</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 3</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Rooftop terrace</span>
+                <span class="feature">Ocean views</span>
+                <span class="feature">Infinity pool</span>
+              </div>
+              <a href="agent-detail.html?id=agent-001" class="agent-link">Listed by Michael Chen →</a>
+            </div>
+          </div>
+
+          <!-- prop-003 -->
+          <div class="property-card" data-type="Apartment" data-suburb="Broadbeach" data-beds="2" data-baths="2" data-price="1350000">
+            <a href="property-detail.html?id=prop-003" class="property-photo-wrap" aria-label="View 14/88 Surf Parade, Broadbeach">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏢</div>
+                <span class="price-badge">$1,350,000</span>
+                <span class="type-badge">Apartment</span>
+                <span class="photo-count">5 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-003" class="prop-address">14/88 Surf Parade</a>
+              <p class="prop-suburb">Broadbeach QLD 4218</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 1</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Beachfront</span>
+                <span class="feature">Pool</span>
+                <span class="feature">Air conditioning</span>
+              </div>
+              <a href="agent-detail.html?id=agent-001" class="agent-link">Listed by Michael Chen →</a>
+            </div>
+          </div>
+
+          <!-- prop-004 -->
+          <div class="property-card" data-type="Townhouse" data-suburb="Broadbeach" data-beds="3" data-baths="2" data-price="920000">
+            <a href="property-detail.html?id=prop-004" class="property-photo-wrap" aria-label="View 3/19 Albert Avenue, Broadbeach">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏘</div>
+                <span class="price-badge">$920,000</span>
+                <span class="type-badge">Townhouse</span>
+                <span class="photo-count">4 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-004" class="prop-address">3/19 Albert Avenue</a>
+              <p class="prop-suburb">Broadbeach QLD 4218</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 3</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 1</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Courtyard</span>
+                <span class="feature">Air conditioning</span>
+                <span class="feature">Open-plan living</span>
+              </div>
+              <a href="agent-detail.html?id=agent-010" class="agent-link">Listed by Chloe Martin →</a>
+            </div>
+          </div>
+
+          <!-- prop-005 -->
+          <div class="property-card" data-type="House" data-suburb="Burleigh Heads" data-beds="4" data-baths="3" data-price="2150000">
+            <a href="property-detail.html?id=prop-005" class="property-photo-wrap" aria-label="View 28 West Burleigh Road, Burleigh Heads">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏡</div>
+                <span class="price-badge">$2,150,000</span>
+                <span class="type-badge">House</span>
+                <span class="photo-count">6 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-005" class="prop-address">28 West Burleigh Road</a>
+              <p class="prop-suburb">Burleigh Heads QLD 4220</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 4</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 3</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Swimming pool</span>
+                <span class="feature">Outdoor entertaining</span>
+                <span class="feature">Double garage</span>
+              </div>
+              <a href="agent-detail.html?id=agent-002" class="agent-link">Listed by Sarah Thompson →</a>
+            </div>
+          </div>
+
+          <!-- prop-006 -->
+          <div class="property-card" data-type="Apartment" data-suburb="Burleigh Heads" data-beds="2" data-baths="2" data-price="765000">
+            <a href="property-detail.html?id=prop-006" class="property-photo-wrap" aria-label="View 6/45 James Street, Burleigh Heads">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏢</div>
+                <span class="price-badge">$765,000</span>
+                <span class="type-badge">Apartment</span>
+                <span class="photo-count">4 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-006" class="prop-address">6/45 James Street</a>
+              <p class="prop-suburb">Burleigh Heads QLD 4220</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 1</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Café precinct</span>
+                <span class="feature">Stone benchtops</span>
+                <span class="feature">Secure parking</span>
+              </div>
+              <a href="agent-detail.html?id=agent-002" class="agent-link">Listed by Sarah Thompson →</a>
+            </div>
+          </div>
+
+          <!-- prop-007 -->
+          <div class="property-card" data-type="House" data-suburb="Main Beach" data-beds="5" data-baths="4" data-price="2600000">
+            <a href="property-detail.html?id=prop-007" class="property-photo-wrap" aria-label="View 22 Tedder Avenue, Main Beach">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏡</div>
+                <span class="price-badge">$2,600,000</span>
+                <span class="type-badge">House</span>
+                <span class="photo-count">8 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-007" class="prop-address">22 Tedder Avenue</a>
+              <p class="prop-suburb">Main Beach QLD 4217</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 5</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 4</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Deep-water frontage</span>
+                <span class="feature">Pontoon</span>
+                <span class="feature">Swimming pool</span>
+              </div>
+              <a href="agent-detail.html?id=agent-001" class="agent-link">Listed by Michael Chen →</a>
+            </div>
+          </div>
+
+          <!-- prop-008 -->
+          <div class="property-card" data-type="Apartment" data-suburb="Main Beach" data-beds="3" data-baths="2" data-price="1950000">
+            <a href="property-detail.html?id=prop-008" class="property-photo-wrap" aria-label="View 5/12 Main Beach Parade, Main Beach">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏢</div>
+                <span class="price-badge">$1,950,000</span>
+                <span class="type-badge">Apartment</span>
+                <span class="photo-count">6 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-008" class="prop-address">5/12 Main Beach Parade</a>
+              <p class="prop-suburb">Main Beach QLD 4217</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 3</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Beachfront</span>
+                <span class="feature">Resort pool</span>
+                <span class="feature">Gym</span>
+              </div>
+              <a href="agent-detail.html?id=agent-008" class="agent-link">Listed by Olivia Bennett →</a>
+            </div>
+          </div>
+
+          <!-- prop-009 -->
+          <div class="property-card" data-type="House" data-suburb="Mermaid Beach" data-beds="4" data-baths="3" data-price="2750000">
+            <a href="property-detail.html?id=prop-009" class="property-photo-wrap" aria-label="View 9 Hedges Avenue, Mermaid Beach">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏡</div>
+                <span class="price-badge">$2,750,000</span>
+                <span class="type-badge">House</span>
+                <span class="photo-count">8 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-009" class="prop-address">9 Hedges Avenue</a>
+              <p class="prop-suburb">Mermaid Beach QLD 4218</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 4</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 3</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Beachfront</span>
+                <span class="feature">Rooftop deck</span>
+                <span class="feature">Guest wing</span>
+              </div>
+              <a href="agent-detail.html?id=agent-003" class="agent-link">Listed by David Wilson →</a>
+            </div>
+          </div>
+
+          <!-- prop-010 -->
+          <div class="property-card" data-type="Villa" data-suburb="Mermaid Beach" data-beds="3" data-baths="2" data-price="1650000">
+            <a href="property-detail.html?id=prop-010" class="property-photo-wrap" aria-label="View 14 Markeri Street, Mermaid Beach">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🌴</div>
+                <span class="price-badge">$1,650,000</span>
+                <span class="type-badge">Villa</span>
+                <span class="photo-count">5 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-010" class="prop-address">14 Markeri Street</a>
+              <p class="prop-suburb">Mermaid Beach QLD 4218</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 3</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Courtyard pool</span>
+                <span class="feature">Timber finishes</span>
+                <span class="feature">Established gardens</span>
+              </div>
+              <a href="agent-detail.html?id=agent-003" class="agent-link">Listed by David Wilson →</a>
+            </div>
+          </div>
+
+          <!-- prop-011 -->
+          <div class="property-card" data-type="Apartment" data-suburb="Palm Beach" data-beds="2" data-baths="2" data-price="885000">
+            <a href="property-detail.html?id=prop-011" class="property-photo-wrap" aria-label="View 12/3 Jefferson Lane, Palm Beach">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏢</div>
+                <span class="price-badge">$885,000</span>
+                <span class="type-badge">Apartment</span>
+                <span class="photo-count">5 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-011" class="prop-address">12/3 Jefferson Lane</a>
+              <p class="prop-suburb">Palm Beach QLD 4221</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 1</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Beachside</span>
+                <span class="feature">North-facing balcony</span>
+                <span class="feature">Air conditioning</span>
+              </div>
+              <a href="agent-detail.html?id=agent-002" class="agent-link">Listed by Sarah Thompson →</a>
+            </div>
+          </div>
+
+          <!-- prop-012 -->
+          <div class="property-card" data-type="Townhouse" data-suburb="Palm Beach" data-beds="3" data-baths="2" data-price="735000">
+            <a href="property-detail.html?id=prop-012" class="property-photo-wrap" aria-label="View 7/22 Eleventh Avenue, Palm Beach">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏘</div>
+                <span class="price-badge">$735,000</span>
+                <span class="type-badge">Townhouse</span>
+                <span class="photo-count">4 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-012" class="prop-address">7/22 Eleventh Avenue</a>
+              <p class="prop-suburb">Palm Beach QLD 4221</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 3</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 1</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Courtyard</span>
+                <span class="feature">Walk-in robe</span>
+                <span class="feature">Air conditioning</span>
+              </div>
+              <a href="agent-detail.html?id=agent-009" class="agent-link">Listed by James Park →</a>
+            </div>
+          </div>
+
+          <!-- prop-013 -->
+          <div class="property-card" data-type="Apartment" data-suburb="Coolangatta" data-beds="3" data-baths="2" data-price="1150000">
+            <a href="property-detail.html?id=prop-013" class="property-photo-wrap" aria-label="View 21 Marine Parade, Coolangatta">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏢</div>
+                <span class="price-badge">$1,150,000</span>
+                <span class="type-badge">Apartment</span>
+                <span class="photo-count">6 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-013" class="prop-address">21 Marine Parade</a>
+              <p class="prop-suburb">Coolangatta QLD 4225</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 3</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Panoramic ocean views</span>
+                <span class="feature">Corner aspect</span>
+                <span class="feature">Beach access</span>
+              </div>
+              <a href="agent-detail.html?id=agent-007" class="agent-link">Listed by Marcus Webb →</a>
+            </div>
+          </div>
+
+          <!-- prop-014 -->
+          <div class="property-card" data-type="House" data-suburb="Coolangatta" data-beds="4" data-baths="2" data-price="1480000">
+            <a href="property-detail.html?id=prop-014" class="property-photo-wrap" aria-label="View 9 Dutton Street, Coolangatta">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏡</div>
+                <span class="price-badge">$1,480,000</span>
+                <span class="type-badge">House</span>
+                <span class="photo-count">5 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-014" class="prop-address">9 Dutton Street</a>
+              <p class="prop-suburb">Coolangatta QLD 4225</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 4</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Level block</span>
+                <span class="feature">Potential to extend</span>
+                <span class="feature">Near airport</span>
+              </div>
+              <a href="agent-detail.html?id=agent-007" class="agent-link">Listed by Marcus Webb →</a>
+            </div>
+          </div>
+
+          <!-- prop-015 -->
+          <div class="property-card" data-type="Apartment" data-suburb="Southport" data-beds="2" data-baths="2" data-price="465000">
+            <a href="property-detail.html?id=prop-015" class="property-photo-wrap" aria-label="View 15/4 Scarborough Street, Southport">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏢</div>
+                <span class="price-badge">$465,000</span>
+                <span class="type-badge">Apartment</span>
+                <span class="photo-count">4 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-015" class="prop-address">15/4 Scarborough Street</a>
+              <p class="prop-suburb">Southport QLD 4215</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 1</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Ground floor</span>
+                <span class="feature">Near tram</span>
+                <span class="feature">Investment potential</span>
+              </div>
+              <a href="agent-detail.html?id=agent-004" class="agent-link">Listed by Jessica Nguyen →</a>
+            </div>
+          </div>
+
+          <!-- prop-016 -->
+          <div class="property-card" data-type="Townhouse" data-suburb="Southport" data-beds="3" data-baths="1" data-price="585000">
+            <a href="property-detail.html?id=prop-016" class="property-photo-wrap" aria-label="View 9/31 Bauer Street, Southport">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏘</div>
+                <span class="price-badge">$585,000</span>
+                <span class="type-badge">Townhouse</span>
+                <span class="photo-count">4 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-016" class="prop-address">9/31 Bauer Street</a>
+              <p class="prop-suburb">Southport QLD 4215</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 3</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 1</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 1</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Renovated kitchen</span>
+                <span class="feature">Cul-de-sac</span>
+                <span class="feature">Low maintenance</span>
+              </div>
+              <a href="agent-detail.html?id=agent-011" class="agent-link">Listed by Nathan Kim →</a>
+            </div>
+          </div>
+
+          <!-- prop-017 -->
+          <div class="property-card" data-type="House" data-suburb="Hope Island" data-beds="4" data-baths="3" data-price="1280000">
+            <a href="property-detail.html?id=prop-017" class="property-photo-wrap" aria-label="View 12 Marina Quay, Hope Island">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏡</div>
+                <span class="price-badge">$1,280,000</span>
+                <span class="type-badge">House</span>
+                <span class="photo-count">6 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-017" class="prop-address">12 Marina Quay</a>
+              <p class="prop-suburb">Hope Island QLD 4212</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 4</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 3</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Canal frontage</span>
+                <span class="feature">Private berth</span>
+                <span class="feature">Resort pool</span>
+              </div>
+              <a href="agent-detail.html?id=agent-005" class="agent-link">Listed by Liam O'Connor →</a>
+            </div>
+          </div>
+
+          <!-- prop-018 -->
+          <div class="property-card" data-type="Villa" data-suburb="Hope Island" data-beds="3" data-baths="2" data-price="820000">
+            <a href="property-detail.html?id=prop-018" class="property-photo-wrap" aria-label="View 8 Waterside Close, Hope Island">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🌴</div>
+                <span class="price-badge">$820,000</span>
+                <span class="type-badge">Villa</span>
+                <span class="photo-count">5 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-018" class="prop-address">8 Waterside Close</a>
+              <p class="prop-suburb">Hope Island QLD 4212</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 3</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Gated community</span>
+                <span class="feature">Near golf course</span>
+                <span class="feature">Courtyard garden</span>
+              </div>
+              <a href="agent-detail.html?id=agent-012" class="agent-link">Listed by Isabella Rossi →</a>
+            </div>
+          </div>
+
+          <!-- prop-019 -->
+          <div class="property-card" data-type="Townhouse" data-suburb="Robina" data-beds="3" data-baths="2" data-price="575000">
+            <a href="property-detail.html?id=prop-019" class="property-photo-wrap" aria-label="View 21 San Maria Court, Robina">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏘</div>
+                <span class="price-badge">$575,000</span>
+                <span class="type-badge">Townhouse</span>
+                <span class="photo-count">4 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-019" class="prop-address">21 San Maria Court</a>
+              <p class="prop-suburb">Robina QLD 4226</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 3</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Family friendly</span>
+                <span class="feature">Near Robina Town Centre</span>
+                <span class="feature">Courtyard</span>
+              </div>
+              <a href="agent-detail.html?id=agent-006" class="agent-link">Listed by Emma Richardson →</a>
+            </div>
+          </div>
+
+          <!-- prop-020 -->
+          <div class="property-card" data-type="House" data-suburb="Robina" data-beds="4" data-baths="2" data-price="965000">
+            <a href="property-detail.html?id=prop-020" class="property-photo-wrap" aria-label="View 7 Ron Penhaligon Way, Robina">
+              <div class="property-photo">
+                <div class="photo-placeholder" aria-hidden="true">🏡</div>
+                <span class="price-badge">$965,000</span>
+                <span class="type-badge">House</span>
+                <span class="photo-count">6 photos</span>
+              </div>
+            </a>
+            <div class="card-body">
+              <a href="property-detail.html?id=prop-020" class="prop-address">7 Ron Penhaligon Way</a>
+              <p class="prop-suburb">Robina QLD 4226</p>
+              <div class="prop-stats">
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 4</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+                <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+              </div>
+              <div class="prop-features">
+                <span class="feature">Park frontage</span>
+                <span class="feature">Butler's pantry</span>
+                <span class="feature">Outdoor entertaining</span>
+              </div>
+              <a href="agent-detail.html?id=agent-006" class="agent-link">Listed by Emma Richardson →</a>
+            </div>
+          </div>
+
+        </div>
+
+        <p class="no-results" id="no-results">No properties match your filters. Try adjusting your criteria.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="re-footer">
+  <div class="container">
+    <div class="agency">
+      <strong>Reozix Real Estate</strong>
+      <p>Gold Coast, QLD</p>
+      <a href="tel:+61755923400">+61 7 5592 3400</a>
+      <a href="mailto:hello@reozixrealestate.com.au">hello@reozixrealestate.com.au</a>
+    </div>
+    <div class="footer-links">
+      <h4>Quick links</h4>
+      <a href="index.html">Home</a>
+      <a href="search.html">Search</a>
+      <a href="agents.html">Agents</a>
+      <a href="appraisal.html">Appraisal</a>
+    </div>
+  </div>
+  <div class="container">
+    <p class="footer-bottom">© 2026 Reozix Real Estate. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="../shared/js/utils.js"></script>
+<script src="js/data.js"></script>
+<script src="js/search.js"></script>
+</body>
+</html>
