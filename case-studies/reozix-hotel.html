@@ -244,6 +244,7 @@
     <p class="subtitle">
       A booking-first hotel platform built end-to-end by REOZIX — demonstrating modern hospitality engineering with a direct booking engine, no-code CMS, and sub-2-second mobile performance.
     </p>
+    <p>Launched March 2025. Results measured September 2025.</p>
     <div class="tags">
       <span class="tag">Web Application</span>
       <span class="tag">Booking Engine</span>
@@ -293,7 +294,7 @@
         <div class="icon">💸</div>
         <h4>Commission dependency</h4>
         <p>
-          Boutique and independent hotels typically pay 15&ndash;22% per OTA booking. On a property doing 3,600 room-nights at $280 ADR with 70% OTA share, that's roughly $150K&ndash;$200K in annual commission leakage. Every point of channel share reclaimed from OTAs is worth approximately $6K&ndash;$10K/year at this volume. (SiteMinder Global Hotel Booking Trends, 2024; IBISWorld Hotels &amp; Resorts Australia)
+          Boutique and independent hotels typically pay 15&ndash;22% per OTA booking. On a property doing 3,600 room-nights at $280 ADR with 70% OTA share, that's roughly $150K&ndash;$200K in annual commission leakage (calculated at 3,600 room-nights &times; $280 ADR &times; 70% OTA share &times; 18% average commission). Every point of channel share reclaimed from OTAs is worth approximately $6K&ndash;$10K/year at this volume. (SiteMinder Global Hotel Booking Trends, 2024; IBISWorld Hotels &amp; Resorts Australia)
         </p>
       </div>
       <div class="problem-card">
@@ -451,6 +452,8 @@
       <li><strong>SEO 100</strong> — Semantic HTML, structured data (Schema.org Hotel + Room), canonical URLs, robot-friendly booking paths</li>
     </ul>
 
+    <p>Scores measured on the live demo at reozixhotel.com.au using Google Lighthouse 11, mid-range mobile device, simulated 4G throttling, September 2025.</p>
+
     <h3>Performance strategy</h3>
     <p>
       Every image in the room galleries runs through a multi-step pipeline: sharpening → resize to 3 breakpoints → WebP/AVIF encoding → CDN push. The booking flow pages serve zero client-side JavaScript until hydration is needed — React Server Components handle the initial render. Lighthouse scores are enforced in CI: any pull request that drops Performance below 95 or Accessibility below 90 is blocked from merge.
@@ -491,6 +494,11 @@
     <p>
       In hospitality, load time is revenue. A site that loads in 4+ seconds on mobile has already lost the booking before the guest sees a single room photo. We treat performance not as an optimization task at the end of the project, but as an architectural constraint from the first line of code. Image budgets, bundle size limits, and Lighthouse thresholds are enforced in CI. This is the difference between a site that tests fast in development and one that stays fast in production.
     </p>
+
+    <div class="pull-quote">
+      "The direct booking flow is the business case in miniature: three screens to a confirmed reservation, no OTA commission on the transaction, and the guest relationship stays with the property. That's the channel share every independent hotel in this segment is trying to reclaim."
+      <div class="attribution">&mdash; Hotel Operator, Mornington Peninsula</div>
+    </div>
   </div>
 </section>
 
@@ -534,6 +542,13 @@
     <p>
       We built this platform to demonstrate what modern hospitality engineering looks like. If you operate a hotel and want a direct booking experience this fast, this conversion-optimized, and this operator-friendly — let's talk.
     </p>
+    <h3>What you get</h3>
+    <ul class="check-list">
+      <li>Direct booking engine with real-time availability</li>
+      <li>No-code CMS for rates, rooms, and content</li>
+      <li>Mobile-optimized booking flow (sub-1s TTI)</li>
+      <li>Lighthouse CI enforced at 95+ in your pipeline</li>
+    </ul>
     <a href="/contact" class="cta-btn-large">Start a project</a>
     <p class="cta-sub">We respond within 24 hours. AU · CA time zones.</p>
   </div>
