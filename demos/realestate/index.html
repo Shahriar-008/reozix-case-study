@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reozix Real Estate — Gold Coast Property Search</title>
+<meta name="description" content="Search apartments, houses, townhouses and villas across the Gold Coast with Reozix Real Estate — from beachfront Surfers Paradise to family homes in Hope Island.">
+<link rel="stylesheet" href="../shared/css/reset.css">
+<link rel="stylesheet" href="css/realestate.css">
+<style>
+  /* Homepage additions — suburb autocomplete + photo placeholders + appraisal CTA banner */
+  .suburb-field { position: relative; }
+  .autocomplete {
+    display: none;
+    position: absolute; top: 100%; left: 0; right: 0; z-index: 20;
+    margin-top: 4px;
+    background: var(--re-surface);
+    border: 1px solid var(--re-border);
+    border-radius: 8px;
+    box-shadow: 0 8px 28px rgba(26, 37, 48, 0.12);
+    overflow: hidden;
+  }
+  .autocomplete.open { display: block; }
+  .autocomplete button {
+    display: block; width: 100%; text-align: left;
+    padding: 10px 14px; font-size: 0.875rem; color: var(--re-text);
+    transition: background 0.15s;
+  }
+  .autocomplete button:hover, .autocomplete button.hover { background: var(--re-accent-light); }
+  .autocomplete .empty { padding: 10px 14px; font-size: 0.875rem; color: var(--re-text-secondary); }
+
+  a.property-photo-wrap { display: block; }
+  .property-card .photo-placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3rem;
+  }
+  .agent-card .agent-photo { position: relative; }
+  .agent-card .agent-photo .photo-placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 3.25rem; font-weight: 700; color: rgba(255, 255, 255, 0.85);
+    letter-spacing: -0.02em;
+  }
+
+  /* Appraisal CTA banner */
+  .appraisal-cta {
+    padding: 72px 0;
+    background: linear-gradient(135deg, var(--re-accent) 0%, #5b9fdd 55%, #7fb4e5 100%);
+    text-align: center;
+    color: #fff;
+  }
+  .appraisal-cta h2 {
+    font-size: 2rem; font-weight: 800; letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+  .appraisal-cta p {
+    max-width: 560px; margin: 0 auto 28px;
+    color: rgba(255, 255, 255, 0.92); font-size: 1.0625rem;
+  }
+  .appraisal-cta .re-btn { background: #fff; color: var(--re-accent-dark); }
+  .appraisal-cta .re-btn:hover { background: var(--re-accent-light); }
+  @media (max-width: 768px) {
+    .appraisal-cta { padding: 56px 0; }
+    .appraisal-cta h2 { font-size: 1.625rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="re-nav">
+  <div class="container">
+    <a href="index.html" class="logo">Reozix <span>Real Estate</span></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <div class="nav-links">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="search.html">Search</a>
+      <a href="agents.html">Agents</a>
+      <a href="appraisal.html">Appraisal</a>
+      <a href="tel:+61755923400">+61 7 5592 3400</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero + search -->
+<section class="re-hero">
+  <div class="container">
+    <h1>Find your place on the Gold Coast</h1>
+    <p class="hero-sub">From beachfront apartments in Surfers Paradise to family homes in Hope Island — search every listing, direct from the source.</p>
+
+    <div class="search-bar">
+      <div class="search-row">
+        <div class="field suburb-field">
+          <label for="suburb">Suburb</label>
+          <input type="text" id="suburb" placeholder="Type a suburb…" autocomplete="off">
+          <div class="autocomplete" id="autocomplete" aria-label="Suburb suggestions"></div>
+        </div>
+        <div class="field">
+          <label for="type">Property type</label>
+          <select id="type">
+            <option value="">Any type</option>
+            <option value="Apartment">Apartment</option>
+            <option value="House">House</option>
+            <option value="Townhouse">Townhouse</option>
+            <option value="Villa">Villa</option>
+            <option value="Land">Land</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="min-price">Min price</label>
+          <select id="min-price">
+            <option value="">Any</option>
+            <option value="500000">$500,000</option>
+            <option value="750000">$750,000</option>
+            <option value="1000000">$1,000,000</option>
+            <option value="1500000">$1,500,000</option>
+            <option value="2000000">$2,000,000</option>
+            <option value="2500000">$2,500,000</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="max-price">Max price</label>
+          <select id="max-price">
+            <option value="">Any</option>
+            <option value="1000000">$1,000,000</option>
+            <option value="1500000">$1,500,000</option>
+            <option value="2000000">$2,000,000</option>
+            <option value="2500000">$2,500,000</option>
+            <option value="3000000">$3,000,000</option>
+          </select>
+        </div>
+        <button class="search-btn" onclick="runSearch()">Search</button>
+      </div>
+      <div class="popular">
+        Popular:
+        <a href="search.html?suburb=Surfers%20Paradise">Surfers Paradise</a>
+        <a href="search.html?suburb=Broadbeach">Broadbeach</a>
+        <a href="search.html?suburb=Burleigh%20Heads">Burleigh Heads</a>
+        <a href="search.html?suburb=Main%20Beach">Main Beach</a>
+        <a href="search.html?suburb=Palm%20Beach">Palm Beach</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured properties -->
+<section class="re-section" id="featured">
+  <div class="container">
+    <h2 class="re-section-title">Featured properties</h2>
+    <p class="re-section-sub">A curated selection of standout listings across the Gold Coast.</p>
+
+    <div class="property-grid">
+      <!-- prop-001 -->
+      <div class="property-card" data-type="Apartment" data-suburb="Surfers Paradise" data-beds="3" data-baths="2" data-price="1850000">
+        <a href="property-detail.html?id=prop-001" class="property-photo-wrap" aria-label="View 12/14 The Esplanade, Surfers Paradise">
+          <div class="property-photo">
+            <div class="photo-placeholder" aria-hidden="true">🏢</div>
+            <span class="price-badge">$1,850,000</span>
+            <span class="type-badge">Apartment</span>
+            <span class="photo-count">5 photos</span>
+          </div>
+        </a>
+        <div class="card-body">
+          <a href="property-detail.html?id=prop-001" class="prop-address">12/14 The Esplanade</a>
+          <p class="prop-suburb">Surfers Paradise QLD 4217</p>
+          <div class="prop-stats">
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 3</span>
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+          </div>
+          <div class="prop-features">
+            <span class="feature">Ocean views</span>
+            <span class="feature">Pool</span>
+            <span class="feature">Gym</span>
+          </div>
+          <a href="agent-detail.html?id=agent-001" class="agent-link">Listed by Michael Chen →</a>
+        </div>
+      </div>
+
+      <!-- prop-004 -->
+      <div class="property-card" data-type="Townhouse" data-suburb="Broadbeach" data-beds="3" data-baths="2" data-price="920000">
+        <a href="property-detail.html?id=prop-004" class="property-photo-wrap" aria-label="View 3/19 Albert Avenue, Broadbeach">
+          <div class="property-photo">
+            <div class="photo-placeholder" aria-hidden="true">🏘</div>
+            <span class="price-badge">$920,000</span>
+            <span class="type-badge">Townhouse</span>
+            <span class="photo-count">4 photos</span>
+          </div>
+        </a>
+        <div class="card-body">
+          <a href="property-detail.html?id=prop-004" class="prop-address">3/19 Albert Avenue</a>
+          <p class="prop-suburb">Broadbeach QLD 4218</p>
+          <div class="prop-stats">
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 3</span>
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 1</span>
+          </div>
+          <div class="prop-features">
+            <span class="feature">Courtyard</span>
+            <span class="feature">Open-plan living</span>
+            <span class="feature">Single garage</span>
+          </div>
+          <a href="agent-detail.html?id=agent-010" class="agent-link">Listed by Chloe Martin →</a>
+        </div>
+      </div>
+
+      <!-- prop-007 -->
+      <div class="property-card" data-type="House" data-suburb="Main Beach" data-beds="5" data-baths="4" data-price="2600000">
+        <a href="property-detail.html?id=prop-007" class="property-photo-wrap" aria-label="View 22 Tedder Avenue, Main Beach">
+          <div class="property-photo">
+            <div class="photo-placeholder" aria-hidden="true">🏡</div>
+            <span class="price-badge">$2,600,000</span>
+            <span class="type-badge">House</span>
+            <span class="photo-count">8 photos</span>
+          </div>
+        </a>
+        <div class="card-body">
+          <a href="property-detail.html?id=prop-007" class="prop-address">22 Tedder Avenue</a>
+          <p class="prop-suburb">Main Beach QLD 4217</p>
+          <div class="prop-stats">
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 5</span>
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 4</span>
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+          </div>
+          <div class="prop-features">
+            <span class="feature">Deep-water frontage</span>
+            <span class="feature">Pontoon</span>
+            <span class="feature">Pool</span>
+          </div>
+          <a href="agent-detail.html?id=agent-001" class="agent-link">Listed by Michael Chen →</a>
+        </div>
+      </div>
+
+      <!-- prop-010 -->
+      <div class="property-card" data-type="Villa" data-suburb="Mermaid Beach" data-beds="3" data-baths="2" data-price="1650000">
+        <a href="property-detail.html?id=prop-010" class="property-photo-wrap" aria-label="View 14 Markeri Street, Mermaid Beach">
+          <div class="property-photo">
+            <div class="photo-placeholder" aria-hidden="true">🌴</div>
+            <span class="price-badge">$1,650,000</span>
+            <span class="type-badge">Villa</span>
+            <span class="photo-count">5 photos</span>
+          </div>
+        </a>
+        <div class="card-body">
+          <a href="property-detail.html?id=prop-010" class="prop-address">14 Markeri Street</a>
+          <p class="prop-suburb">Mermaid Beach QLD 4218</p>
+          <div class="prop-stats">
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 3</span>
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+          </div>
+          <div class="prop-features">
+            <span class="feature">Courtyard pool</span>
+            <span class="feature">Timber finishes</span>
+            <span class="feature">Double garage</span>
+          </div>
+          <a href="agent-detail.html?id=agent-003" class="agent-link">Listed by David Wilson →</a>
+        </div>
+      </div>
+
+      <!-- prop-011 -->
+      <div class="property-card" data-type="Apartment" data-suburb="Palm Beach" data-beds="2" data-baths="2" data-price="885000">
+        <a href="property-detail.html?id=prop-011" class="property-photo-wrap" aria-label="View 12/3 Jefferson Lane, Palm Beach">
+          <div class="property-photo">
+            <div class="photo-placeholder" aria-hidden="true">🏢</div>
+            <span class="price-badge">$885,000</span>
+            <span class="type-badge">Apartment</span>
+            <span class="photo-count">5 photos</span>
+          </div>
+        </a>
+        <div class="card-body">
+          <a href="property-detail.html?id=prop-011" class="prop-address">12/3 Jefferson Lane</a>
+          <p class="prop-suburb">Palm Beach QLD 4221</p>
+          <div class="prop-stats">
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 2</span>
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 2</span>
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 1</span>
+          </div>
+          <div class="prop-features">
+            <span class="feature">Beachside</span>
+            <span class="feature">North-facing balcony</span>
+            <span class="feature">Secure parking</span>
+          </div>
+          <a href="agent-detail.html?id=agent-002" class="agent-link">Listed by Sarah Thompson →</a>
+        </div>
+      </div>
+
+      <!-- prop-017 -->
+      <div class="property-card" data-type="House" data-suburb="Hope Island" data-beds="4" data-baths="3" data-price="1280000">
+        <a href="property-detail.html?id=prop-017" class="property-photo-wrap" aria-label="View 12 Marina Quay, Hope Island">
+          <div class="property-photo">
+            <div class="photo-placeholder" aria-hidden="true">🏡</div>
+            <span class="price-badge">$1,280,000</span>
+            <span class="type-badge">House</span>
+            <span class="photo-count">6 photos</span>
+          </div>
+        </a>
+        <div class="card-body">
+          <a href="property-detail.html?id=prop-017" class="prop-address">12 Marina Quay</a>
+          <p class="prop-suburb">Hope Island QLD 4212</p>
+          <div class="prop-stats">
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🛏</span> 4</span>
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🛁</span> 3</span>
+            <span class="stat"><span class="stat-icon" aria-hidden="true">🚗</span> 2</span>
+          </div>
+          <div class="prop-features">
+            <span class="feature">Canal frontage</span>
+            <span class="feature">Private berth</span>
+            <span class="feature">Resort pool</span>
+          </div>
+          <a href="agent-detail.html?id=agent-005" class="agent-link">Listed by Liam O'Connor →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Agents -->
+<section class="re-section alt" id="team">
+  <div class="container">
+    <h2 class="re-section-title">Meet our team</h2>
+    <p class="re-section-sub">Local specialists with the track record to back it up.</p>
+
+    <div class="agents-grid">
+      <a class="agent-card" href="agent-detail.html?id=agent-001">
+        <div class="agent-photo">
+          <div class="photo-placeholder" aria-hidden="true">MC</div>
+        </div>
+        <div class="agent-card-body">
+          <h3>Michael Chen</h3>
+          <p class="role">Principal / Sales Director</p>
+          <div class="specs">
+            <span class="tag">Surfers Paradise</span>
+            <span class="tag">Broadbeach</span>
+            <span class="tag">Main Beach</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="agent-card" href="agent-detail.html?id=agent-002">
+        <div class="agent-photo">
+          <div class="photo-placeholder" aria-hidden="true">ST</div>
+        </div>
+        <div class="agent-card-body">
+          <h3>Sarah Thompson</h3>
+          <p class="role">Senior Sales Agent</p>
+          <div class="specs">
+            <span class="tag">Burleigh Heads</span>
+            <span class="tag">Miami</span>
+            <span class="tag">Palm Beach</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="agent-card" href="agent-detail.html?id=agent-006">
+        <div class="agent-photo">
+          <div class="photo-placeholder" aria-hidden="true">ER</div>
+        </div>
+        <div class="agent-card-body">
+          <h3>Emma Richardson</h3>
+          <p class="role">Senior Sales Agent</p>
+          <div class="specs">
+            <span class="tag">Robina</span>
+            <span class="tag">Varsity Lakes</span>
+            <span class="tag">Clear Island Waters</span>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Appraisal CTA -->
+<section class="appraisal-cta">
+  <div class="container">
+    <h2>Know what your property is worth</h2>
+    <p>Get a free, no-obligation market appraisal from a local agent. It takes under a minute — and we'll call you within 24 hours.</p>
+    <a href="appraisal.html" class="re-btn">Request a free appraisal</a>
+  </div>
+</section>
+
+<footer class="re-footer">
+  <div class="container">
+    <div class="agency">
+      <strong>Reozix Real Estate</strong>
+      <p>Gold Coast, QLD</p>
+      <a href="tel:+61755923400">+61 7 5592 3400</a>
+      <a href="mailto:hello@reozixrealestate.com.au">hello@reozixrealestate.com.au</a>
+    </div>
+    <div class="footer-links">
+      <h4>Quick links</h4>
+      <a href="index.html">Home</a>
+      <a href="search.html">Search</a>
+      <a href="agents.html">Agents</a>
+      <a href="appraisal.html">Appraisal</a>
+    </div>
+  </div>
+  <div class="container">
+    <p class="footer-bottom">© 2026 Reozix Real Estate. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="../shared/js/utils.js"></script>
+<script src="js/data.js"></script>
+<script>
+// Homepage behaviour — cosmetic suburb autocomplete + search form submission.
+document.addEventListener('DOMContentLoaded', function() {
+  var input = document.getElementById('suburb');
+  var dropdown = document.getElementById('autocomplete');
+  if (!input || !dropdown) return;
+
+  // Top suburbs as they appear in RE_DATA (first appearance order).
+  var suburbs = [];
+  RE_DATA.properties.forEach(function(p) {
+    if (suburbs.indexOf(p.suburb) === -1) suburbs.push(p.suburb);
+  });
+  suburbs = suburbs.slice(0, 6);
+
+  function render(list) {
+    dropdown.innerHTML = '';
+    if (!list.length) {
+      var div = document.createElement('div');
+      div.className = 'empty';
+      div.textContent = 'No matching suburbs';
+      dropdown.appendChild(div);
+      return;
+    }
+    list.forEach(function(s) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = s;
+      btn.addEventListener('click', function() {
+        input.value = s;
+        hide();
+      });
+      dropdown.appendChild(btn);
+    });
+  }
+
+  function filtered() {
+    var q = input.value.trim().toLowerCase();
+    return suburbs.filter(function(s) { return s.toLowerCase().indexOf(q) !== -1; });
+  }
+
+  function show() { render(filtered()); dropdown.classList.add('open'); }
+  function hide() { dropdown.classList.remove('open'); }
+
+  input.addEventListener('focus', show);
+  input.addEventListener('input', show);
+  input.addEventListener('blur', function() { setTimeout(hide, 120); });
+  input.addEventListener('keydown', function(e) { if (e.key === 'Enter') runSearch(); });
+});
+
+// Build search.html query string from the search bar.
+window.runSearch = function() {
+  var params = new URLSearchParams();
+  var suburb = document.getElementById('suburb').value.trim();
+  var type = document.getElementById('type').value;
+  var minPrice = document.getElementById('min-price').value;
+  var maxPrice = document.getElementById('max-price').value;
+  if (suburb) params.set('suburb', suburb);
+  if (type) params.set('type', type);
+  if (minPrice) params.set('min_price', minPrice);
+  if (maxPrice) params.set('max_price', maxPrice);
+  var qs = params.toString();
+  location.href = 'search.html' + (qs ? '?' + qs : '');
+};
+</script>
+</body>
+</html>
