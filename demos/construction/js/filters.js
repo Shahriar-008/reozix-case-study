@@ -9,7 +9,7 @@ function filterProjects(type) {
     t.classList.toggle('active', t.dataset.type === type);
   });
   document.querySelectorAll('.project-card').forEach(function(card) {
-    card.style.display = (type === 'all' || card.dataset.type === type) ? 'block' : 'none';
+    card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
   });
 }
 
