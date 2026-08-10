@@ -203,7 +203,63 @@
 .hotel-footer a { color: rgba(255,255,255,0.6); }
 .hotel-footer a:hover { color: #fff; }
 
+/* Room detail page */
+.room-detail { padding: 96px 0 72px; background: var(--hotel-bg); min-height: 70vh; }
+.room-detail-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 48px; align-items: start; }
+.gallery-main {
+  height: 420px; background: #d4c5a0; border-radius: 12px; overflow: hidden;
+}
+.gallery-main img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-thumbs {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-top: 8px;
+}
+.gallery-thumbs button {
+  padding: 0; border: none; cursor: pointer; background: #d4c5a0;
+  height: 64px; border-radius: 6px; overflow: hidden; opacity: 0.65;
+  transition: opacity 0.15s;
+}
+.gallery-thumbs button:hover { opacity: 1; }
+.gallery-thumbs button.active { opacity: 1; box-shadow: 0 0 0 2px var(--hotel-accent); }
+.gallery-thumbs img { width: 100%; height: 100%; object-fit: cover; }
+.detail-content h1 {
+  font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em;
+  margin-bottom: 12px; color: var(--hotel-text);
+}
+.detail-content .desc {
+  color: var(--hotel-text-secondary); font-size: 1.0625rem;
+  line-height: 1.6; margin-bottom: 24px;
+}
+.detail-content .rate {
+  font-size: 2rem; font-weight: 700; color: var(--hotel-accent-dark);
+  margin-bottom: 24px;
+}
+.detail-content .rate span {
+  font-size: 1rem; color: var(--hotel-text-secondary); font-weight: 400;
+}
+.amenities-list {
+  list-style: none; display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 28px;
+}
+.amenities-list li {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; background: var(--hotel-surface);
+  border: 1px solid var(--hotel-border); border-radius: 8px;
+  font-size: 0.9375rem;
+}
+.room-detail .btn, .not-found .btn {
+  display: inline-block; padding: 14px 32px;
+  background: var(--hotel-accent); color: #fff;
+  border-radius: 6px; font-size: 1rem; font-weight: 600;
+  transition: background 0.15s;
+}
+.room-detail .btn:hover, .not-found .btn:hover { background: var(--hotel-accent-dark); }
+.not-found { text-align: center; padding: 80px 0; }
+.not-found h1 { font-size: 2.5rem; font-weight: 800; margin-bottom: 12px; color: var(--hotel-text); }
+.not-found p { color: var(--hotel-text-secondary); margin-bottom: 32px; }
+
 @media (max-width: 768px) {
+  .room-detail-grid { grid-template-columns: 1fr; gap: 32px; }
+  .gallery-main { height: 300px; }
   .hotel-hero .container { grid-template-columns: 1fr; gap: 32px; }
   .hotel-hero .hero-content h1 { font-size: 2.25rem; }
   .hotel-hero .hero-visual { height: 300px; }

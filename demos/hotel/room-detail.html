@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Room Details — Reozix Hotel</title>
+<meta name="description" content="Room details at Reozix Hotel on the Mornington Peninsula. Book direct for best rates, late checkout, and a welcome drink.">
+<link rel="stylesheet" href="../shared/css/reset.css">
+<link rel="stylesheet" href="css/hotel.css">
+</head>
+<body>
+
+<nav class="hotel-nav">
+  <div class="container">
+    <a href="/" class="logo">Reozix Hotel</a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <div class="nav-links">
+      <a href="rooms.html">Rooms</a>
+      <a href="#about">About</a>
+      <a href="#location">Location</a>
+      <a href="tel:+61359841200">+61 3 5984 1200</a>
+      <a href="booking.html" class="book-btn">Book Now</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Direct booking perk banner -->
+<div class="perk-banner" style="margin-top: 72px;">
+  <div class="container">
+    <div class="perks">
+      <span class="perk-item">🏷️ Best rate guaranteed</span>
+      <span class="perk-item">🕐 Late checkout until 1pm</span>
+      <span class="perk-item">🍷 Welcome drink on arrival</span>
+    </div>
+  </div>
+</div>
+
+<!-- Room detail -->
+<section class="room-detail">
+  <div class="container">
+    <div class="room-detail-grid" id="room-detail-grid">
+      <div class="gallery">
+        <div class="gallery-main">
+          <img id="gallery-main-img" src="" alt="">
+        </div>
+        <div class="gallery-thumbs" id="gallery-thumbs"></div>
+      </div>
+      <div class="detail-content">
+        <h1 id="room-name"></h1>
+        <p class="desc" id="room-desc"></p>
+        <ul class="amenities-list" id="room-amenities"></ul>
+        <p class="rate" id="room-rate">$0 <span>AUD / night</span></p>
+        <a class="btn" id="book-btn" href="booking.html">Book this room</a>
+      </div>
+    </div>
+
+    <!-- Inline availability checker -->
+    <div class="date-picker-bar" id="date-picker" style="margin: 56px auto 0;">
+      <h3>Check availability</h3>
+      <div class="picker-row">
+        <div class="field">
+          <label for="checkin">Check-in</label>
+          <input type="date" id="checkin" value="2026-09-01">
+        </div>
+        <div class="field">
+          <label for="checkout">Check-out</label>
+          <input type="date" id="checkout" value="2026-09-03">
+        </div>
+        <div class="field">
+          <label for="guests">Guests</label>
+          <select id="guests">
+            <option>1 guest</option>
+            <option selected>2 guests</option>
+            <option>3 guests</option>
+            <option>4 guests</option>
+          </select>
+        </div>
+        <button class="check-btn" onclick="location.href='booking.html'">Check</button>
+      </div>
+    </div>
+
+    <div class="not-found" id="not-found" style="display:none;">
+      <h1>Room not found</h1>
+      <p>The room you're looking for doesn't exist or is no longer available.</p>
+      <a href="rooms.html" class="btn">View all rooms</a>
+    </div>
+  </div>
+</section>
+
+<footer class="hotel-footer">
+  <div class="container">
+    <div>
+      <strong>Reozix Hotel</strong><br>
+      Mornington Peninsula, Victoria<br>
+      <a href="tel:+61359841200">+61 3 5984 1200</a>
+    </div>
+    <div>
+      <a href="rooms.html">Rooms</a> · <a href="#">About</a> · <a href="#">Location</a> · <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script src="../shared/js/utils.js"></script>
+<script src="js/data.js"></script>
+<script>
+// Room detail page — renders one room from HOTEL_DATA based on ?id=
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var roomId = params.get('id');
+
+  var rooms = (HOTEL_DATA && HOTEL_DATA.rooms) || [];
+  var room = null;
+  for (var i = 0; i < rooms.length; i++) {
+    if (rooms[i].id === roomId) { room = rooms[i]; break; }
+  }
+
+  var grid = document.getElementById('room-detail-grid');
+  var datePicker = document.getElementById('date-picker');
+  var notFound = document.getElementById('not-found');
+
+  // No match (or no ?id=) → show "Room not found"
+  if (!room) {
+    document.title = 'Room not found — Reozix Hotel';
+    grid.style.display = 'none';
+    datePicker.style.display = 'none';
+    notFound.style.display = '';
+    return;
+  }
+
+  // Per-room Unsplash gallery (first image matches the room card on rooms.html)
+  var galleryImages = {
+    'vineyard-suite': [
+      'photo-1590490360182-c33d57733427',
+      'photo-1566073771259-6a8506099945',
+      'photo-1611892440504-42a792e24d32',
+      'photo-1631049307264-da0ec9d70304',
+      'photo-1520250497591-112f2f40a3f4'
+    ],
+    'ocean-king': [
+      'photo-1595576508898-0ad5c879a061',
+      'photo-1631049307264-da0ec9d70304',
+      'photo-1578683010236-d716f9a3f461',
+      'photo-1611892440504-42a792e24d32',
+      'photo-1520250497591-112f2f40a3f4'
+    ],
+    'garden-queen': [
+      'photo-1582719478250-c89cae4dc85b',
+      'photo-1631049307264-da0ec9d70304',
+      'photo-1571896349842-33c89424de2d',
+      'photo-1591088398332-8a7791972843'
+    ],
+    'family-suite': [
+      'photo-1566665797739-1674de7a421a',
+      'photo-1591088398332-8a7791972843',
+      'photo-1578683010236-d716f9a3f461',
+      'photo-1611892440504-42a792e24d32',
+      'photo-1520250497591-112f2f40a3f4'
+    ]
+  };
+
+  // Amenity icons (same emoji set as rooms.html)
+  var icons = {
+    'King bed': '🛏️',
+    'Vineyard views': '🌅',
+    'Ocean views': '🌊',
+    'Freestanding bath': '🛁',
+    'Private balcony': '🌤️',
+    'Rain shower': '🚿',
+    'Walk-in shower': '🚿',
+    'Sitting area': '🛋️',
+    'Minibar': '🍾',
+    'Nespresso machine': '☕',
+    'Bathrobes': '🧖',
+    'Queen bed': '🛏️',
+    'Garden terrace': '🌿',
+    'Shower': '🚿',
+    'Tea & coffee': '🍵',
+    'Two single beds': '🛏️',
+    'Garden access': '🌿',
+    'Bath & shower': '🛁',
+    'Board games': '🎲'
+  };
+
+  var images = galleryImages[room.id] || galleryImages['vineyard-suite'];
+
+  // Page title + name + description
+  document.title = room.name + ' — Reozix Hotel';
+  document.getElementById('room-name').textContent = room.name;
+  document.getElementById('room-desc').textContent = room.description;
+
+  // Rate
+  document.getElementById('room-rate').innerHTML = '$' + room.rate + ' <span>AUD / night</span>';
+
+  // "Book this room" CTA
+  var bookBtn = document.getElementById('book-btn');
+  bookBtn.href = 'booking.html?room=' + encodeURIComponent(room.id);
+
+  // Full amenity list
+  var list = document.getElementById('room-amenities');
+  room.amenities.forEach(function(amenity) {
+    var li = document.createElement('li');
+    li.innerHTML = '<span aria-hidden="true">' + (icons[amenity] || '✓') + '</span> ' + amenity;
+    list.appendChild(li);
+  });
+
+  // Photo gallery (main image + clickable thumbnails)
+  var mainImg = document.getElementById('gallery-main-img');
+  var thumbs = document.getElementById('gallery-thumbs');
+  var src = function(id, w) { return 'https://images.unsplash.com/' + id + '?w=' + w + '&q=80'; };
+
+  mainImg.src = src(images[0], 1200);
+  mainImg.alt = room.name;
+
+  images.forEach(function(imgId, i) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = i === 0 ? 'active' : '';
+    btn.setAttribute('aria-label', 'View photo ' + (i + 1) + ' of ' + images.length);
+    var img = document.createElement('img');
+    img.src = src(imgId, 300);
+    img.alt = room.name + ' photo ' + (i + 1);
+    img.loading = 'lazy';
+    btn.appendChild(img);
+    btn.addEventListener('click', function() {
+      mainImg.src = src(imgId, 1200);
+      mainImg.alt = room.name + ' photo ' + (i + 1);
+      var active = thumbs.querySelector('.active');
+      if (active) active.classList.remove('active');
+      btn.classList.add('active');
+    });
+    thumbs.appendChild(btn);
+  });
+})();
+</script>
+</body>
+</html>
