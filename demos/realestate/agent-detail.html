@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Profile — Reozix Real Estate, Gold Coast</title>
+<meta name="description" content="Full agent profile with specialisations, recent sales history and a direct contact form. Reozix Real Estate, Gold Coast.">
+<link rel="stylesheet" href="../shared/css/reset.css">
+<link rel="stylesheet" href="css/realestate.css">
+<style>
+  /* Agent detail page additions — back link, contact form spacing, success message, not-found state */
+  .back-link {
+    display: inline-block; margin-bottom: 20px;
+    font-size: 0.875rem; font-weight: 500; color: var(--re-accent-dark);
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: var(--re-accent); }
+
+  /* Initials placeholder on a coloured block for contrast */
+  .agent-profile .agent-photo {
+    background: linear-gradient(135deg, var(--re-accent) 0%, #7fb4e5 100%);
+  }
+  .agent-profile .agent-photo .photo-placeholder { color: #fff; }
+
+  .agent-contact-form { margin-top: 32px; }
+  .form-success {
+    display: none; margin-top: 20px; padding: 14px 18px;
+    border-radius: 8px; background: #e8f7ee; border: 1px solid #bfe6cf;
+    color: #1f7a44; font-size: 0.9375rem;
+  }
+
+  /* Not-found state */
+  .not-found { text-align: center; padding: 64px 24px; }
+  .not-found .nf-icon { font-size: 3.5rem; }
+  .not-found h1 { font-size: 2rem; font-weight: 800; margin: 16px 0 8px; color: var(--re-text); }
+  .not-found p { color: var(--re-text-secondary); margin-bottom: 24px; }
+</style>
+</head>
+<body>
+
+<nav class="re-nav">
+  <div class="container">
+    <a href="index.html" class="logo">Reozix <span>Real Estate</span></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="search.html">Search</a>
+      <a href="agents.html">Agents</a>
+      <a href="appraisal.html">Appraisal</a>
+      <a href="tel:+61755923400">+61 7 5592 3400</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Agent profile -->
+<section class="re-section">
+  <div class="container">
+    <a href="agents.html" class="back-link">← Back to agents</a>
+
+    <div id="profile-wrap">
+
+      <div class="agent-profile">
+        <div class="agent-photo">
+          <div class="photo-placeholder" id="agent-photo" aria-hidden="true"></div>
+        </div>
+        <div class="agent-info">
+          <h2 id="agent-name"></h2>
+          <p class="agent-role" id="agent-role"></p>
+          <p class="agent-bio" id="agent-bio"></p>
+          <div class="agent-contact">
+            <a id="agent-phone" href="tel:">📞 <span id="agent-phone-text"></span></a>
+            <a id="agent-email" href="mailto:">✉️ <span id="agent-email-text"></span></a>
+          </div>
+          <div class="agent-specializations" id="agent-specializations"></div>
+          <div class="agent-sales">
+            <h3>Recent sales</h3>
+            <table class="sales-table">
+              <thead>
+                <tr>
+                  <th scope="col">Address</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody id="sales-rows"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <form class="appraisal-form agent-contact-form" id="contact-form" novalidate>
+        <h3>Send a message to <span id="contact-agent">this agent</span></h3>
+        <p class="form-intro">Tell us what you're looking for and we'll get back to you within 24 hours.</p>
+        <div class="form-row">
+          <div class="field">
+            <label for="cf-name">Name</label>
+            <input type="text" id="cf-name" placeholder="Your name" required>
+          </div>
+          <div class="field">
+            <label for="cf-email">Email</label>
+            <input type="email" id="cf-email" placeholder="you@example.com" required>
+          </div>
+          <div class="field full">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" placeholder="How can we help?" required></textarea>
+          </div>
+        </div>
+        <div class="submit-row">
+          <button type="submit" class="re-btn">Send message</button>
+          <p class="submit-note">We'll reply within 24 hours.</p>
+        </div>
+        <p class="form-success" id="form-success" role="status">Thanks — your message has been sent to <span id="success-agent"></span>. We'll be in touch soon.</p>
+      </form>
+
+    </div>
+
+    <div class="not-found" id="not-found" style="display:none;">
+      <span class="nf-icon" aria-hidden="true">👤</span>
+      <h1>Agent not found</h1>
+      <p>The agent you're looking for doesn't exist or may have moved on.</p>
+      <a href="agents.html" class="re-btn">Browse all agents</a>
+    </div>
+  </div>
+</section>
+
+<footer class="re-footer">
+  <div class="container">
+    <div class="agency">
+      <strong>Reozix Real Estate</strong>
+      <p>Gold Coast, QLD</p>
+      <a href="tel:+61755923400">+61 7 5592 3400</a>
+      <a href="mailto:hello@reozixrealestate.com.au">hello@reozixrealestate.com.au</a>
+    </div>
+    <div class="footer-links">
+      <h4>Quick links</h4>
+      <a href="index.html">Home</a>
+      <a href="search.html">Search</a>
+      <a href="agents.html">Agents</a>
+      <a href="appraisal.html">Appraisal</a>
+    </div>
+  </div>
+  <div class="container">
+    <p class="footer-bottom">© 2026 Reozix Real Estate. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="../shared/js/utils.js"></script>
+<script src="js/data.js"></script>
+<script>
+// Agent detail page — renders one agent from RE_DATA based on ?id=
+(function() {
+  var params = new URLSearchParams(window.location.search);
+  var agentId = params.get('id');
+
+  var agents = (RE_DATA && RE_DATA.agents) || [];
+  var agent = null;
+  for (var i = 0; i < agents.length; i++) {
+    if (agents[i].id === agentId) { agent = agents[i]; break; }
+  }
+
+  var profileWrap = document.getElementById('profile-wrap');
+  var notFound = document.getElementById('not-found');
+
+  // No match (or no ?id=) → show "Agent not found"
+  if (!agent) {
+    document.title = 'Agent not found — Reozix Real Estate';
+    profileWrap.style.display = 'none';
+    notFound.style.display = '';
+    return;
+  }
+
+  function initials(name) {
+    var parts = name.split(' ');
+    return (parts[0] ? parts[0][0] : '') + (parts[parts.length - 1] ? parts[parts.length - 1][0] : '');
+  }
+
+  function formatPrice(n) {
+    return '$' + n.toLocaleString('en-AU');
+  }
+
+  function formatDate(s) {
+    var parts = String(s).split('-');
+    if (parts.length !== 2) return String(s);
+    var months = ['January', 'February', 'March', 'April', 'May', 'June',
+      'July', 'August', 'September', 'October', 'November', 'December'];
+    var m = parseInt(parts[1], 10) - 1;
+    return (months[m] || parts[1]) + ' ' + parts[0];
+  }
+
+  // Page title + profile head
+  document.title = agent.name + ' — Reozix Real Estate';
+  document.getElementById('agent-photo').textContent = initials(agent.name);
+  document.getElementById('agent-name').textContent = agent.name;
+  document.getElementById('agent-role').textContent = agent.role;
+  document.getElementById('agent-bio').textContent = agent.bio;
+
+  // Phone + email links
+  var phoneEl = document.getElementById('agent-phone');
+  phoneEl.href = 'tel:' + agent.phone.replace(/[^+\d]/g, '');
+  document.getElementById('agent-phone-text').textContent = agent.phone;
+  var emailEl = document.getElementById('agent-email');
+  emailEl.href = 'mailto:' + agent.email;
+  document.getElementById('agent-email-text').textContent = agent.email;
+
+  // Contact form heading + success message carry the agent's name
+  document.getElementById('contact-agent').textContent = agent.name;
+  document.getElementById('success-agent').textContent = agent.name;
+
+  // Specialisations
+  var specs = document.getElementById('agent-specializations');
+  agent.specializations.forEach(function(s) {
+    var tag = document.createElement('span');
+    tag.className = 'tag';
+    tag.textContent = s;
+    specs.appendChild(tag);
+  });
+
+  // Recent sales (address, price, date)
+  var tbody = document.getElementById('sales-rows');
+  (agent.recentSales || []).forEach(function(sale) {
+    var tr = document.createElement('tr');
+
+    var tdAddress = document.createElement('td');
+    tdAddress.textContent = sale.address;
+
+    var tdPrice = document.createElement('td');
+    tdPrice.className = 'sale-price';
+    tdPrice.textContent = formatPrice(sale.price);
+
+    var tdDate = document.createElement('td');
+    tdDate.className = 'sale-date';
+    tdDate.textContent = formatDate(sale.date);
+
+    tr.appendChild(tdAddress);
+    tr.appendChild(tdPrice);
+    tr.appendChild(tdDate);
+    tbody.appendChild(tr);
+  });
+
+  // Contact form — cosmetic only: swap the form for an inline success message
+  var form = document.getElementById('contact-form');
+  var success = document.getElementById('form-success');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    form.style.display = 'none';
+    success.style.display = '';
+  });
+})();
+</script>
+</body>
+</html>
