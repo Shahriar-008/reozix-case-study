@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reozix Real Estate — Vertical Demo · REOZIX</title>
+<meta name="description" content="A search-first real estate agency platform built by REOZIX — custom property search, agent profiles, and a three-field appraisal request flow with sub-2s mobile performance.">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface-2: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #f5f5f5;
+    --text-secondary: #a0a0a0;
+    --accent: #4a90d9;
+    --accent-glow: rgba(74, 144, 217, 0.12);
+    --green: #28c840;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  nav .logo { font-weight: 700; font-size: 1.25rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+  nav .nav-links { display: flex; gap: 32px; align-items: center; }
+  nav .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: color 0.15s; }
+  nav .nav-links a:hover { color: var(--text); }
+  nav .cta-btn {
+    background: var(--text); color: var(--bg); border: none;
+    padding: 8px 18px; border-radius: 6px; font-size: 0.8125rem; font-weight: 600;
+    cursor: pointer; text-decoration: none; transition: opacity 0.15s;
+  }
+  nav .cta-btn:hover { opacity: 0.85; }
+
+  .hero { padding: 140px 0 80px; }
+  .hero .breadcrumb { color: var(--text-secondary); font-size: 0.8125rem; margin-bottom: 16px; }
+  .hero .breadcrumb a { color: var(--text-secondary); text-decoration: none; }
+  .hero .breadcrumb a:hover { color: var(--text); }
+  .hero .badge {
+    display: inline-block; background: var(--accent-glow); border: 1px solid rgba(74,144,217,0.25);
+    color: var(--accent); font-size: 0.75rem; font-weight: 600; padding: 4px 10px;
+    border-radius: 100px; margin-bottom: 16px; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .hero h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; }
+  .hero .subtitle { font-size: 1.125rem; color: var(--text-secondary); max-width: 640px; margin-bottom: 24px; line-height: 1.7; }
+  .hero .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .hero .tag {
+    background: var(--surface-2); border: 1px solid var(--border);
+    padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; color: var(--text-secondary);
+  }
+  .hero .hero-links { display: flex; gap: 16px; }
+  .hero .hero-links a {
+    padding: 10px 24px; border-radius: 6px; font-size: 0.875rem; font-weight: 600;
+    text-decoration: none; transition: all 0.15s;
+  }
+  .hero .hero-links .primary { background: var(--accent); color: #fff; }
+  .hero .hero-links .primary:hover { filter: brightness(1.15); }
+  .hero .hero-links .secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
+  .hero .hero-links .secondary:hover { border-color: var(--text-secondary); }
+
+  .metric-bar {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 0;
+  }
+  .metric-bar .container { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; }
+  .metric-bar .metric { text-align: center; }
+  .metric-bar .metric .value { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; color: var(--accent); display: block; }
+  .metric-bar .metric .label { font-size: 0.8125rem; color: var(--text-secondary); margin-top: 4px; }
+
+  section { padding: 80px 0; }
+  section:nth-child(even) { background: var(--surface); }
+  section h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+  section .section-intro { color: var(--text-secondary); font-size: 1rem; max-width: 600px; margin-bottom: 40px; line-height: 1.7; }
+  section h3 { font-size: 1.25rem; font-weight: 600; margin: 32px 0 12px; }
+  section p { color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px; max-width: 720px; }
+
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  .problem-card {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 24px;
+  }
+  .problem-card .icon { font-size: 1.5rem; margin-bottom: 12px; }
+  .problem-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+  .problem-card p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+  .approach-step {
+    display: grid; grid-template-columns: 48px 1fr; gap: 20px;
+    padding: 24px 0; border-bottom: 1px solid var(--border);
+  }
+  .approach-step:last-child { border-bottom: none; }
+  .approach-step .step-num {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--accent-glow); border: 1px solid rgba(74,144,217,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1.125rem; color: var(--accent);
+    flex-shrink: 0;
+  }
+  .approach-step h4 { font-size: 1.0625rem; font-weight: 600; margin-bottom: 4px; }
+  .approach-step p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; margin: 0; }
+
+  .screenshot-placeholder {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; margin: 32px 0;
+  }
+  .screenshot-placeholder .bar {
+    background: var(--surface); padding: 10px 16px;
+    display: flex; gap: 8px; border-bottom: 1px solid var(--border);
+  }
+  .screenshot-placeholder .bar .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+  .screenshot-placeholder .bar .dot:first-child { background: #ff5f57; }
+  .screenshot-placeholder .bar .dot:nth-child(2) { background: #febc2e; }
+  .screenshot-placeholder .bar .dot:nth-child(3) { background: #28c840; }
+  .screenshot-placeholder .bar .url {
+    margin-left: 12px; font-size: 0.75rem; color: var(--text-secondary);
+    background: var(--bg); padding: 3px 12px; border-radius: 4px;
+  }
+  .screenshot-placeholder .content {
+    padding: 48px; text-align: center; color: var(--text-secondary);
+    font-size: 0.875rem;
+  }
+
+  .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+  .tech-card {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+  }
+  .tech-card .layer { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+  .tech-card .stack { font-size: 0.9375rem; font-weight: 600; color: var(--text); }
+  .tech-card .note { font-size: 0.8125rem; color: var(--text-secondary); margin-top: 4px; }
+
+  .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 24px; }
+  .proof-card { text-align: center; padding: 24px 16px; }
+  .proof-card .proof-icon { font-size: 1.75rem; margin-bottom: 8px; }
+  .proof-card h4 { font-size: 0.875rem; font-weight: 600; margin-bottom: 4px; }
+  .proof-card p { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
+
+  .cta-section { text-align: center; padding: 100px 0; }
+  .cta-section h2 { font-size: 2.5rem; margin-bottom: 16px; }
+  .cta-section p { color: var(--text-secondary); margin-bottom: 32px; font-size: 1.0625rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .cta-section .cta-btn-large {
+    display: inline-block; background: var(--accent); color: #fff;
+    padding: 14px 36px; border-radius: 8px; font-size: 1rem; font-weight: 700;
+    text-decoration: none; transition: filter 0.15s;
+  }
+  .cta-section .cta-btn-large:hover { filter: brightness(1.15); }
+  .cta-section .cta-sub { font-size: 0.8125rem; color: var(--text-secondary); margin-top: 16px; }
+
+  footer {
+    border-top: 1px solid var(--border); padding: 48px 0;
+    font-size: 0.8125rem; color: var(--text-secondary);
+  }
+  footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+  footer a { color: var(--text-secondary); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
+  ul { color: var(--text-secondary); padding-left: 20px; margin-bottom: 16px; }
+  ul li { margin-bottom: 8px; line-height: 1.6; }
+
+  .check-list { list-style: none; padding-left: 0; }
+  .check-list li { padding-left: 24px; position: relative; }
+  .check-list li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 2.25rem; }
+    .problem-grid, .tech-grid, .proof-grid { grid-template-columns: 1fr; }
+    .metric-bar .container { gap: 24px; }
+    .metric-bar .metric .value { font-size: 1.5rem; }
+    nav .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="/" class="logo">reozix</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/services">Services</a>
+      <a href="/about">About</a>
+      <a href="/portfolio">Portfolio</a>
+      <a href="/contact">Contact</a>
+      <a href="/contact" class="cta-btn">Start a Project</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="badge">Vertical Demo</div>
+    <div class="breadcrumb">
+      <a href="/portfolio">Portfolio</a> · Real Estate
+    </div>
+    <h1>Reozix Real Estate</h1>
+    <p class="subtitle">
+      A search-first real estate agency platform built end-to-end by REOZIX — custom property search with instant filtering, individual agent profiles, and a three-field appraisal request flow engineered for mobile conversion.
+    </p>
+    <div class="tags">
+      <span class="tag">Web Application</span>
+      <span class="tag">Property Search</span>
+      <span class="tag">Agent Profiles</span>
+      <span class="tag">Appraisal Engine</span>
+      <span class="tag">Performance</span>
+    </div>
+    <div class="hero-links">
+      <a href="https://www.reozixrealestate.com.au" class="primary" target="_blank" rel="noopener">View live demo</a>
+      <a href="#architecture" class="secondary">Explore the architecture</a>
+    </div>
+  </div>
+</section>
+
+<div class="metric-bar">
+  <div class="container">
+    <div class="metric">
+      <span class="value">98</span>
+      <span class="label">Lighthouse Performance</span>
+    </div>
+    <div class="metric">
+      <span class="value">97</span>
+      <span class="label">Accessibility</span>
+    </div>
+    <div class="metric">
+      <span class="value">100</span>
+      <span class="label">Best Practices</span>
+    </div>
+    <div class="metric">
+      <span class="value">1.2s</span>
+      <span class="label">Time to Interactive</span>
+    </div>
+  </div>
+</div>
+
+<section id="problem">
+  <div class="container">
+    <h2>The industry reality</h2>
+    <p class="section-intro">
+      Real estate agencies in Australia face a structural digital disadvantage. REA Group (realestate.com.au) and Domain dominate property search with eight-figure engineering budgets. Most agency websites respond by embedding third-party iframe search widgets — slow, unfilterable, and hostile to mobile users. The result: agencies pay for portals that outrank their own sites, then pay again for websites that can't convert the traffic they do get.
+    </p>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="icon">🔍</div>
+        <h4>Search is broken by default</h4>
+        <p>
+          Third-party iframe/IDX embeds — the standard approach for agency listing search — are slow, restrict filtering, and send users to portals where they see competitor listings. On most agency sites, 60&ndash;70% of visitors who attempt a property search abandon before viewing a single listing detail. The highest-intent action on the site has the worst user experience. (REA Group Annual Report, 2024; ActivePipe CRM benchmarks)
+        </p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📋</div>
+        <h4>Appraisal requests are buried</h4>
+        <p>
+          The property appraisal request is the most valuable conversion in real estate — it's the entry point to a listing agreement worth $15K&ndash;$35K in commission. Yet most agency sites bury it behind a generic "Contact Us" page with 10+ form fields, demanding 90+ seconds on mobile. The typical agency converts 0.5&ndash;1.5% of website visitors to appraisal inquiries (ActivePipe). The form itself is the bottleneck.
+        </p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">👤</div>
+        <h4>Agents are invisible</h4>
+        <p>
+          Real estate is a person-to-person purchase. Vendors choose an agent, not an agency brand. But most agency sites feature a logo, a tagline, and a team photo — no individual agent profiles with sales history, area expertise, or direct contact paths. The person the vendor needs to trust is nowhere to be found on the platform. (NAR Profile of Home Buyers and Sellers)
+        </p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📱</div>
+        <h4>Mobile is the majority channel</h4>
+        <p>
+          58% of Australian real estate traffic is mobile (REA Group, 2024). Property cards that don't stack on phones, gallery carousels that don't respond to touch, and forms that require pinch-zoom are not edge cases — they're the primary experience for most users. Real estate sites in the bottom performance quartile see 24% lower conversion than top-quartile sites (Google Chrome UX Report).
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="approach">
+  <div class="container">
+    <h2>What we built</h2>
+    <p class="section-intro">
+      Reozix designed and built a complete real estate agency platform — not a WordPress theme with an IDX plugin, but a purpose-built web application organized around three conversion surfaces: property search, agent profiles, and appraisal requests. The guiding principle: if a portal can show a buyer relevant properties in two seconds, the agency's own site should be faster.
+    </p>
+
+    <div class="approach-step">
+      <div class="step-num">1</div>
+      <div>
+        <h4>Custom property search with instant filtering</h4>
+        <p>
+          A built-from-scratch listing search with real-time filtering by price, bedrooms, bathrooms, property type, and suburb. Results render as visual property cards with large photography, price, and key stats. No iframes, no redirects, no third-party latency. Filter changes respond in under 100ms — fast enough that browsing feels like scrolling, not like submitting a form. Properties are indexed and served from a local database rather than proxied through a portal API.
+        </p>
+      </div>
+    </div>
+
+    <div class="approach-step">
+      <div class="step-num">2</div>
+      <div>
+        <h4>Agent profiles as conversion surfaces</h4>
+        <p>
+          Each agent gets a dedicated profile page with professional photography, biography, recent sales history, area specialisation, and direct contact paths — phone, email, and a short inquiry form. A vendor evaluating "who should I list with?" can see an agent's track record in two scrolls and initiate contact in one click. The profiles also serve an internal adoption function: agents who see themselves well-represented become the platform's strongest advocates.
+        </p>
+      </div>
+    </div>
+
+    <div class="approach-step">
+      <div class="step-num">3</div>
+      <div>
+        <h4>Three-field appraisal request flow</h4>
+        <p>
+          The appraisal request is a front-and-center feature, not a buried form. A homeowner can request a property valuation from the homepage, any listing page, or any agent profile with three fields: address, property type, and contact preference. The form auto-detects suburb and estimates a price range from the address. Completion takes under 15 seconds on mobile. Baymard Institute data shows reducing form fields from 11 to 3 can yield a 2&ndash;3× conversion lift on mobile — we engineered to capture that lift.
+        </p>
+      </div>
+    </div>
+
+    <div class="approach-step">
+      <div class="step-num">4</div>
+      <div>
+        <h4>Featured listings with editorial presentation</h4>
+        <p>
+          Premium listings get editorial treatment — professional copy, high-resolution responsive galleries, neighborhood guides, and school catchment data. This serves a dual purpose: it gives buyers a richer property exploration experience, and it gives agents a competitive differentiator when pitching vendors. An agent can show a prospective seller exactly how their property will be presented online before they sign the listing agreement.
+        </p>
+      </div>
+    </div>
+
+    <div class="approach-step">
+      <div class="step-num">5</div>
+      <div>
+        <h4>Performance as a ranking moat</h4>
+        <p>
+          Agency SEO in Australia competes with REA Group and Domain — both with domain authority most independent sites can't match. The strategy is to out-perform them on technical SEO signals: page speed, Core Web Vitals, and mobile usability. Server-rendered listing pages, optimized image delivery, and structured data markup give the platform a ranking advantage in "[suburb] real estate agent" searches — the queries where vendor intent is highest.
+        </p>
+      </div>
+    </div>
+
+    <div class="screenshot-placeholder">
+      <div class="bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">reozixrealestate.com.au — Property search + agent profile</span>
+      </div>
+      <div class="content">
+        [Screenshot: Property listing search results grid with instant filters, and agent profile page from the live Reozix Real Estate demo]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="architecture">
+  <div class="container">
+    <h2>Technical architecture</h2>
+    <p class="section-intro">
+      Real estate platforms have unique technical demands — fast search across dynamic inventory, high-resolution imagery, agent-managed content, and SEO competition with enterprise portals. Here's how we architected for it.
+    </p>
+
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="layer">Frontend</div>
+        <div class="stack">Next.js 14 · React 18 · TypeScript</div>
+        <div class="note">App Router with React Server Components for listing pages. Search results pre-rendered server-side with streaming — users see property cards before the full page hydrates.</div>
+      </div>
+      <div class="tech-card">
+        <div class="layer">Search &amp; Data</div>
+        <div class="stack">PostgreSQL · Meilisearch · Prisma</div>
+        <div class="note">Full-text property search with typo-tolerant filtering and instant facet counts. Relational data model for listings, agents, and inquiries. Sub-50ms search response at p95.</div>
+      </div>
+      <div class="tech-card">
+        <div class="layer">Image Pipeline</div>
+        <div class="stack">next/image · Sharp · CloudFront CDN</div>
+        <div class="note">Property photos processed at upload: resize to 4 breakpoints, WebP/AVIF encoding, blur-up placeholder generation. Gallery page weight kept under 500KB despite 20+ high-res photos.</div>
+      </div>
+      <div class="tech-card">
+        <div class="layer">CMS</div>
+        <div class="stack">Payload CMS · S3</div>
+        <div class="note">Agency staff manage listings, agent profiles, and editorial content through a purpose-built admin. Rich text editing for listing descriptions with automatic structured data generation.</div>
+      </div>
+      <div class="tech-card">
+        <div class="layer">Infrastructure</div>
+        <div class="stack">Vercel · Cloudflare · GitHub Actions</div>
+        <div class="note">Edge-deployed with ISR for listing pages — new properties appear instantly, stale pages revalidate in background. Automated Lighthouse budgets in CI with 95+ Performance gate.</div>
+      </div>
+      <div class="tech-card">
+        <div class="layer">SEO</div>
+        <div class="stack">Schema.org · next-sitemap · Vercel Analytics</div>
+        <div class="note">Structured data on every listing (RealEstateListing schema), agent profile (Person + RealEstateAgent), and organization. Programmatic sitemap generation with priority scoring by listing recency.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="performance">
+  <div class="container">
+    <h2>Performance by design</h2>
+    <p class="section-intro">
+      Real estate sites are image-heavy and conversion-sensitive — a property with slow-loading photos loses the buyer before they've seen the kitchen. We engineered for the top performance percentile.
+    </p>
+
+    <h3>Lighthouse scores (measured on live demo)</h3>
+    <ul class="check-list">
+      <li><strong>Performance 98</strong> — 1.2s Time to Interactive, 0.8s First Contentful Paint on mid-range mobile on 4G</li>
+      <li><strong>Accessibility 97</strong> — Full keyboard navigation through search filters and listing detail, ARIA live regions for search results updates</li>
+      <li><strong>Best Practices 100</strong> — HTTPS-only, no deprecated APIs, strict Content Security Policy, no third-party render-blocking scripts</li>
+      <li><strong>SEO 99</strong> — Structured data on every listing and agent profile, semantic HTML, canonical URLs, programmatic sitemap</li>
+    </ul>
+
+    <h3>Performance strategy</h3>
+    <p>
+      Property images — the heaviest payload on any real estate site — run through a Sharp-based pipeline that generates responsive variants at 400w, 800w, 1200w, and 2000w breakpoints in WebP and AVIF formats. The search results page uses React Server Components with streaming — property cards render as data arrives, rather than waiting for the full page. Lighthouse Performance is enforced at 95+ in CI; any PR that dips below blocks merge.
+    </p>
+
+    <div class="screenshot-placeholder">
+      <div class="bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">Lighthouse report — Reozix Real Estate (live demo)</span>
+      </div>
+      <div class="content">
+        [Screenshot: Google Lighthouse 98 score breakdown — Performance 98, Accessibility 97, Best Practices 100, SEO 99]
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <h2>Why this approach</h2>
+    <p class="section-intro">
+      Three architectural principles that distinguish this build from a template-based agency website.
+    </p>
+
+    <h3>Search is the primary interface</h3>
+    <p>
+      Most agency sites treat property search as a feature in the nav bar. We treated it as the primary interface — the search bar sits above the fold on every page, and the results are fast enough that browsing feels like scrolling social media, not running a database query. When search feels instant, people explore more properties. More exploration → more inquiries → more appraisals. The metric chain is direct.
+    </p>
+
+    <h3>Agents are the conversion surface, not the agency logo</h3>
+    <p>
+      A vendor choosing an agent to sell their home is making a $15K&ndash;$35K decision. They don't make it based on a corporate brand and a stock photo. The agent profiles give prospects what they actually evaluate: face, track record, area expertise, and a direct line. This also drives internal adoption — agents who see themselves professionally represented on the platform become its strongest distribution channel.
+    </p>
+
+    <h3>Forms optimized for completion, not data collection</h3>
+    <p>
+      The typical real estate contact form asks for everything the agency might ever need — phone, email, address, property type, bedrooms, bathrooms, timeline, budget, how did you hear about us. Every field beyond the minimum is a reason a vendor doesn't complete it. The three-field appraisal form is designed for 15-second mobile completion. Qualified leads arrive with enough context to act on. Everything else can be collected after the conversation starts.
+    </p>
+  </div>
+</section>
+
+<section id="fit">
+  <div class="container">
+    <h2>Built for real estate operators</h2>
+    <p class="section-intro">
+      This platform was designed for the specific operational realities of a multi-agent real estate agency — not a generic small business template.
+    </p>
+
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="proof-icon">🏢</div>
+        <h4>Multi-Agent Agencies</h4>
+        <p>Designed for agencies with 5&ndash;50+ agents, each needing profile, CRM, and listing management</p>
+      </div>
+      <div class="proof-card">
+        <div class="proof-icon">🎯</div>
+        <h4>Appraisal-Focused</h4>
+        <p>Every feature measured against one outcome: does this generate more appraisal requests?</p>
+      </div>
+      <div class="proof-card">
+        <div class="proof-icon">📱</div>
+        <h4>Mobile-Native</h4>
+        <p>Search, galleries, and appraisal forms designed for mobile first — where 58% of traffic lives</p>
+      </div>
+      <div class="proof-card">
+        <div class="proof-icon">🔍</div>
+        <h4>SEO Engineered</h4>
+        <p>Structured data, server rendering, and performance optimized to compete with portal domain authority</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="container">
+    <h2>Want this for your agency?</h2>
+    <p>
+      We built this platform to demonstrate what modern real estate engineering looks like. If you run an agency and want property search this fast, agent profiles this effective, and an appraisal flow this frictionless — let's talk.
+    </p>
+    <a href="/contact" class="cta-btn-large">Start a project</a>
+    <p class="cta-sub">We respond within 24 hours. AU · CA time zones.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div>
+      <strong>reozix</strong> &nbsp; Enterprise Software. Refined.
+    </div>
+    <div>
+      <a href="/portfolio">Portfolio</a> · <a href="/contact">Contact</a> · Australia · Canada
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:insights.ehotelier.com)",
+      "WebFetch(domain:www.siteminder.com)",
+      "WebFetch(domain:cafe.reozix.com)",
+      "WebFetch(domain:reozix.com)",
+      "WebFetch(domain:www.nar.realtor)",
+      "WebFetch(domain:www.hotelminder.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Read(//c/Users/shahr/.claude/**)",
+      "PowerShell(node -e \"const s=JSON.parse\\(require\\('fs'\\).readFileSync\\('C:/Users/shahr/.claude/settings.json','utf8'\\)\\); console.log\\('valid JSON ✓'\\); console.log\\('autoCompactWindow =', s.autoCompactWindow\\); console.log\\('statusLine =', JSON.stringify\\(s.statusLine\\)\\);\")"
+    ]
+  }
+}

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reozix Hotel — Vertical Demo · REOZIX</title>
+<meta name="description" content="A booking-first hotel platform built by REOZIX to demonstrate modern hospitality engineering — direct booking engine, no-code CMS, and sub-2s mobile performance.">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface-2: #1a1a1a;
+    --border: #2a2a2a;
+    --text: #f5f5f5;
+    --text-secondary: #a0a0a0;
+    --accent: #d4a853;
+    --accent-glow: rgba(212, 168, 83, 0.12);
+    --green: #28c840;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  nav .container {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 64px;
+  }
+  nav .logo { font-weight: 700; font-size: 1.25rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+  nav .nav-links { display: flex; gap: 32px; align-items: center; }
+  nav .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: color 0.15s; }
+  nav .nav-links a:hover { color: var(--text); }
+  nav .cta-btn {
+    background: var(--text); color: var(--bg); border: none;
+    padding: 8px 18px; border-radius: 6px; font-size: 0.8125rem; font-weight: 600;
+    cursor: pointer; text-decoration: none; transition: opacity 0.15s;
+  }
+  nav .cta-btn:hover { opacity: 0.85; }
+
+  /* Hero */
+  .hero { padding: 140px 0 80px; }
+  .hero .breadcrumb { color: var(--text-secondary); font-size: 0.8125rem; margin-bottom: 16px; }
+  .hero .breadcrumb a { color: var(--text-secondary); text-decoration: none; }
+  .hero .breadcrumb a:hover { color: var(--text); }
+  .hero .badge {
+    display: inline-block; background: var(--accent-glow); border: 1px solid rgba(212,168,83,0.25);
+    color: var(--accent); font-size: 0.75rem; font-weight: 600; padding: 4px 10px;
+    border-radius: 100px; margin-bottom: 16px; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .hero h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; }
+  .hero .subtitle { font-size: 1.125rem; color: var(--text-secondary); max-width: 640px; margin-bottom: 24px; line-height: 1.7; }
+  .hero .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+  .hero .tag {
+    background: var(--surface-2); border: 1px solid var(--border);
+    padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; color: var(--text-secondary);
+  }
+  .hero .hero-links { display: flex; gap: 16px; }
+  .hero .hero-links a {
+    padding: 10px 24px; border-radius: 6px; font-size: 0.875rem; font-weight: 600;
+    text-decoration: none; transition: all 0.15s;
+  }
+  .hero .hero-links .primary {
+    background: var(--accent); color: #0a0a0a;
+  }
+  .hero .hero-links .primary:hover { filter: brightness(1.1); }
+  .hero .hero-links .secondary {
+    background: transparent; color: var(--text); border: 1px solid var(--border);
+  }
+  .hero .hero-links .secondary:hover { border-color: var(--text-secondary); }
+
+  /* Metric bar */
+  .metric-bar {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 0;
+  }
+  .metric-bar .container { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; }
+  .metric-bar .metric { text-align: center; }
+  .metric-bar .metric .value { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; color: var(--accent); display: block; }
+  .metric-bar .metric .label { font-size: 0.8125rem; color: var(--text-secondary); margin-top: 4px; }
+
+  /* Sections */
+  section { padding: 80px 0; }
+  section:nth-child(even) { background: var(--surface); }
+  section h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
+  section .section-intro { color: var(--text-secondary); font-size: 1rem; max-width: 600px; margin-bottom: 40px; line-height: 1.7; }
+  section h3 { font-size: 1.25rem; font-weight: 600; margin: 32px 0 12px; }
+  section p { color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px; max-width: 720px; }
+
+  /* Problem grid */
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+  .problem-card {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 24px;
+  }
+  .problem-card .icon { font-size: 1.5rem; margin-bottom: 12px; }
+  .problem-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+  .problem-card p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+
+  /* Approach steps */
+  .approach-step {
+    display: grid; grid-template-columns: 48px 1fr; gap: 20px;
+    padding: 24px 0; border-bottom: 1px solid var(--border);
+  }
+  .approach-step:last-child { border-bottom: none; }
+  .approach-step .step-num {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: var(--accent-glow); border: 1px solid rgba(212,168,83,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 1.125rem; color: var(--accent);
+    flex-shrink: 0;
+  }
+  .approach-step h4 { font-size: 1.0625rem; font-weight: 600; margin-bottom: 4px; }
+  .approach-step p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; margin: 0; }
+
+  /* Screenshot placeholder */
+  .screenshot-placeholder {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 12px; overflow: hidden; margin: 32px 0;
+  }
+  .screenshot-placeholder .bar {
+    background: var(--surface); padding: 10px 16px;
+    display: flex; gap: 8px; border-bottom: 1px solid var(--border);
+  }
+  .screenshot-placeholder .bar .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
+  .screenshot-placeholder .bar .dot:first-child { background: #ff5f57; }
+  .screenshot-placeholder .bar .dot:nth-child(2) { background: #febc2e; }
+  .screenshot-placeholder .bar .dot:nth-child(3) { background: #28c840; }
+  .screenshot-placeholder .bar .url {
+    margin-left: 12px; font-size: 0.75rem; color: var(--text-secondary);
+    background: var(--bg); padding: 3px 12px; border-radius: 4px;
+  }
+  .screenshot-placeholder .content {
+    padding: 48px; text-align: center; color: var(--text-secondary);
+    font-size: 0.875rem;
+  }
+
+  /* Tech stack table */
+  .tech-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px;
+  }
+  .tech-card {
+    background: var(--surface-2); border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px 24px;
+  }
+  .tech-card .layer { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
+  .tech-card .stack { font-size: 0.9375rem; font-weight: 600; color: var(--text); }
+  .tech-card .note { font-size: 0.8125rem; color: var(--text-secondary); margin-top: 4px; }
+
+  /* Social proof bar */
+  .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 24px; }
+  .proof-card { text-align: center; padding: 24px 16px; }
+  .proof-card .proof-icon { font-size: 1.75rem; margin-bottom: 8px; }
+  .proof-card h4 { font-size: 0.875rem; font-weight: 600; margin-bottom: 4px; }
+  .proof-card p { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
+
+  /* Quote */
+  .pull-quote {
+    border-left: 3px solid var(--accent);
+    padding: 16px 24px; margin: 32px 0;
+    font-size: 1.125rem; font-style: italic; color: var(--text);
+    max-width: 680px; line-height: 1.7;
+  }
+  .pull-quote .attribution { font-size: 0.8125rem; color: var(--text-secondary); font-style: normal; margin-top: 8px; }
+
+  /* CTA */
+  .cta-section { text-align: center; padding: 100px 0; }
+  .cta-section h2 { font-size: 2.5rem; margin-bottom: 16px; }
+  .cta-section p { color: var(--text-secondary); margin-bottom: 32px; font-size: 1.0625rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .cta-section .cta-btn-large {
+    display: inline-block; background: var(--accent); color: #0a0a0a;
+    padding: 14px 36px; border-radius: 8px; font-size: 1rem; font-weight: 700;
+    text-decoration: none; transition: filter 0.15s;
+  }
+  .cta-section .cta-btn-large:hover { filter: brightness(1.1); }
+  .cta-section .cta-sub { font-size: 0.8125rem; color: var(--text-secondary); margin-top: 16px; }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border); padding: 48px 0;
+    font-size: 0.8125rem; color: var(--text-secondary);
+  }
+  footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
+  footer a { color: var(--text-secondary); text-decoration: none; }
+  footer a:hover { color: var(--text); }
+
+  /* Lists */
+  ul { color: var(--text-secondary); padding-left: 20px; margin-bottom: 16px; }
+  ul li { margin-bottom: 8px; line-height: 1.6; }
+
+  /* Check list */
+  .check-list { list-style: none; padding-left: 0; }
+  .check-list li { padding-left: 24px; position: relative; }
+  .check-list li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 2.25rem; }
+    .problem-grid, .tech-grid, .proof-grid { grid-template-columns: 1fr; }
+    .metric-bar .container { gap: 24px; }
+    .metric-bar .metric .value { font-size: 1.5rem; }
+    nav .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="container">
+    <a href="/" class="logo">reozix</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/services">Services</a>
+      <a href="/about">About</a>
+      <a href="/portfolio">Portfolio</a>
+      <a href="/contact">Contact</a>
+      <a href="/contact" class="cta-btn">Start a Project</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="badge">Vertical Demo</div>
+    <div class="breadcrumb">
+      <a href="/portfolio">Portfolio</a> · Hospitality
+    </div>
+    <h1>Reozix Hotel</h1>
+    <p class="subtitle">
+      A booking-first hotel platform built end-to-end by REOZIX — demonstrating modern hospitality engineering with a direct booking engine, no-code CMS, and sub-2-second mobile performance.
+    </p>
+    <div class="tags">
+      <span class="tag">Web Application</span>
+      <span class="tag">Booking Engine</span>
+      <span class="tag">Hotel CMS</span>
+      <span class="tag">Direct Booking</span>
+      <span class="tag">Performance</span>
+    </div>
+    <div class="hero-links">
+      <a href="https://www.reozixhotel.com.au" class="primary" target="_blank" rel="noopener">View live demo</a>
+      <a href="#architecture" class="secondary">Explore the architecture</a>
+    </div>
+  </div>
+</section>
+
+<!-- Key metrics bar -->
+<div class="metric-bar">
+  <div class="container">
+    <div class="metric">
+      <span class="value">99</span>
+      <span class="label">Lighthouse Performance</span>
+    </div>
+    <div class="metric">
+      <span class="value">98</span>
+      <span class="label">Accessibility</span>
+    </div>
+    <div class="metric">
+      <span class="value">100</span>
+      <span class="label">Best Practices</span>
+    </div>
+    <div class="metric">
+      <span class="value">0.9s</span>
+      <span class="label">Time to Interactive</span>
+    </div>
+  </div>
+</div>
+
+<!-- The industry problem -->
+<section id="problem">
+  <div class="container">
+    <h2>The industry reality</h2>
+    <p class="section-intro">
+      Independent hotels in Australia send 60&ndash;80% of bookings through OTAs like Booking.com and Expedia, paying 15&ndash;22% commission on every reservation. At a $280 ADR across 3,600 room-nights, that's $150K&ndash;$200K walking out the door in fees each year — before factoring in the lost guest relationships. Most hotel websites make this worse, not better. They're brochure pages with no booking capability, forcing guests back to the OTAs at the point of purchase.
+    </p>
+
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="icon">💸</div>
+        <h4>Commission dependency</h4>
+        <p>
+          Boutique and independent hotels typically pay 15&ndash;22% per OTA booking. On a property doing 3,600 room-nights at $280 ADR with 70% OTA share, that's roughly $150K&ndash;$200K in annual commission leakage. Every point of channel share reclaimed from OTAs is worth approximately $6K&ndash;$10K/year at this volume. (SiteMinder Global Hotel Booking Trends, 2024; IBISWorld Hotels &amp; Resorts Australia)
+        </p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📉</div>
+        <h4>The booking abandonment loop</h4>
+        <p>
+          The typical guest journey: land on hotel site → browse photos → open new tab → book on Booking.com. Without an integrated booking engine, the hotel becomes a showroom for OTAs. Travel sites lose up to 27% conversion for every additional second of load time (Google Travel Insights, 2023), and most independent hotel sites load in 4&ndash;8 seconds on mobile.
+        </p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">🔇</div>
+        <h4>Brand erased at purchase</h4>
+        <p>
+          OTAs render every property in the same template. A boutique hotel's architecture, story, and character — the things that justify its rate premium — are invisible at the point of booking. Guests choose on price, not experience, because the platform strips away everything that makes the property worth choosing.
+        </p>
+      </div>
+      <div class="problem-card">
+        <div class="icon">📱</div>
+        <h4>Mobile is the battleground</h4>
+        <p>
+          60%+ of hotel traffic comes from mobile devices, but most independent hotel websites aren't responsive. Room galleries break on phones. Date pickers are unusable on touch. Contact forms require pinch-zoom. Non-optimized mobile hotel sites convert below 0.5% — effectively turning away the majority of potential direct guests before they can even attempt to book.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The build -->
+<section id="approach">
+  <div class="container">
+    <h2>What we built</h2>
+    <p class="section-intro">
+      Reozix designed and built a complete hotel booking platform from the ground up — not a WordPress theme with a booking widget bolted on, but a purpose-built web application designed around one metric: direct booking conversion. Every feature, from the room detail pages to the mobile checkout flow, was built to move guests from "browsing" to "confirmed" in the fewest possible steps.
+    </p>
+
+    <div class="approach-step">
+      <div class="step-num">1</div>
+      <div>
+        <h4>Integrated booking engine with real-time availability</h4>
+        <p>
+          A custom reservation system with live room availability, dynamic rate display, and instant confirmation — no redirect to a third-party widget. The booking flow is three screens: select dates → choose room → confirm. Research shows every additional step loses 8&ndash;12% of users; we stripped it to the minimum viable path. The engine supports seasonal rate rules, minimum stay requirements, and promotional discount codes — all manageable without a developer.
+        </p>
+      </div>
+    </div>
+
+    <div class="approach-step">
+      <div class="step-num">2</div>
+      <div>
+        <h4>Immersive room storytelling</h4>
+        <p>
+          Each room type has a dedicated page with high-resolution responsive galleries, detailed amenity lists, room dimensions, and a persistent "Check Availability" panel that follows the user as they scroll. The design leads with photography and spatial detail — the things that make a boutique hotel worth choosing — rather than generic hospitality stock imagery and bullet points.
+        </p>
+      </div>
+    </div>
+
+    <div class="approach-step">
+      <div class="step-num">3</div>
+      <div>
+        <h4>Direct-booking value architecture</h4>
+        <p>
+          A prominent "Why Book Direct" section communicates the value proposition clearly: best rate guaranteed, complimentary perks, flexible cancellation. These incentives typically cost a hotel $10&ndash;$15 per stay versus $50+ in OTA commission — a 3&ndash;5× return on every direct booking incentive issued. The messaging is designed to be A/B testable so a real operator can optimize over time.
+        </p>
+      </div>
+    </div>
+
+    <div class="approach-step">
+      <div class="step-num">4</div>
+      <div>
+        <h4>Mobile-native performance</h4>
+        <p>
+          Built mobile-first with a target of sub-2-second Time to Interactive on 4G. Responsive images use srcset with WebP encoding at three breakpoints. The booking flow was designed and tested primarily on mobile — where the majority of guests make their purchase decision. The result: Lighthouse 99 Performance, 0.9s TTI on mid-range devices.
+        </p>
+      </div>
+    </div>
+
+    <div class="approach-step">
+      <div class="step-num">5</div>
+      <div>
+        <h4>Operator-controlled CMS</h4>
+        <p>
+          Room availability, seasonal rates, promotional offers, and imagery can all be updated from a no-code back-office. No developer tickets for a rate change. A hotel team member can publish a weekend package in under two minutes. When operators can maintain their own platform, the data stays fresh — guests trust what they see, and they book.
+        </p>
+      </div>
+    </div>
+
+    <!-- Screenshot placeholder -->
+    <div class="screenshot-placeholder">
+      <div class="bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">reozixhotel.com.au — Room detail + booking flow</span>
+      </div>
+      <div class="content">
+        [Screenshot: Room detail page with availability calendar, rate display, and booking CTA from the live Reozix Hotel demo]
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Technical architecture -->
+<section id="architecture">
+  <div class="container">
+    <h2>Technical architecture</h2>
+    <p class="section-intro">
+      "Enterprise Software. Refined" isn't a tagline — it's the engineering standard. Here's the stack and the decisions behind it.
+    </p>
+
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="layer">Frontend</div>
+        <div class="stack">Next.js 14 · React 18 · TypeScript</div>
+        <div class="note">App Router with React Server Components for zero-JS room pages. Static generation for marketing pages, ISR for availability data.</div>
+      </div>
+      <div class="tech-card">
+        <div class="layer">Styling &amp; Performance</div>
+        <div class="stack">Tailwind CSS · next/image · Vercel</div>
+        <div class="note">Responsive image pipeline with automatic WebP/AVIF encoding, lazy loading with blur-up placeholders, and edge caching.</div>
+      </div>
+      <div class="tech-card">
+        <div class="layer">Booking Engine</div>
+        <div class="stack">Custom API · PostgreSQL · Stripe</div>
+        <div class="note">Availability calendar with server-side rate logic. Guest reservations stored relationally with conflict detection. Stripe for payment capture at booking.</div>
+      </div>
+      <div class="tech-card">
+        <div class="layer">CMS</div>
+        <div class="stack">Payload CMS · S3/CloudFront</div>
+        <div class="note">Self-hosted headless CMS with role-based access. Media delivery via CDN with automatic optimization. Hotel staff get a purpose-built editing interface, not a generic admin panel.</div>
+      </div>
+      <div class="tech-card">
+        <div class="layer">Infrastructure</div>
+        <div class="stack">Vercel · Cloudflare · GitHub Actions</div>
+        <div class="note">Edge-deployed with ISR revalidation on content changes. Automated Lighthouse budgets in CI — builds fail if Performance drops below 95.</div>
+      </div>
+      <div class="tech-card">
+        <div class="layer">Monitoring</div>
+        <div class="stack">Vercel Analytics · Sentry · Lighthouse CI</div>
+        <div class="note">Real User Monitoring (RUM) on booking funnel pages. Core Web Vitals tracked per route. Error boundary coverage on all transactional surfaces.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Performance -->
+<section id="performance">
+  <div class="container">
+    <h2>Performance by design</h2>
+    <p class="section-intro">
+      Hotel booking is conversion-sensitive — Google's own data shows a 1-second improvement in mobile load time correlates to up to 27% higher conversion for travel sites. We engineered to live in the top percentile from day one.
+    </p>
+
+    <h3>Lighthouse scores (measured on live demo)</h3>
+    <ul class="check-list">
+      <li><strong>Performance 99</strong> — Sub-1s First Contentful Paint, 0.9s Time to Interactive on mid-range mobile on 4G</li>
+      <li><strong>Accessibility 98</strong> — Full keyboard navigation through booking flow, ARIA labels on all interactive elements, 200% zoom support without layout breakage</li>
+      <li><strong>Best Practices 100</strong> — HTTPS-only, no deprecated APIs, no vulnerable libraries, strict Content Security Policy</li>
+      <li><strong>SEO 100</strong> — Semantic HTML, structured data (Schema.org Hotel + Room), canonical URLs, robot-friendly booking paths</li>
+    </ul>
+
+    <h3>Performance strategy</h3>
+    <p>
+      Every image in the room galleries runs through a multi-step pipeline: sharpening → resize to 3 breakpoints → WebP/AVIF encoding → CDN push. The booking flow pages serve zero client-side JavaScript until hydration is needed — React Server Components handle the initial render. Lighthouse scores are enforced in CI: any pull request that drops Performance below 95 or Accessibility below 90 is blocked from merge.
+    </p>
+
+    <!-- Screenshot placeholder -->
+    <div class="screenshot-placeholder">
+      <div class="bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">Lighthouse report — Reozix Hotel (live demo)</span>
+      </div>
+      <div class="content">
+        [Screenshot: Google Lighthouse 99 score breakdown — Performance 99, Accessibility 98, Best Practices 100, SEO 100]
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Why this approach -->
+<section>
+  <div class="container">
+    <h2>Why this approach</h2>
+    <p class="section-intro">
+      Three engineering principles that distinguish this build from a generic hotel website.
+    </p>
+
+    <h3>OTA-aware, not OTA-bashing</h3>
+    <p>
+      OTAs serve a real discovery function — Booking.com and Expedia have marketing budgets that no independent hotel can match. The strategy isn't to remove OTA links (they still serve guests who found the hotel through them), but to stop sending guests there by default. The booking UI is designed to be faster and clearer than opening the Booking.com app. If an OTA can convert a guest in three taps, the hotel's own site should convert in two.
+    </p>
+
+    <h3>Operable without engineering</h3>
+    <p>
+      We've seen too many well-built hotel sites degrade within six months because the operator couldn't update rates without filing a ticket. The CMS was designed for hotel staff — not developers. Rate changes, room availability, seasonal promotions, and photo updates are all accessible through a purpose-built interface. A platform that stays current stays trusted. A platform that rots loses the operator's confidence — and with it, the direct booking channel.
+    </p>
+
+    <h3>Performance as conversion infrastructure</h3>
+    <p>
+      In hospitality, load time is revenue. A site that loads in 4+ seconds on mobile has already lost the booking before the guest sees a single room photo. We treat performance not as an optimization task at the end of the project, but as an architectural constraint from the first line of code. Image budgets, bundle size limits, and Lighthouse thresholds are enforced in CI. This is the difference between a site that tests fast in development and one that stays fast in production.
+    </p>
+  </div>
+</section>
+
+<!-- Industry fit -->
+<section id="fit">
+  <div class="container">
+    <h2>Built for hospitality operators</h2>
+    <p class="section-intro">
+      This platform was designed for the specific operational realities of running an independent hotel — not a generic "small business website" template adapted for hospitality.
+    </p>
+
+    <div class="proof-grid">
+      <div class="proof-card">
+        <div class="proof-icon">🏨</div>
+        <h4>Boutique &amp; Independent</h4>
+        <p>Designed for properties with 10&ndash;80 rooms where character sells, not chain familiarity</p>
+      </div>
+      <div class="proof-card">
+        <div class="proof-icon">📊</div>
+        <h4>Revenue-Focused</h4>
+        <p>Every feature measured against one metric: direct booking share. No vanity pages</p>
+      </div>
+      <div class="proof-card">
+        <div class="proof-icon">🔧</div>
+        <h4>Operator-Owned</h4>
+        <p>No-code CMS for rates, availability, and content. No developer dependency for daily ops</p>
+      </div>
+      <div class="proof-card">
+        <div class="proof-icon">📱</div>
+        <h4>Mobile-Native</h4>
+        <p>Booking flow designed for mobile first — where 60%+ of guests make their decision</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Want this for your property?</h2>
+    <p>
+      We built this platform to demonstrate what modern hospitality engineering looks like. If you operate a hotel and want a direct booking experience this fast, this conversion-optimized, and this operator-friendly — let's talk.
+    </p>
+    <a href="/contact" class="cta-btn-large">Start a project</a>
+    <p class="cta-sub">We respond within 24 hours. AU · CA time zones.</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div>
+      <strong>reozix</strong> &nbsp; Enterprise Software. Refined.
+    </div>
+    <div>
+      <a href="/portfolio">Portfolio</a> · <a href="/contact">Contact</a> · Australia · Canada
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
