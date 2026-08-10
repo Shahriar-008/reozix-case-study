@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request a Free Property Appraisal — Reozix Real Estate, Gold Coast</title>
+<meta name="description" content="Get a free, no-obligation market appraisal for your Gold Coast property. A local Reozix Real Estate agent will contact you within 24 hours.">
+<link rel="stylesheet" href="../shared/css/reset.css">
+<link rel="stylesheet" href="css/realestate.css">
+<style>
+  /* Appraisal page additions — page hero, two-column layout, pre-fill banner, form errors, success state, sidebar agents */
+  .appraisal-hero {
+    margin-top: 72px; padding: 64px 0 40px; text-align: center;
+    background: linear-gradient(135deg, #dceafa 0%, #eef5fc 55%, #f4f8fc 100%);
+  }
+  .appraisal-hero h1 {
+    font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em;
+    line-height: 1.12; margin-bottom: 12px; color: var(--re-text);
+  }
+  .appraisal-hero p {
+    font-size: 1.125rem; color: var(--re-text-secondary);
+    max-width: 620px; margin: 0 auto; line-height: 1.6;
+  }
+
+  .appraisal-layout { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
+  .appraisal-main { min-width: 0; }
+
+  /* Pre-fill banner (shown when arriving from a property detail page) */
+  .prefill-banner {
+    display: none; align-items: flex-start; gap: 12px;
+    background: var(--re-accent-light); border: 1px solid var(--re-accent);
+    border-radius: 12px; padding: 14px 16px; margin-bottom: 16px;
+    font-size: 0.9375rem; color: var(--re-accent-dark);
+  }
+  .prefill-banner .pf-icon { font-size: 1.375rem; line-height: 1; flex-shrink: 0; }
+  .prefill-banner strong { font-weight: 600; }
+
+  /* Form validation */
+  .appraisal-form .form-error {
+    display: none; background: #fdecec; border: 1px solid #f5b5b5; color: #b33434;
+    border-radius: 8px; padding: 10px 14px; font-size: 0.875rem; font-weight: 500;
+    margin-bottom: 18px;
+  }
+  .appraisal-form .error-msg { display: none; font-size: 0.8125rem; color: #d64545; }
+  .appraisal-form .field.invalid label { color: #d64545; }
+  .appraisal-form .field.invalid .error-msg { display: block; }
+  .appraisal-form .field.invalid input,
+  .appraisal-form .field.invalid select,
+  .appraisal-form .field.invalid textarea {
+    border-color: #d64545; background: #fff7f7;
+  }
+  .appraisal-form h3.form-divider {
+    margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--re-border);
+  }
+  .appraisal-form .optional { font-weight: 400; color: var(--re-text-secondary); }
+
+  /* Success state */
+  .success-panel {
+    display: none; background: var(--re-surface); border: 1px solid var(--re-border);
+    border-radius: 16px; padding: 48px 32px; text-align: center;
+    box-shadow: var(--re-shadow); max-width: 680px;
+  }
+  .success-panel .success-icon {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: #2ecc71; color: #fff; font-size: 1.75rem; font-weight: 700;
+    display: inline-flex; align-items: center; justify-content: center; margin-bottom: 18px;
+  }
+  .success-panel h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 8px; color: var(--re-text); }
+  .success-panel p {
+    color: var(--re-text-secondary); font-size: 1.0625rem; line-height: 1.6;
+    max-width: 440px; margin: 0 auto 10px;
+  }
+  .success-panel .success-phone { margin-top: 6px; }
+  .success-panel .success-phone a { color: var(--re-accent-dark); font-weight: 600; }
+  .success-panel .re-btn { margin-top: 18px; }
+
+  /* Sidebar — talk card + top agents */
+  .appraisal-sidebar { display: flex; flex-direction: column; gap: 20px; }
+  .appraisal-card {
+    background: var(--re-accent); color: #fff;
+    border-radius: 16px; padding: 28px; text-align: center;
+  }
+  .appraisal-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 6px; }
+  .appraisal-card p { color: rgba(255, 255, 255, 0.92); font-size: 0.9375rem; margin-bottom: 18px; }
+  .appraisal-card .re-btn { background: #fff; color: var(--re-accent-dark); width: 100%; }
+  .appraisal-card .re-btn:hover { background: var(--re-accent-light); }
+
+  .top-agents {
+    background: var(--re-surface); border: 1px solid var(--re-border);
+    border-radius: 16px; padding: 24px; box-shadow: var(--re-shadow);
+  }
+  .top-agents > h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: 16px; color: var(--re-text); }
+  .top-agents .agent-card {
+    display: flex; align-items: center; gap: 14px;
+    padding: 12px; border-radius: 12px; margin-bottom: 10px;
+    background: var(--re-bg); border: 1px solid var(--re-border);
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  }
+  .top-agents .agent-card:last-child { margin-bottom: 0; }
+  .top-agents .agent-card:hover { transform: translateY(-2px); box-shadow: var(--re-shadow); border-color: var(--re-accent); }
+  .top-agents .agent-card .agent-photo {
+    width: 52px; height: 52px; border-radius: 50%; flex-shrink: 0;
+    background: linear-gradient(135deg, var(--re-accent) 0%, #7fb4e5 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; font-weight: 700; color: #fff; letter-spacing: -0.02em;
+  }
+  .top-agents .agent-card .agent-card-body { padding: 0; text-align: left; flex: 1; min-width: 0; }
+  .top-agents .agent-card h3 { font-size: 0.9375rem; font-weight: 600; margin-bottom: 2px; }
+  .top-agents .agent-card .role { font-size: 0.8125rem; color: var(--re-accent-dark); font-weight: 500; margin-bottom: 6px; }
+  .top-agents .agent-card .specs { justify-content: flex-start; gap: 5px; }
+  .top-agents .agent-card .specs .tag { font-size: 0.6875rem; padding: 3px 8px; }
+
+  @media (min-width: 1024px) {
+    .appraisal-layout { grid-template-columns: minmax(0, 1fr) 340px; }
+    .appraisal-sidebar { position: sticky; top: 96px; }
+  }
+  @media (max-width: 768px) {
+    .appraisal-hero { margin-top: 60px; padding: 48px 0 32px; }
+    .appraisal-hero h1 { font-size: 1.875rem; }
+    .prefill-banner { flex-direction: column; align-items: flex-start; gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="re-nav">
+  <div class="container">
+    <a href="index.html" class="logo">Reozix <span>Real Estate</span></a>
+    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="search.html">Search</a>
+      <a href="agents.html">Agents</a>
+      <a href="appraisal.html" aria-current="page">Appraisal</a>
+      <a href="tel:+61755923400">+61 7 5592 3400</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Page heading -->
+<section class="appraisal-hero">
+  <div class="container">
+    <h1>Request a Free Property Appraisal</h1>
+    <p>From beachfront apartments in Surfers Paradise to canal homes on Hope Island — find out what your property is really worth with a free, no-obligation market appraisal from our local Gold Coast team.</p>
+  </div>
+</section>
+
+<!-- Form + sidebar -->
+<section class="re-section">
+  <div class="container">
+    <div class="appraisal-layout">
+
+      <!-- Form column -->
+      <div class="appraisal-main">
+
+        <div class="prefill-banner" id="prefill-banner">
+          <span class="pf-icon" aria-hidden="true">🏠</span>
+          <div><strong>Appraisal for:</strong> <span id="prefill-address"></span></div>
+        </div>
+
+        <form class="appraisal-form" id="appraisal-form" novalidate>
+          <h3>Property details</h3>
+          <p class="form-intro">Tell us about the property you'd like valued. The more detail, the more accurate your appraisal.</p>
+
+          <p class="form-error" id="form-error">Please complete the highlighted fields below.</p>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="property-type">Property type</label>
+              <select id="property-type" name="property-type">
+                <option value="">Select a type</option>
+                <option value="Apartment">Apartment</option>
+                <option value="House">House</option>
+                <option value="Townhouse">Townhouse</option>
+                <option value="Villa">Villa</option>
+                <option value="Penthouse">Penthouse</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="suburb">Suburb</label>
+              <select id="suburb" name="suburb" required>
+                <option value="">Select a suburb</option>
+              </select>
+              <span class="error-msg">Please select a suburb</span>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label for="address">Property address</label>
+            <input type="text" id="address" name="address" placeholder="e.g. 12/14 The Esplanade" required>
+            <span class="error-msg">Please enter the property address</span>
+          </div>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="bedrooms">Bedrooms</label>
+              <select id="bedrooms" name="bedrooms">
+                <option value="">Any</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5+">5+</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="bathrooms">Bathrooms</label>
+              <select id="bathrooms" name="bathrooms">
+                <option value="">Any</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4+">4+</option>
+              </select>
+            </div>
+          </div>
+
+          <h3 class="form-divider">Your details</h3>
+          <p class="form-intro">Where should we send your appraisal, and how should we reach you?</p>
+
+          <div class="form-row">
+            <div class="field">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" autocomplete="name" required>
+              <span class="error-msg">Please enter your name</span>
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="e.g. 0400 000 000" required>
+              <span class="error-msg">Please enter your phone number</span>
+            </div>
+          </div>
+
+          <div class="field full">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+            <span class="error-msg">Please enter a valid email</span>
+          </div>
+
+          <div class="field full">
+            <label for="message">Message <span class="optional">(optional)</span></label>
+            <textarea id="message" name="message" placeholder="Anything we should know about your property or timeline…"></textarea>
+          </div>
+
+          <input type="hidden" id="property-id" name="property-id" value="">
+
+          <div class="submit-row">
+            <button type="submit" class="re-btn">Get My Appraisal</button>
+            <p class="submit-note">Free, no-obligation. A local agent will call you within 24 hours.</p>
+          </div>
+        </form>
+
+        <!-- Success state -->
+        <div class="success-panel" id="success-panel" role="status" aria-live="polite">
+          <span class="success-icon" aria-hidden="true">✓</span>
+          <h2>Thank you!</h2>
+          <p>An agent will contact you within 24 hours to arrange your free appraisal.</p>
+          <p class="success-phone">Prefer to talk now? Call <a href="tel:+61755923400"></a></p>
+          <button type="button" class="re-btn outline" onclick="resetAppraisalForm()">Request another appraisal</button>
+        </div>
+
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="appraisal-sidebar">
+        <div class="appraisal-card">
+          <h3>Prefer to talk?</h3>
+          <p>Speak directly with our Gold Coast team and get an instant ballpark over the phone.</p>
+          <a href="tel:+61755923400" class="re-btn">+61 7 5592 3400</a>
+        </div>
+
+        <div class="top-agents">
+          <h3>Our Top Agents</h3>
+
+          <a class="agent-card" href="agent-detail.html?id=agent-001">
+            <div class="agent-photo" aria-hidden="true">MC</div>
+            <div class="agent-card-body">
+              <h3>Michael Chen</h3>
+              <p class="role">Principal / Sales Director</p>
+              <div class="specs">
+                <span class="tag">Surfers Paradise</span>
+                <span class="tag">Broadbeach</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="agent-card" href="agent-detail.html?id=agent-002">
+            <div class="agent-photo" aria-hidden="true">ST</div>
+            <div class="agent-card-body">
+              <h3>Sarah Thompson</h3>
+              <p class="role">Senior Sales Agent</p>
+              <div class="specs">
+                <span class="tag">Burleigh Heads</span>
+                <span class="tag">Palm Beach</span>
+              </div>
+            </div>
+          </a>
+
+          <a class="agent-card" href="agent-detail.html?id=agent-006">
+            <div class="agent-photo" aria-hidden="true">ER</div>
+            <div class="agent-card-body">
+              <h3>Emma Richardson</h3>
+              <p class="role">Senior Sales Agent</p>
+              <div class="specs">
+                <span class="tag">Robina</span>
+                <span class="tag">Varsity Lakes</span>
+              </div>
+            </div>
+          </a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<footer class="re-footer">
+  <div class="container">
+    <div class="agency">
+      <strong>Reozix Real Estate</strong>
+      <p>Gold Coast, QLD</p>
+      <a href="tel:+61755923400">+61 7 5592 3400</a>
+      <a href="mailto:hello@reozixrealestate.com.au">hello@reozixrealestate.com.au</a>
+    </div>
+    <div class="footer-links">
+      <h4>Quick links</h4>
+      <a href="index.html">Home</a>
+      <a href="search.html">Search</a>
+      <a href="agents.html">Agents</a>
+      <a href="appraisal.html">Appraisal</a>
+    </div>
+  </div>
+  <div class="container">
+    <p class="footer-bottom">© 2026 Reozix Real Estate. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="../shared/js/utils.js"></script>
+<script src="js/data.js"></script>
+<script>
+// Appraisal form — URL pre-fill, suburb dropdown, validation and success state.
+(function() {
+  var data = window.RE_DATA || { properties: [], agency: { phone: '' } };
+
+  // 1. Populate the suburb dropdown from RE_DATA (first-appearance order)
+  var suburbSelect = document.getElementById('suburb');
+  if (suburbSelect) {
+    var suburbs = [];
+    data.properties.forEach(function(p) {
+      if (suburbs.indexOf(p.suburb) === -1) suburbs.push(p.suburb);
+    });
+    suburbs.forEach(function(s) {
+      var opt = document.createElement('option');
+      opt.value = s;
+      opt.textContent = s;
+      suburbSelect.appendChild(opt);
+    });
+  }
+
+  // 2. Property pre-fill — ?property=prop-XXX
+  var property = null;
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var propId = params.get('property');
+    if (propId) {
+      for (var i = 0; i < data.properties.length; i++) {
+        if (data.properties[i].id === propId) { property = data.properties[i]; break; }
+      }
+    }
+  } catch (e) { /* no query string support — skip pre-fill */ }
+
+  if (property) {
+    document.getElementById('property-id').value = property.id;
+    document.getElementById('prefill-address').textContent = property.address;
+    document.getElementById('prefill-banner').style.display = 'flex';
+
+    var typeSelect = document.getElementById('property-type');
+    if (typeSelect) typeSelect.value = property.type;
+
+    var parts = property.address.split(', ');
+    document.getElementById('address').value = parts[0];
+    if (suburbSelect) suburbSelect.value = property.suburb;
+  }
+
+  // 3. Success state phone number from RE_DATA.agency
+  var agencyPhone = (data.agency && data.agency.phone) || '';
+  var phoneLinks = document.querySelectorAll('.success-phone a');
+  phoneLinks.forEach(function(a) {
+    a.href = 'tel:' + agencyPhone.replace(/[^+\d]/g, '');
+    a.textContent = agencyPhone;
+  });
+
+  // 4. Form validation — required: name, email, phone, address, suburb
+  var form = document.getElementById('appraisal-form');
+  var requiredIds = ['name', 'email', 'phone', 'address', 'suburb'];
+  var formError = document.getElementById('form-error');
+
+  function markInvalid(el, invalid) {
+    el.classList.toggle('invalid', invalid);
+    var field = el.closest('.field');
+    if (field) field.classList.toggle('invalid', invalid);
+    if (invalid) el.setAttribute('aria-invalid', 'true');
+    else el.removeAttribute('aria-invalid');
+  }
+
+  function validate() {
+    var firstInvalid = null;
+    requiredIds.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var value = el.value.trim();
+      var empty = value === '';
+      var badEmail = id === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+      var invalid = empty || badEmail;
+      markInvalid(el, invalid);
+      if (invalid && !firstInvalid) firstInvalid = el;
+    });
+    if (formError) formError.style.display = firstInvalid ? 'block' : 'none';
+    if (firstInvalid) firstInvalid.focus();
+    return !firstInvalid;
+  }
+
+  // Clear error state as the user fixes each field
+  requiredIds.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('input', function() { markInvalid(el, false); });
+    el.addEventListener('change', function() { markInvalid(el, false); });
+  });
+
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!validate()) return;
+      form.style.display = 'none';
+      var success = document.getElementById('success-panel');
+      success.style.display = 'block';
+      success.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  }
+
+  // 5. Reset from the success panel
+  window.resetAppraisalForm = function() {
+    if (form) form.reset();
+    document.getElementById('property-id').value = '';
+    form.style.display = '';
+    document.getElementById('success-panel').style.display = 'none';
+    document.getElementById('prefill-banner').style.display = 'none';
+    if (formError) formError.style.display = 'none';
+  };
+})();
+</script>
+</body>
+</html>
