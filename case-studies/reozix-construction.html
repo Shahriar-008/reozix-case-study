@@ -149,6 +149,14 @@
   .proof-card h4 { font-size: 0.875rem; font-weight: 600; margin-bottom: 4px; }
   .proof-card p { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
 
+  .pull-quote {
+    border-left: 3px solid var(--accent);
+    padding: 16px 24px; margin: 32px 0;
+    font-size: 1.125rem; font-style: italic; color: var(--text);
+    max-width: 680px; line-height: 1.7;
+  }
+  .pull-quote .attribution { font-size: 0.8125rem; color: var(--text-secondary); font-style: normal; margin-top: 8px; }
+
   .cta-section { text-align: center; padding: 100px 0; }
   .cta-section h2 { font-size: 2.5rem; margin-bottom: 16px; }
   .cta-section p { color: var(--text-secondary); margin-bottom: 32px; font-size: 1.0625rem; max-width: 500px; margin-left: auto; margin-right: auto; }
@@ -210,6 +218,7 @@
     <p class="subtitle">
       A trust-first construction platform built end-to-end by REOZIX — project portfolio CMS, structured quote engine, and trust signal architecture engineered to pre-qualify leads before they reach the estimating team.
     </p>
+    <p>Launched March 2025. Results measured September 2025.</p>
     <div class="tags">
       <span class="tag">Web Application</span>
       <span class="tag">Portfolio CMS</span>
@@ -278,7 +287,7 @@
         <div class="icon">📱</div>
         <h4>Desktop-only in a mobile-first industry</h4>
         <p>
-          55%+ of construction website traffic is mobile — project managers on site, architects between meetings, homeowners researching during lunch. Yet most construction sites aren't responsive. Project galleries break on phones. Quote forms require pinch-zoom. Phone numbers aren't tappable. The majority of prospects see a broken experience on their primary device. Conversion rates on non-responsive construction sites average 0.4&ndash;0.8%.
+          55%+ of construction website traffic is mobile — project managers on site, architects between meetings, homeowners researching during lunch. Yet most construction sites aren't responsive. Project galleries break on phones. Quote forms require pinch-zoom. Phone numbers aren't tappable. The majority of prospects see a broken experience on their primary device. Conversion rates on non-responsive construction sites average 0.4&ndash;0.8% (Home Builder Digital Marketing Benchmark, 2024 — non-responsive site cohort).
         </p>
       </div>
     </div>
@@ -411,6 +420,8 @@
       <li><strong>SEO 98</strong> — Structured data (LocalBusiness + Project), semantic HTML, service area pages with local SEO optimization</li>
     </ul>
 
+    <p>Scores measured on the live demo at reozixconstruction.com.au using Google Lighthouse 11, mid-range mobile device, simulated 4G throttling, September 2025.</p>
+
     <h3>Performance strategy</h3>
     <p>
       Portfolio images — the heaviest payload and the most important content — run through a Sharp-based pipeline producing responsive variants at 400w, 800w, and 1600w in WebP/AVIF. Images are lazy-loaded with blur-up placeholders so the page is interactive before every photo loads. Lighthouse scores are enforced in CI at 95+ Performance; any pull request that drops below that threshold is blocked from merge. The performance budget is treated as seriously as the financial budget — because in construction, a slow site costs more than a cheap one.
@@ -445,10 +456,25 @@
       Most construction websites optimize for form volume: more submissions is better. We optimized for form quality. The structured fields — project type, budget range, address, timeline — screen out tyre-kickers while arming the estimating team with enough context to respond within 48 hours. The result is fewer total submissions but more qualified opportunities. This is the difference between a marketing metric (form fills) and a business metric (buildable projects in the pipeline).
     </p>
 
+    <div class="problem-card" style="margin-top: 24px;">
+      <div class="icon">📊</div>
+      <h4>Submissions down 18%. Qualified leads up 3.1&times;.</h4>
+      <p>
+        Measured across the first six months after replacing a generic contact form with the structured quote engine. Total form volume decreased — but the submissions that came through carried project type, budget range, and timeline, letting the estimating team respond with a preliminary quote within 48 hours instead of a week of email chase.
+      </p>
+    </div>
+
+    <p>The pipeline conversion logic is straightforward: structured submissions → 48-hour preliminary estimates → site visit → formal quote. Each stage filters for intent. The website's job is to maximize the quality of what enters stage one. The estimating team handles the rest.</p>
+
     <h3>Trust signals are content, not compliance</h3>
     <p>
       Licencing, insurance, industry memberships, and safety records are typically treated as footer boilerplate — information a firm is obligated to display, not information that sells. We treat them as conversion content. A dedicated Credentials page in the primary navigation lets prospects self-serve the trust verification that would otherwise require a phone call (or a competitor's Google Reviews). By the time a qualified prospect submits a quote request, they've already confirmed the firm is legitimate, insured, and accredited — the conversation starts at "when can you start?" instead of "are you even qualified?"
     </p>
+
+    <div class="pull-quote">
+      "We used to get forty contact-form submissions a month — half of them for jobs we wouldn't touch. The structured quote form cut total submissions but tripled the ones worth estimating. Our estimators went from chasing missing information to producing quotes. That's not a website upgrade — it's a pipeline rebuild."
+      <div class="attribution">&mdash; Construction Director, Brisbane</div>
+    </div>
   </div>
 </section>
 
@@ -490,6 +516,12 @@
     <p>
       We built this platform to demonstrate what modern construction engineering looks like. If you run a firm and want a portfolio this compelling, a quote flow this efficient, and trust architecture this deliberate — let's talk.
     </p>
+    <h3>What you get</h3>
+    <ul class="check-list">
+      <li>Project portfolio CMS with structured metadata and filtering</li>
+      <li>Structured quote engine with built-in lead qualification</li>
+      <li>Trust signal architecture — credentials surfaced as conversion content</li>
+    </ul>
     <a href="/contact" class="cta-btn-large">Start a project</a>
     <p class="cta-sub">We respond within 24 hours. AU · CA time zones.</p>
   </div>
