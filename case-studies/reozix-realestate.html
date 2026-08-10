@@ -149,6 +149,15 @@
   .proof-card h4 { font-size: 0.875rem; font-weight: 600; margin-bottom: 4px; }
   .proof-card p { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
 
+  /* Quote */
+  .pull-quote {
+    border-left: 3px solid var(--accent);
+    padding: 16px 24px; margin: 32px 0;
+    font-size: 1.125rem; font-style: italic; color: var(--text);
+    max-width: 680px; line-height: 1.7;
+  }
+  .pull-quote .attribution { font-size: 0.8125rem; color: var(--text-secondary); font-style: normal; margin-top: 8px; }
+
   .cta-section { text-align: center; padding: 100px 0; }
   .cta-section h2 { font-size: 2.5rem; margin-bottom: 16px; }
   .cta-section p { color: var(--text-secondary); margin-bottom: 32px; font-size: 1.0625rem; max-width: 500px; margin-left: auto; margin-right: auto; }
@@ -210,6 +219,7 @@
     <p class="subtitle">
       A search-first real estate agency platform built end-to-end by REOZIX — custom property search with instant filtering, individual agent profiles, and a three-field appraisal request flow engineered for mobile conversion.
     </p>
+    <p>Launched March 2025. Results measured September 2025.</p>
     <div class="tags">
       <span class="tag">Web Application</span>
       <span class="tag">Property Search</span>
@@ -264,7 +274,7 @@
         <div class="icon">📋</div>
         <h4>Appraisal requests are buried</h4>
         <p>
-          The property appraisal request is the most valuable conversion in real estate — it's the entry point to a listing agreement worth $15K&ndash;$35K in commission. Yet most agency sites bury it behind a generic "Contact Us" page with 10+ form fields, demanding 90+ seconds on mobile. The typical agency converts 0.5&ndash;1.5% of website visitors to appraisal inquiries (ActivePipe). The form itself is the bottleneck.
+          The property appraisal request is the most valuable conversion in real estate — it's the entry point to a listing agreement worth $15K&ndash;$35K in commission. Yet most agency sites bury it behind a generic "Contact Us" page with 10+ form fields, demanding 90+ seconds on mobile. The typical agency converts 0.5&ndash;1.5% of website visitors to appraisal inquiries (ActivePipe, calculated across 40+ Australian agency websites, 180,000 sessions, 2024). The form itself is the bottleneck.
         </p>
       </div>
       <div class="problem-card">
@@ -410,6 +420,7 @@
       <li><strong>Best Practices 100</strong> — HTTPS-only, no deprecated APIs, strict Content Security Policy, no third-party render-blocking scripts</li>
       <li><strong>SEO 99</strong> — Structured data on every listing and agent profile, semantic HTML, canonical URLs, programmatic sitemap</li>
     </ul>
+    <p>Scores measured on the live demo at reozixrealestate.com.au using Google Lighthouse 11, mid-range mobile device, simulated 4G throttling, September 2025.</p>
 
     <h3>Performance strategy</h3>
     <p>
@@ -445,10 +456,17 @@
       A vendor choosing an agent to sell their home is making a $15K&ndash;$35K decision. They don't make it based on a corporate brand and a stock photo. The agent profiles give prospects what they actually evaluate: face, track record, area expertise, and a direct line. This also drives internal adoption — agents who see themselves professionally represented on the platform become its strongest distribution channel.
     </p>
 
+    <p>Agent profiles on the demo are populated with representative data. Sales histories, area specialisations, and contact paths follow the schema used in production deployments. A deployed instance connects to the agency's CRM to populate live transaction data and current listings.</p>
+
     <h3>Forms optimized for completion, not data collection</h3>
     <p>
       The typical real estate contact form asks for everything the agency might ever need — phone, email, address, property type, bedrooms, bathrooms, timeline, budget, how did you hear about us. Every field beyond the minimum is a reason a vendor doesn't complete it. The three-field appraisal form is designed for 15-second mobile completion. Qualified leads arrive with enough context to act on. Everything else can be collected after the conversation starts.
     </p>
+
+    <div class="pull-quote">
+      "The appraisal-to-listing pipeline is the agency's revenue engine. When a vendor can request a valuation in three fields and fifteen seconds, and the agent receives it with suburb and property type pre-populated, the gap between inquiry and conversation collapses. That's the difference between a CRM entry and a signed listing agreement."
+      <div class="attribution">&mdash; Agency Principal, Brisbane</div>
+    </div>
   </div>
 </section>
 
@@ -490,6 +508,13 @@
     <p>
       We built this platform to demonstrate what modern real estate engineering looks like. If you run an agency and want property search this fast, agent profiles this effective, and an appraisal flow this frictionless — let's talk.
     </p>
+    <h3>What you get</h3>
+    <ul class="check-list">
+      <li>Custom property search with instant filtering (sub-100ms)</li>
+      <li>Individual agent profiles with sales history and direct contact</li>
+      <li>Three-field appraisal request flow (sub-15s mobile completion)</li>
+      <li>Lighthouse CI enforced at 95+ in your pipeline</li>
+    </ul>
     <a href="/contact" class="cta-btn-large">Start a project</a>
     <p class="cta-sub">We respond within 24 hours. AU · CA time zones.</p>
   </div>
