@@ -16,7 +16,6 @@ Three verticals were selected from the Reozix portfolio to demonstrate distinct 
 
 ```
 .
-├── index.html                     # Landing page — one card per vertical
 ├── case-studies/
 │   ├── reozix-hotel.html          # Boutique Hotel case study
 │   ├── reozix-realestate.html     # Real Estate case study
@@ -40,13 +39,20 @@ Three verticals were selected from the Reozix portfolio to demonstrate distinct 
 
 ## Running locally
 
-Serve the repo root over HTTP, then open the landing page:
+Serve the repo root over HTTP, then open a case study or demo directly:
 
 ```bash
 python -m http.server 8080
 ```
 
-Then visit <http://localhost:8080/> (or open `index.html` directly from disk).
+Then visit one of these entry points:
+
+- <http://localhost:8080/case-studies/reozix-hotel.html>
+- <http://localhost:8080/case-studies/reozix-realestate.html>
+- <http://localhost:8080/case-studies/reozix-construction.html>
+- <http://localhost:8080/demos/hotel/index.html>
+- <http://localhost:8080/demos/realestate/index.html>
+- <http://localhost:8080/demos/construction/index.html>
 
 ## Lighthouse evidence
 
