@@ -11,6 +11,8 @@ demos/assets/screenshots/*/lighthouse.report.json
 
 # Dependencies
 node_modules/
+package.json
+package-lock.json
 
 # Python
 __pycache__/
