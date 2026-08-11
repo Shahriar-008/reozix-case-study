@@ -20,7 +20,7 @@ Three verticals were selected from the Reozix portfolio to demonstrate distinct 
 │   ├── reozix-hotel.html          # Boutique Hotel case study
 │   ├── reozix-realestate.html     # Real Estate case study
 │   ├── reozix-construction.html   # Construction case study
-│   ├── RESEARCH-BRIEF.md          # Vertical selection + honest framing
+│   ├── RESEARCH-BRIEF.md          # Vertical selection + project notes
 │   └── PORTFOLIO-URL-UPDATES.md   # Portfolio link mapping
 ├── demos/                         # The actual product (plain HTML/CSS/JS)
 │   ├── hotel/                     #   Working hotel demo (rooms, booking flow)
@@ -33,9 +33,10 @@ Three verticals were selected from the Reozix portfolio to demonstrate distinct 
 
 ## Framing note
 
-- **`demos/`** is the actual product — plain HTML/CSS/JS demonstration platforms you can click through. They are honest demonstrations, not client engagements.
-- **`case-studies/`** pages describe the **aspirational future stack** for each vertical (Next.js / React Server Components / Payload CMS / Stripe / Meilisearch / Postgres / Vercel). That language is intentional and describes the engineering target, not a live production deployment in this repo.
-- No fake clients and no fabricated KPIs. The only measured numbers are the Lighthouse scores from the live demos (see [RESEARCH-BRIEF.md](case-studies/RESEARCH-BRIEF.md)).
+- **`demos/`** contains the working demo sites for each vertical, built with plain HTML/CSS/JS.
+- **`case-studies/`** contains the written case-study pages for each vertical.
+- **`demos/assets/screenshots/`** contains the supporting screenshots and Lighthouse report artifacts used by the case studies.
+- **`case-studies/RESEARCH-BRIEF.md`** explains the vertical selection and the documentation approach used in this repo.
 
 ## Running locally
 
@@ -56,7 +57,7 @@ Then visit one of these entry points:
 
 ## Lighthouse evidence
 
-The truth lives in `demos/assets/screenshots/<vertical>/lighthouse.report.json` — one per vertical, with the full audit breakdown.
+`demos/assets/screenshots/<vertical>/lighthouse.report.json` contains the Lighthouse audit output for each vertical.
 
 - The `.html` / `.json` report artifacts are **kept on disk as provenance** but gitignored (they are large, single-purpose dumps — see [`.gitignore`](.gitignore)).
 - The **WebP/PNG screenshots** (`homepage-hero`, `lighthouse-score`, etc.) are committed and referenced by the case-study pages.
@@ -74,7 +75,7 @@ Current scores measured on the live demos (Lighthouse 13.4.1, mid-range mobile, 
 ## Verifying
 
 - **Scores are real:** re-run Lighthouse against a served demo and compare against its `lighthouse.report.json` (they should match the table above).
-- **Case studies are honest:** each page is labeled *Vertical Demo* and references the live demo — no fabricated client outcomes.
+- **Case studies are documented:** each page links to the live demo and the related screenshots, reports, and supporting notes.
 - **The repo is self-consistent:** every case-study screenshot path resolves under `demos/assets/screenshots/<vertical>/`, and each case-study "View live demo" link resolves to its `demos/<vertical>/index.html`.
 
 Site: <https://reozix.com> · Sitemap: <https://reozix.com/sitemap.xml>
