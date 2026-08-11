@@ -7,38 +7,8 @@
 <meta name="description" content="Filter every Reozix Real Estate listing by property type, suburb, price range and bedrooms — apartments, houses, townhouses, penthouses and villas across the Gold Coast.">
 <link rel="stylesheet" href="../shared/css/reset.css">
 <link rel="stylesheet" href="css/realestate.css">
-<style>
-  /* Search page additions — price range inputs, beds select, no-results state */
-  .price-range { display: flex; align-items: center; gap: 8px; }
-  .price-range input {
-    width: 100%; min-width: 0; padding: 10px 12px;
-    border: 1px solid var(--re-border); border-radius: 8px;
-    font-family: inherit; font-size: 0.9375rem; color: var(--re-text);
-    background: var(--re-bg);
-    transition: border-color 0.15s, box-shadow 0.15s;
-  }
-  .price-range input:focus {
-    outline: none; border-color: var(--re-accent); background: var(--re-surface);
-    box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.15);
-  }
-  .price-range .price-sep { color: var(--re-text-secondary); flex-shrink: 0; }
-  #filter-beds {
-    width: 100%; padding: 10px 12px;
-    border: 1px solid var(--re-border); border-radius: 8px;
-    font-family: inherit; font-size: 0.9375rem; color: var(--re-text);
-    background: var(--re-surface);
-  }
-  #filter-beds:focus { outline: none; border-color: var(--re-accent); }
-  .filter-sidebar .clear-filters { width: 100%; margin-top: 24px; }
-  .no-results {
-    display: none; padding: 48px 24px; text-align: center;
-    background: var(--re-surface); border: 1px dashed var(--re-border);
-    border-radius: 14px; color: var(--re-text-secondary); font-size: 1rem;
-  }
-  .no-results.show { display: block; }
-</style>
 </head>
-<body>
+<body data-page="search">
 
 <nav class="re-nav">
   <div class="container">
@@ -153,6 +123,12 @@
 
       <!-- Results -->
       <div class="results-area">
+        <!--
+          The property cards below are intentionally static HTML that mirrors js/data.js
+          (the same 20 listings in the same order). They render without JavaScript, and
+          js/search.js filters them in the DOM via data-* attributes for no-JS resilience.
+          If the dataset changes, update these cards and data.js together.
+        -->
         <div class="property-grid">
 
           <!-- prop-001 -->
@@ -725,7 +701,6 @@
 </footer>
 
 <script src="../shared/js/utils.js"></script>
-<script src="js/data.js"></script>
 <script src="js/search.js"></script>
 </body>
 </html>

@@ -7,141 +7,8 @@
 <meta name="description" content="Full listing details for Gold Coast property with photo gallery, key facts, features and the listing agent. Request a free appraisal from Reozix Real Estate.">
 <link rel="stylesheet" href="../shared/css/reset.css">
 <link rel="stylesheet" href="css/realestate.css">
-<style>
-  /* Property detail page additions — gallery, key facts grid, listing agent card, appraisal CTA */
-  .back-link {
-    display: inline-block; margin-bottom: 20px;
-    font-size: 0.875rem; font-weight: 500; color: var(--re-accent-dark);
-    transition: color 0.15s;
-  }
-  .back-link:hover { color: var(--re-accent); }
-
-  .detail-head { margin-bottom: 24px; }
-  .type-pill {
-    display: inline-block; background: var(--re-accent-light); color: var(--re-accent-dark);
-    font-size: 0.75rem; font-weight: 600; padding: 5px 12px; border-radius: 999px;
-    margin-bottom: 10px;
-  }
-  .detail-head h1 {
-    font-size: 1.875rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15;
-    color: var(--re-text);
-  }
-  .prop-location { font-size: 1rem; color: var(--re-text-secondary); margin-top: 4px; }
-  .prop-price { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--re-accent); margin-top: 12px; }
-
-  .detail-grid { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: start; }
-
-  /* Photo gallery */
-  .gallery-main {
-    height: 300px; border-radius: 14px; overflow: hidden;
-    background: linear-gradient(135deg, #dbe8f7 0%, #c3d9f2 100%);
-  }
-  .gallery-main img { width: 100%; height: 100%; object-fit: cover; }
-  .gallery-thumbs {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
-    gap: 8px; margin-top: 8px;
-  }
-  .gallery-thumbs button {
-    padding: 0; border: none; cursor: pointer;
-    height: 64px; border-radius: 6px; overflow: hidden; opacity: 0.65;
-    transition: opacity 0.15s;
-  }
-  .gallery-thumbs button:hover { opacity: 1; }
-  .gallery-thumbs button.active { opacity: 1; box-shadow: 0 0 0 2px var(--re-accent); }
-  .gallery-thumbs img { width: 100%; height: 100%; object-fit: cover; }
-
-  /* Key facts grid */
-  .prop-stat-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
-    margin-top: 28px;
-  }
-  .prop-stat {
-    background: var(--re-surface); border: 1px solid var(--re-border);
-    border-radius: 10px; padding: 14px 16px;
-  }
-  .prop-stat .stat-label {
-    display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
-    color: var(--re-text-secondary); margin-bottom: 4px;
-  }
-  .prop-stat .stat-value { font-size: 0.9375rem; font-weight: 600; color: var(--re-text); }
-  .prop-stat.featured {
-    background: var(--re-accent); border-color: var(--re-accent); grid-column: 1 / -1;
-  }
-  .prop-stat.featured .stat-label { color: rgba(255, 255, 255, 0.8); }
-  .prop-stat.featured .stat-value { color: #fff; font-size: 1.25rem; }
-
-  .detail-heading {
-    font-size: 1.375rem; font-weight: 700; letter-spacing: -0.01em;
-    margin: 36px 0 14px; color: var(--re-text);
-  }
-  .prop-description { color: var(--re-text-secondary); line-height: 1.7; font-size: 1rem; }
-  .prop-features { display: flex; flex-wrap: wrap; gap: 8px; }
-  .prop-features .feature {
-    background: var(--re-bg); border: 1px solid var(--re-border); color: var(--re-text);
-    font-size: 0.875rem; font-weight: 500; padding: 6px 14px; border-radius: 999px;
-  }
-
-  /* Sidebar — listing agent card + appraisal CTA */
-  .listing-agent {
-    background: var(--re-surface); border: 1px solid var(--re-border);
-    border-radius: 16px; padding: 24px; box-shadow: var(--re-shadow); text-align: center;
-  }
-  .listing-agent .agent-photo {
-    width: 96px; height: 96px; margin: 0 auto 14px; border-radius: 50%;
-    background: linear-gradient(135deg, var(--re-accent) 0%, #7fb4e5 100%);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.75rem; font-weight: 700; color: #fff; letter-spacing: -0.02em;
-  }
-  .listing-agent h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: 2px; color: var(--re-text); }
-  .listing-agent .role {
-    font-size: 0.875rem; color: var(--re-accent-dark); font-weight: 500; margin-bottom: 16px;
-  }
-  .listing-agent .agent-contact { display: flex; flex-direction: column; gap: 8px; margin-bottom: 14px; }
-  .listing-agent .agent-contact a {
-    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    padding: 10px 14px; border: 1px solid var(--re-border); border-radius: 8px;
-    font-size: 0.875rem; font-weight: 500; color: var(--re-accent-dark);
-    transition: background 0.15s, border-color 0.15s;
-  }
-  .listing-agent .agent-contact a:hover { background: var(--re-accent-light); border-color: var(--re-accent); }
-  .listing-agent .view-profile {
-    display: inline-block; font-size: 0.875rem; font-weight: 500; color: var(--re-accent-dark);
-    transition: color 0.15s;
-  }
-  .listing-agent .view-profile:hover { color: var(--re-accent); }
-
-  .appraisal-card {
-    margin-top: 20px; background: var(--re-accent); color: #fff;
-    border-radius: 16px; padding: 28px; text-align: center;
-  }
-  .appraisal-card h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 6px; }
-  .appraisal-card p { color: rgba(255, 255, 255, 0.92); font-size: 0.9375rem; margin-bottom: 18px; }
-  .appraisal-card .re-btn { background: #fff; color: var(--re-accent-dark); width: 100%; }
-  .appraisal-card .re-btn:hover { background: var(--re-accent-light); }
-
-  /* Not-found state */
-  .not-found { text-align: center; padding: 64px 24px; }
-  .not-found .nf-icon { font-size: 3.5rem; }
-  .not-found h1 { font-size: 2rem; font-weight: 800; margin: 16px 0 8px; color: var(--re-text); }
-  .not-found p { color: var(--re-text-secondary); margin-bottom: 24px; }
-
-  @media (min-width: 640px) {
-    .prop-stat-grid { grid-template-columns: repeat(3, 1fr); }
-    .prop-stat.featured { grid-column: 1 / -1; }
-    .gallery-main { height: 420px; }
-  }
-  @media (min-width: 768px) {
-    .detail-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 16px; }
-    .detail-head h1 { font-size: 2.25rem; }
-    .prop-price { margin-top: 0; }
-  }
-  @media (min-width: 1024px) {
-    .detail-grid { grid-template-columns: 1fr 360px; }
-    .detail-sidebar { position: sticky; top: 96px; }
-  }
-</style>
 </head>
-<body>
+<body data-page="property-detail">
 
 <nav class="re-nav">
   <div class="container">
@@ -179,7 +46,7 @@
         <div class="detail-main">
           <div class="gallery">
             <div class="gallery-main">
-              <img id="gallery-main-img" src="" alt="">
+              <img id="gallery-main-img" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=80" alt="Property photo — Reozix Real Estate">
             </div>
             <div class="gallery-thumbs" id="gallery-thumbs"></div>
           </div>
@@ -216,7 +83,7 @@
       </div>
     </div>
 
-    <div class="not-found" id="not-found" style="display:none;">
+    <div class="not-found is-hidden" id="not-found">
       <span class="nf-icon" aria-hidden="true">🏠</span>
       <h1>Property not found</h1>
       <p>The property you're looking for doesn't exist or may have already been sold.</p>
@@ -267,7 +134,7 @@
   if (!property) {
     document.title = 'Property not found — Reozix Real Estate';
     detail.style.display = 'none';
-    notFound.style.display = '';
+    notFound.classList.remove('is-hidden');
     return;
   }
 

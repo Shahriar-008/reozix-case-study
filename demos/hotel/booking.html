@@ -23,12 +23,12 @@
 
 <nav class="hotel-nav">
   <div class="container">
-    <a href="/" class="logo">Reozix Hotel</a>
+    <a href="index.html" class="logo">Reozix Hotel</a>
     <button class="nav-toggle" aria-label="Menu">☰</button>
     <div class="nav-links">
       <a href="rooms.html">Rooms</a>
-      <a href="#about">About</a>
-      <a href="#location">Location</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#location">Location</a>
       <a href="tel:+61359841200">+61 3 5984 1200</a>
       <a href="booking.html" class="book-btn">Book Now</a>
     </div>
@@ -36,7 +36,7 @@
 </nav>
 
 <!-- Direct booking perk banner -->
-<div class="perk-banner" style="margin-top: 72px;">
+<div class="perk-banner offset-top">
   <div class="container">
     <div class="perks">
       <span class="perk-item">🏷️ Best rate guaranteed</span>
@@ -49,7 +49,7 @@
 <!-- Booking flow -->
 <section class="booking-section">
   <div class="container">
-    <h1 style="font-size: 2.75rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px;">Book your stay</h1>
+    <h1 class="page-heading">Book your stay</h1>
     <p class="page-sub">Three quick steps. No account needed.</p>
 
     <!-- Step indicator -->
@@ -61,72 +61,78 @@
 
     <!-- Step 1: Dates -->
     <div class="booking-step">
-      <div class="date-picker-bar" style="margin: 0 auto;">
-        <h3>Select your dates</h3>
-        <div class="picker-row">
-          <div class="field">
-            <label for="checkin">Check-in</label>
-            <input type="date" id="checkin" value="2026-09-01">
+      <div class="date-picker-bar center-margin">
+        <fieldset class="step-fields">
+          <legend>Select your dates</legend>
+          <div class="picker-row">
+            <div class="field">
+              <label for="checkin">Check-in</label>
+              <input type="date" id="checkin" value="2026-09-01" aria-required="true">
+            </div>
+            <div class="field">
+              <label for="checkout">Check-out</label>
+              <input type="date" id="checkout" value="2026-09-03" aria-required="true">
+            </div>
+            <div class="field">
+              <label for="guests">Guests</label>
+              <select id="guests" aria-required="true">
+                <option>1 guest</option>
+                <option selected>2 guests</option>
+                <option>3 guests</option>
+                <option>4 guests</option>
+              </select>
+            </div>
+            <button class="check-btn" id="next-btn" type="button">Next</button>
           </div>
-          <div class="field">
-            <label for="checkout">Check-out</label>
-            <input type="date" id="checkout" value="2026-09-03">
-          </div>
-          <div class="field">
-            <label for="guests">Guests</label>
-            <select id="guests">
-              <option>1 guest</option>
-              <option selected>2 guests</option>
-              <option>3 guests</option>
-              <option>4 guests</option>
-            </select>
-          </div>
-          <button class="check-btn" onclick="showStep(2)">Next</button>
-        </div>
+        </fieldset>
       </div>
     </div>
 
     <!-- Step 2: Room selection -->
     <div class="booking-step" style="display: none;">
-      <p class="page-sub" style="text-align: center;">Choose your room</p>
-      <div class="room-grid" id="room-select-grid">
-        <!-- Rooms rendered from HOTEL_DATA by the inline script -->
-      </div>
-      <div style="text-align: center;">
-        <a href="#" class="back-link" onclick="showStep(1); return false;">← Back to dates</a>
+      <fieldset class="room-select-step">
+        <legend>Choose your room</legend>
+        <div class="room-grid" id="room-select-grid">
+          <!-- Rooms rendered from HOTEL_DATA by the inline script -->
+        </div>
+      </fieldset>
+      <div class="center-text">
+        <a href="#" class="back-link" id="back-to-dates">← Back to dates</a>
       </div>
     </div>
 
     <!-- Step 3: Guest details -->
     <div class="booking-step" style="display: none;">
-      <div class="date-picker-bar" style="margin: 0 auto;">
-        <h3>Your details</h3>
-        <div class="picker-row">
-          <div class="field">
-            <label for="guest-name">Name</label>
-            <input type="text" id="guest-name" placeholder="Full name">
+      <div class="date-picker-bar center-margin">
+        <fieldset class="step-fields">
+          <legend>Your details</legend>
+          <div class="picker-row">
+            <div class="field">
+              <label for="guest-name">Name</label>
+              <input type="text" id="guest-name" placeholder="Full name" aria-required="true">
+            </div>
+            <div class="field">
+              <label for="guest-email">Email</label>
+              <input type="email" id="guest-email" placeholder="you@example.com" aria-required="true">
+            </div>
+            <div class="field">
+              <label for="guest-phone">Phone</label>
+              <input type="tel" id="guest-phone" placeholder="+61 4xx xxx xxx" aria-required="true">
+            </div>
           </div>
-          <div class="field">
-            <label for="guest-email">Email</label>
-            <input type="email" id="guest-email" placeholder="you@example.com">
+          <div class="confirm-row">
+            <button class="check-btn" id="confirm-btn" type="button">Confirm Booking</button>
           </div>
-          <div class="field">
-            <label for="guest-phone">Phone</label>
-            <input type="tel" id="guest-phone" placeholder="+61 4xx xxx xxx">
+          <div class="center-text">
+            <a href="#" class="back-link" id="back-to-room">← Back to room</a>
           </div>
-        </div>
-        <div style="margin-top: 16px; text-align: right;">
-          <button class="check-btn" onclick="submitBooking()">Confirm Booking</button>
-        </div>
-        <div style="text-align: center;">
-          <a href="#" class="back-link" onclick="showStep(2); return false;">← Back to room</a>
-        </div>
+        </fieldset>
       </div>
     </div>
 
     <!-- Step 4: Confirmation -->
     <div class="booking-step" style="display: none;">
-      <div class="confirmation">
+      <div class="confirmation" role="status" aria-live="polite">
         <div class="check-icon">✓</div>
         <h2>Booking confirmed</h2>
         <p class="ref">Reference: <strong id="booking-ref">RZH-······</strong></p>
@@ -151,7 +157,7 @@
       <a href="tel:+61359841200">+61 3 5984 1200</a>
     </div>
     <div>
-      <a href="rooms.html">Rooms</a> · <a href="#">About</a> · <a href="#">Location</a> · <a href="#">Contact</a>
+      <a href="rooms.html">Rooms</a> · <a href="index.html#about">About</a> · <a href="index.html#location">Location</a> · <a href="tel:+61359841200">Contact</a>
     </div>
   </div>
 </footer>
@@ -245,6 +251,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
     confirmBooking(); // defined in js/booking.js
   };
+
+  // Step navigation buttons/links (S4: no inline onclick)
+  document.getElementById('next-btn').addEventListener('click', function() { showStep(2); });
+  document.getElementById('back-to-dates').addEventListener('click', function(e) {
+    e.preventDefault();
+    showStep(1);
+  });
+  document.getElementById('confirm-btn').addEventListener('click', function() { submitBooking(); });
+  document.getElementById('back-to-room').addEventListener('click', function(e) {
+    e.preventDefault();
+    showStep(2);
+  });
 
   showStep(1); // Start on the Dates step
 });

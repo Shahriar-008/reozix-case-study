@@ -7,36 +7,8 @@
 <meta name="description" content="Full agent profile with specialisations, recent sales history and a direct contact form. Reozix Real Estate, Gold Coast.">
 <link rel="stylesheet" href="../shared/css/reset.css">
 <link rel="stylesheet" href="css/realestate.css">
-<style>
-  /* Agent detail page additions — back link, contact form spacing, success message, not-found state */
-  .back-link {
-    display: inline-block; margin-bottom: 20px;
-    font-size: 0.875rem; font-weight: 500; color: var(--re-accent-dark);
-    transition: color 0.15s;
-  }
-  .back-link:hover { color: var(--re-accent); }
-
-  /* Initials placeholder on a coloured block for contrast */
-  .agent-profile .agent-photo {
-    background: linear-gradient(135deg, var(--re-accent) 0%, #7fb4e5 100%);
-  }
-  .agent-profile .agent-photo .photo-placeholder { color: #fff; }
-
-  .agent-contact-form { margin-top: 32px; }
-  .form-success {
-    display: none; margin-top: 20px; padding: 14px 18px;
-    border-radius: 8px; background: #e8f7ee; border: 1px solid #bfe6cf;
-    color: #1f7a44; font-size: 0.9375rem;
-  }
-
-  /* Not-found state */
-  .not-found { text-align: center; padding: 64px 24px; }
-  .not-found .nf-icon { font-size: 3.5rem; }
-  .not-found h1 { font-size: 2rem; font-weight: 800; margin: 16px 0 8px; color: var(--re-text); }
-  .not-found p { color: var(--re-text-secondary); margin-bottom: 24px; }
-</style>
 </head>
-<body>
+<body data-page="agent-detail">
 
 <nav class="re-nav">
   <div class="container">
@@ -114,7 +86,7 @@
 
     </div>
 
-    <div class="not-found" id="not-found" style="display:none;">
+    <div class="not-found is-hidden" id="not-found">
       <span class="nf-icon" aria-hidden="true">👤</span>
       <h1>Agent not found</h1>
       <p>The agent you're looking for doesn't exist or may have moved on.</p>
@@ -165,7 +137,7 @@
   if (!agent) {
     document.title = 'Agent not found — Reozix Real Estate';
     profileWrap.style.display = 'none';
-    notFound.style.display = '';
+    notFound.classList.remove('is-hidden');
     return;
   }
 

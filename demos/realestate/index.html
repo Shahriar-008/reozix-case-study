@@ -7,66 +7,8 @@
 <meta name="description" content="Search apartments, houses, townhouses and villas across the Gold Coast with Reozix Real Estate — from beachfront Surfers Paradise to family homes in Hope Island.">
 <link rel="stylesheet" href="../shared/css/reset.css">
 <link rel="stylesheet" href="css/realestate.css">
-<style>
-  /* Homepage additions — suburb autocomplete + photo placeholders + appraisal CTA banner */
-  .suburb-field { position: relative; }
-  .autocomplete {
-    display: none;
-    position: absolute; top: 100%; left: 0; right: 0; z-index: 20;
-    margin-top: 4px;
-    background: var(--re-surface);
-    border: 1px solid var(--re-border);
-    border-radius: 8px;
-    box-shadow: 0 8px 28px rgba(26, 37, 48, 0.12);
-    overflow: hidden;
-  }
-  .autocomplete.open { display: block; }
-  .autocomplete button {
-    display: block; width: 100%; text-align: left;
-    padding: 10px 14px; font-size: 0.875rem; color: var(--re-text);
-    transition: background 0.15s;
-  }
-  .autocomplete button:hover, .autocomplete button.hover { background: var(--re-accent-light); }
-  .autocomplete .empty { padding: 10px 14px; font-size: 0.875rem; color: var(--re-text-secondary); }
-
-  a.property-photo-wrap { display: block; }
-  .property-card .photo-placeholder {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 3rem;
-  }
-  .agent-card .agent-photo { position: relative; }
-  .agent-card .agent-photo .photo-placeholder {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 3.25rem; font-weight: 700; color: rgba(255, 255, 255, 0.85);
-    letter-spacing: -0.02em;
-  }
-
-  /* Appraisal CTA banner */
-  .appraisal-cta {
-    padding: 72px 0;
-    background: linear-gradient(135deg, var(--re-accent) 0%, #5b9fdd 55%, #7fb4e5 100%);
-    text-align: center;
-    color: #fff;
-  }
-  .appraisal-cta h2 {
-    font-size: 2rem; font-weight: 800; letter-spacing: -0.02em;
-    margin-bottom: 10px;
-  }
-  .appraisal-cta p {
-    max-width: 560px; margin: 0 auto 28px;
-    color: rgba(255, 255, 255, 0.92); font-size: 1.0625rem;
-  }
-  .appraisal-cta .re-btn { background: #fff; color: var(--re-accent-dark); }
-  .appraisal-cta .re-btn:hover { background: var(--re-accent-light); }
-  @media (max-width: 768px) {
-    .appraisal-cta { padding: 56px 0; }
-    .appraisal-cta h2 { font-size: 1.625rem; }
-  }
-</style>
 </head>
-<body>
+<body data-page="index">
 
 <nav class="re-nav">
   <div class="container">
@@ -129,7 +71,7 @@
             <option value="3000000">$3,000,000</option>
           </select>
         </div>
-        <button class="search-btn" onclick="runSearch()">Search</button>
+        <button type="button" class="search-btn" id="search-btn">Search</button>
       </div>
       <div class="popular">
         Popular:
@@ -465,6 +407,11 @@ window.runSearch = function() {
   var qs = params.toString();
   location.href = 'search.html' + (qs ? '?' + qs : '');
 };
+
+// Search button (no inline handler — wired here for progressive enhancement).
+document.getElementById('search-btn').addEventListener('click', function() {
+  window.runSearch();
+});
 </script>
 </body>
 </html>

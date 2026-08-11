@@ -67,6 +67,10 @@
     </div>
     <p class="ct-filter-count" id="filter-count" aria-live="polite">Showing <strong id="result-count">18</strong> of 18 projects</p>
 
+    <!-- The project cards below intentionally mirror CONSTRUCTION_DATA in js/data.js
+         (same 18 projects, same fields) and are hard-coded for no-JS rendering.
+         The filter tabs in js/filters.js operate purely on these DOM cards;
+         they are NOT rendered from the data file. Keep the two in sync. -->
     <div class="ct-portfolio-grid">
 
       <!-- proj-001 -->
@@ -84,7 +88,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$1,450,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:60%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-60"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 14 weeks</span>
@@ -109,7 +113,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$620,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:26%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-26"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 10 weeks</span>
@@ -134,7 +138,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$1,100,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:46%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-46"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 16 weeks</span>
@@ -159,7 +163,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$480,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:20%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-20"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 8 weeks</span>
@@ -184,7 +188,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$385,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:16%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-16"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 18 weeks</span>
@@ -209,7 +213,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$88,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:4%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-4"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 6 weeks</span>
@@ -234,7 +238,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$240,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:10%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-10"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 12 weeks</span>
@@ -259,7 +263,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$320,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:13%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-13"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 14 weeks</span>
@@ -284,7 +288,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$2,400,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:100%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-100"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 34 weeks</span>
@@ -309,7 +313,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$1,800,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:75%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-75"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 30 weeks</span>
@@ -334,7 +338,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$2,800,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:100%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-100"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 40 weeks</span>
@@ -359,7 +363,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$2,100,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:88%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-88"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 36 weeks</span>
@@ -384,7 +388,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$950,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:40%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-40"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 24 weeks</span>
@@ -409,7 +413,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$580,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:24%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-24"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 20 weeks</span>
@@ -434,7 +438,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$140,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:6%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-6"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 7 weeks</span>
@@ -459,7 +463,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$420,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:18%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-18"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 26 weeks</span>
@@ -484,7 +488,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$95,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:4%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-4"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 5 weeks</span>
@@ -509,7 +513,7 @@
               <span class="ct-budget-label">Budget</span>
               <span class="ct-budget-value">$120,000</span>
             </div>
-            <div class="ct-budget-track"><div class="ct-budget-fill" style="width:5%"></div></div>
+            <div class="ct-budget-track"><div class="ct-budget-fill ct-budget-fill-5"></div></div>
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 6 weeks</span>
@@ -548,7 +552,6 @@
 </footer>
 
 <script src="../shared/js/utils.js"></script>
-<script src="js/data.js"></script>
 <script src="js/filters.js"></script>
 </body>
 </html>

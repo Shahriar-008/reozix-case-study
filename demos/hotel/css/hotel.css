@@ -173,6 +173,18 @@
   color: #28c840;
 }
 
+/* Booking step fieldsets (S2 a11y: group each step) */
+.step-fields, .room-select-step {
+  border: 0; padding: 0; margin: 0; min-width: 0;
+}
+.step-fields legend, .room-select-step legend {
+  font-size: 1.125rem; font-weight: 600; margin-bottom: 16px; padding: 0;
+}
+.room-select-step legend { text-align: center; }
+.room-select-step { margin-bottom: 16px; }
+.center-text { text-align: center; }
+.confirm-row { margin-top: 16px; text-align: right; }
+
 /* Confirmation */
 .confirmation { text-align: center; padding: 60px 0; }
 .confirmation .check-icon {
@@ -202,6 +214,36 @@
 .hotel-footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
 .hotel-footer a { color: rgba(255,255,255,0.6); }
 .hotel-footer a:hover { color: #fff; }
+
+/* Reviews section (index.html) */
+.reviews-section { padding: 80px 0; }
+.reviews-section h2 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+.reviews-section .section-sub { color: var(--hotel-text-secondary); margin-bottom: 40px; }
+.reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.review-card { background: var(--hotel-bg); padding: 28px; border-radius: 12px; }
+.review-card .review-text {
+  font-style: italic; margin-bottom: 16px; line-height: 1.7; color: var(--hotel-text);
+}
+.review-card .review-author { font-weight: 600; font-size: 0.875rem; }
+.review-card .review-location { font-size: 0.8125rem; color: var(--hotel-text-secondary); }
+
+/* Shared page utilities (rooms/room-detail/booking) */
+.page-heading { font-size: 2.75rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; }
+.perk-banner.offset-top { margin-top: 72px; }
+.date-picker-bar.center-margin { margin: 0 auto; }
+.date-picker-bar.offset-top { margin: 56px auto 0; }
+.page-sub.center { text-align: center; }
+.center-text { text-align: center; }
+.confirm-row { margin-top: 16px; text-align: right; }
+
+/* About + Location sections (index.html) */
+.about-section, .location-section { padding: 80px 0; }
+.about-section .section-sub, .location-section .section-sub {
+  color: var(--hotel-text-secondary); margin-bottom: 24px; max-width: 720px; line-height: 1.6;
+}
+.about-section h2, .location-section h2 {
+  font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 8px;
+}
 
 /* Room detail page */
 .room-detail { padding: 96px 0 72px; background: var(--hotel-bg); min-height: 70vh; }

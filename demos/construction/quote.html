@@ -56,48 +56,48 @@
         <div class="ct-form-row">
           <div class="ct-field">
             <label for="project-type">Project type</label>
-            <select id="project-type" name="project-type">
+            <select id="project-type" name="project-type" aria-required="true" aria-describedby="error-project-type">
               <option value="">Select a project type&hellip;</option>
               <option>Commercial Fit-Out</option>
               <option>Residential Extension</option>
               <option>New Build</option>
               <option>Renovation</option>
             </select>
-            <span class="ct-error-msg">Please select a project type.</span>
+            <span class="ct-error-msg" id="error-project-type">Please select a project type.</span>
           </div>
 
           <div class="ct-field">
             <label for="budget-tier">Budget tier</label>
-            <select id="budget-tier" name="budget-tier">
+            <select id="budget-tier" name="budget-tier" aria-required="true" aria-describedby="error-budget-tier">
               <option value="">Select a budget range&hellip;</option>
               <option>$100K&ndash;$250K</option>
               <option>$250K&ndash;$500K</option>
               <option>$500K&ndash;$1M</option>
               <option>$1M+</option>
             </select>
-            <span class="ct-error-msg">Please select a budget tier.</span>
+            <span class="ct-error-msg" id="error-budget-tier">Please select a budget tier.</span>
           </div>
         </div>
 
         <div class="ct-form-row">
           <div class="ct-field ct-field-full">
             <label for="property-address">Property address</label>
-            <input type="text" id="property-address" name="property-address" placeholder="Enter your Brisbane property address">
-            <span class="ct-error-msg">Please enter your property address.</span>
+            <input type="text" id="property-address" name="property-address" placeholder="Enter your Brisbane property address" aria-required="true" aria-describedby="error-property-address">
+            <span class="ct-error-msg" id="error-property-address">Please enter your property address.</span>
           </div>
         </div>
 
         <div class="ct-form-row">
           <div class="ct-field ct-field-full">
             <label for="preferred-timeline">Preferred timeline</label>
-            <select id="preferred-timeline" name="preferred-timeline">
+            <select id="preferred-timeline" name="preferred-timeline" aria-required="true" aria-describedby="error-preferred-timeline">
               <option value="">Select a timeline&hellip;</option>
               <option>ASAP</option>
               <option>1&ndash;3 months</option>
               <option>3&ndash;6 months</option>
               <option>6+ months</option>
             </select>
-            <span class="ct-error-msg">Please select a preferred timeline.</span>
+            <span class="ct-error-msg" id="error-preferred-timeline">Please select a preferred timeline.</span>
           </div>
         </div>
 
