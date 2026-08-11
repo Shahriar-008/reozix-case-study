@@ -2,6 +2,16 @@
 demos/assets/screenshots/*/lighthouse.report.html
 demos/assets/screenshots/*/lighthouse.report.json
 
+# Local-only workflow and agent files
+.superpowers/
+.claude/
+.claude/settings.local.json
+/docs/superpowers/
+/tools/
+
+# Dependencies
+node_modules/
+
 # Python
 __pycache__/
 *.pyc

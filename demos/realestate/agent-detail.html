@@ -13,7 +13,7 @@
 <nav class="re-nav">
   <div class="container">
     <a href="index.html" class="logo">Reozix <span>Real Estate</span></a>
-    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="search.html">Search</a>
@@ -40,8 +40,8 @@
           <p class="agent-role" id="agent-role"></p>
           <p class="agent-bio" id="agent-bio"></p>
           <div class="agent-contact">
-            <a id="agent-phone" href="tel:">📞 <span id="agent-phone-text"></span></a>
-            <a id="agent-email" href="mailto:">✉️ <span id="agent-email-text"></span></a>
+            <a id="agent-phone" href="tel:"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <span id="agent-phone-text"></span></a>
+            <a id="agent-email" href="mailto:"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> <span id="agent-email-text"></span></a>
           </div>
           <div class="agent-specializations" id="agent-specializations"></div>
           <div class="agent-sales">
@@ -87,7 +87,7 @@
     </div>
 
     <div class="not-found is-hidden" id="not-found">
-      <span class="nf-icon" aria-hidden="true">👤</span>
+      <span class="nf-icon" aria-hidden="true"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
       <h1>Agent not found</h1>
       <p>The agent you're looking for doesn't exist or may have moved on.</p>
       <a href="agents.html" class="re-btn">Browse all agents</a>
@@ -141,6 +141,21 @@
     return;
   }
 
+  var agentPhotos = {
+    'agent-001': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
+    'agent-002': 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80',
+    'agent-003': 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&q=80',
+    'agent-004': 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80',
+    'agent-005': 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&q=80',
+    'agent-006': 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&q=80',
+    'agent-007': 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80',
+    'agent-008': 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&q=80',
+    'agent-009': 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&q=80',
+    'agent-010': 'https://images.unsplash.com/photo-1534528745975-51589fd6153f?w=400&q=80',
+    'agent-011': 'https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=400&q=80',
+    'agent-012': 'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=400&q=80'
+  };
+
   function initials(name) {
     var parts = name.split(' ');
     return (parts[0] ? parts[0][0] : '') + (parts[parts.length - 1] ? parts[parts.length - 1][0] : '');
@@ -161,7 +176,18 @@
 
   // Page title + profile head
   document.title = agent.name + ' — Reozix Real Estate';
-  document.getElementById('agent-photo').textContent = initials(agent.name);
+  var photoEl = document.getElementById('agent-photo');
+  var photoUrl = agentPhotos[agent.id];
+  if (photoUrl) {
+    var img = document.createElement('img');
+    img.src = photoUrl;
+    img.alt = agent.name;
+    img.loading = 'lazy';
+    photoEl.textContent = '';
+    photoEl.appendChild(img);
+  } else {
+    photoEl.textContent = initials(agent.name);
+  }
   document.getElementById('agent-name').textContent = agent.name;
   document.getElementById('agent-role').textContent = agent.role;
   document.getElementById('agent-bio').textContent = agent.bio;
