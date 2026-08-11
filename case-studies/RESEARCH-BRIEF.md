@@ -121,13 +121,13 @@ These are real Lighthouse scores from the deployed demo platforms, not fabricate
 
 | Metric | Hotel | Real Estate | Construction |
 |--------|-------|-------------|--------------|
-| Lighthouse Performance | 99 | 98 | 97 |
-| Accessibility | 98 | 97 | 95 |
-| Best Practices | 100 | 100 | 100 |
-| Time to Interactive | 0.9s | 1.2s | 1.8s |
-| SEO | 98 | 98 | 98 |
+| Lighthouse Performance | 98 | 100 | 93 |
+| Accessibility | 87 | 91 | 93 |
+| Best Practices | 96 | 96 | 96 |
+| Time to Interactive | 2.4s | 1.4s | 3.1s |
+| SEO | 100 | 100 | 100 |
 
-All scores enforced at 95+ Performance gate in CI via Lighthouse CI + GitHub Actions.
+CI enforces a 95+ Performance gate on pull requests; current demo scores are recorded in the table above.
 
 ---
 
