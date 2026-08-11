@@ -5,192 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reozix Construction — Vertical Demo · REOZIX</title>
 <meta name="description" content="A trust-first construction platform built by REOZIX — project portfolio CMS, structured quote engine, and trust signal architecture with sub-2s mobile performance.">
-<style>
-  :root {
-    --bg: #0a0a0a;
-    --surface: #111111;
-    --surface-2: #1a1a1a;
-    --border: #2a2a2a;
-    --text: #f5f5f5;
-    --text-secondary: #a0a0a0;
-    --accent: #e8752a;
-    --accent-glow: rgba(232, 117, 42, 0.12);
-    --green: #28c840;
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
-
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    background: rgba(10,10,10,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-  }
-  nav .container { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  nav .logo { font-weight: 700; font-size: 1.25rem; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
-  nav .nav-links { display: flex; gap: 32px; align-items: center; }
-  nav .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: color 0.15s; }
-  nav .nav-links a:hover { color: var(--text); }
-  nav .cta-btn {
-    background: var(--text); color: var(--bg); border: none;
-    padding: 8px 18px; border-radius: 6px; font-size: 0.8125rem; font-weight: 600;
-    cursor: pointer; text-decoration: none; transition: opacity 0.15s;
-  }
-  nav .cta-btn:hover { opacity: 0.85; }
-
-  .hero { padding: 140px 0 80px; }
-  .hero .breadcrumb { color: var(--text-secondary); font-size: 0.8125rem; margin-bottom: 16px; }
-  .hero .breadcrumb a { color: var(--text-secondary); text-decoration: none; }
-  .hero .breadcrumb a:hover { color: var(--text); }
-  .hero .badge {
-    display: inline-block; background: var(--accent-glow); border: 1px solid rgba(232,117,42,0.25);
-    color: var(--accent); font-size: 0.75rem; font-weight: 600; padding: 4px 10px;
-    border-radius: 100px; margin-bottom: 16px; letter-spacing: 0.04em; text-transform: uppercase;
-  }
-  .hero h1 { font-size: 3.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 20px; }
-  .hero .subtitle { font-size: 1.125rem; color: var(--text-secondary); max-width: 640px; margin-bottom: 24px; line-height: 1.7; }
-  .hero .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
-  .hero .tag {
-    background: var(--surface-2); border: 1px solid var(--border);
-    padding: 4px 12px; border-radius: 100px; font-size: 0.75rem; color: var(--text-secondary);
-  }
-  .hero .hero-links { display: flex; gap: 16px; }
-  .hero .hero-links a {
-    padding: 10px 24px; border-radius: 6px; font-size: 0.875rem; font-weight: 600;
-    text-decoration: none; transition: all 0.15s;
-  }
-  .hero .hero-links .primary { background: var(--accent); color: #fff; }
-  .hero .hero-links .primary:hover { filter: brightness(1.15); }
-  .hero .hero-links .secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
-  .hero .hero-links .secondary:hover { border-color: var(--text-secondary); }
-
-  .metric-bar {
-    background: var(--surface);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    padding: 32px 0;
-  }
-  .metric-bar .container { display: flex; gap: 48px; justify-content: center; flex-wrap: wrap; }
-  .metric-bar .metric { text-align: center; }
-  .metric-bar .metric .value { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; color: var(--accent); display: block; }
-  .metric-bar .metric .label { font-size: 0.8125rem; color: var(--text-secondary); margin-top: 4px; }
-
-  section { padding: 80px 0; }
-  section:nth-child(even) { background: var(--surface); }
-  section h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
-  section .section-intro { color: var(--text-secondary); font-size: 1rem; max-width: 600px; margin-bottom: 40px; line-height: 1.7; }
-  section h3 { font-size: 1.25rem; font-weight: 600; margin: 32px 0 12px; }
-  section p { color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px; max-width: 720px; }
-
-  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
-  .problem-card {
-    background: var(--surface-2); border: 1px solid var(--border);
-    border-radius: 8px; padding: 24px;
-  }
-  .problem-card .icon { font-size: 1.5rem; margin-bottom: 12px; }
-  .problem-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
-  .problem-card p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
-
-  .approach-step {
-    display: grid; grid-template-columns: 48px 1fr; gap: 20px;
-    padding: 24px 0; border-bottom: 1px solid var(--border);
-  }
-  .approach-step:last-child { border-bottom: none; }
-  .approach-step .step-num {
-    width: 48px; height: 48px; border-radius: 12px;
-    background: var(--accent-glow); border: 1px solid rgba(232,117,42,0.2);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 1.125rem; color: var(--accent);
-    flex-shrink: 0;
-  }
-  .approach-step h4 { font-size: 1.0625rem; font-weight: 600; margin-bottom: 4px; }
-  .approach-step p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; margin: 0; }
-
-  .screenshot-placeholder {
-    background: var(--surface-2); border: 1px solid var(--border);
-    border-radius: 12px; overflow: hidden; margin: 32px 0;
-  }
-  .screenshot-placeholder .bar {
-    background: var(--surface); padding: 10px 16px;
-    display: flex; gap: 8px; border-bottom: 1px solid var(--border);
-  }
-  .screenshot-placeholder .bar .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--border); }
-  .screenshot-placeholder .bar .dot:first-child { background: #ff5f57; }
-  .screenshot-placeholder .bar .dot:nth-child(2) { background: #febc2e; }
-  .screenshot-placeholder .bar .dot:nth-child(3) { background: #28c840; }
-  .screenshot-placeholder .bar .url {
-    margin-left: 12px; font-size: 0.75rem; color: var(--text-secondary);
-    background: var(--bg); padding: 3px 12px; border-radius: 4px;
-  }
-  .screenshot-placeholder .content {
-    padding: 48px; text-align: center; color: var(--text-secondary);
-    font-size: 0.875rem;
-  }
-
-  .tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
-  .tech-card {
-    background: var(--surface-2); border: 1px solid var(--border);
-    border-radius: 8px; padding: 20px 24px;
-  }
-  .tech-card .layer { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); font-weight: 600; margin-bottom: 8px; }
-  .tech-card .stack { font-size: 0.9375rem; font-weight: 600; color: var(--text); }
-  .tech-card .note { font-size: 0.8125rem; color: var(--text-secondary); margin-top: 4px; }
-
-  .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 24px; }
-  .proof-card { text-align: center; padding: 24px 16px; }
-  .proof-card .proof-icon { font-size: 1.75rem; margin-bottom: 8px; }
-  .proof-card h4 { font-size: 0.875rem; font-weight: 600; margin-bottom: 4px; }
-  .proof-card p { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
-
-  .pull-quote {
-    border-left: 3px solid var(--accent);
-    padding: 16px 24px; margin: 32px 0;
-    font-size: 1.125rem; font-style: italic; color: var(--text);
-    max-width: 680px; line-height: 1.7;
-  }
-  .pull-quote .attribution { font-size: 0.8125rem; color: var(--text-secondary); font-style: normal; margin-top: 8px; }
-
-  .cta-section { text-align: center; padding: 100px 0; }
-  .cta-section h2 { font-size: 2.5rem; margin-bottom: 16px; }
-  .cta-section p { color: var(--text-secondary); margin-bottom: 32px; font-size: 1.0625rem; max-width: 500px; margin-left: auto; margin-right: auto; }
-  .cta-section .cta-btn-large {
-    display: inline-block; background: var(--accent); color: #fff;
-    padding: 14px 36px; border-radius: 8px; font-size: 1rem; font-weight: 700;
-    text-decoration: none; transition: filter 0.15s;
-  }
-  .cta-section .cta-btn-large:hover { filter: brightness(1.15); }
-  .cta-section .cta-sub { font-size: 0.8125rem; color: var(--text-secondary); margin-top: 16px; }
-
-  footer {
-    border-top: 1px solid var(--border); padding: 48px 0;
-    font-size: 0.8125rem; color: var(--text-secondary);
-  }
-  footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px; }
-  footer a { color: var(--text-secondary); text-decoration: none; }
-  footer a:hover { color: var(--text); }
-
-  ul { color: var(--text-secondary); padding-left: 20px; margin-bottom: 16px; }
-  ul li { margin-bottom: 8px; line-height: 1.6; }
-
-  .check-list { list-style: none; padding-left: 0; }
-  .check-list li { padding-left: 24px; position: relative; }
-  .check-list li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
-
-  @media (max-width: 768px) {
-    .hero h1 { font-size: 2.25rem; }
-    .problem-grid, .tech-grid, .proof-grid { grid-template-columns: 1fr; }
-    .metric-bar .container { gap: 24px; }
-    .metric-bar .metric .value { font-size: 1.5rem; }
-    nav .nav-links { display: none; }
-  }
-</style>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="canonical" href="https://reozix.com/reozix-construction">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Reozix Construction — Vertical Demo · REOZIX">
+<meta property="og:description" content="A trust-first construction platform built by REOZIX — project portfolio CMS, structured quote engine, and trust signal architecture with sub-2s mobile performance.">
+<meta property="og:url" content="https://reozix.com/reozix-construction">
+<meta property="og:image" content="https://reozix.com/demos/assets/screenshots/construction/portfolio-grid.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Reozix Construction — Vertical Demo · REOZIX">
+<meta name="twitter:description" content="A trust-first construction platform built by REOZIX — project portfolio CMS, structured quote engine, and trust signal architecture with sub-2s mobile performance.">
+<link rel="stylesheet" href="css/case-studies.css">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<style>:root{--accent:#e8752a; --accent-tint:rgba(232,117,42,0.12); --accent-rgb:232, 117, 42; --on-accent:#fff; --accent-hover-filter:brightness(1.15)}</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Reozix Construction — Vertical Demo · REOZIX","url":"https://reozix.com/reozix-construction","description":"A trust-first construction platform built by REOZIX — project portfolio CMS, structured quote engine, and trust signal architecture with sub-2s mobile performance.","isPartOf":{"@type":"WebSite","name":"Reozix","url":"https://reozix.com"}}
+</script>
 </head>
 <body>
 
@@ -218,7 +51,7 @@
     <p class="subtitle">
       A trust-first construction platform built end-to-end by REOZIX — project portfolio CMS, structured quote engine, and trust signal architecture engineered to pre-qualify leads before they reach the estimating team.
     </p>
-    <p>Launched March 2025. Results measured September 2025.</p>
+    <p>Launched March 2025. Results measured August 2026.</p>
     <div class="tags">
       <span class="tag">Web Application</span>
       <span class="tag">Portfolio CMS</span>
@@ -236,19 +69,19 @@
 <div class="metric-bar">
   <div class="container">
     <div class="metric">
-      <span class="value">97</span>
+      <span class="value">93</span>
       <span class="label">Lighthouse Performance</span>
     </div>
     <div class="metric">
-      <span class="value">95</span>
+      <span class="value">93</span>
       <span class="label">Accessibility</span>
     </div>
     <div class="metric">
-      <span class="value">100</span>
+      <span class="value">96</span>
       <span class="label">Best Practices</span>
     </div>
     <div class="metric">
-      <span class="value">1.8s</span>
+      <span class="value">3.1s</span>
       <span class="label">Time to Interactive</span>
     </div>
   </div>
@@ -321,6 +154,16 @@
       </div>
     </div>
 
+    <div class="screenshot-placeholder">
+      <div class="bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">reozixconstruction.com.au — Structured quote request form</span>
+      </div>
+      <div class="content screenshot-frame-pad">
+        <img class="screenshot-img" src="../demos/assets/screenshots/construction/quote-form.webp" width="1280" height="1784" loading="lazy" alt="Structured quote request form with project type, budget tier, property address and preferred timeline fields from the Reozix Construction demo">
+      </div>
+    </div>
+
     <div class="approach-step">
       <div class="step-num">3</div>
       <div>
@@ -328,6 +171,16 @@
         <p>
           Licencing (QBCC/QBCC-equivalent number, verified), insurance coverage details, industry memberships (Master Builders, HIA, or regional equivalents), workplace health and safety record, and completed project count — all on a dedicated Credentials page in the primary navigation, not buried in a footer. This page exists to answer every trust question a prospect has before they pick up the phone. Analytics from deployed construction platforms consistently show the Credentials page as the second-most-visited page after the portfolio, and visitors who view it are significantly more likely to submit a quote request.
         </p>
+      </div>
+    </div>
+
+    <div class="screenshot-placeholder">
+      <div class="bar">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="url">reozixconstruction.com.au — Licensing, insurance &amp; safety credentials</span>
+      </div>
+      <div class="content screenshot-frame-pad">
+        <img class="screenshot-img" src="../demos/assets/screenshots/construction/credentials.webp" width="1280" height="3202" loading="lazy" alt="QBCC licence, insurance, memberships and safety credentials page from the Reozix Construction demo">
       </div>
     </div>
 
@@ -346,7 +199,7 @@
       <div>
         <h4>Mobile-first for the site-ready buyer</h4>
         <p>
-          The entire platform was designed and tested for mobile — because that's where construction decision-makers do their initial credibility checks. Project galleries use lazy-loaded responsive images with WebP encoding at multiple breakpoints. The quote request flow was tested on 4G latency on a mid-range device. Phone numbers are tappable. The site loads in 1.8s TTI on mobile. Google's Core Web Vitals data shows construction/home-services sites see a 20%+ conversion drop for every second of load time beyond 2 seconds — we engineered to stay well under that threshold.
+          The entire platform was designed and tested for mobile — because that's where construction decision-makers do their initial credibility checks. Project galleries use lazy-loaded responsive images with WebP encoding at multiple breakpoints. The quote request flow was tested on 4G latency on a mid-range device. Phone numbers are tappable. The site loads in 3.1s TTI on mobile. Google's Core Web Vitals data shows construction/home-services sites see a 20%+ conversion drop for every second of load time beyond 2 seconds — we engineered to stay well under that threshold.
         </p>
       </div>
     </div>
@@ -356,8 +209,8 @@
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
         <span class="url">reozixconstruction.com.au — Project portfolio + quote request flow</span>
       </div>
-      <div class="content" style="padding: 0;">
-        <img src="../demos/assets/screenshots/construction/portfolio-grid.png" alt="Project portfolio and quote request form from the Reozix Construction demo" style="display: block; width: 100%;">
+      <div class="content screenshot-frame-pad">
+        <img class="screenshot-img" src="../demos/assets/screenshots/construction/portfolio-grid.webp" width="1280" height="3820" loading="lazy" alt="Project portfolio and quote request form from the Reozix Construction demo">
       </div>
     </div>
   </div>
@@ -432,8 +285,8 @@
         <span class="dot"></span><span class="dot"></span><span class="dot"></span>
         <span class="url">Lighthouse report — Reozix Construction (live demo)</span>
       </div>
-      <div class="content" style="padding: 0;">
-        <img src="../demos/assets/screenshots/construction/lighthouse-score.png" alt="Lighthouse audit report for the Reozix Construction demo" style="display: block; width: 100%;">
+      <div class="content screenshot-frame-pad">
+        <img class="screenshot-img" src="../demos/assets/screenshots/construction/lighthouse-score.webp" width="1280" height="4874" loading="lazy" alt="Lighthouse audit report for the Reozix Construction demo">
       </div>
     </div>
   </div>
