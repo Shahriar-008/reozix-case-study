@@ -1,0 +1,11 @@
+# Lighthouse report artifacts (kept on disk as provenance; not served or committed)
+demos/assets/screenshots/*/lighthouse.report.html
+demos/assets/screenshots/*/lighthouse.report.json
+
+# Python
+__pycache__/
+*.pyc
+
+# OS / editor
+.DS_Store
+Thumbs.db

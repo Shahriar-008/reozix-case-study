@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reozix — Vertical Demo Portfolio</title>
+<meta name="description" content="Reozix-built demonstration platforms for Boutique Hotel, Real Estate, and Construction — honest vertical demos with real Lighthouse scores, no fabricated client results.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>
+  :root {
+    --bg: #fafafa;
+    --surface: #ffffff;
+    --ink: #1a1a1a;
+    --muted: #5b5b5b;
+    --border: #e6e4df;
+    --hotel: #d4a853;
+    --realestate: #4a90d9;
+    --construction: #e8752a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  header.site-header {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  header.site-header .inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .logo {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .logo span { color: var(--muted); font-weight: 600; }
+  header .tagline {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+  main { max-width: 1040px; margin: 0 auto; padding: 3rem 1.5rem 4rem; }
+  .intro { max-width: 720px; margin-bottom: 2.5rem; }
+  .intro h1 {
+    font-size: 2.1rem;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.9rem;
+  }
+  .intro p { color: var(--muted); margin-bottom: 0.75rem; }
+  .cards { display: grid; gap: 1.5rem; }
+  @media (min-width: 820px) { .cards { grid-template-columns: repeat(3, 1fr); } }
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 1.5rem 1.5rem 1.25rem;
+    text-decoration: none;
+    color: var(--ink);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+  }
+  .card:hover { box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08); transform: translateY(-2px); }
+  .card .eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+  }
+  .card h2 { font-size: 1.3rem; margin-bottom: 0.5rem; }
+  .card p { color: var(--muted); font-size: 0.95rem; flex-grow: 1; }
+  .card .meta {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    padding-top: 0.75rem;
+  }
+  .card .meta strong { color: var(--accent); }
+  footer {
+    border-top: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  footer .inner {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a class="logo" href="index.html">reozix <span>— Vertical Demo Portfolio</span></a>
+    <span class="tagline">Enterprise Software. Refined.</span>
+  </div>
+</header>
+
+<main>
+  <section class="intro">
+    <h1>What Reozix builds, demonstrated per industry</h1>
+    <p>
+      These are Reozix-built <strong>demonstration platforms</strong> — honest vertical demos that show the engineering
+      behind a modern web product for three industries, not fabricated client case studies. No fake clients, no
+      invented KPIs. Every page is a working demo you can click through, with real Lighthouse scores measured on the
+      live build.
+    </p>
+    <p>
+      Each vertical was chosen for a distinct engineering challenge: direct-booking conversion for hospitality,
+      instant property search for real estate, and speed-to-quote credibility for construction.
+    </p>
+  </section>
+
+  <section class="cards">
+    <a class="card" href="case-studies/reozix-hotel.html" style="--accent: #d4a853">
+      <div class="eyebrow">Boutique Hotel</div>
+      <h2>Reozix Hotel</h2>
+      <p>
+        A booking-first hotel platform with a direct booking engine, no-code CMS, and sub-2-second mobile performance —
+        built to win back channel share from the OTAs.
+      </p>
+      <div class="meta"><strong>98</strong> Lighthouse Performance · <strong>2.4s</strong> TTI</div>
+    </a>
+
+    <a class="card" href="case-studies/reozix-realestate.html" style="--accent: #4a90d9">
+      <div class="eyebrow">Real Estate</div>
+      <h2>Reozix Real Estate</h2>
+      <p>
+        A listings platform with instant Meilisearch property search, structured appraisal flow, and agent profiles —
+        built for agencies who compete against the big portals.
+      </p>
+      <div class="meta"><strong>100</strong> Lighthouse Performance · <strong>1.4s</strong> TTI</div>
+    </a>
+
+    <a class="card" href="case-studies/reozix-construction.html" style="--accent: #e8752a">
+      <div class="eyebrow">Construction</div>
+      <h2>Reozix Construction</h2>
+      <p>
+        A portfolio-and-quote platform with structured project metadata, a qualifying quote flow, and trust signal
+        architecture — built for the industry's long, credibility-first sales cycle.
+      </p>
+      <div class="meta"><strong>93</strong> Lighthouse Performance · <strong>3.1s</strong> TTI</div>
+    </a>
+  </section>
+</main>
+
+<footer>
+  <div class="inner">
+    <div><strong>reozix</strong> &nbsp; Enterprise Software. Refined.</div>
+    <div>Australia · Canada · Vertical demonstration portfolio</div>
+  </div>
+</footer>
+
+</body>
+</html>

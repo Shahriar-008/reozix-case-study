@@ -1,0 +1,16 @@
+{
+  "name": "Reozix — Vertical Demos",
+  "short_name": "Reozix",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#1a1a1a",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
