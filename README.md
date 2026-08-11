@@ -1,6 +1,6 @@
 # Reozix — Vertical Demo Portfolio
 
-A static portfolio for the **Reozix** web agency: three hand-built, per-industry demonstration platforms, each with a case-study page. This repository is the honest counterpart to a traditional "client results" portfolio — every demo is a working Reozix build, and every score is real.
+A static portfolio for the **Reozix** web agency: three hand-built, per-industry demonstration platforms, each with a case-study page. Every demo is a working Reozix build, and every score is real.
 
 ## What this repo is
 
