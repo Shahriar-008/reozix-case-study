@@ -1,0 +1,10 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "redirects": [
+    { "source": "/about", "destination": "https://reozix.com/about", "permanent": true },
+    { "source": "/services", "destination": "https://reozix.com/services", "permanent": true },
+    { "source": "/portfolio", "destination": "https://reozix.com/portfolio", "permanent": true },
+    { "source": "/contact", "destination": "https://reozix.com/contact", "permanent": true }
+  ]
+}

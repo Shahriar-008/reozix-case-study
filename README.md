@@ -79,3 +79,9 @@ Current scores measured on the live demos (Lighthouse 13.4.1, mid-range mobile, 
 - **The repo is self-consistent:** every case-study screenshot path resolves under `demos/assets/screenshots/<vertical>/`, and each case-study "View live demo" link resolves to its `demos/<vertical>/index.html`.
 
 Site: <https://reozix.com> · Sitemap: <https://reozix.com/sitemap.xml>
+
+## Deploying
+
+The repo is a pure static site — no build step. It deploys as-is to any static host (Vercel, Netlify, GitHub Pages, etc.); just point the host at the repo root.
+
+This repo ships a [`vercel.json`](vercel.json) for Vercel deployments. It redirects the root-relative agency nav links (`/about`, `/services`, `/portfolio`, `/contact`) used by the case-study pages to the corresponding live pages on reozix.com — these pages are intended for deployment on the agency site, where those paths resolve natively.
