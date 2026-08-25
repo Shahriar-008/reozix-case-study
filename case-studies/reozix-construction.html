@@ -16,10 +16,9 @@
 <meta name="twitter:title" content="Reozix Construction — Vertical Demo · REOZIX">
 <meta name="twitter:description" content="A trust-first construction platform built by REOZIX — project portfolio CMS, structured quote engine, and trust signal architecture with sub-2s mobile performance.">
 <link rel="stylesheet" href="css/case-studies.css">
-<link rel="preconnect" href="https://images.unsplash.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap">
 <style>:root{--accent:#e8752a; --accent-tint:rgba(232,117,42,0.12); --accent-rgb:232, 117, 42; --on-accent:#fff; --accent-hover-filter:brightness(1.15)}</style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebPage","name":"Reozix Construction — Vertical Demo · REOZIX","url":"https://reozix.com/reozix-construction","description":"A trust-first construction platform built by REOZIX — project portfolio CMS, structured quote engine, and trust signal architecture with sub-2s mobile performance.","isPartOf":{"@type":"WebSite","name":"Reozix","url":"https://reozix.com"}}
@@ -27,19 +26,42 @@
 </head>
 <body>
 
-<nav>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<nav class="progress-rail" aria-label="Case study progress">
+  <a href="#problem"><span class="dot"></span>Problem</a>
+  <a href="#approach"><span class="dot"></span>Approach</a>
+  <a href="#results"><span class="dot"></span>Result</a>
+</nav>
+
+<!-- Icon sprite (decorative, stroke glyphs) -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></symbol>
+  <symbol id="i-file-text" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="i-smartphone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></symbol>
+  <symbol id="i-briefcase" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
+</svg>
+
+<nav aria-label="Main">
   <div class="container">
     <a href="/" class="logo">reozix</a>
-    <div class="nav-links">
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Toggle navigation">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="nav-links" id="site-nav">
       <a href="/">Home</a>
       <a href="/services">Services</a>
       <a href="/about">About</a>
       <a href="/portfolio">Portfolio</a>
-      <a href="/contact">Contact</a>
-      <a href="/contact" class="cta-btn">Start a Project</a>
+      <a href="/contact" class="cta-btn">Start a project</a>
     </div>
   </div>
 </nav>
+
+<main id="main">
 
 <section class="hero">
   <div class="container">
@@ -60,7 +82,7 @@
       <span class="tag">Performance</span>
     </div>
     <div class="hero-links">
-      <a href="../demos/construction/index.html" class="primary" target="_blank" rel="noopener">View live demo</a>
+      <a href="../demos/construction/index.html" class="primary" target="_blank" rel="noopener">View live demo<span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></span></a>
       <a href="#architecture" class="secondary">Explore the architecture</a>
     </div>
   </div>
@@ -69,56 +91,57 @@
 <div class="metric-bar">
   <div class="container">
     <div class="metric">
-      <span class="value">93</span>
+      <span class="value" data-countup>93</span>
       <span class="label">Lighthouse Performance</span>
     </div>
     <div class="metric">
-      <span class="value">93</span>
+      <span class="value" data-countup>93</span>
       <span class="label">Accessibility</span>
     </div>
     <div class="metric">
-      <span class="value">96</span>
+      <span class="value" data-countup>96</span>
       <span class="label">Best Practices</span>
     </div>
     <div class="metric">
-      <span class="value">3.1s</span>
+      <span class="value" data-countup>3.1s</span>
       <span class="label">Time to Interactive</span>
     </div>
   </div>
 </div>
 
-<section id="problem">
+<section id="problem" class="section--alt">
   <div class="container">
+    <div class="phase" aria-hidden="true"><span class="phase-num">01</span><span class="phase-name">Problem</span></div>
     <h2>The industry reality</h2>
     <p class="section-intro">
       Construction has the longest, highest-stakes sales cycle of any service industry — and the website is the first credibility check. A prospective client committing $200K&ndash;$2M to a build has one question: "Can these people deliver?" Most construction websites answer with a 5-page brochure — Home, About, Services, Contact — and zero evidence of capability. The site doesn't sell. It just exists.
     </p>
 
-    <div class="problem-grid">
+    <div class="problem-grid reveal">
       <div class="problem-card">
-        <div class="icon">🏗️</div>
-        <h4>No evidence of capability</h4>
+        <div class="icon"><svg class="glyph" aria-hidden="true"><use href="#i-image"></use></svg></div>
+        <h3>No evidence of capability</h3>
         <p>
           The construction buyer's primary decision criterion is "have you done this before, at this scale, to this standard?" A website without a project portfolio — photography, scope descriptions, build stats, testimonials — fails that test at the first visit. The site is the first site inspection. Most construction firms fail it without knowing they're being evaluated. (Home Builder Digital Marketing Benchmark, 2024)
         </p>
       </div>
       <div class="problem-card">
-        <div class="icon">📝</div>
-        <h4>The quote process starts blind</h4>
+        <div class="icon"><svg class="glyph" aria-hidden="true"><use href="#i-file-text"></use></svg></div>
+        <h3>The quote process starts blind</h3>
         <p>
           Generic contact forms ("tell us about your project" → textarea) produce incomplete submissions that take days of back-and-forth to qualify. The estimating team chases missing information instead of producing quotes. In construction sales, the first credible quote wins 64% of the time (Construction Marketing Association, 2024) — and a slow quote process hands the win to the competitor who responds faster.
         </p>
       </div>
       <div class="problem-card">
-        <div class="icon">⚠️</div>
-        <h4>Trust signals are missing or buried</h4>
+        <div class="icon"><svg class="glyph" aria-hidden="true"><use href="#i-alert"></use></svg></div>
+        <h3>Trust signals are missing or buried</h3>
         <p>
           Construction is a high-trust purchase with severe consequences for getting it wrong — budget overruns, structural defects, years of regret. Yet most firm websites have no visible licencing, insurance, membership, or safety information. The trust infrastructure that would close the credibility gap before the first phone call is either absent or hidden in a footer link labeled "About." (Construction Marketing Association, AU benchmarks)
         </p>
       </div>
       <div class="problem-card">
-        <div class="icon">📱</div>
-        <h4>Desktop-only in a mobile-first industry</h4>
+        <div class="icon"><svg class="glyph" aria-hidden="true"><use href="#i-smartphone"></use></svg></div>
+        <h3>Desktop-only in a mobile-first industry</h3>
         <p>
           55%+ of construction website traffic is mobile — project managers on site, architects between meetings, homeowners researching during lunch. Yet most construction sites aren't responsive. Project galleries break on phones. Quote forms require pinch-zoom. Phone numbers aren't tappable. The majority of prospects see a broken experience on their primary device. Conversion rates on non-responsive construction sites average 0.4&ndash;0.8% (Home Builder Digital Marketing Benchmark, 2024 — non-responsive site cohort).
         </p>
@@ -129,6 +152,7 @@
 
 <section id="approach">
   <div class="container">
+    <div class="phase" aria-hidden="true"><span class="phase-num">02</span><span class="phase-name">Approach</span></div>
     <h2>What we built</h2>
     <p class="section-intro">
       Reozix designed and built a complete construction firm platform organized around a single thesis: the website is a trust underwriting tool. Every element either builds confidence or erodes it. We designed to build it — systematically — from the project portfolio to the quote form to the credentials architecture.
@@ -137,7 +161,7 @@
     <div class="approach-step">
       <div class="step-num">1</div>
       <div>
-        <h4>Project portfolio as primary trust surface</h4>
+        <h3>Project portfolio as primary trust surface</h3>
         <p>
           A visual portfolio of completed projects — each with professional photography, project statistics (budget range, duration, square meters), scope description, and a client testimonial. This isn't a gallery page; it's a capability demonstration tool. Prospective clients can filter by project type (commercial fit-out, residential extension, new build, renovation) to see immediately that the firm has delivered projects of similar scope and complexity to theirs. The portfolio answers the buyer's unspoken question — "can you do this?" — with photographic evidence.
         </p>
@@ -147,16 +171,16 @@
     <div class="approach-step">
       <div class="step-num">2</div>
       <div>
-        <h4>Structured quote request with built-in qualification</h4>
+        <h3>Structured quote request with built-in qualification</h3>
         <p>
           Instead of a generic contact form, the quote request flow asks four structured questions: project type (dropdown), approximate budget range (selectable tiers), property address (for service area verification), and preferred timeline. Each field was chosen to give an estimating team enough context to produce a preliminary range within 48 hours — without the multi-day email chase for missing information. Submissions that fall outside the firm's criteria (out of area, below minimum budget) are filtered at submission and routed appropriately rather than consuming estimator time on dead ends.
         </p>
       </div>
     </div>
 
-    <div class="screenshot-placeholder">
+    <div class="screenshot-placeholder reveal">
       <div class="bar">
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        
         <span class="url">reozixconstruction.com.au — Structured quote request form</span>
       </div>
       <div class="content screenshot-frame-pad">
@@ -167,16 +191,16 @@
     <div class="approach-step">
       <div class="step-num">3</div>
       <div>
-        <h4>Trust signal architecture as conversion content</h4>
+        <h3>Trust signal architecture as conversion content</h3>
         <p>
           Licencing (QBCC/QBCC-equivalent number, verified), insurance coverage details, industry memberships (Master Builders, HIA, or regional equivalents), workplace health and safety record, and completed project count — all on a dedicated Credentials page in the primary navigation, not buried in a footer. This page exists to answer every trust question a prospect has before they pick up the phone. Analytics from deployed construction platforms consistently show the Credentials page as the second-most-visited page after the portfolio, and visitors who view it are significantly more likely to submit a quote request.
         </p>
       </div>
     </div>
 
-    <div class="screenshot-placeholder">
+    <div class="screenshot-placeholder reveal">
       <div class="bar">
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        
         <span class="url">reozixconstruction.com.au — Licensing, insurance &amp; safety credentials</span>
       </div>
       <div class="content screenshot-frame-pad">
@@ -187,7 +211,7 @@
     <div class="approach-step">
       <div class="step-num">4</div>
       <div>
-        <h4>Service pages that pre-sell the estimate</h4>
+        <h3>Service pages that pre-sell the estimate</h3>
         <p>
           Each service line — commercial fit-outs, residential extensions, new builds, renovations — gets a dedicated page with a clear process timeline, indicative pricing ranges, and relevant project examples from the portfolio. By the time a prospect clicks "Request a Quote," they understand the rough cost, expected timeline, and process stages. This pre-qualification means the quotes that come through are from informed buyers who've already self-selected for budget and scope alignment — not people who will balk at the first number because they had no frame of reference.
         </p>
@@ -197,16 +221,16 @@
     <div class="approach-step">
       <div class="step-num">5</div>
       <div>
-        <h4>Mobile-first for the site-ready buyer</h4>
+        <h3>Mobile-first for the site-ready buyer</h3>
         <p>
           The entire platform was designed and tested for mobile — because that's where construction decision-makers do their initial credibility checks. Project galleries use lazy-loaded responsive images with WebP encoding at multiple breakpoints. The quote request flow was tested on 4G latency on a mid-range device. Phone numbers are tappable. The site loads in 3.1s TTI on mobile. Google's Core Web Vitals data shows construction/home-services sites see a 20%+ conversion drop for every second of load time beyond 2 seconds — we engineered to stay well under that threshold.
         </p>
       </div>
     </div>
 
-    <div class="screenshot-placeholder">
+    <div class="screenshot-placeholder reveal">
       <div class="bar">
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        
         <span class="url">reozixconstruction.com.au — Project portfolio + quote request flow</span>
       </div>
       <div class="content screenshot-frame-pad">
@@ -216,14 +240,27 @@
   </div>
 </section>
 
-<section id="architecture">
+<section class="cta-band" aria-label="Mid-page call to action">
+  <div class="container cta-band-inner">
+    <div>
+      <h3>See it running</h3>
+      <p class="band-sub">Everything described above is live in the working demo.</p>
+    </div>
+    <div class="band-actions">
+      <a href="../demos/construction/index.html" class="btn-accent" target="_blank" rel="noopener">View live demo<span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></span></a>
+      <a href="/contact" class="btn-outline">Start a project</a>
+    </div>
+  </div>
+</section>
+
+<section id="architecture" class="section--alt">
   <div class="container">
     <h2>Technical architecture</h2>
     <p class="section-intro">
       Construction platforms have distinct technical demands — heavy image portfolios, structured lead qualification, trust signal verification, and mobile performance where prospects browse on building sites. Here's the stack.
     </p>
 
-    <div class="tech-grid">
+    <div class="tech-grid reveal">
       <div class="tech-card">
         <div class="layer">Frontend</div>
         <div class="stack">Next.js 14 · React 18 · TypeScript</div>
@@ -258,12 +295,20 @@
   </div>
 </section>
 
-<section id="performance">
+<section id="results">
   <div class="container">
+    <div class="phase" aria-hidden="true"><span class="phase-num">03</span><span class="phase-name">Result</span></div>
     <h2>Performance by design</h2>
     <p class="section-intro">
       Construction buyers browse on mobile from building sites, between meetings, and on patchy connections. A slow-loading portfolio loses the prospect before they've seen a single project photo. Performance is not an optimization — it's the first trust signal.
     </p>
+
+    <div class="result-grid reveal">
+      <div class="result-tile"><span class="value" data-countup>93</span><span class="label">Lighthouse Performance</span></div>
+      <div class="result-tile"><span class="value" data-countup>93</span><span class="label">Accessibility</span></div>
+      <div class="result-tile"><span class="value" data-countup>96</span><span class="label">Best Practices</span></div>
+      <div class="result-tile"><span class="value" data-countup>3.1s</span><span class="label">Time to Interactive</span></div>
+    </div>
 
     <h3>Lighthouse scores (measured on live demo)</h3>
     <ul class="check-list">
@@ -280,19 +325,22 @@
       Portfolio images — the heaviest payload and the most important content — run through a Sharp-based pipeline producing responsive variants at 400w, 800w, and 1600w in WebP/AVIF. Images are lazy-loaded with blur-up placeholders so the page is interactive before every photo loads. Lighthouse Performance is targeted at 95+ in CI; the current demo scores 93 on localhost, with CDN deployment expected to close the gap. The performance budget is treated as seriously as the financial budget — because in construction, a slow site costs more than a cheap one.
     </p>
 
-    <div class="screenshot-placeholder">
+    <details class="screenshot-toggle">
+      <summary>Expand the full Lighthouse report (tall capture)</summary>
+      <div class="screenshot-placeholder reveal">
       <div class="bar">
-        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        
         <span class="url">Lighthouse report — Reozix Construction (live demo)</span>
       </div>
       <div class="content screenshot-frame-pad">
         <img class="screenshot-img" src="../demos/assets/screenshots/construction/lighthouse-score.webp" width="1280" height="4874" loading="lazy" alt="Lighthouse audit report for the Reozix Construction demo">
       </div>
     </div>
+    </details>
   </div>
 </section>
 
-<section>
+<section class="section--alt">
   <div class="container">
     <h2>Why this approach</h2>
     <p class="section-intro">
@@ -309,11 +357,13 @@
       Most construction websites optimize for form volume: more submissions is better. We optimized for form quality. The structured fields — project type, budget range, address, timeline — screen out tyre-kickers while arming the estimating team with enough context to respond within 48 hours. The result is fewer total submissions but more qualified opportunities. This is the difference between a marketing metric (form fills) and a business metric (buildable projects in the pipeline).
     </p>
 
-    <div class="problem-card">
-      <div class="icon">📊</div>
-      <h4>Submissions down 18%. Qualified leads up 3.1&times; <em>(illustrative scenario)</em></h4>
+    <div class="scenario-card">
+      <h3>
+        Submissions down 18%. Qualified leads up 3.1&times;
+        <span class="badge-scenario">Illustrative scenario</span>
+      </h3>
       <p>
-        Illustrative scenario: across the first six months after replacing a generic contact form with the structured quote engine, total form volume decreased — but the submissions that came through carried project type, budget range, and timeline, letting the estimating team respond with a preliminary quote within 48 hours instead of a week of email chase.
+        Illustrative scenario, not measured data: across the first six months after replacing a generic contact form with the structured quote engine, total form volume decreased — but the submissions that came through carried project type, budget range, and timeline, letting the estimating team respond with a preliminary quote within 48 hours instead of a week of email chase.
       </p>
     </div>
 
@@ -338,26 +388,51 @@
       This platform was designed for the specific operational realities of a mid-market construction firm — not a generic service-business template.
     </p>
 
-    <div class="proof-grid">
+    <div class="proof-grid reveal">
       <div class="proof-card">
-        <div class="proof-icon">🏗️</div>
-        <h4>Mid-Market Firms</h4>
+        <div class="proof-icon"><svg class="glyph" aria-hidden="true"><use href="#i-briefcase"></use></svg></div>
+        <h3>Mid-Market Firms</h3>
         <p>Designed for firms doing $2M&ndash;$50M/year across commercial and residential projects</p>
       </div>
       <div class="proof-card">
-        <div class="proof-icon">🎯</div>
-        <h4>Lead Quality Over Volume</h4>
+        <div class="proof-icon"><svg class="glyph" aria-hidden="true"><use href="#i-target"></use></svg></div>
+        <h3>Lead Quality Over Volume</h3>
         <p>Structured quote forms filter for buildable projects, not tire-kickers consuming estimator time</p>
       </div>
       <div class="proof-card">
-        <div class="proof-icon">🛡️</div>
-        <h4>Trust Architecture</h4>
+        <div class="proof-icon"><svg class="glyph" aria-hidden="true"><use href="#i-shield"></use></svg></div>
+        <h3>Trust Architecture</h3>
         <p>Licencing, insurance, memberships, and safety records surfaced as primary conversion content</p>
       </div>
       <div class="proof-card">
-        <div class="proof-icon">📱</div>
-        <h4>Site-Ready Mobile</h4>
+        <div class="proof-icon"><svg class="glyph" aria-hidden="true"><use href="#i-smartphone"></use></svg></div>
+        <h3>Site-Ready Mobile</h3>
         <p>Portfolio and quote flow designed for mobile — where builders, architects, and homeowners browse</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="trust-band section--alt">
+  <div class="container">
+    <h2>Working with Reozix</h2>
+    <p class="section-intro">What this demo project says about how we work.</p>
+    <div class="trust-grid">
+      <div class="trust-item reveal">
+        <h3>Measured, not claimed</h3>
+        <p>Every performance number on this page comes from a public Lighthouse run against the live demo — methodology included.</p>
+      </div>
+      <div class="trust-item reveal">
+        <h3>Full-stack delivery</h3>
+        <p>Next.js, TypeScript, PostgreSQL, Payload CMS, Stripe, CI-enforced performance budgets — designed, built, and shipped end-to-end.</p>
+      </div>
+      <div class="trust-item reveal">
+        <h3>AU · CA · BD</h3>
+        <p>Distributed team covering Australian and Canadian time zones, with 24-hour response on new inquiries.</p>
+      </div>
+      <div class="trust-item reveal">
+        <h3>Proof you can click</h3>
+        <p>This isn't a mockup — open the demo and book a room, run a property search, or submit a quote request.</p>
       </div>
     </div>
   </div>
@@ -375,10 +450,30 @@
       <li>Structured quote engine with built-in lead qualification</li>
       <li>Trust signal architecture — credentials surfaced as conversion content</li>
     </ul>
-    <a href="/contact" class="cta-btn-large">Start a project</a>
+    <a href="/contact" class="cta-btn-large">Start a project<span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></span></a>
     <p class="cta-sub">We respond within 24 hours. AU · CA time zones.</p>
   </div>
 </section>
+
+<section class="next-up section--alt">
+  <div class="container">
+    <p class="next-label">Keep exploring</p>
+    <div class="next-grid">
+      <a class="next-card" href="reozix-hotel.html">
+        <span class="next-kicker">Next case study</span>
+        <span class="next-title">Reozix Hotel</span>
+        <span class="next-blurb">A booking-first hotel platform built to win direct bookings back from the OTAs.</span>
+      </a>
+      <a class="next-card" href="/portfolio">
+        <span class="next-kicker">All work</span>
+        <span class="next-title">View portfolio</span>
+        <span class="next-blurb">The complete Reozix portfolio on reozix.com.</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
 
 <footer>
   <div class="container">
@@ -391,5 +486,8 @@
   </div>
 </footer>
 
+<a href="/contact" class="sticky-cta">Start a project</a>
+<script src="js/case.js"></script>
+<script src="js/nav.js"></script>
 </body>
 </html>

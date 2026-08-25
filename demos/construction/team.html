@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Team — Reozix Construction, Brisbane</title>
+<meta name="description" content="Meet the Reozix Construction team — Brisbane builders, site supervisors and estimators delivering commercial fit-outs, extensions, new builds and renovations.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%23c05a12%27/%3E%3Ctext x=%278%27 y=%2712%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2711%27 fill=%27%23fff%27%3EC%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+<link rel="stylesheet" href="../shared/css/reset.css">
+<link rel="stylesheet" href="css/construction.css">
+</head>
+<body>
+
+<nav class="ct-nav">
+  <div class="ct-container">
+    <a href="index.html" class="logo">Reozix <span>Construction</span></a>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="services.html">Services</a>
+      <a href="credentials.html">Credentials</a>
+      <a href="team.html" aria-current="page">Team</a>
+      <a href="tel:+61731862400">+61 7 3186 2400</a>
+      <a href="quote.html" class="ct-btn">Get a Quote</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<section class="ct-page-header">
+  <div class="ct-container">
+    <span class="ct-page-kicker">The People Behind the Builds</span>
+    <h1>Meet the Team</h1>
+    <p>Forty-five people build with Reozix. These six run it — and at least one of them will be on your project every week.</p>
+  </div>
+</section>
+
+<section class="ct-section">
+  <div class="ct-container">
+    <div class="ct-team-grid" id="team-grid">
+      <!-- Rendered from js/data.js; no-JS fallback below -->
+      <noscript>
+        <div class="ct-team-card"><div class="ct-avatar">DR</div><h3>David Reozix</h3><p class="ct-role">Managing Director</p><p>Second-generation builder. Runs estimating and client relationships personally.</p></div>
+        <div class="ct-team-card"><div class="ct-avatar">ST</div><h3>Sam Tuqiri</h3><p class="ct-role">Construction Manager</p><p>Runs the build program across all active sites.</p></div>
+        <div class="ct-team-card"><div class="ct-avatar">PN</div><h3>Priya Nair</h3><p class="ct-role">Senior Site Supervisor</p><p>Your point of contact once work starts on site.</p></div>
+      </noscript>
+    </div>
+  </div>
+</section>
+
+<section class="ct-section" style="padding-top:0;">
+  <div class="ct-container">
+    <div class="ct-mid-cta">
+      <div>
+        <h2>Work with the team directly</h2>
+        <p>Your first call is with David, and your estimate comes from Mick — no sales layer.</p>
+      </div>
+      <a href="quote.html" class="ct-btn">Get a Quote</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ct-footer">
+  <div class="ct-container">
+    <div class="ct-footer-agency">
+      <strong>Reozix <span>Construction</span></strong>
+      <p>Brisbane, QLD</p>
+      <a href="tel:+61731862400">+61 7 3186 2400</a>
+      <a href="mailto:build@reozix.com.au">build@reozix.com.au</a>
+    </div>
+    <div class="ct-footer-links">
+      <p class="fh">Quick links</p>
+      <a href="index.html">Home</a>
+      <a href="portfolio.html">Portfolio</a>
+      <a href="services.html">Services</a>
+      <a href="credentials.html">Credentials</a>
+      <a href="team.html">Team</a>
+      <a href="quote.html">Get a Quote</a>
+    </div>
+  </div>
+  <div class="ct-container">
+    <p class="ct-footer-bottom">© 2026 Reozix Construction. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="../shared/js/utils.js"></script>
+<script src="js/data.js"></script>
+<script src="js/icons.js"></script>
+<div class="ct-sticky-bar" aria-label="Quick contact">
+  <a href="tel:+61731862400" class="ct-btn ct-btn-ghost">Call</a>
+  <a href="quote.html" class="ct-btn">Get a Quote</a>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  if (typeof CONSTRUCTION_DATA === 'undefined' || !CONSTRUCTION_DATA.team) return;
+  var grid = document.getElementById('team-grid');
+  grid.innerHTML = CONSTRUCTION_DATA.team.map(function (m) {
+    return '<div class="ct-team-card">' +
+      '<div class="ct-avatar" aria-hidden="true">' + m.initials + '</div>' +
+      '<h3>' + m.name + '</h3>' +
+      '<p class="ct-role">' + m.role + '</p>' +
+      '<p class="ct-tenure">' + m.tenure + '</p>' +
+      '<p>' + m.bio + '</p>' +
+      '</div>';
+  }).join('');
+});
+</script>
+</body>
+</html>

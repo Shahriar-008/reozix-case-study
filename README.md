@@ -66,14 +66,20 @@ Current scores measured on the live demos (Lighthouse 13.4.1, mid-range mobile, 
 
 | Metric | Hotel | Real Estate | Construction |
 |--------|-------|-------------|--------------|
-| Performance | 98 | 100 | 93 |
-| Accessibility | 87 | 91 | 93 |
-| Best Practices | 96 | 96 | 96 |
+| Performance | 99 | 100 | 93 |
+| Accessibility | 100 | 91 | 93 |
+| Best Practices | 100 | 96 | 96 |
 | SEO | 100 | 100 | 100 |
 | Time to Interactive | 2.4s | 1.4s | 3.1s |
 
+Hotel scores were re-measured in August 2026 after the booking-platform rebuild
+(Lighthouse 13.4.1, mobile emulation, simulated 4G). Its TTI cell predates that
+rebuild — current hotel field data: FCP 1.4s, LCP 1.7s, TBT 82ms (see
+`demos/assets/screenshots/hotel/lighthouse.report.json`).
+
 ## Verifying
 
+- **Smoke tests:** `node tools/smoke-hotel.mjs`, `node tools/smoke-hotel-upgrade.mjs`, `node tools/ct-verify.mjs`, `node tools/re-verify.mjs` — all four must pass (server on :8080 required).
 - **Scores are real:** re-run Lighthouse against a served demo and compare against its `lighthouse.report.json` (they should match the table above).
 - **Case studies are documented:** each page links to the live demo and the related screenshots, reports, and supporting notes.
 - **The repo is self-consistent:** every case-study screenshot path resolves under `demos/assets/screenshots/<vertical>/`, and each case-study "View live demo" link resolves to its `demos/<vertical>/index.html`.

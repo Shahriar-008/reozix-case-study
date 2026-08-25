@@ -6,6 +6,11 @@
 <title>Project Details — Reozix Construction, Brisbane</title>
 <meta name="description" content="Project case study for a Reozix Construction build in Brisbane — photo gallery, budget, duration, floor area, scope and client testimonial for every commercial and residential project.">
 <link rel="stylesheet" href="../shared/css/reset.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%23c05a12%27/%3E%3Ctext x=%278%27 y=%2712%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2711%27 fill=%27%23fff%27%3EC%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
 <link rel="stylesheet" href="css/construction.css">
 </head>
 <body>
@@ -13,17 +18,22 @@
 <nav class="ct-nav">
   <div class="ct-container">
     <a href="index.html" class="logo">Reozix <span>Construction</span></a>
-    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="portfolio.html" aria-current="page">Portfolio</a>
       <a href="services.html">Services</a>
       <a href="credentials.html">Credentials</a>
+      <a href="team.html">Team</a>
       <a href="tel:+61731862400">+61 7 3186 2400</a>
       <a href="quote.html" class="ct-btn">Get a Quote</a>
     </div>
   </div>
 </nav>
+
+<main>
 
 <!-- Page header -->
 <section class="ct-page-header">
@@ -40,11 +50,24 @@
     <a href="portfolio.html" class="ct-project-link ct-back-link">← Back to Portfolio</a>
 
     <!-- Photo gallery -->
-    <div class="ct-gallery-main">
-      <span class="photo-placeholder" id="gallery-placeholder" aria-hidden="true">🏗️</span>
+    <button type="button" class="ct-gallery-main" id="gallery-main-btn" aria-label="Open photo viewer">
+      <span class="photo-placeholder" id="gallery-placeholder" aria-hidden="true"></span>
       <img id="gallery-main-img" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=800&q=80" alt="">
-    </div>
+    </button>
     <div class="ct-gallery-thumbs" id="gallery-thumbs"></div>
+
+    
+    <!-- Before / after comparison (renovation + extension projects) -->
+    <div class="ct-ba" id="ba-slider" style="display:none;">
+      <img id="ba-after" src="" alt="After the build">
+      <div class="ct-ba-before" id="ba-before-wrap">
+        <img id="ba-before" src="" alt="Before the build">
+      </div>
+      <div class="ct-ba-handle" aria-hidden="true"></div>
+      <span class="ct-ba-label before" aria-hidden="true">Before</span>
+      <span class="ct-ba-label after" aria-hidden="true">After</span>
+    </div>
+    <input type="range" class="ct-ba-range" id="ba-range" min="0" max="100" value="50" aria-label="Compare before and after" style="display:none;">
 
     <div class="ct-project-detail-grid">
       <!-- Main column -->
@@ -71,7 +94,7 @@
         <div class="stat-row"><span class="stat-label">Floor area</span><span class="stat-value" id="stat-sqm"></span></div>
         <div class="stat-row"><span class="stat-label">Location</span><span class="stat-value" id="stat-location"></span></div>
         <div class="stat-row"><span class="stat-label">Year Completed</span><span class="stat-value" id="stat-year"></span></div>
-        <a href="quote.html" class="ct-btn">Enquire About This Build</a>
+        <a href="quote.html?project=" id="enquire-link" class="ct-btn">Enquire About This Build</a>
       </aside>
     </div>
   </div>
@@ -96,6 +119,8 @@
   </div>
 </section>
 
+</main>
+
 <footer class="ct-footer">
   <div class="ct-container">
     <div class="ct-footer-agency">
@@ -105,7 +130,7 @@
       <a href="mailto:build@reozix.com.au">build@reozix.com.au</a>
     </div>
     <div class="ct-footer-links">
-      <h4>Quick links</h4>
+      <p class="fh">Quick links</p>
       <a href="index.html">Home</a>
       <a href="portfolio.html">Portfolio</a>
       <a href="services.html">Services</a>
@@ -118,7 +143,12 @@
   </div>
 </footer>
 
+<div class="ct-sticky-bar" aria-label="Quick contact">
+  <a href="tel:+61731862400" class="ct-btn ct-btn-ghost">Call</a>
+  <a href="quote.html" class="ct-btn">Get a Quote</a>
+</div>
 <script src="../shared/js/utils.js"></script>
+<script src="js/icons.js"></script>
 <script src="js/data.js"></script>
 <script>
 // Construction project detail page — renders one project from CONSTRUCTION_DATA based on ?id=
@@ -168,11 +198,11 @@
   function statusLabel(status) {
     return status === 'in-progress' ? 'In progress' : 'Completed';
   }
-  function typeEmoji(type) {
-    if (type === 'Commercial Fit-Out') return '🏢';
-    if (type === 'Residential Extension') return '🏠';
-    if (type === 'Renovation') return '🔨';
-    return '🏗️';
+  function typeIcon(type) {
+    if (type === 'Commercial Fit-Out') return 'building';
+    if (type === 'Residential Extension') return 'home';
+    if (type === 'Renovation') return 'hammer';
+    return 'crane';
   }
 
   // Unsplash photo pools keyed by project type
@@ -212,6 +242,28 @@
   };
   var pool = photoPools[project.type] || photoPools['New Build'];
 
+  // Before/after comparison for renovation-type projects
+  (function () {
+    var baTypes = ['Renovation', 'Residential Extension'];
+    if (baTypes.indexOf(project.type) === -1) return;
+    var slider = document.getElementById('ba-slider');
+    var range = document.getElementById('ba-range');
+    var beforeImg = document.getElementById('ba-before');
+    var afterImg = document.getElementById('ba-after');
+    // distinct pool frames: before = an earlier frame, after = the hero frame
+    beforeImg.src = 'https://images.unsplash.com/' + pool[(projectIndex + 3) % pool.length] + '?auto=format&fit=crop&w=1200&q=75&sat=-60';
+    afterImg.src = 'https://images.unsplash.com/' + pool[projectIndex % pool.length] + '?auto=format&fit=crop&w=1200&q=80';
+    slider.style.display = '';
+    range.style.display = '';
+    function setSplit(v) {
+      document.getElementById('ba-before-wrap').style.width = v + '%';
+      beforeImg.style.width = (100 / v * 100) + '%';
+      slider.querySelector('.ct-ba-handle').style.left = v + '%';
+    }
+    range.addEventListener('input', function () { setSplit(this.value); });
+    setSplit(50);
+  })();
+
   // Deterministic photo selection: (project index × photo count) + photo index
   function photoIdFor(index) {
     return pool[(projectIndex + index) % pool.length];
@@ -225,16 +277,26 @@
   document.getElementById('page-kicker').textContent = 'Case Study';
   document.getElementById('page-title').textContent = project.title;
   document.getElementById('page-sub').textContent = project.type + ' · ' + project.suburb;
-  document.getElementById('gallery-placeholder').textContent = typeEmoji(project.type);
+  document.getElementById('gallery-placeholder').textContent = '';
 
-  // Photo gallery (main image + clickable thumbnails)
+  // Photo gallery (main image + clickable thumbnails + fullscreen lightbox)
   var mainImg = document.getElementById('gallery-main-img');
   var thumbs = document.getElementById('gallery-thumbs');
+  var currentIdx = 0;
 
   mainImg.src = photoSrc(photoIdFor(0), 800, 500);
   mainImg.alt = project.title + ' photo 1 of ' + project.photos;
 
+  var lbImages = [];
   var n;
+  for (n = 0; n < project.photos; n++) {
+    lbImages.push({
+      src: photoSrc(photoIdFor(n), 1600, 1000),
+      alt: project.title + ' photo ' + (n + 1)
+    });
+  }
+  var lightbox = RZ.makeLightbox(lbImages);
+
   for (n = 0; n < project.photos; n++) {
     (function(index) {
       var btn = document.createElement('button');
@@ -247,15 +309,23 @@
       img.loading = 'lazy';
       btn.appendChild(img);
       btn.addEventListener('click', function() {
+        currentIdx = index;
         mainImg.src = photoSrc(photoIdFor(index), 800, 500);
         mainImg.alt = project.title + ' photo ' + (index + 1) + ' of ' + project.photos;
         var active = thumbs.querySelector('.active');
         if (active) active.classList.remove('active');
         btn.classList.add('active');
       });
+      btn.addEventListener('dblclick', function() { lightbox.open(index); });
       thumbs.appendChild(btn);
     })(n);
   }
+
+  // Main image opens the lightbox at the currently shown photo
+  document.querySelector('.ct-gallery-main').classList.add('lb-enabled');
+  document.querySelector('.ct-gallery-main').addEventListener('click', function() {
+    lightbox.open(currentIdx);
+  });
 
   // Scope description
   document.getElementById('detail-desc').textContent = project.description;
@@ -287,6 +357,7 @@
   document.getElementById('stat-sqm').textContent = formatNumber(project.sqm) + ' sqm';
   document.getElementById('stat-location').textContent = project.suburb;
   document.getElementById('stat-year').textContent = completedYear(project.completed);
+  document.getElementById('enquire-link').href = 'quote.html?project=' + project.id;
 })();
 </script>
 </body>

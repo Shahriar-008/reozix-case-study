@@ -15,7 +15,8 @@ var RE_DATA = {
       description: 'Absolute beachfront apartment with panoramic ocean views over Surfers Paradise. Floor-to-ceiling glass frames the surf from the open-plan living and dining areas, with a generous entertainer\'s balcony and designer kitchen.',
       features: ['Ocean views', 'Pool', 'Gym', 'Concierge'],
       agentId: 'agent-001',
-      photos: 5
+      photos: 5,
+      inspection: 'Sat 10:00–10:30am',
     },
     {
       id: 'prop-002',
@@ -27,7 +28,8 @@ var RE_DATA = {
       description: 'Sky-home penthouse with uninterrupted ocean and hinterland views from every room. Four bedrooms, three designer bathrooms and a 50sqm rooftop terrace — the definitive Surfers Paradise address.',
       features: ['Rooftop terrace', 'Ocean views', 'Infinity pool', 'Concierge', 'Three car spaces'],
       agentId: 'agent-001',
-      photos: 7
+      photos: 7,
+      inspection: 'Sat 11:00–11:30am',
     },
     {
       id: 'prop-003',
@@ -39,7 +41,8 @@ var RE_DATA = {
       description: 'North-east facing apartment in the heart of Broadbeach, moments from the beach, Pacific Fair and The Star. Floor-to-ceiling windows, stone benchtops and a superb balcony capture coastal breezes year-round.',
       features: ['Beachfront', 'Pool', 'Air conditioning', 'Secure parking'],
       agentId: 'agent-001',
-      photos: 5
+      photos: 5,
+      inspection: 'Sat 9:30–10:00am',
     },
     {
       id: 'prop-004',
@@ -51,7 +54,8 @@ var RE_DATA = {
       description: 'Low-maintenance townhouse in a boutique complex, a short stroll to Kurrawa Beach and the Broadbeach dining strip. Open-plan living flows to a private courtyard with established gardens.',
       features: ['Courtyard', 'Air conditioning', 'Open-plan living', 'Single garage'],
       agentId: 'agent-010',
-      photos: 4
+      photos: 4,
+      inspection: 'Sat 12:00–12:30pm',
     },
     {
       id: 'prop-005',
@@ -63,7 +67,8 @@ var RE_DATA = {
       description: 'Contemporary family home on a generous 607sqm block, minutes to Burleigh\'s famous national park and patrolled beach. Light-filled living spaces open to a resort-style pool and alfresco entertaining deck.',
       features: ['Swimming pool', 'Outdoor entertaining', 'Double garage', 'Walk to beach'],
       agentId: 'agent-002',
-      photos: 6
+      photos: 6,
+      inspection: 'Sun 10:00–10:30am',
     },
     {
       id: 'prop-006',
@@ -75,7 +80,8 @@ var RE_DATA = {
       description: 'Sleek two-bedroom apartment two blocks from the sand, in the vibrant Burleigh Heads café precinct. Modern kitchen with stone island bench, secure parking and leafy district views.',
       features: ['Café precinct', 'Stone benchtops', 'Secure parking', 'Air conditioning'],
       agentId: 'agent-002',
-      photos: 4
+      photos: 4,
+      inspection: 'Sat 10:30–11:00am',
     },
     {
       id: 'prop-007',
@@ -87,7 +93,8 @@ var RE_DATA = {
       description: 'Rare deep-water frontage on the highly sought-after Tedder Avenue. Five bedrooms across two levels, private pontoon access and a north-facing pool, all moments from the cafés of Main Beach.',
       features: ['Deep-water frontage', 'Pontoon', 'Swimming pool', 'Multiple living zones'],
       agentId: 'agent-001',
-      photos: 8
+      photos: 8,
+      inspection: 'Sun 11:00–11:30am',
     },
     {
       id: 'prop-008',
@@ -99,7 +106,8 @@ var RE_DATA = {
       description: 'Elegant apartment directly opposite the beach with sweeping views from Burleigh to the Surfers skyline. Three generous bedrooms, resort pool and gym, and a walk-to-everything Main Beach address.',
       features: ['Beachfront', 'Resort pool', 'Gym', 'Ocean views'],
       agentId: 'agent-008',
-      photos: 6
+      photos: 6,
+      inspection: 'Sat 9:00–9:30am',
     },
     {
       id: 'prop-009',
@@ -111,7 +119,8 @@ var RE_DATA = {
       description: 'Stunning beachside residence on Mermaid Beach\'s golden mile. Walls of glass frame the ocean, with a stunning kitchen, guest wing and rooftop viewing deck capturing sunrise over the water.',
       features: ['Beachfront', 'Rooftop deck', 'Guest wing', 'Smart home'],
       agentId: 'agent-003',
-      photos: 8
+      photos: 8,
+      inspection: 'Sat 11:30am–12pm',
     },
     {
       id: 'prop-010',
@@ -123,7 +132,8 @@ var RE_DATA = {
       description: 'Tropical-style villa a gentle stroll to Mermaid Beach\'s patrolled surf. Timber and stone finishes, an internal courtyard pool and lush established gardens create a private resort feel.',
       features: ['Courtyard pool', 'Timber finishes', 'Established gardens', 'Double garage'],
       agentId: 'agent-003',
-      photos: 5
+      photos: 5,
+      inspection: 'Sat 12:30–1:00pm',
     },
     {
       id: 'prop-011',

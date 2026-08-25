@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Room Details — Reozix Hotel</title>
 <meta name="description" content="Room details at Reozix Hotel on the Mornington Peninsula. Book direct for best rates, late checkout, and a welcome drink.">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%23a8863d%27/%3E%3Ctext x=%278%27 y=%2712%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2711%27 fill=%27%23fffdf9%27%3ER%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap"></noscript>
 <link rel="stylesheet" href="../shared/css/reset.css">
 <link rel="stylesheet" href="css/hotel.css">
 </head>
@@ -13,24 +19,27 @@
 <nav class="hotel-nav">
   <div class="container">
     <a href="index.html" class="logo">Reozix Hotel</a>
-    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
     <div class="nav-links">
       <a href="rooms.html">Rooms</a>
+      <a href="index.html#experiences">Experiences</a>
       <a href="index.html#about">About</a>
-      <a href="index.html#location">Location</a>
-      <a href="tel:+61359841200">+61 3 5984 1200</a>
-      <a href="booking.html" class="book-btn">Book Now</a>
+      <select class="currency-select" id="currency-select" aria-label="Display currency"><option value="AUD">AUD $</option><option value="NZD">NZD $</option><option value="USD">USD $</option><option value="GBP">GBP £</option></select><a href="tel:+61359841200">+61 3 5984 1200</a>
+      <a href="booking.html" class="book-btn">Book your stay</a>
     </div>
   </div>
 </nav>
 
-<!-- Direct booking perk banner -->
-<div class="perk-banner offset-top">
+<main>
+<!-- Direct booking perks -->
+<div class="perk-strip offset-top">
   <div class="container">
     <div class="perks">
-      <span class="perk-item">🏷️ Best rate guaranteed</span>
-      <span class="perk-item">🕐 Late checkout until 1pm</span>
-      <span class="perk-item">🍷 Welcome drink on arrival</span>
+      <span class="perk-item">Best rate guaranteed</span>
+      <span class="perk-item">Late checkout until 1pm, on us</span>
+      <span class="perk-item">Welcome drink from our cellar</span>
     </div>
   </div>
 </div>
@@ -41,42 +50,60 @@
     <div class="room-detail-grid" id="room-detail-grid">
       <div class="gallery">
         <div class="gallery-main">
-          <img id="gallery-main-img" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80" alt="Reozix Hotel room">
+          <img id="gallery-main-img" src="" alt="">
         </div>
         <div class="gallery-thumbs" id="gallery-thumbs"></div>
       </div>
       <div class="detail-content">
         <h1 id="room-name"></h1>
+        <p class="sleeps" id="room-sleeps" style="color:var(--text-secondary);margin-bottom:10px;"></p>
         <p class="desc" id="room-desc"></p>
         <ul class="amenities-list" id="room-amenities"></ul>
-        <p class="rate" id="room-rate">$0 <span>AUD / night</span></p>
-        <a class="btn" id="book-btn" href="booking.html">Book this room</a>
+
+        <!-- Rate plans — choose how to book this room before entering the flow -->
+        <fieldset class="plan-fieldset">
+          <legend style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.5rem;font-weight:600;padding:0;margin-bottom:6px;">Choose your rate</legend>
+          <p id="plan-stay-note" style="font-size:.8125rem;color:var(--text-secondary);margin-bottom:14px;"></p>
+          <div class="plan-list" id="plan-list" role="radiogroup" aria-label="Rate plans"></div>
+        </fieldset>
+
+        <button type="button" class="btn" id="book-btn">
+          Continue to booking
+          <span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></span>
+        </button>
+        <p class="trust-line">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Free cancellation on flexible rates</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> Pay on arrival available</span>
+        </p>
       </div>
     </div>
 
     <!-- Inline availability checker -->
-    <div class="date-picker-bar offset-top" id="date-picker">
-      <h3>Check availability</h3>
-      <div class="picker-row">
+    <div class="booking-widget offset-top center-margin" id="date-picker" style="margin-top:56px;">
+      <h2 class="sr-only">Check availability</h2>
+      <div class="widget-row">
         <div class="field">
           <label for="checkin">Check-in</label>
-          <input type="date" id="checkin" value="2026-09-01">
+          <input type="date" id="checkin" aria-required="true">
         </div>
         <div class="field">
           <label for="checkout">Check-out</label>
-          <input type="date" id="checkout" value="2026-09-03">
+          <input type="date" id="checkout" aria-required="true">
         </div>
         <div class="field">
           <label for="guests">Guests</label>
           <select id="guests">
-            <option>1 guest</option>
-            <option selected>2 guests</option>
-            <option>3 guests</option>
-            <option>4 guests</option>
+            <option value="1">1 guest</option>
+            <option value="2" selected>2 guests</option>
+            <option value="3">3 guests</option>
+            <option value="4">4 guests</option>
           </select>
         </div>
-        <button class="check-btn" id="check-btn" type="button">Check</button>
+        <div class="btn-cell">
+          <button class="check-btn" id="check-btn" type="button">Update rates</button>
+        </div>
       </div>
+      <p class="picker-error" id="dates-error" role="alert"></p>
     </div>
 
     <div class="not-found" id="not-found" style="display:none;">
@@ -87,15 +114,17 @@
   </div>
 </section>
 
+</main>
+
 <footer class="hotel-footer">
   <div class="container">
     <div>
-      <strong>Reozix Hotel</strong><br>
+      <strong>Reozix Hotel</strong><br><br>
       Mornington Peninsula, Victoria<br>
       <a href="tel:+61359841200">+61 3 5984 1200</a>
     </div>
     <div>
-      <a href="rooms.html">Rooms</a> · <a href="index.html#about">About</a> · <a href="index.html#location">Location</a> · <a href="tel:+61359841200">Contact</a>
+      <a href="rooms.html">Rooms</a> · <a href="index.html#about">About</a> · <a href="index.html#faq">FAQ</a> · <a href="tel:+61359841200">Contact</a>
     </div>
   </div>
 </footer>
@@ -103,16 +132,9 @@
 <script src="../shared/js/utils.js"></script>
 <script src="js/data.js"></script>
 <script>
-// Check button → booking page (S4: no inline onclick)
+// Room detail — renders the room from ?id=, shows the three rate plans priced
+// for the URL stay, and carries room + plan + stay into the booking flow.
 document.addEventListener('DOMContentLoaded', function() {
-  document.getElementById('check-btn').addEventListener('click', function() {
-    window.location.href = 'booking.html';
-  });
-});
-</script>
-<script>
-// Room detail page — renders one room from HOTEL_DATA based on ?id=
-(function() {
   var params = new URLSearchParams(window.location.search);
   var roomId = params.get('id');
 
@@ -126,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function() {
   var datePicker = document.getElementById('date-picker');
   var notFound = document.getElementById('not-found');
 
-  // No match (or no ?id=) → show "Room not found"
   if (!room) {
     document.title = 'Room not found — Reozix Hotel';
     grid.style.display = 'none';
@@ -135,89 +156,134 @@ document.addEventListener('DOMContentLoaded', function() {
     return;
   }
 
-  // Per-room Unsplash gallery (first image matches the room card on rooms.html)
+  /* Per-room Unsplash gallery */
   var galleryImages = {
-    'vineyard-suite': [
-      'photo-1590490360182-c33d57733427',
-      'photo-1566073771259-6a8506099945',
-      'photo-1611892440504-42a792e24d32',
-      'photo-1631049307264-da0ec9d70304',
-      'photo-1520250497591-112f2f40a3f4'
-    ],
-    'ocean-king': [
-      'photo-1595576508898-0ad5c879a061',
-      'photo-1631049307264-da0ec9d70304',
-      'photo-1578683010236-d716f9a3f461',
-      'photo-1611892440504-42a792e24d32',
-      'photo-1520250497591-112f2f40a3f4'
-    ],
-    'garden-queen': [
-      'photo-1582719478250-c89cae4dc85b',
-      'photo-1631049307264-da0ec9d70304',
-      'photo-1571896349842-33c89424de2d',
-      'photo-1591088398332-8a7791972843'
-    ],
-    'family-suite': [
-      'photo-1566665797739-1674de7a421a',
-      'photo-1591088398332-8a7791972843',
-      'photo-1578683010236-d716f9a3f461',
-      'photo-1611892440504-42a792e24d32',
-      'photo-1520250497591-112f2f40a3f4'
-    ]
+    'vineyard-suite': ['photo-1590490360182-c33d57733427','photo-1566073771259-6a8506099945','photo-1611892440504-42a792e24d32','photo-1631049307264-da0ec9d70304','photo-1520250497591-112f2f40a3f4'],
+    'ocean-king': ['photo-1595576508898-0ad5c879a061','photo-1631049307264-da0ec9d70304','photo-1578683010236-d716f9a3f461','photo-1611892440504-42a792e24d32','photo-1520250497591-112f2f40a3f4'],
+    'garden-queen': ['photo-1582719478250-c89cae4dc85b','photo-1631049307264-da0ec9d70304','photo-1571896349842-33c89424de2d','photo-1591088398332-8a7791972843'],
+    'family-suite': ['photo-1566665797739-1674de7a421a','photo-1591088398332-8a7791972843','photo-1578683010236-d716f9a3f461','photo-1611892440504-42a792e24d32','photo-1520250497591-112f2f40a3f4']
   };
 
-  // Amenity icons (same emoji set as rooms.html)
-  var icons = {
-    'King bed': '🛏️',
-    'Vineyard views': '🌅',
-    'Ocean views': '🌊',
-    'Freestanding bath': '🛁',
-    'Private balcony': '🌤️',
-    'Rain shower': '🚿',
-    'Walk-in shower': '🚿',
-    'Sitting area': '🛋️',
-    'Minibar': '🍾',
-    'Nespresso machine': '☕',
-    'Bathrobes': '🧖',
-    'Queen bed': '🛏️',
-    'Garden terrace': '🌿',
-    'Shower': '🚿',
-    'Tea & coffee': '🍵',
-    'Two single beds': '🛏️',
-    'Garden access': '🌿',
-    'Bath & shower': '🛁',
-    'Board games': '🎲'
-  };
-
-  var images = galleryImages[room.id] || galleryImages['vineyard-suite'];
-
-  // Page title + name + description
   document.title = room.name + ' — Reozix Hotel';
   document.getElementById('room-name').textContent = room.name;
   document.getElementById('room-desc').textContent = room.description;
 
-  // Rate
-  document.getElementById('room-rate').innerHTML = '$' + room.rate + ' <span>AUD / night</span>';
+  /* Availability bar */
+  var ci = document.getElementById('checkin');
+  var co = document.getElementById('checkout');
+  var guestsSel = document.getElementById('guests');
+  var error = document.getElementById('dates-error');
+  var planStayNote = document.getElementById('plan-stay-note');
+  var selectedPlan = params.get('plan') || 'flexible';
 
-  // "Book this room" CTA
-  var bookBtn = document.getElementById('book-btn');
-  bookBtn.href = 'booking.html?room=' + encodeURIComponent(room.id);
+  function defaultDates() {
+    var d = new Date(); d.setDate(d.getDate() + 7);
+    var o = new Date(d); o.setDate(o.getDate() + 2);
+    return { checkin: RZ.iso(d), checkout: RZ.iso(o) };
+  }
+  var stayUrl = RZ.stayFromUrl();
+  var fb = defaultDates();
+  ci.value = stayUrl.checkin || fb.checkin;
+  co.value = stayUrl.checkout || fb.checkout;
+  if (stayUrl.guests) guestsSel.value = String(stayUrl.guests);
+  if (!HOTEL_DATA.ratePlans.some(function(p){ return p.id === selectedPlan; })) selectedPlan = 'flexible';
 
-  // Full amenity list
+  function nightsNow() { return RZ.nights(ci.value, co.value) || RZ.nights(fb.checkin, fb.checkout); }
+  function guestsNow() { return parseInt(guestsSel.value, 10) || 2; }
+
+  /* Rate plan pricing */
+  function planPricing(plan, nights) {
+    var perNight = room.rate - Math.round(room.rate * (plan.discount || 0)) + (plan.perNight || 0);
+    return { perNight: perNight, total: perNight * nights };
+  }
+
+  function renderPlans() {
+    var n = nightsNow();
+    var g = guestsNow();
+    planStayNote.textContent = RZ.fmtDate(ci.value) + ' → ' + RZ.fmtDate(co.value) + ' · ' + n + (n === 1 ? ' night' : ' nights') +
+      (g > room.maxGuests ? ' — this room sleeps up to ' + room.maxGuests + ', too small for your party of ' + g : '');
+    var list = document.getElementById('plan-list');
+    list.innerHTML = '';
+    HOTEL_DATA.ratePlans.forEach(function(plan) {
+      var p = planPricing(plan, n);
+      var label = document.createElement('label');
+      label.className = 'plan-option';
+      label.innerHTML =
+        '<input type="radio" name="rate-plan" value="' + plan.id + '"' + (plan.id === selectedPlan ? ' checked' : '') + '>' +
+        '<span class="plan-box">' +
+          '<span class="plan-meta">' +
+            '<span class="plan-name">' + plan.name + (plan.tag ? ' <span class="plan-tag">' + plan.tag + '</span>' : '') + '</span>' +
+            '<span class="plan-summary">' + plan.summary + '</span>' +
+            '<span class="plan-summary" style="color:var(--accent-strong);font-weight:500;">' + plan.payment + '</span>' +
+          '</span>' +
+          '<span class="plan-price">' +
+            (plan.discount ? '<span class="plan-old">' + hotelMoney(room.rate) + '</span> ' : '') +
+            '<span class="pp-night">' + hotelMoney(p.perNight) + '</span>' +
+            '<span class="pp-stay">' + hotelMoney(p.total) + ' total incl. GST</span>' +
+          '</span>' +
+        '</span>';
+      label.querySelector('input').addEventListener('change', function() { selectedPlan = plan.id; });
+      list.appendChild(label);
+    });
+  }
+  renderPlans();
+
+  ci.min = RZ.iso(new Date());
+  function syncCheckoutMin() {
+    if (!ci.value) return;
+    var d = new Date(ci.value + 'T12:00'); d.setDate(d.getDate() + 1);
+    co.min = RZ.iso(d);
+  }
+  syncCheckoutMin();
+  [ci, co, guestsSel].forEach(function(el) { el.addEventListener('change', renderPlans); });
+
+  function bookingUrl() {
+    return 'booking.html?' + new URLSearchParams({
+      room: room.id,
+      plan: selectedPlan,
+      checkin: ci.value,
+      checkout: co.value,
+      guests: guestsSel.value
+    }).toString();
+  }
+
+  document.getElementById('book-btn').addEventListener('click', function(e) {
+    e.preventDefault();
+    window.location.href = bookingUrl();
+  });
+  document.getElementById('check-btn').addEventListener('click', function() {
+    error.classList.remove('show');
+    if (!ci.value || !co.value) { error.textContent = 'Select both a check-in and a check-out date.'; error.classList.add('show'); return; }
+    if (!RZ.nights(ci.value, co.value)) { error.textContent = 'Check-out must be at least one night after check-in.'; error.classList.add('show'); return; }
+    syncCheckoutMin();
+    renderPlans();
+  });
+
+  /* Amenity list */
   var list = document.getElementById('room-amenities');
+  var checkSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:14px;height:14px;color:var(--accent-strong);" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
   room.amenities.forEach(function(amenity) {
     var li = document.createElement('li');
-    li.innerHTML = '<span aria-hidden="true">' + (icons[amenity] || '✓') + '</span> ' + amenity;
+    li.innerHTML = checkSvg + ' ' + amenity;
     list.appendChild(li);
   });
 
-  // Photo gallery (main image + clickable thumbnails)
+  /* Photo gallery + lightbox */
+  var images = galleryImages[room.id] || galleryImages['vineyard-suite'];
+  var src = function(id, w) { return 'https://images.unsplash.com/' + id + '?w=' + w + '&q=80'; };
   var mainImg = document.getElementById('gallery-main-img');
   var thumbs = document.getElementById('gallery-thumbs');
-  var src = function(id, w) { return 'https://images.unsplash.com/' + id + '?w=' + w + '&q=80'; };
+  var currentIdx = 0;
 
   mainImg.src = src(images[0], 1200);
   mainImg.alt = room.name;
+
+  var lightbox = RZ.makeLightbox(images.map(function(imgId, i) {
+    return { src: src(imgId, 1600), alt: room.name + ' photo ' + (i + 1) };
+  }));
+
+  document.querySelector('.gallery-main').classList.add('lb-enabled');
+  mainImg.parentElement.addEventListener('click', function() { lightbox.open(currentIdx); });
 
   images.forEach(function(imgId, i) {
     var btn = document.createElement('button');
@@ -230,15 +296,18 @@ document.addEventListener('DOMContentLoaded', function() {
     img.loading = 'lazy';
     btn.appendChild(img);
     btn.addEventListener('click', function() {
+      currentIdx = i;
       mainImg.src = src(imgId, 1200);
       mainImg.alt = room.name + ' photo ' + (i + 1);
       var active = thumbs.querySelector('.active');
       if (active) active.classList.remove('active');
       btn.classList.add('active');
     });
+    btn.addEventListener('dblclick', function() { lightbox.open(i); });
     thumbs.appendChild(btn);
   });
-})();
+});
 </script>
+<script>(function(){var s=document.getElementById("currency-select");if(!s)return;try{s.value=localStorage.getItem("hotel-currency")||"AUD";}catch(e){}s.addEventListener("change",function(){try{localStorage.setItem("hotel-currency",s.value);}catch(e){}location.reload();});})();</script>
 </body>
 </html>

@@ -38,3 +38,33 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   .nav-links { display: none; }
   .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: inherit; padding: 16px 24px; border-top: 1px solid #e5e5e5; }
 }
+
+/* Image lightbox — created by RZ.makeLightbox (shared/js/utils.js) */
+.lightbox {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(26, 26, 26, 0.92);
+  display: none; align-items: center; justify-content: center;
+}
+.lightbox.open { display: flex; }
+.lightbox img {
+  max-width: min(1100px, 92vw); max-height: 84vh;
+  border-radius: 8px; object-fit: contain;
+}
+.lightbox button {
+  position: absolute; background: rgba(255,255,255,0.12); color: #fff;
+  border: none; cursor: pointer; border-radius: 50%;
+  width: 44px; height: 44px; font-size: 1.25rem; line-height: 1;
+  transition: background 0.15s;
+}
+.lightbox button:hover { background: rgba(255,255,255,0.25); }
+.lightbox .lb-close { top: 20px; right: 20px; }
+.lightbox .lb-prev { left: 16px; top: 50%; transform: translateY(-50%); }
+.lightbox .lb-next { right: 16px; top: 50%; transform: translateY(-50%); }
+.lightbox .lb-count {
+  position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%);
+  color: rgba(255,255,255,0.75); font-size: 0.875rem;
+}
+@media (max-width: 768px) {
+  .lightbox .lb-prev { left: 8px; }
+  .lightbox .lb-next { right: 8px; }
+}

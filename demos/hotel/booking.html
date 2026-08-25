@@ -5,43 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Book Your Stay — Reozix Hotel</title>
 <meta name="description" content="Book direct at Reozix Hotel on the Mornington Peninsula. Best rate guaranteed, late checkout until 1pm, and a welcome drink on arrival.">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%23a8863d%27/%3E%3Ctext x=%278%27 y=%2712%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2711%27 fill=%27%23fffdf9%27%3ER%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap"></noscript>
 <link rel="stylesheet" href="../shared/css/reset.css">
 <link rel="stylesheet" href="css/hotel.css">
-<style>
-  /* Booking page additions (step indicator + confirmation styled in hotel.css) */
-  .page-sub { color: var(--hotel-text-secondary); margin-bottom: 40px; font-size: 1.0625rem; }
-  .room-select-card.selected { outline: 2px solid var(--hotel-accent); }
-  .room-select-card .btn.selected { background: var(--hotel-accent-dark); }
-  .back-link { display: inline-block; margin-top: 20px; font-size: 0.875rem; color: var(--hotel-text-secondary); }
-  .back-link:hover { color: var(--hotel-text); }
-  .confirmation .sent-to { color: var(--hotel-text-secondary); margin-bottom: 32px; }
-  .confirmation .btn-back { display: inline-block; padding: 10px 24px; background: var(--hotel-accent); color: #fff; border-radius: 6px; font-size: 0.875rem; font-weight: 600; transition: background 0.15s; }
-  .confirmation .btn-back:hover { background: var(--hotel-accent-dark); }
-</style>
 </head>
 <body>
 
 <nav class="hotel-nav">
   <div class="container">
     <a href="index.html" class="logo">Reozix Hotel</a>
-    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
     <div class="nav-links">
       <a href="rooms.html">Rooms</a>
+      <a href="index.html#experiences">Experiences</a>
       <a href="index.html#about">About</a>
-      <a href="index.html#location">Location</a>
-      <a href="tel:+61359841200">+61 3 5984 1200</a>
-      <a href="booking.html" class="book-btn">Book Now</a>
+      <select class="currency-select" id="currency-select" aria-label="Display currency"><option value="AUD">AUD $</option><option value="NZD">NZD $</option><option value="USD">USD $</option><option value="GBP">GBP £</option></select><a href="tel:+61359841200">+61 3 5984 1200</a>
+      <a href="rooms.html" class="book-btn">Book your stay</a>
     </div>
   </div>
 </nav>
 
-<!-- Direct booking perk banner -->
-<div class="perk-banner offset-top">
+<main>
+<!-- Direct booking perks -->
+<div class="perk-strip offset-top">
   <div class="container">
     <div class="perks">
-      <span class="perk-item">🏷️ Best rate guaranteed</span>
-      <span class="perk-item">🕐 Late checkout until 1pm</span>
-      <span class="perk-item">🍷 Welcome drink on arrival</span>
+      <span class="perk-item">Best rate guaranteed</span>
+      <span class="perk-item">No booking fees</span>
+      <span class="perk-item">Welcome drink from our cellar</span>
     </div>
   </div>
 </div>
@@ -50,97 +48,160 @@
 <section class="booking-section">
   <div class="container">
     <h1 class="page-heading">Book your stay</h1>
-    <p class="page-sub">Three quick steps. No account needed.</p>
+    <p class="page-sub">Four quick steps. No account needed.</p>
 
     <!-- Step indicator -->
-    <div class="booking-steps">
-      <div class="step active">1 Dates</div>
-      <div class="step">2 Room</div>
-      <div class="step">3 Confirm</div>
+    <div class="booking-steps" aria-hidden="true">
+      <div class="step active"><span class="step-n">1</span> Dates</div>
+      <div class="step"><span class="step-n">2</span> Room &amp; rate</div>
+      <div class="step"><span class="step-n">3</span> Extras &amp; details</div>
+      <div class="step"><span class="step-n">4</span> Confirmed</div>
     </div>
 
     <!-- Step 1: Dates -->
-    <div class="booking-step">
-      <div class="date-picker-bar center-margin">
+    <div class="booking-step step-panel">
+      <form class="booking-widget center-margin" id="dates-form" novalidate>
         <fieldset class="step-fields">
           <legend>Select your dates</legend>
-          <div class="picker-row">
+          <div class="widget-row">
             <div class="field">
               <label for="checkin">Check-in</label>
-              <input type="date" id="checkin" value="2026-09-01" aria-required="true">
+              <input type="date" id="checkin" aria-required="true">
             </div>
             <div class="field">
               <label for="checkout">Check-out</label>
-              <input type="date" id="checkout" value="2026-09-03" aria-required="true">
+              <input type="date" id="checkout" aria-required="true">
             </div>
             <div class="field">
               <label for="guests">Guests</label>
               <select id="guests" aria-required="true">
-                <option>1 guest</option>
-                <option selected>2 guests</option>
-                <option>3 guests</option>
-                <option>4 guests</option>
+                <option value="1">1 guest</option>
+                <option value="2" selected>2 guests</option>
+                <option value="3">3 guests</option>
+                <option value="4">4 guests</option>
               </select>
             </div>
-            <button class="check-btn" id="next-btn" type="button">Next</button>
+            <div class="btn-cell">
+              <button class="check-btn" id="next-btn" type="submit">
+                Choose room
+                <span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              </button>
+            </div>
           </div>
+          <p class="picker-error" id="dates-error" role="alert"></p>
+          <p class="widget-note">Flexible rates require no prepayment <span class="dot-sep">·</span> Free cancellation until 48 hours before arrival</p>
         </fieldset>
-      </div>
+      </form>
     </div>
 
-    <!-- Step 2: Room selection -->
-    <div class="booking-step" style="display: none;">
+    <!-- Step 2: Room + rate selection -->
+    <div class="booking-step step-panel" style="display:none;">
+      <div class="done-summary" data-done-for="2"></div>
       <fieldset class="room-select-step">
-        <legend>Choose your room</legend>
-        <div class="room-grid" id="room-select-grid">
-          <!-- Rooms rendered from HOTEL_DATA by the inline script -->
-        </div>
+        <legend>Choose your room and rate</legend>
+        <div id="room-rate-grid"><!-- rendered by js/booking.js --></div>
       </fieldset>
       <div class="center-text">
-        <a href="#" class="back-link" id="back-to-dates">← Back to dates</a>
+        <button type="button" class="back-link" id="back-to-dates">← Back to dates</button>
       </div>
     </div>
 
-    <!-- Step 3: Guest details -->
-    <div class="booking-step" style="display: none;">
-      <div class="date-picker-bar center-margin">
-        <fieldset class="step-fields">
-          <legend>Your details</legend>
-          <div class="picker-row">
-            <div class="field">
-              <label for="guest-name">Name</label>
-              <input type="text" id="guest-name" placeholder="Full name" aria-required="true">
+    <!-- Step 3: Extras + guest details -->
+    <div class="booking-step step-panel" style="display:none;">
+      <div class="done-summary" data-done-for="3"></div>
+      <div class="step-cols">
+        <form id="details-form" novalidate>
+          <fieldset class="step-fields">
+            <legend>Add extras</legend>
+            <div class="extras-list" id="extras-list"><!-- rendered --></div>
+          </fieldset>
+
+          <fieldset class="step-fields">
+            <legend>Your details</legend>
+            <div class="picker-row" style="display:flex;flex-direction:column;gap:14px;">
+              <div class="field">
+                <label for="guest-name">Name</label>
+                <input type="text" id="guest-name" placeholder="Full name" autocomplete="name" aria-required="true">
+              </div>
+              <div class="field">
+                <label for="guest-email">Email</label>
+                <input type="email" id="guest-email" placeholder="you@example.com" autocomplete="email" aria-required="true">
+              </div>
+              <div class="field">
+                <label for="guest-phone">Phone</label>
+                <input type="tel" id="guest-phone" placeholder="+61 4xx xxx xxx" autocomplete="tel" aria-required="true">
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset class="step-fields" style="margin-top:28px;">
+            <legend>Payment</legend>
+            <div class="pay-options" id="pay-options"><!-- rendered --></div>
+          </fieldset>
+
+          
+          <!-- Card fields — required only for pay-online rates -->
+          <div class="card-fields" id="card-fields">
+            <p class="card-note">Demo checkout — no real charge is made.</p>
+            <div class="field field-full">
+              <label for="card-number">Card number</label>
+              <input type="text" id="card-number" inputmode="numeric" placeholder="4242 4242 4242 4242" autocomplete="cc-number">
             </div>
             <div class="field">
-              <label for="guest-email">Email</label>
-              <input type="email" id="guest-email" placeholder="you@example.com" aria-required="true">
+              <label for="card-exp">Expiry</label>
+              <input type="text" id="card-exp" inputmode="numeric" placeholder="MM/YY" autocomplete="cc-exp">
             </div>
             <div class="field">
-              <label for="guest-phone">Phone</label>
-              <input type="tel" id="guest-phone" placeholder="+61 4xx xxx xxx" aria-required="true">
+              <label for="card-cvc">CVC</label>
+              <input type="text" id="card-cvc" inputmode="numeric" placeholder="123" autocomplete="cc-csc">
             </div>
+          </div>
+<p class="field-error" id="details-error" role="alert"></p>
+          <div class="trust-line">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Secure booking</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg> No hidden fees — the total below is everything</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Free cancellation on flexible rates</span>
           </div>
           <div class="confirm-row">
-            <button class="check-btn" id="confirm-btn" type="button">Confirm Booking</button>
+            <button class="check-btn" id="confirm-btn" type="submit">
+              Confirm booking
+              <span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+            </button>
           </div>
           <div class="center-text">
-            <a href="#" class="back-link" id="back-to-room">← Back to room</a>
+            <button type="button" class="back-link" id="back-to-room">← Back to room &amp; rate</button>
           </div>
-        </fieldset>
+        </form>
+        <aside class="price-summary" aria-live="polite">
+          <h3>Your stay</h3>
+          <div class="row muted"><span>Dates</span><span id="sum-dates">—</span></div>
+          <div class="row muted"><span>Guests</span><span id="sum-guests">—</span></div>
+          <div class="row" style="margin-top:8px;"><span id="sum-room">—</span><span id="sum-room-price">—</span></div>
+          <div class="row muted"><span id="sum-plan">—</span><span id="sum-plan-price">—</span></div>
+          <div id="sum-extras"></div>
+          <div class="row total"><span>Total</span><span id="sum-total">—</span></div>
+          <p class="tax-note">Includes GST. No booking fees.</p>
+          <p class="pay-note" id="sum-pay"></p>
+        </aside>
       </div>
     </div>
 
     <!-- Step 4: Confirmation -->
-    <div class="booking-step" style="display: none;">
+    <div class="booking-step step-panel" style="display:none;">
       <div class="confirmation" role="status" aria-live="polite">
-        <div class="check-icon">✓</div>
+        <div class="check-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
         <h2>Booking confirmed</h2>
         <p class="ref">Reference: <strong id="booking-ref">RZH-······</strong></p>
         <div class="details">
           <div class="row"><span>Room</span><span id="confirm-room">—</span></div>
+          <div class="row"><span>Rate</span><span id="confirm-plan">—</span></div>
           <div class="row"><span>Dates</span><span id="confirm-dates">—</span></div>
           <div class="row"><span>Guests</span><span id="confirm-guests">—</span></div>
+          <div class="row" id="confirm-extras-row" style="display:none;"><span>Extras</span><span id="confirm-extras">—</span></div>
           <div class="row"><span>Total</span><span id="confirm-total">—</span></div>
+          <div class="row"><span>Payment</span><span id="confirm-payment">—</span></div>
         </div>
         <p class="sent-to">Your confirmation has been sent to <strong id="confirm-email">your email</strong></p>
         <a href="index.html" class="btn-back">Back to home</a>
@@ -149,15 +210,26 @@
   </div>
 </section>
 
+<!-- Sticky mobile bar -->
+<div class="book-bar" id="book-bar">
+  <div class="bb-total">
+    <div class="bb-label" id="bar-label">Total · 2 nights</div>
+    <div class="bb-amount" id="bar-amount">$0</div>
+  </div>
+  <button class="btn btn-gold" id="bar-btn" type="button">Continue</button>
+</div>
+
+</main>
+
 <footer class="hotel-footer">
   <div class="container">
     <div>
-      <strong>Reozix Hotel</strong><br>
+      <strong>Reozix Hotel</strong><br><br>
       Mornington Peninsula, Victoria<br>
       <a href="tel:+61359841200">+61 3 5984 1200</a>
     </div>
     <div>
-      <a href="rooms.html">Rooms</a> · <a href="index.html#about">About</a> · <a href="index.html#location">Location</a> · <a href="tel:+61359841200">Contact</a>
+      <a href="rooms.html">Rooms</a> · <a href="index.html#about">About</a> · <a href="index.html#faq">FAQ</a> · <a href="tel:+61359841200">Contact</a>
     </div>
   </div>
 </footer>
@@ -165,107 +237,6 @@
 <script src="../shared/js/utils.js"></script>
 <script src="js/data.js"></script>
 <script src="js/booking.js"></script>
-<script>
-// Booking flow helpers — step navigation itself lives in js/booking.js (per task brief)
-document.addEventListener('DOMContentLoaded', function() {
-  var selectedRoomId = null;
-
-  // Render room selection grid from HOTEL_DATA
-  var grid = document.getElementById('room-select-grid');
-  HOTEL_DATA.rooms.forEach(function(room) {
-    var card = document.createElement('div');
-    card.className = 'room-card room-select-card';
-    card.id = 'room-card-' + room.id;
-
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'btn';
-    btn.textContent = 'Select';
-    btn.addEventListener('click', function() { selectRoom(room.id); });
-
-    var info = document.createElement('div');
-    info.className = 'room-info';
-    var h3 = document.createElement('h3'); h3.textContent = room.name;
-    var desc = document.createElement('p'); desc.className = 'desc'; desc.textContent = room.description;
-    var rate = document.createElement('p'); rate.className = 'rate';
-    rate.textContent = '$' + room.rate + ' ';
-    var unit = document.createElement('span'); unit.textContent = 'AUD / night';
-    rate.appendChild(unit);
-
-    info.appendChild(h3);
-    info.appendChild(desc);
-    info.appendChild(rate);
-    info.appendChild(btn);
-    card.appendChild(info);
-    grid.appendChild(card);
-  });
-
-  function selectRoom(id, silent) {
-    selectedRoomId = id;
-    var cards = grid.querySelectorAll('.room-select-card');
-    for (var i = 0; i < cards.length; i++) {
-      cards[i].classList.remove('selected');
-      var b = cards[i].querySelector('.btn');
-      b.classList.remove('selected');
-      b.textContent = 'Select';
-    }
-    var card = document.getElementById('room-card-' + id);
-    if (card) {
-      card.classList.add('selected');
-      var selBtn = card.querySelector('.btn');
-      selBtn.classList.add('selected');
-      selBtn.textContent = 'Selected';
-    }
-    if (!silent) showStep(3);
-  }
-
-  // Pre-select room from ?room=[id]
-  var params = new URLSearchParams(location.search);
-  var preId = params.get('room');
-  if (preId) {
-    HOTEL_DATA.rooms.forEach(function(room) {
-      if (room.id === preId) selectRoom(room.id, true);
-    });
-  }
-
-  // Confirm — fill summary, then delegate to confirmBooking() in js/booking.js
-  window.submitBooking = function() {
-    var room = null;
-    HOTEL_DATA.rooms.forEach(function(r) { if (r.id === selectedRoomId) room = r; });
-    var checkin = document.getElementById('checkin').value;
-    var checkout = document.getElementById('checkout').value;
-    var guests = document.getElementById('guests').value;
-    var email = document.getElementById('guest-email').value;
-
-    document.getElementById('confirm-room').textContent = room ? room.name : 'Not selected';
-    document.getElementById('confirm-dates').textContent = checkin + ' to ' + checkout;
-    document.getElementById('confirm-guests').textContent = guests;
-    document.getElementById('confirm-email').textContent = email || 'your email';
-
-    var total = '—';
-    if (room && checkin && checkout) {
-      var nights = Math.max(1, Math.round((new Date(checkout) - new Date(checkin)) / 86400000));
-      total = '$' + (nights * room.rate) + ' AUD';
-    }
-    document.getElementById('confirm-total').textContent = total;
-
-    confirmBooking(); // defined in js/booking.js
-  };
-
-  // Step navigation buttons/links (S4: no inline onclick)
-  document.getElementById('next-btn').addEventListener('click', function() { showStep(2); });
-  document.getElementById('back-to-dates').addEventListener('click', function(e) {
-    e.preventDefault();
-    showStep(1);
-  });
-  document.getElementById('confirm-btn').addEventListener('click', function() { submitBooking(); });
-  document.getElementById('back-to-room').addEventListener('click', function(e) {
-    e.preventDefault();
-    showStep(2);
-  });
-
-  showStep(1); // Start on the Dates step
-});
-</script>
+<script>(function(){var s=document.getElementById("currency-select");if(!s)return;try{s.value=localStorage.getItem("hotel-currency")||"AUD";}catch(e){}s.addEventListener("change",function(){try{localStorage.setItem("hotel-currency",s.value);}catch(e){}location.reload();});})();</script>
 </body>
 </html>

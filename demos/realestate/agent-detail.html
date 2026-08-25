@@ -6,7 +6,11 @@
 <title>Agent Profile — Reozix Real Estate, Gold Coast</title>
 <meta name="description" content="Full agent profile with specialisations, recent sales history and a direct contact form. Reozix Real Estate, Gold Coast.">
 <link rel="stylesheet" href="../shared/css/reset.css">
-<link rel="stylesheet" href="css/realestate.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
+    <link rel="stylesheet" href="css/realestate.css">
 </head>
 <body data-page="agent-detail">
 
@@ -235,13 +239,38 @@
     tbody.appendChild(tr);
   });
 
-  // Contact form — cosmetic only: swap the form for an inline success message
+  // Contact form — validated (name, email format, message), inline errors,
+  // aria-invalid + focus management, live error clearing.
   var form = document.getElementById('contact-form');
   var success = document.getElementById('form-success');
+
+  function setError(id, bad) {
+    var field = document.getElementById(id);
+    field.classList.toggle('invalid', bad);
+    field.setAttribute('aria-invalid', bad ? 'true' : 'false');
+  }
+  function validEmail(v) { return /.+@.+\..+/.test(v); }
+
   form.addEventListener('submit', function(e) {
     e.preventDefault();
+    var name = document.getElementById('cf-name');
+    var email = document.getElementById('cf-email');
+    var message = document.getElementById('cf-message');
+    var bad = [];
+    if (!name.value.trim()) bad.push(name);
+    if (!validEmail(email.value.trim())) bad.push(email);
+    if (!message.value.trim()) bad.push(message);
+    bad.forEach(function(f) { setError(f.id, true); });
+    if (bad.length) {
+      bad[0].focus();
+      return;
+    }
     form.style.display = 'none';
     success.style.display = 'block';
+  });
+
+  ['cf-name', 'cf-email', 'cf-message'].forEach(function(id) {
+    document.getElementById(id).addEventListener('input', function() { setError(id, false); });
   });
 })();
 </script>

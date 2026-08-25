@@ -5,14 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Get a Quote — Reozix Construction, Brisbane</title>
 <meta name="description" content="Request a fixed-price quote from Reozix Construction — commercial fit-outs, residential extensions, new builds and renovations across Brisbane and Queensland.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%23c05a12%27/%3E%3Ctext x=%278%27 y=%2712%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2711%27 fill=%27%23fff%27%3EC%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
 <link rel="stylesheet" href="../shared/css/reset.css">
 <link rel="stylesheet" href="css/construction.css">
 <style>
-  /* Quote page additions — centre the form column */
-  .ct-quote-wrap {
-    max-width: 720px;
-    margin: 0 auto;
+  .ct-quote-wrap { max-width: 760px; margin: 0 auto; }
+  .ct-wstep-panel fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+  .ct-wstep-panel legend {
+    font-family: var(--ct-font-display); font-size: 1.5rem; font-weight: 600;
+    padding: 0; margin-bottom: 18px;
   }
+  .ct-field textarea {
+    width: 100%; padding: 12px 14px; border: 1px solid var(--ct-border); border-radius: 6px;
+    font-family: inherit; font-size: 0.9375rem; background: #fff; resize: vertical; min-height: 96px;
+  }
+  .ct-field textarea:focus-visible { outline: none; border-color: var(--ct-accent); box-shadow: 0 0 0 3px rgba(232,117,42,0.15); }
+  .ct-field textarea.invalid { border-color: #d0342c; background: #fff7f7; }
 </style>
 </head>
 <body>
@@ -20,111 +32,198 @@
 <nav class="ct-nav">
   <div class="ct-container">
     <a href="index.html" class="logo">Reozix <span>Construction</span></a>
-    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="portfolio.html">Portfolio</a>
       <a href="services.html">Services</a>
       <a href="credentials.html">Credentials</a>
+      <a href="team.html">Team</a>
       <a href="tel:+61731862400">+61 7 3186 2400</a>
       <a href="quote.html" class="ct-btn">Get a Quote</a>
     </div>
   </div>
 </nav>
 
+<main>
+
 <!-- Page header -->
 <section class="ct-page-header">
   <div class="ct-container">
     <span class="ct-page-kicker">Request a Quote</span>
     <h1>Tell Us About Your Project</h1>
-    <p>Four quick questions and we&rsquo;ll come back with a preliminary estimate within 48 hours &mdash; free site visits across Brisbane.</p>
+    <p>Three quick steps. You&rsquo;ll have a free preliminary estimate within 48 hours &mdash; and a fixed-price quote within five working days if you decide to proceed.</p>
   </div>
 </section>
 
-<!-- Quote form -->
+<!-- Quote wizard -->
 <section class="ct-section" id="request-quote">
   <div class="ct-container">
-    <span class="ct-section-kicker">Start Your Project</span>
-    <h2 class="ct-section-title">Get a Fixed-Price Quote</h2>
-    <p class="ct-section-sub">Let us know what you&rsquo;re planning and where it&rsquo;s happening. If the property is in Queensland, we&rsquo;ll follow up with a preliminary estimate within 48 hours.</p>
-
     <div class="ct-quote-wrap">
-      <form class="ct-quote-form" id="quote-form" novalidate>
-        <h3>Project Details</h3>
-        <p class="ct-form-intro">All fields are required.</p>
+      <div class="ct-wizard-steps" aria-hidden="true">
+        <div class="wstep active"><span class="wn">1</span> Project</div>
+        <div class="wstep"><span class="wn">2</span> Contact</div>
+        <div class="wstep"><span class="wn">3</span> Review</div>
+      </div>
 
-        <div class="ct-form-row">
-          <div class="ct-field">
-            <label for="project-type">Project type</label>
-            <select id="project-type" name="project-type" aria-required="true" aria-describedby="error-project-type">
-              <option value="">Select a project type&hellip;</option>
-              <option>Commercial Fit-Out</option>
-              <option>Residential Extension</option>
-              <option>New Build</option>
-              <option>Renovation</option>
-            </select>
-            <span class="ct-error-msg" id="error-project-type">Please select a project type.</span>
-          </div>
-
-          <div class="ct-field">
-            <label for="budget-tier">Budget tier</label>
-            <select id="budget-tier" name="budget-tier" aria-required="true" aria-describedby="error-budget-tier">
-              <option value="">Select a budget range&hellip;</option>
-              <option>$100K&ndash;$250K</option>
-              <option>$250K&ndash;$500K</option>
-              <option>$500K&ndash;$1M</option>
-              <option>$1M+</option>
-            </select>
-            <span class="ct-error-msg" id="error-budget-tier">Please select a budget tier.</span>
-          </div>
+      <form id="quote-form" class="ct-quote-form" novalidate>
+        <!-- Step 1: project -->
+        <div class="ct-wstep-panel" data-step="1">
+          <fieldset>
+            <legend>Project details</legend>
+            <div class="ct-form-row">
+              <div class="ct-field">
+                <label for="project-type">Project type</label>
+                <select id="project-type" name="project-type" aria-required="true" aria-describedby="error-project-type">
+                  <option value="">Select a project type&hellip;</option>
+                  <option>Commercial Fit-Out</option>
+                  <option>Residential Extension</option>
+                  <option>New Build</option>
+                  <option>Renovation</option>
+                </select>
+                <span class="ct-error-msg" id="error-project-type">Please select a project type.</span>
+              </div>
+              <div class="ct-field">
+                <label for="budget-tier">Budget tier</label>
+                <select id="budget-tier" name="budget-tier" aria-required="true" aria-describedby="error-budget-tier">
+                  <option value="">Select a budget range&hellip;</option>
+                  <option>$100K&ndash;$250K</option>
+                  <option>$250K&ndash;$500K</option>
+                  <option>$500K&ndash;$1M</option>
+                  <option>$1M+</option>
+                </select>
+                <span class="ct-error-msg" id="error-budget-tier">Please select a budget tier.</span>
+              </div>
+            </div>
+            <div class="ct-form-row">
+              <div class="ct-field">
+                <label for="property-address">Property address</label>
+                <input type="text" id="property-address" name="property-address" placeholder="Street and suburb" aria-required="true" aria-describedby="error-property-address">
+                <span class="ct-error-msg" id="error-property-address">Please enter your property address.</span>
+              </div>
+              <div class="ct-field">
+                <label for="property-postcode">Postcode</label>
+                <input type="text" id="property-postcode" name="property-postcode" inputmode="numeric" maxlength="4" placeholder="4000" aria-required="true" aria-describedby="error-property-postcode">
+                <span class="ct-error-msg" id="error-property-postcode">Enter a 4-digit postcode.</span>
+              </div>
+            </div>
+            <div class="ct-form-row">
+              <div class="ct-field ct-field-full">
+                <label for="preferred-timeline">Preferred timeline</label>
+                <select id="preferred-timeline" name="preferred-timeline" aria-required="true" aria-describedby="error-preferred-timeline">
+                  <option value="">Select a timeline&hellip;</option>
+                  <option>ASAP</option>
+                  <option>1&ndash;3 months</option>
+                  <option>3&ndash;6 months</option>
+                  <option>6+ months</option>
+                </select>
+                <span class="ct-error-msg" id="error-preferred-timeline">Please select a preferred timeline.</span>
+              </div>
+            </div>
+            <div class="ct-form-row" id="project-context-row" style="display:none;">
+              <div class="ct-field ct-field-full">
+                <p class="ct-form-note" id="project-context-note"></p>
+              </div>
+            </div>
+            <p class="ct-field-error" id="step1-error" role="alert" style="display:none;"></p>
+            <div class="ct-wstep-nav">
+              <span></span>
+              <button type="button" class="ct-btn" id="to-step-2">Continue
+                <svg class="ct-ic ct-ic-sm" aria-hidden="true"><use href="#ct-arrow"/></svg>
+              </button>
+            </div>
+          </fieldset>
         </div>
 
-        <div class="ct-form-row">
-          <div class="ct-field ct-field-full">
-            <label for="property-address">Property address</label>
-            <input type="text" id="property-address" name="property-address" placeholder="Enter your Brisbane property address" aria-required="true" aria-describedby="error-property-address">
-            <span class="ct-error-msg" id="error-property-address">Please enter your property address.</span>
-          </div>
+        <!-- Step 2: contact -->
+        <div class="ct-wstep-panel" data-step="2" style="display:none;">
+          <fieldset>
+            <legend>How should we reach you?</legend>
+            <div class="ct-form-row">
+              <div class="ct-field">
+                <label for="contact-name">Name</label>
+                <input type="text" id="contact-name" name="contact-name" autocomplete="name" aria-required="true" aria-describedby="error-contact-name">
+                <span class="ct-error-msg" id="error-contact-name">Please enter your name.</span>
+              </div>
+              <div class="ct-field">
+                <label for="contact-phone">Phone</label>
+                <input type="tel" id="contact-phone" name="contact-phone" autocomplete="tel" placeholder="+61 4xx xxx xxx" aria-required="true" aria-describedby="error-contact-phone">
+                <span class="ct-error-msg" id="error-contact-phone">Please enter a phone number.</span>
+              </div>
+            </div>
+            <div class="ct-form-row">
+              <div class="ct-field ct-field-full">
+                <label for="contact-email">Email</label>
+                <input type="email" id="contact-email" name="contact-email" autocomplete="email" placeholder="you@example.com" aria-required="true" aria-describedby="error-contact-email">
+                <span class="ct-error-msg" id="error-contact-email">Please enter a valid email address.</span>
+              </div>
+            </div>
+            <div class="ct-form-row">
+              <div class="ct-field ct-field-full">
+                <label for="project-notes">Anything else we should know? <span style="color:var(--ct-text-secondary);font-weight:400;">(optional)</span></label>
+                <textarea id="project-notes" name="project-notes" placeholder="Existing plans, site access, heritage constraints, ideal start date&hellip;"></textarea>
+              </div>
+            </div>
+            <!-- Honeypot: bots fill this, humans never see it -->
+            <div class="ct-hp" aria-hidden="true">
+              <label for="company-website">Company website</label>
+              <input type="text" id="company-website" name="company-website" tabindex="-1" autocomplete="off">
+            </div>
+            <p class="ct-form-note">We use your details only to prepare your estimate. No marketing lists, ever.</p>
+            <p class="ct-field-error" id="step2-error" role="alert" style="display:none;"></p>
+            <div class="ct-wstep-nav">
+              <button type="button" class="ct-btn ct-btn-ghost" id="back-to-1">Back</button>
+              <button type="button" class="ct-btn" id="to-step-3">Review request
+                <svg class="ct-ic ct-ic-sm" aria-hidden="true"><use href="#ct-arrow"/></svg>
+              </button>
+            </div>
+          </fieldset>
         </div>
 
-        <div class="ct-form-row">
-          <div class="ct-field ct-field-full">
-            <label for="preferred-timeline">Preferred timeline</label>
-            <select id="preferred-timeline" name="preferred-timeline" aria-required="true" aria-describedby="error-preferred-timeline">
-              <option value="">Select a timeline&hellip;</option>
-              <option>ASAP</option>
-              <option>1&ndash;3 months</option>
-              <option>3&ndash;6 months</option>
-              <option>6+ months</option>
-            </select>
-            <span class="ct-error-msg" id="error-preferred-timeline">Please select a preferred timeline.</span>
-          </div>
-        </div>
-
-        <div class="ct-submit-row">
-          <button type="submit" class="ct-btn">Request a Quote</button>
-          <span class="ct-submit-note">We&rsquo;ll respond within 48 hours.</span>
+        <!-- Step 3: review -->
+        <div class="ct-wstep-panel" data-step="3" style="display:none;">
+          <fieldset>
+            <legend>Review your request</legend>
+            <div id="review-chips">
+              <span class="ct-review-chip"><span class="lbl">Type</span> <span id="rev-type">—</span> <a href="#" data-goto="1">Edit</a></span>
+              <span class="ct-review-chip"><span class="lbl">Budget</span> <span id="rev-budget">—</span> <a href="#" data-goto="1">Edit</a></span>
+              <span class="ct-review-chip"><span class="lbl">Address</span> <span id="rev-address">—</span> <a href="#" data-goto="1">Edit</a></span>
+              <span class="ct-review-chip"><span class="lbl">Timeline</span> <span id="rev-timeline">—</span> <a href="#" data-goto="1">Edit</a></span>
+              <span class="ct-review-chip"><span class="lbl">Contact</span> <span id="rev-contact">—</span> <a href="#" data-goto="2">Edit</a></span>
+            </div>
+            <p class="ct-form-note">What happens next: a free preliminary estimate within <strong>48 hours</strong>. If you proceed, we visit the site and deliver a fixed-price quote within <strong>five working days</strong>.</p>
+            <p class="ct-field-error" id="step3-error" role="alert" style="display:none;"></p>
+            <div class="ct-wstep-nav">
+              <button type="button" class="ct-btn ct-btn-ghost" id="back-to-2">Back</button>
+              <button type="submit" class="ct-btn" id="submit-quote">Send request
+                <svg class="ct-ic ct-ic-sm" aria-hidden="true"><use href="#ct-check"/></svg>
+              </button>
+            </div>
+          </fieldset>
         </div>
       </form>
 
-      <div class="ct-form-message ct-form-success" id="quote-success" role="status">
-        Thank you &mdash; we&rsquo;ll have a preliminary estimate to you within 48 hours.
+      <!-- Success -->
+      <div class="ct-form-message ct-form-success" id="quote-success" role="status" style="display:none;">
+        <strong>Request received — reference <span id="quote-ref">QC-······</span>.</strong><br><br>
+        What happens next:<br>
+        1. Mick (estimating) prepares your preliminary estimate and calls within 48 hours.<br>
+        2. If the numbers look right, we book a free site visit.<br>
+        3. Fixed-price quote within five working days of the visit.<br><br>
+        Nothing to prepare — have your plans handy if you have them.
       </div>
-      <div class="ct-form-message ct-form-error" id="quote-error" role="alert">
-        We currently only operate in Queensland. If you&rsquo;re outside our service area, we&rsquo;d be happy to recommend a builder in your region.
+      <!-- Out of area -->
+      <div class="ct-form-message ct-form-error" id="quote-error" role="alert" style="display:none;">
+        <strong>We currently build across Queensland only</strong> (postcodes 4000&ndash;4999).<br><br>
+        For projects outside our service area, the <a href="https://www.qbcc.qld.gov.au/" target="_blank" rel="noopener">QBCC licensee search</a> can help you find a licensed local builder — and your state&rsquo;s master builders association keeps a member directory. We&rsquo;re happy to answer general questions in the meantime: <a href="mailto:build@reozix.com.au">build@reozix.com.au</a>.
       </div>
     </div>
   </div>
 </section>
 
-<!-- CTA banner -->
-<section class="ct-cta">
-  <div class="ct-container">
-    <h2>Ready to Start?</h2>
-    <p>Tell us about your build and we&rsquo;ll come back with a detailed, fixed-price quote within five working days. Free site visits across Brisbane.</p>
-    <a href="#request-quote" class="ct-btn">Request a Quote</a>
-  </div>
-</section>
+</main>
 
 <footer class="ct-footer">
   <div class="ct-container">
@@ -135,11 +234,12 @@
       <a href="mailto:build@reozix.com.au">build@reozix.com.au</a>
     </div>
     <div class="ct-footer-links">
-      <h4>Quick links</h4>
+      <p class="fh">Quick links</p>
       <a href="index.html">Home</a>
       <a href="portfolio.html">Portfolio</a>
       <a href="services.html">Services</a>
       <a href="credentials.html">Credentials</a>
+      <a href="team.html">Team</a>
       <a href="quote.html">Get a Quote</a>
     </div>
   </div>
@@ -149,102 +249,132 @@
 </footer>
 
 <script src="../shared/js/utils.js"></script>
+<script src="js/data.js"></script>
+<script src="js/icons.js"></script>
 <script>
-// Quote page — validates the request form and checks the property postcode
-// against Queensland ranges (4000–4999 and 9000–9999).
-(function() {
+// Quote wizard — 3 steps (project → contact → review), ?project= prefill,
+// live QLD postcode check, honeypot spam guard, honest next-steps on success.
+(function () {
   var form = document.getElementById('quote-form');
-  var successMsg = document.getElementById('quote-success');
-  var errorMsg = document.getElementById('quote-error');
-  if (!form || !successMsg || !errorMsg) {
-    return;
-  }
+  if (!form) return;
 
-  var fields = {
-    projectType: document.getElementById('project-type'),
-    budgetTier: document.getElementById('budget-tier'),
-    propertyAddress: document.getElementById('property-address'),
-    preferredTimeline: document.getElementById('preferred-timeline')
+  var panels = form.querySelectorAll('.ct-wstep-panel');
+  var steps = document.querySelectorAll('.ct-wizard-steps .wstep');
+  var current = 1;
+  var fromProject = null;
+
+  var f = {
+    type: document.getElementById('project-type'),
+    budget: document.getElementById('budget-tier'),
+    address: document.getElementById('property-address'),
+    postcode: document.getElementById('property-postcode'),
+    timeline: document.getElementById('preferred-timeline'),
+    name: document.getElementById('contact-name'),
+    phone: document.getElementById('contact-phone'),
+    email: document.getElementById('contact-email'),
+    notes: document.getElementById('project-notes'),
+    honeypot: document.getElementById('company-website')
   };
 
-  function setFieldState(field, ok) {
-    var wrapper = field.parentNode;
-    if (ok) {
-      wrapper.classList.remove('error');
-      wrapper.classList.add('valid');
-    } else {
-      wrapper.classList.remove('valid');
-      wrapper.classList.add('error');
-    }
+  function showStep(n) {
+    current = n;
+    panels.forEach(function (p) { p.style.display = parseInt(p.getAttribute('data-step'), 10) === n ? 'block' : 'none'; });
+    steps.forEach(function (s, i) {
+      s.className = 'wstep';
+      if (i + 1 < n) s.classList.add('complete');
+      if (i + 1 === n) s.classList.add('active');
+    });
+    if (n === 3) renderReview();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function validate() {
-    var valid = true;
-    var i;
-    var names = ['projectType', 'budgetTier', 'preferredTimeline'];
-    for (i = 0; i < names.length; i++) {
-      if (fields[names[i]].value === '') {
-        setFieldState(fields[names[i]], false);
-        valid = false;
-      } else {
-        setFieldState(fields[names[i]], true);
-      }
-    }
-    if (fields.propertyAddress.value.replace(/^\s+|\s+$/g, '') === '') {
-      setFieldState(fields.propertyAddress, false);
-      valid = false;
-    } else {
-      setFieldState(fields.propertyAddress, true);
-    }
-    return valid;
+  function setError(id, show) {
+    var el = document.getElementById('error-' + id);
+    var field = document.getElementById(id);
+    if (el) el.style.display = show ? 'block' : 'none';
+    if (field) field.classList.toggle('invalid', show);
   }
-
-  function extractPostcode(address) {
-    var matches = address.match(/(\d{4})/g);
-    if (!matches || matches.length === 0) {
-      return null;
-    }
-    return matches[matches.length - 1];
+  function stepError(id, msg) {
+    var el = document.getElementById(id);
+    el.textContent = msg;
+    el.style.display = 'block';
   }
+  function validEmail(v) { return /.+@.+\..+/.test(v); }
+  function isQld(pc) { var n = parseInt(pc, 10); return n >= 4000 && n <= 4999; }
 
-  function isQueenslandPostcode(postcode) {
-    if (postcode === null) {
+  function validateStep1() {
+    var ok = true;
+    ['project-type', 'budget-tier', 'property-address', 'preferred-timeline'].forEach(function (id) {
+      var bad = !document.getElementById(id).value.trim();
+      setError(id, bad); if (bad) ok = false;
+    });
+    var pc = f.postcode.value.trim();
+    var pcBad = !/^\d{4}$/.test(pc);
+    setError('property-postcode', pcBad); if (pcBad) ok = false;
+    if (ok && !isQld(pc)) {
+      form.style.display = 'none';
+      document.getElementById('quote-error').style.display = 'block';
       return false;
     }
-    var code = parseInt(postcode, 10);
-    return (code >= 4000 && code <= 4999) || (code >= 9000 && code <= 9999);
+    if (!ok) stepError('step1-error', 'Please complete the highlighted fields.');
+    else document.getElementById('step1-error').style.display = 'none';
+    return ok;
   }
 
-  // Clear the error state as soon as a field has a value.
-  function watchField(field) {
-    field.addEventListener('change', function() {
-      if (field.value !== '') {
-        field.parentNode.classList.remove('error');
+  function validateStep2() {
+    var ok = true;
+    var nameBad = !f.name.value.trim();
+    setError('contact-name', nameBad); if (nameBad) ok = false;
+    var phoneBad = !f.phone.value.trim();
+    setError('contact-phone', phoneBad); if (phoneBad) ok = false;
+    var emailBad = !validEmail(f.email.value.trim());
+    setError('contact-email', emailBad); if (emailBad) ok = false;
+    if (!ok) stepError('step2-error', 'Please complete the highlighted fields.');
+    else document.getElementById('step2-error').style.display = 'none';
+    return ok;
+  }
+
+  function renderReview() {
+    document.getElementById('rev-type').textContent = f.type.value;
+    document.getElementById('rev-budget').textContent = f.budget.value;
+    document.getElementById('rev-address').textContent = f.address.value + ' ' + f.postcode.value;
+    document.getElementById('rev-timeline').textContent = f.timeline.value;
+    document.getElementById('rev-contact').textContent = f.name.value + ' · ' + f.phone.value;
+  }
+
+  document.getElementById('to-step-2').addEventListener('click', function () { if (validateStep1()) showStep(2); });
+  document.getElementById('back-to-1').addEventListener('click', function () { showStep(1); });
+  document.getElementById('to-step-3').addEventListener('click', function () { if (validateStep2()) showStep(3); });
+  document.getElementById('back-to-2').addEventListener('click', function () { showStep(2); });
+  document.querySelectorAll('[data-goto]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); showStep(parseInt(a.getAttribute('data-goto'), 10)); });
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (f.honeypot.value) return; // bot — pretend success, send nothing
+    var ref = 'QC-' + Date.now().toString(36).toUpperCase().slice(-6);
+    document.getElementById('quote-ref').textContent = ref;
+    form.style.display = 'none';
+    document.querySelector('.ct-wizard-steps').style.display = 'none';
+    document.getElementById('quote-success').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ?project=proj-xxx prefill — carry project context into the request
+  var params = new URLSearchParams(window.location.search);
+  var projectId = params.get('project');
+  if (projectId && typeof CONSTRUCTION_DATA !== 'undefined') {
+    CONSTRUCTION_DATA.projects.forEach(function (p) {
+      if (p.id === projectId) {
+        fromProject = p;
+        f.type.value = p.type;
+        var note = document.getElementById('project-context-note');
+        document.getElementById('project-context-row').style.display = '';
+        note.innerHTML = 'Requesting about <strong>' + p.title + '</strong> (' + p.suburb + ', completed ' + p.completed.replace('-', '/') + '). We&rsquo;ll bring comparable budget and timeline data to your estimate.';
       }
     });
   }
-  fields.propertyAddress.addEventListener('input', function() {
-    if (this.value.replace(/^\s+|\s+$/g, '') !== '') {
-      this.parentNode.classList.remove('error');
-    }
-  });
-  watchField(fields.projectType);
-  watchField(fields.budgetTier);
-  watchField(fields.preferredTimeline);
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    if (!validate()) {
-      return;
-    }
-    var postcode = extractPostcode(fields.propertyAddress.value);
-    form.style.display = 'none';
-    if (isQueenslandPostcode(postcode)) {
-      successMsg.classList.add('show');
-    } else {
-      errorMsg.classList.add('show');
-    }
-  });
 })();
 </script>
 </body>

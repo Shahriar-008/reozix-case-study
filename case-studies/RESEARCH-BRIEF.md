@@ -121,11 +121,14 @@ These are real Lighthouse scores from the deployed demo platforms, not fabricate
 
 | Metric | Hotel | Real Estate | Construction |
 |--------|-------|-------------|--------------|
-| Lighthouse Performance | 98 | 100 | 93 |
-| Accessibility | 87 | 91 | 93 |
-| Best Practices | 96 | 96 | 96 |
-| Time to Interactive | 2.4s | 1.4s | 3.1s |
+| Lighthouse Performance | 99 | 100 | 93 |
+| Accessibility | 100 | 91 | 93 |
+| Best Practices | 100 | 96 | 96 |
+| Time to Interactive | 1.7s LCP* | 1.4s | 3.1s |
 | SEO | 100 | 100 | 100 |
+
+\* Hotel re-measured August 2026 after the booking-platform rebuild (Lighthouse
+13.4.1, mobile emulation, simulated 4G): FCP 1.4s, LCP 1.7s, TBT 82ms.
 
 CI enforces a 95+ Performance gate on pull requests; current demo scores are recorded in the table above.
 

@@ -1,7 +1,7 @@
 // search.js — instant client-side filtering for the Real Estate search page.
 // Extends the base filterProperties() sketch to work with checkbox filters,
-// a price range, a no-results state, and pre-fill from the homepage query
-// string (?suburb=&type=&min_price=&max_price=).
+// a price range, sorting, dynamic filter counts, a no-results state, and
+// pre-fill from the homepage query string (?suburb=&type=&min_price=&max_price=).
 
 function getCheckedValues(filter) {
   var values = [];
@@ -34,17 +34,60 @@ function filterProperties() {
     // '' restores the card's stylesheet display:flex; 'none' hides it.
     card.style.display = match ? '' : 'none';
     if (match) visible++;
+    card.setAttribute('data-visible', match ? '1' : '0');
   });
+
+  applySort();
 
   var count = document.getElementById('result-count');
   if (count) count.textContent = visible;
 
   var empty = document.getElementById('no-results');
   if (empty) empty.classList.toggle('show', visible === 0);
+
+  updateFilterCounts();
+  updateMap();
 }
 
-// Check a checkbox for a filter value, adding one on the fly if the value
-// isn't already in the sidebar (e.g. a suburb outside the top 8).
+/* Sorting — reorders visible cards inside the results grid. */
+function applySort() {
+  var grid = document.querySelector('.results-grid') || document.querySelector('.property-grid');
+  if (!grid) return;
+  var sort = document.getElementById('sort-by');
+  if (!sort) return;
+  var cards = Array.prototype.slice.call(grid.querySelectorAll('.property-card'));
+  var mode = sort.value;
+  cards.sort(function(a, b) {
+    var pa = parseInt(a.dataset.price), pb = parseInt(b.dataset.price);
+    var ba = parseInt(a.dataset.beds), bb = parseInt(b.dataset.beds);
+    if (mode === 'price-asc') return pa - pb;
+    if (mode === 'price-desc') return pb - pa;
+    if (mode === 'beds-desc') return bb - ba || pb - pa;
+    return 0; // featured = DOM order
+  });
+  cards.forEach(function(card) { grid.appendChild(card); });
+}
+
+/* Dynamic filter counts — recomputed from the visible dataset on every change. */
+function updateFilterCounts() {
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.property-card'));
+  document.querySelectorAll('.filter-group[data-filter-group]').forEach(function(group) {
+    var filter = group.getAttribute('data-filter-group');
+    group.querySelectorAll('input[data-filter]').forEach(function(cb) {
+      var n = cards.filter(function(card) {
+        if (card.getAttribute('data-visible') === '0') return false;
+        return (card.dataset[filter] || '') === cb.value;
+      }).length;
+      var label = cb.parentNode;
+      var base = label.dataset.base || (label.dataset.base = label.textContent.replace(/\s*\(\d+\)\s*$/, '').trim());
+      label.textContent = base + (n !== undefined ? ' (' + n + ')' : '');
+      label.insertBefore(cb, label.firstChild);
+    });
+  });
+}
+
+/* Check a checkbox for a filter value, adding one on the fly if the value
+   isn't already in the sidebar (e.g. a suburb outside the top 8). */
 function ensureFilterChecked(filter, value) {
   if (!value) return;
   var cbs = document.querySelectorAll('input[data-filter="' + filter + '"]');
@@ -90,6 +133,9 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('filter-min-price').addEventListener('input', filterProperties);
   document.getElementById('filter-max-price').addEventListener('input', filterProperties);
 
+  var sort = document.getElementById('sort-by');
+  if (sort) sort.addEventListener('change', filterProperties);
+
   // Clear Filters button — reset every filter and show all properties.
   document.getElementById('clear-filters').addEventListener('click', function() {
     document.querySelectorAll('.filter-input').forEach(function(cb) { cb.checked = false; });
@@ -98,6 +144,17 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('filter-max-price').value = '';
     filterProperties();
   });
+
+  // Mobile: collapsible filter panel
+  var toggle = document.getElementById('filter-toggle');
+  var sidebar = document.querySelector('.filter-sidebar');
+  if (toggle && sidebar) {
+    toggle.addEventListener('click', function() {
+      var open = sidebar.classList.toggle('filters-open');
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.textContent = open ? 'Hide filters' : 'Show filters';
+    });
+  }
 
   // Pre-fill from the homepage search bar and apply the filters on load.
   prefillFromUrl();

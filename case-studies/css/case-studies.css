@@ -68,6 +68,24 @@ nav .cta-btn {
 }
 nav .cta-btn:hover { opacity: 0.85; }
 
+/* Mobile nav toggle (hidden on desktop) */
+nav .nav-toggle {
+  display: none; background: transparent; border: 1px solid var(--border);
+  border-radius: 6px; width: 40px; height: 40px; cursor: pointer;
+  align-items: center; justify-content: center; color: var(--text);
+}
+nav .nav-toggle svg { display: block; }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.skip-link {
+  position: absolute; left: -9999px; top: 0; z-index: 200;
+  background: var(--accent); color: var(--on-accent);
+  padding: 10px 18px; border-radius: 0 0 6px 0; font-weight: 600;
+  text-decoration: none; font-size: 0.875rem;
+}
+.skip-link:focus { left: 0; }
+
 /* Hero */
 .hero { padding: 140px 0 80px; }
 .hero .breadcrumb { color: var(--text-secondary); font-size: 0.8125rem; margin-bottom: 16px; }
@@ -109,7 +127,7 @@ nav .cta-btn:hover { opacity: 0.85; }
 
 /* Sections */
 section { padding: 80px 0; }
-section:nth-child(even) { background: var(--surface); }
+.section--alt { background: var(--surface); }
 section h2 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 12px; }
 section .section-intro { color: var(--text-secondary); font-size: 1rem; max-width: 600px; margin-bottom: 40px; line-height: 1.7; }
 section h3 { font-size: 1.25rem; font-weight: 600; margin: 32px 0 12px; }
@@ -122,7 +140,24 @@ section p { color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px
   border-radius: 8px; padding: 24px;
 }
 .problem-card .icon { font-size: 1.5rem; margin-bottom: 12px; }
-.problem-card h4 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+.icon .glyph { width: 24px; height: 24px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.proof-card .glyph { width: 28px; height: 28px; stroke: var(--accent); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Illustrative-scenario variant: visually distinct from factual cards */
+.scenario-card {
+  background: transparent; border: 1px dashed rgba(var(--accent-rgb), 0.45);
+  border-radius: 8px; padding: 24px; margin: 32px 0; max-width: 720px;
+}
+.scenario-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: var(--text); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.scenario-card p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+.badge-scenario {
+  display: inline-block; font-size: 0.6875rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--accent); background: var(--accent-tint);
+  border: 1px solid rgba(var(--accent-rgb), 0.3);
+  padding: 2px 8px; border-radius: 100px; white-space: nowrap;
+}
+.problem-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 8px; color: var(--text); }
 .problem-card p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; margin: 0; }
 
 /* Approach steps */
@@ -138,7 +173,7 @@ section p { color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px
   font-weight: 700; font-size: 1.125rem; color: var(--accent);
   flex-shrink: 0;
 }
-.approach-step h4 { font-size: 1.0625rem; font-weight: 600; margin-bottom: 4px; }
+.approach-step h3 { font-size: 1.0625rem; font-weight: 600; margin-bottom: 4px; }
 .approach-step p { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; margin: 0; }
 
 /* Screenshot placeholder */
@@ -181,7 +216,7 @@ section p { color: var(--text-secondary); line-height: 1.75; margin-bottom: 16px
 .proof-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 24px; }
 .proof-card { text-align: center; padding: 24px 16px; }
 .proof-card .proof-icon { font-size: 1.75rem; margin-bottom: 8px; }
-.proof-card h4 { font-size: 0.875rem; font-weight: 600; margin-bottom: 4px; }
+.proof-card h3 { font-size: 0.875rem; font-weight: 600; margin-bottom: 4px; }
 .proof-card p { font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5; margin: 0; }
 
 /* Quote */
@@ -229,5 +264,311 @@ ul li { margin-bottom: 8px; line-height: 1.6; }
   .problem-grid, .tech-grid, .proof-grid { grid-template-columns: 1fr; }
   .metric-bar .container { gap: 24px; }
   .metric-bar .metric .value { font-size: 1.5rem; }
-  nav .nav-links { display: none; }
+
+  nav .nav-toggle { display: flex; }
+  nav .nav-links {
+    display: none;
+    position: absolute; top: 64px; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 8px 24px 16px;
+  }
+  nav.nav-open .nav-links { display: flex; }
+  nav .nav-links a { padding: 12px 0; font-size: 1rem; border-bottom: 1px solid var(--border); }
+  nav .nav-links a:last-child { border-bottom: none; }
+  nav .nav-links .cta-btn { margin-top: 12px; text-align: center; padding: 12px 18px; }
+}
+
+/* =====================================================================
+   Series system � tokens, narrative structure, conversion, motion
+   ===================================================================== */
+
+/* Design tokens (8px base scale, single radius) */
+:root {
+  --space-1: 8px;  --space-2: 16px; --space-3: 24px; --space-4: 32px;
+  --space-5: 48px; --space-6: 64px; --space-7: 80px;
+  --radius: 12px;
+}
+
+/* Phase markers: make the Problem -> Approach -> Result arc unmistakable */
+.phase { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.phase .phase-num {
+  font-weight: 800; font-size: 0.875rem; color: var(--accent); letter-spacing: 0.08em;
+}
+.phase .phase-name {
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.14em; color: var(--text-secondary);
+}
+.phase::after { content: ''; height: 1px; width: 64px; background: rgba(var(--accent-rgb), 0.4); }
+
+/* Result tiles: measured numbers get display-scale treatment */
+.result-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  margin: var(--space-4) 0 var(--space-5);
+}
+.result-tile {
+  background: var(--surface-2); border: 1px solid rgba(var(--accent-rgb), 0.25);
+  border-radius: var(--radius); padding: var(--space-3);
+}
+.result-tile .value {
+  font-size: 3rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+  color: var(--accent); display: block; font-variant-numeric: tabular-nums;
+}
+.result-tile .label { font-size: 0.8125rem; color: var(--text-secondary); display: block; margin-top: 6px; }
+
+/* Mid-page CTA band */
+.cta-band {
+  border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+  background: var(--surface); padding: var(--space-5) 0;
+}
+.cta-band-inner { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; }
+.cta-band h3 { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em; }
+.cta-band .band-sub { color: var(--text-secondary); font-size: 0.9375rem; margin: 4px 0 0; max-width: none; }
+.cta-band .band-actions { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+
+.btn-accent, .btn-outline {
+  display: inline-block; padding: 12px 28px; border-radius: 8px;
+  font-size: 0.9375rem; font-weight: 600; text-decoration: none;
+  transition: filter 0.15s, border-color 0.15s, transform 0.15s;
+}
+.btn-accent { background: var(--accent); color: var(--on-accent); }
+.btn-accent:hover { filter: var(--accent-hover-filter); }
+.btn-outline { border: 1px solid var(--border); color: var(--text); background: transparent; }
+.btn-outline:hover { border-color: var(--text-secondary); }
+.btn-accent:active, .btn-outline:active { transform: scale(0.98); }
+
+/* Sticky mobile CTA pill (appears after hero scrolls out of view) */
+.sticky-cta {
+  position: fixed; bottom: 20px; right: 20px; z-index: 90;
+  background: var(--accent); color: var(--on-accent);
+  padding: 12px 22px; border-radius: 100px; font-weight: 700; font-size: 0.875rem;
+  text-decoration: none; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  opacity: 0; transform: translateY(80px); pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+}
+.sticky-cta.visible { opacity: 1; transform: none; pointer-events: auto; }
+
+/* Progress rail (desktop): where the reader is in the P->A->R arc.
+   It's a <nav> element, so it inherits the fixed-header element styles
+   (full-width, dark bg, backdrop blur) — neutralize those explicitly. */
+.progress-rail {
+  position: fixed; left: 24px; top: 50%; transform: translateY(-50%);
+  z-index: 80; display: none;
+  right: auto; width: max-content; height: auto;
+  background: transparent; border: none;
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+}
+.progress-rail a {
+  display: flex; align-items: center; gap: 10px; margin: 16px 0;
+  text-decoration: none; color: var(--text-secondary); font-size: 0.75rem; font-weight: 600;
+  transition: color 0.2s;
+}
+.progress-rail .dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  border: 2px solid var(--text-secondary); transition: border-color 0.2s, background 0.2s;
+}
+.progress-rail a:hover { color: var(--text); }
+.progress-rail a.active { color: var(--accent); }
+.progress-rail a.active .dot { border-color: var(--accent); background: var(--accent); }
+
+/* Trust band (real signals only � identical across all three pages) */
+.trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); margin-top: var(--space-3); }
+.trust-item { border-top: 2px solid rgba(var(--accent-rgb), 0.45); padding-top: var(--space-2); }
+.trust-item h3 { font-size: 0.9375rem; font-weight: 600; margin: 0 0 6px; }
+.trust-item p { font-size: 0.8125rem; line-height: 1.6; color: var(--text-secondary); margin: 0; max-width: none; }
+
+/* Next case study cards (no dead ends) */
+.next-up { padding: var(--space-6) 0; }
+.next-label {
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.14em; color: var(--text-secondary); margin-bottom: var(--space-2);
+}
+.next-grid { display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-2); }
+.next-card {
+  display: flex; flex-direction: column; gap: 6px;
+  background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: var(--space-3); text-decoration: none;
+  transition: border-color 0.15s, transform 0.15s;
+}
+.next-card:hover { border-color: rgba(var(--accent-rgb), 0.55); transform: translateY(-2px); }
+.next-card .next-kicker {
+  font-size: 0.6875rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--accent);
+}
+.next-card .next-title { font-size: 1.125rem; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+.next-card .next-blurb { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.55; }
+
+/* Collapsible tall captures (full Lighthouse reports) */
+.screenshot-toggle summary { cursor: pointer; color: var(--text-secondary); font-size: 0.8125rem; padding: 10px 0; }
+.screenshot-toggle summary:hover { color: var(--text); }
+.screenshot-toggle[open] summary { margin-bottom: 8px; }
+
+/* Reveal-on-scroll (opt-in via html.js so no-JS users see everything) */
+html.js .reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+html.js .reveal.revealed { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal { opacity: 1; transform: none; transition: none; }
+  .sticky-cta { transition: none; }
+}
+
+@media (min-width: 1200px) {
+  .progress-rail { display: block; }
+}
+@media (min-width: 769px) {
+  .sticky-cta { display: none; }
+}
+
+@media (max-width: 768px) {
+  .result-grid { grid-template-columns: repeat(2, 1fr); }
+  .trust-grid { grid-template-columns: repeat(2, 1fr); }
+  .next-grid { grid-template-columns: 1fr; }
+  .cta-band-inner { flex-direction: column; align-items: flex-start; }
+}
+@media (max-width: 480px) {
+  .result-grid, .trust-grid { grid-template-columns: 1fr; }
+}
+
+/* =====================================================================
+   Premium pass � dark-tech "Enterprise. Refined." language
+   Display type, depth, double-bezel surfaces, kinetic buttons.
+   Perf-guarded: grain is fixed/pointer-events-none; blur stays on nav;
+   animations remain transform/opacity only.
+   ===================================================================== */
+
+:root {
+  --font-display: 'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
+  --hairline: rgba(255, 255, 255, 0.08);
+  --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 24px 48px -28px rgba(0, 0, 0, 0.65);
+}
+
+/* ---- Typography scale ---- */
+body { letter-spacing: -0.006em; }
+.hero h1 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(2.75rem, 6vw, 4.5rem); letter-spacing: -0.04em; line-height: 1.02;
+}
+section h2 {
+  font-family: var(--font-display); font-weight: 700;
+  font-size: clamp(1.75rem, 3vw, 2.375rem); letter-spacing: -0.03em; margin-bottom: 14px;
+}
+section h3 { font-family: var(--font-display); letter-spacing: -0.01em; }
+.cta-section h2 { font-size: clamp(2rem, 4vw, 3rem); letter-spacing: -0.03em; }
+.hero .subtitle { font-size: 1.1875rem; max-width: 620px; }
+.metric-bar .metric .value, .result-tile .value, .phase .phase-num, .next-card .next-title {
+  font-family: var(--font-display);
+}
+
+/* ---- Ambient depth (static, zero repaint cost) ---- */
+body::after {
+  content: ''; position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+}
+.hero { position: relative; overflow: hidden; padding: 152px 0 96px; }
+.hero::before {
+  content: ''; position: absolute; top: -45%; right: -18%;
+  width: min(60vw, 780px); aspect-ratio: 1; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(closest-side, rgba(var(--accent-rgb), 0.13), transparent 72%);
+}
+.hero .container { position: relative; }
+
+/* Macro-whitespace */
+@media (min-width: 900px) {
+  section { padding: 120px 0; }
+  .cta-section { padding: 140px 0; }
+}
+
+/* ---- Nav refinement ---- */
+nav {
+  background: rgba(10, 10, 10, 0.72);
+  border-bottom-color: var(--hairline);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+nav .cta-btn { border-radius: 100px; padding: 9px 20px; }
+
+/* ---- Double-bezel surfaces ---- */
+.problem-card, .tech-card, .result-tile, .next-card, .scenario-card, .screenshot-placeholder {
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+}
+.problem-card, .tech-card, .result-tile, .next-card { transition: transform 0.6s var(--ease-out), border-color 0.4s var(--ease-out); }
+.problem-card:hover, .tech-card:hover, .next-card:hover { transform: translateY(-3px); border-color: rgba(var(--accent-rgb), 0.4); }
+.result-tile { border-color: rgba(var(--accent-rgb), 0.22); background: linear-gradient(180deg, rgba(var(--accent-rgb), 0.05), transparent 55%), var(--surface-2); }
+.result-tile .value { font-weight: 700; font-size: 3.25rem; letter-spacing: -0.035em; }
+.screenshot-placeholder .bar { background: transparent; border-bottom: 1px solid var(--hairline); }
+.screenshot-placeholder .bar .url { background: transparent; padding-left: 0; color: var(--text-secondary); letter-spacing: 0.01em; }
+
+/* ---- Metric strip ---- */
+.metric-bar { background: rgba(255, 255, 255, 0.02); }
+.metric-bar .container { justify-content: space-between; gap: 0; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; max-width: 880px; }
+.metric-bar .container::-webkit-scrollbar { display: none; }
+.metric-bar .metric { text-align: left; padding: 0 36px; border-left: 1px solid var(--hairline); }
+.metric-bar .metric:first-child { border-left: none; padding-left: 0; }
+.metric-bar .metric .value { font-weight: 700; font-size: 2.25rem; letter-spacing: -0.03em; }
+.metric-bar .metric .label { text-transform: uppercase; letter-spacing: 0.09em; font-size: 0.6875rem; margin-top: 6px; }
+
+/* ---- Phase markers ---- */
+.phase { margin-bottom: 20px; }
+.phase .phase-num { font-weight: 700; font-size: 1rem; letter-spacing: 0.1em; font-variant-numeric: tabular-nums; }
+.phase .phase-name { letter-spacing: 0.18em; font-size: 0.6875rem; }
+.phase::after { content: ''; height: 1px; flex: 1; max-width: 220px; background: linear-gradient(90deg, rgba(var(--accent-rgb), 0.5), transparent); margin-left: 8px; }
+
+/* ---- Kinetic pill buttons + nested arrow circle ---- */
+.hero .hero-links a, .btn-accent, .btn-outline, .cta-btn-large, .sticky-cta { border-radius: 100px; }
+.hero .hero-links a, .btn-accent, .btn-outline, .cta-btn-large {
+  transition: filter 0.5s var(--ease-out), border-color 0.4s var(--ease-out), transform 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+}
+.btn-accent, .hero .hero-links .primary, .cta-btn-large {
+  display: inline-flex; align-items: center; gap: 12px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18), 0 12px 32px -16px rgba(var(--accent-rgb), 0.5);
+}
+.cta-btn-large { display: inline-flex; align-items: center; gap: 12px; padding: 16px 40px; font-size: 1.0625rem; }
+.hero .hero-links a:active, .btn-accent:active, .btn-outline:active, .cta-btn-large:active { transform: scale(0.97); }
+.btn-arrow {
+  width: 26px; height: 26px; border-radius: 50%; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(0, 0, 0, 0.14);
+  transition: transform 0.6s var(--ease-out);
+}
+.btn-arrow svg { width: 13px; height: 13px; }
+a:hover > .btn-arrow, a:hover .btn-arrow { transform: translate(2px, -2px); }
+
+/* ---- Pull quote ---- */
+.pull-quote { position: relative; border-left: none; border-left: 2px solid rgba(var(--accent-rgb), 0.55); padding: 8px 0 8px 32px; font-style: normal; }
+.pull-quote::before {
+  content: '\201C'; position: absolute; left: 24px; top: -34px;
+  font-family: var(--font-display); font-size: 4.5rem; line-height: 1;
+  color: rgba(var(--accent-rgb), 0.35);
+}
+.pull-quote .attribution { text-transform: uppercase; letter-spacing: 0.1em; font-size: 0.6875rem; }
+
+/* ---- Trust / next-up / proof ---- */
+.trust-item { border-top-width: 1px; }
+.trust-grid { gap: 32px; }
+.next-card .next-kicker { letter-spacing: 0.14em; }
+.proof-card { border-top: 1px solid var(--hairline); padding-top: 20px; text-align: left; }
+.proof-grid { gap: 32px; }
+
+/* ---- Reveal easing upgrade ---- */
+html.js .reveal { transition-duration: 0.85s; }
+html.js .reveal { transition-timing-function: cubic-bezier(0.32, 0.72, 0, 1); }
+
+/* ---- Mobile guards for the premium layer ---- */
+@media (max-width: 768px) {
+  .hero { padding: 128px 0 72px; }
+  .hero::before { width: 90vw; top: -30%; right: -30%; opacity: 0.8; }
+  .metric-bar .container { flex-wrap: wrap; gap: 20px 0; }
+  .metric-bar .metric { border-left: none; padding: 0 24px 0 0; text-align: center; flex: 1 1 40%; }
+  .result-tile .value { font-size: 2.5rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .problem-card, .tech-card, .next-card, .btn-arrow,
+  .hero .hero-links a, .btn-accent, .btn-outline, .cta-btn-large { transition: none; }
 }

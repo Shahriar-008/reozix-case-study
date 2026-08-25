@@ -6,6 +6,11 @@
 <title>Reozix Construction — Brisbane Commercial & Residential Builder</title>
 <meta name="description" content="Reozix Construction is a QBCC-licensed Brisbane builder delivering commercial fit-outs, residential extensions, new builds and renovations across the city — on time, on budget, built to last.">
 <link rel="stylesheet" href="../shared/css/reset.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%23c05a12%27/%3E%3Ctext x=%278%27 y=%2712%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2711%27 fill=%27%23fff%27%3EC%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
 <link rel="stylesheet" href="css/construction.css">
 <style>
   /* Homepage additions — testimonial pull-quote */
@@ -40,17 +45,22 @@
 <nav class="ct-nav">
   <div class="ct-container">
     <a href="index.html" class="logo">Reozix <span>Construction</span></a>
-    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </button>
     <div class="nav-links">
       <a href="index.html" aria-current="page">Home</a>
       <a href="portfolio.html">Portfolio</a>
       <a href="services.html">Services</a>
       <a href="credentials.html">Credentials</a>
+      <a href="team.html">Team</a>
       <a href="tel:+61731862400">+61 7 3186 2400</a>
       <a href="quote.html" class="ct-btn">Get a Quote</a>
     </div>
   </div>
 </nav>
+
+<main>
 
 <!-- Hero + stats -->
 <section class="ct-hero">
@@ -99,7 +109,7 @@
       <!-- proj-001 -->
       <article class="ct-project-card">
         <a href="project-detail.html?id=proj-001" class="ct-project-photo" aria-label="View Meridian Tower Executive Office Fit-Out">
-          <div class="photo-placeholder" aria-hidden="true">🏢</div>
+          <div class="photo-placeholder" aria-hidden="true"><svg class="ct-ic" aria-hidden="true"><use href="#ct-building"/></svg></div>
           <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=60" alt="Meridian Tower executive office fit-out" loading="lazy">
           <span class="ct-project-type">Commercial Fit-Out</span>
         </a>
@@ -115,7 +125,7 @@
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 14 weeks</span>
-            <span class="ct-meta-item">📐 1,350 sqm</span>
+            <span class="ct-meta-item"><svg class="ct-ic ct-ic-sm" aria-hidden="true"><use href="#ct-ruler"/></svg> 1,350 sqm</span>
           </div>
           <a href="project-detail.html?id=proj-001" class="ct-project-link">View Project →</a>
         </div>
@@ -124,7 +134,7 @@
       <!-- proj-009 -->
       <article class="ct-project-card">
         <a href="project-detail.html?id=proj-009" class="ct-project-photo" aria-label="View New Farm Contemporary Custom Home">
-          <div class="photo-placeholder" aria-hidden="true">🏗️</div>
+          <div class="photo-placeholder" aria-hidden="true"><svg class="ct-ic" aria-hidden="true"><use href="#ct-building"/></svg></div>
           <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=60" alt="New Farm contemporary custom home" loading="lazy">
           <span class="ct-project-type">New Build</span>
         </a>
@@ -140,7 +150,7 @@
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 34 weeks</span>
-            <span class="ct-meta-item">📐 420 sqm</span>
+            <span class="ct-meta-item"><svg class="ct-ic ct-ic-sm" aria-hidden="true"><use href="#ct-ruler"/></svg> 420 sqm</span>
           </div>
           <a href="project-detail.html?id=proj-009" class="ct-project-link">View Project →</a>
         </div>
@@ -149,7 +159,7 @@
       <!-- proj-005 -->
       <article class="ct-project-card">
         <a href="project-detail.html?id=proj-005" class="ct-project-photo" aria-label="View Latitude Street Second Storey Addition">
-          <div class="photo-placeholder" aria-hidden="true">🏠</div>
+          <div class="photo-placeholder" aria-hidden="true"><svg class="ct-ic" aria-hidden="true"><use href="#ct-building"/></svg></div>
           <img src="https://images.unsplash.com/photo-1508450859948-4e04fabaa4ea?auto=format&fit=crop&w=800&q=60" alt="Latitude Street second storey addition" loading="lazy">
           <span class="ct-project-type">Residential Extension</span>
         </a>
@@ -165,7 +175,7 @@
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 18 weeks</span>
-            <span class="ct-meta-item">📐 95 sqm</span>
+            <span class="ct-meta-item"><svg class="ct-ic ct-ic-sm" aria-hidden="true"><use href="#ct-ruler"/></svg> 95 sqm</span>
           </div>
           <a href="project-detail.html?id=proj-005" class="ct-project-link">View Project →</a>
         </div>
@@ -174,7 +184,7 @@
       <!-- proj-014 -->
       <article class="ct-project-card">
         <a href="project-detail.html?id=proj-014" class="ct-project-photo" aria-label="View Bulimba Queenslander Whole-Home Renovation">
-          <div class="photo-placeholder" aria-hidden="true">🔨</div>
+          <div class="photo-placeholder" aria-hidden="true"><svg class="ct-ic" aria-hidden="true"><use href="#ct-building"/></svg></div>
           <img src="https://images.unsplash.com/photo-1600585152915-d208bec867a1?auto=format&fit=crop&w=800&q=60" alt="Bulimba Queenslander whole-home renovation" loading="lazy">
           <span class="ct-project-type">Renovation</span>
         </a>
@@ -190,7 +200,7 @@
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 20 weeks</span>
-            <span class="ct-meta-item">📐 250 sqm</span>
+            <span class="ct-meta-item"><svg class="ct-ic ct-ic-sm" aria-hidden="true"><use href="#ct-ruler"/></svg> 250 sqm</span>
           </div>
           <a href="project-detail.html?id=proj-014" class="ct-project-link">View Project →</a>
         </div>
@@ -199,7 +209,7 @@
       <!-- proj-012 -->
       <article class="ct-project-card">
         <a href="project-detail.html?id=proj-012" class="ct-project-photo" aria-label="View Hamilton Townhouse Development">
-          <div class="photo-placeholder" aria-hidden="true">🏘️</div>
+          <div class="photo-placeholder" aria-hidden="true"><svg class="ct-ic" aria-hidden="true"><use href="#ct-building"/></svg></div>
           <img src="https://images.unsplash.com/photo-1600573472591-ee6b68d14c68?auto=format&fit=crop&w=800&q=60" alt="Hamilton townhouse development" loading="lazy">
           <span class="ct-project-type">New Build</span>
         </a>
@@ -215,7 +225,7 @@
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 36 weeks</span>
-            <span class="ct-meta-item">📐 690 sqm</span>
+            <span class="ct-meta-item"><svg class="ct-ic ct-ic-sm" aria-hidden="true"><use href="#ct-ruler"/></svg> 690 sqm</span>
           </div>
           <a href="project-detail.html?id=proj-012" class="ct-project-link">View Project →</a>
         </div>
@@ -224,7 +234,7 @@
       <!-- proj-003 -->
       <article class="ct-project-card">
         <a href="project-detail.html?id=proj-003" class="ct-project-photo" aria-label="View Wickham Street Medical Centre Fit-Out">
-          <div class="photo-placeholder" aria-hidden="true">🏢</div>
+          <div class="photo-placeholder" aria-hidden="true"><svg class="ct-ic" aria-hidden="true"><use href="#ct-building"/></svg></div>
           <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=60" alt="Wickham Street medical centre fit-out" loading="lazy">
           <span class="ct-project-type">Commercial Fit-Out</span>
         </a>
@@ -240,7 +250,7 @@
           </div>
           <div class="ct-project-meta">
             <span class="ct-meta-item">⏱ 16 weeks</span>
-            <span class="ct-meta-item">📐 780 sqm</span>
+            <span class="ct-meta-item"><svg class="ct-ic ct-ic-sm" aria-hidden="true"><use href="#ct-ruler"/></svg> 780 sqm</span>
           </div>
           <a href="project-detail.html?id=proj-003" class="ct-project-link">View Project →</a>
         </div>
@@ -258,25 +268,25 @@
 
     <div class="ct-services-grid">
       <div class="ct-service-card">
-        <div class="ct-service-icon">🏢</div>
+        <div class="ct-service-icon"><svg class="ct-ic" aria-hidden="true"><use href="#ct-building"/></svg></div>
         <h3>Commercial Fit-Outs</h3>
         <p>Turnkey fit-outs for offices, retail and medical spaces across Brisbane's CBD and inner suburbs — from bare shell to move-in ready under one contract.</p>
         <a href="services.html#svc-001" class="ct-service-link">Learn More →</a>
       </div>
       <div class="ct-service-card">
-        <div class="ct-service-icon">🏠</div>
+        <div class="ct-service-icon"><svg class="ct-ic" aria-hidden="true"><use href="#ct-home"/></svg></div>
         <h3>Residential Extensions</h3>
         <p>Second-storey additions, rear extensions and deck builds that give your Brisbane home the space it needs — without the cost of moving.</p>
         <a href="services.html#svc-002" class="ct-service-link">Learn More →</a>
       </div>
       <div class="ct-service-card">
-        <div class="ct-service-icon">🏗️</div>
+        <div class="ct-service-icon"><svg class="ct-ic" aria-hidden="true"><use href="#ct-crane"/></svg></div>
         <h3>New Builds</h3>
         <p>Custom homes, duplexes and townhouse developments built to your plans or designed from the ground up, with a dedicated site supervisor.</p>
         <a href="services.html#svc-003" class="ct-service-link">Learn More →</a>
       </div>
       <div class="ct-service-card">
-        <div class="ct-service-icon">🔨</div>
+        <div class="ct-service-icon"><svg class="ct-ic" aria-hidden="true"><use href="#ct-hammer"/></svg></div>
         <h3>Renovations</h3>
         <p>Kitchens, bathrooms and whole-home renovations that modernise your space without losing its character — from heritage to contemporary.</p>
         <a href="services.html#svc-004" class="ct-service-link">Learn More →</a>
@@ -299,13 +309,23 @@
 </section>
 
 <!-- Quote CTA -->
+
+<section class="ct-section" id="faq">
+  <div class="ct-container">
+    <span class="ct-section-kicker">Before You Ask</span>
+    <h2 class="ct-section-title" style="text-align:center;">Common Questions</h2>
+    <div class="ct-faq" id="faq-list"></div>
+  </div>
+</section>
 <section class="ct-cta">
   <div class="ct-container">
     <h2>Start Your Project</h2>
-    <p>Tell us about your build and we'll come back with a detailed, fixed-price quote within five working days. Free site visits across Brisbane.</p>
+    <p>Tell us about your build and we'll come back with a detailed, fixed-price quote within five working days of the site visit. Free site visits across Brisbane.</p>
     <a href="quote.html" class="ct-btn">Get a Quote</a>
   </div>
 </section>
+
+</main>
 
 <footer class="ct-footer">
   <div class="ct-container">
@@ -316,7 +336,7 @@
       <a href="mailto:build@reozix.com.au">build@reozix.com.au</a>
     </div>
     <div class="ct-footer-links">
-      <h4>Quick links</h4>
+      <p class="fh">Quick links</p>
       <a href="index.html">Home</a>
       <a href="portfolio.html">Portfolio</a>
       <a href="services.html">Services</a>
@@ -329,6 +349,32 @@
   </div>
 </footer>
 
+<div class="ct-sticky-bar" aria-label="Quick contact">
+  <a href="tel:+61731862400" class="ct-btn ct-btn-ghost">Call</a>
+  <a href="quote.html" class="ct-btn">Get a Quote</a>
+</div>
 <script src="../shared/js/utils.js"></script>
+<script src="js/data.js"></script>
+<script src="js/icons.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  if (typeof CONSTRUCTION_DATA === 'undefined' || !CONSTRUCTION_DATA.faq) return;
+  var list = document.getElementById('faq-list');
+  list.innerHTML = CONSTRUCTION_DATA.faq.map(function (item, i) {
+    return '<div class="ct-faq-item" id="faq-' + i + '">' +
+      '<button type="button" class="ct-faq-q" aria-expanded="false" aria-controls="faqa-' + i + '">' + item.q +
+      '<span class="ct-faq-icon" aria-hidden="true"><svg class="ct-ic ct-ic-sm"><use href="#ct-arrow"/></svg></span></button>' +
+      '<div class="ct-faq-a" id="faqa-' + i + '"><div><p>' + item.a + '</p></div></div></div>';
+  }).join('');
+  list.querySelectorAll('.ct-faq-q').forEach(function (btn) {
+    btn.querySelector('.ct-faq-icon svg').style.transform = 'rotate(90deg)';
+    btn.addEventListener('click', function () {
+      var item = btn.closest('.ct-faq-item');
+      var open = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  });
+});
+</script>
 </body>
 </html>

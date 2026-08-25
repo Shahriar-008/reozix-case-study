@@ -6,7 +6,10 @@
 
 function filterProjects(type) {
   document.querySelectorAll('.filter-tab').forEach(function(t) {
-    t.classList.toggle('active', t.dataset.type === type);
+    var active = t.dataset.type === type;
+    t.classList.toggle('active', active);
+    // Announce the selected tab to assistive tech
+    t.setAttribute('aria-pressed', String(active));
   });
   document.querySelectorAll('.project-card').forEach(function(card) {
     card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';

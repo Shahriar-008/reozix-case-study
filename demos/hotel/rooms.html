@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Our Rooms — Reozix Hotel</title>
 <meta name="description" content="Four room types at Reozix Hotel on the Mornington Peninsula. Book direct for best rates, late checkout, and a welcome drink.">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%23a8863d%27/%3E%3Ctext x=%278%27 y=%2712%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2711%27 fill=%27%23fffdf9%27%3ER%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap"></noscript>
 <link rel="stylesheet" href="../shared/css/reset.css">
 <link rel="stylesheet" href="css/hotel.css">
 </head>
@@ -13,142 +19,203 @@
 <nav class="hotel-nav">
   <div class="container">
     <a href="index.html" class="logo">Reozix Hotel</a>
-    <button class="nav-toggle" aria-label="Menu">☰</button>
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+    </button>
     <div class="nav-links">
       <a href="rooms.html">Rooms</a>
+      <a href="index.html#experiences">Experiences</a>
       <a href="index.html#about">About</a>
-      <a href="index.html#location">Location</a>
-      <a href="tel:+61359841200">+61 3 5984 1200</a>
-      <a href="booking.html" class="book-btn">Book Now</a>
+      <a href="index.html#faq">FAQ</a>
+      <select class="currency-select" id="currency-select" aria-label="Display currency"><option value="AUD">AUD $</option><option value="NZD">NZD $</option><option value="USD">USD $</option><option value="GBP">GBP £</option></select><a href="tel:+61359841200">+61 3 5984 1200</a>
+      <a href="booking.html" class="book-btn">Book your stay</a>
     </div>
   </div>
 </nav>
 
-<!-- Direct booking perk banner -->
-<div class="perk-banner offset-top">
+<main>
+<!-- Direct booking perks -->
+<div class="perk-strip offset-top">
   <div class="container">
     <div class="perks">
-      <span class="perk-item">🏷️ Best rate guaranteed</span>
-      <span class="perk-item">🕐 Late checkout until 1pm</span>
-      <span class="perk-item">🍷 Welcome drink on arrival</span>
+      <span class="perk-item">Best rate guaranteed</span>
+      <span class="perk-item">Late checkout until 1pm, on us</span>
+      <span class="perk-item">Welcome drink from our cellar</span>
     </div>
   </div>
 </div>
 
-<!-- Availability checker -->
-<div class="container">
-  <div class="date-picker-bar">
-    <h3>Check availability</h3>
-    <div class="picker-row">
+<!-- Availability -->
+<div class="container" id="availability" style="padding-top:48px;">
+  <form class="booking-widget center-margin" novalidate>
+    <h2 class="sr-only">Check availability</h2>
+    <div class="widget-row">
       <div class="field">
         <label for="checkin">Check-in</label>
-        <input type="date" id="checkin" value="2026-09-01">
+        <input type="date" id="checkin" aria-required="true">
       </div>
       <div class="field">
         <label for="checkout">Check-out</label>
-        <input type="date" id="checkout" value="2026-09-03">
+        <input type="date" id="checkout" aria-required="true">
       </div>
       <div class="field">
         <label for="guests">Guests</label>
-        <select id="guests">
-          <option>1 guest</option>
-          <option selected>2 guests</option>
-          <option>3 guests</option>
-          <option>4 guests</option>
+        <select id="guests" aria-required="true">
+          <option value="1">1 guest</option>
+          <option value="2" selected>2 guests</option>
+          <option value="3">3 guests</option>
+          <option value="4">4 guests</option>
         </select>
       </div>
-      <button class="check-btn" id="check-btn" type="button">Check</button>
+      <div class="btn-cell">
+        <button class="check-btn" id="check-btn" type="submit">
+          Update
+          <span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></span>
+        </button>
+      </div>
     </div>
-  </div>
+    <p class="picker-error" id="dates-error" role="alert"></p>
+  </form>
 </div>
 
 <!-- Rooms -->
-<section class="rooms-section">
+<section class="rooms-section" style="padding-top:56px;">
   <div class="container">
     <h1 class="page-heading">Our Rooms</h1>
-    <p class="section-sub">Four room types. Direct booking rates.</p>
-    <!-- These four cards intentionally mirror js/data.js but are kept static for
-         no-JS rendering (the page works without JavaScript). -->
-    <div class="room-grid">
-      <div class="room-card">
-        <div class="room-img">
-          <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&q=80" alt="Vineyard Suite" loading="lazy">
-        </div>
-        <div class="room-info">
-          <h3>Vineyard Suite</h3>
-          <p class="desc">King bed, vineyard views, freestanding bath, private balcony. 42m².</p>
-          <div class="amenities-preview">
-            <span>🛏️ King bed</span><span>🌅 Vineyard views</span><span>🛁 Freestanding bath</span><span>🌤️ Private balcony</span><span>🚿 Rain shower</span><span>🍾 Minibar</span><span>☕ Nespresso machine</span><span>🧖 Bathrobes</span>
-          </div>
-          <p class="rate">$380 <span>AUD / night</span></p>
-          <a href="room-detail.html?id=vineyard-suite" class="btn">View room</a>
-        </div>
-      </div>
-      <div class="room-card">
-        <div class="room-img">
-          <img src="https://images.unsplash.com/photo-1595576508898-0ad5c879a061?w=600&q=80" alt="Ocean King" loading="lazy">
-        </div>
-        <div class="room-info">
-          <h3>Ocean King</h3>
-          <p class="desc">King bed, ocean views, walk-in shower, sitting area. 35m².</p>
-          <div class="amenities-preview">
-            <span>🛏️ King bed</span><span>🌊 Ocean views</span><span>🚿 Walk-in shower</span><span>🛋️ Sitting area</span><span>🍾 Minibar</span><span>☕ Nespresso machine</span><span>🧖 Bathrobes</span>
-          </div>
-          <p class="rate">$320 <span>AUD / night</span></p>
-          <a href="room-detail.html?id=ocean-king" class="btn">View room</a>
-        </div>
-      </div>
-      <div class="room-card">
-        <div class="room-img">
-          <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&q=80" alt="Garden Queen" loading="lazy">
-        </div>
-        <div class="room-info">
-          <h3>Garden Queen</h3>
-          <p class="desc">Queen bed, garden terrace, shower. 28m².</p>
-          <div class="amenities-preview">
-            <span>🛏️ Queen bed</span><span>🌿 Garden terrace</span><span>🚿 Shower</span><span>🍾 Minibar</span><span>🍵 Tea &amp; coffee</span>
-          </div>
-          <p class="rate">$240 <span>AUD / night</span></p>
-          <a href="room-detail.html?id=garden-queen" class="btn">View room</a>
-        </div>
-      </div>
-      <div class="room-card">
-        <div class="room-img">
-          <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=600&q=80" alt="Family Suite" loading="lazy">
-        </div>
-        <div class="room-info">
-          <h3>Family Suite</h3>
-          <p class="desc">King + two singles, garden access, bath and shower. 55m².</p>
-          <div class="amenities-preview">
-            <span>🛏️ King bed</span><span>🛏️ Two single beds</span><span>🌿 Garden access</span><span>🛁 Bath &amp; shower</span><span>🍾 Minibar</span><span>☕ Nespresso machine</span><span>🎲 Board games</span>
-          </div>
-          <p class="rate">$450 <span>AUD / night</span></p>
-          <a href="room-detail.html?id=family-suite" class="btn">View room</a>
-        </div>
+    <p class="page-sub">Four room types. Rates are nightly, GST-inclusive.</p>
+    <!-- Stay context carried from the homepage widget; hidden without JS -->
+    <div class="stay-strip" id="stay-strip" style="display:none;" role="status"></div>
+    <div class="list-controls">
+      <p class="count" id="room-count"></p>
+      <div class="field" style="min-width:220px;">
+        <label for="sort-by">Sort by</label>
+        <select id="sort-by">
+          <option value="recommended">Recommended</option>
+          <option value="price-asc">Price · low to high</option>
+          <option value="price-desc">Price · high to low</option>
+          <option value="size">Size · largest first</option>
+        </select>
       </div>
     </div>
+    <div class="room-grid" id="room-grid"></div>
   </div>
 </section>
+
+</main>
 
 <footer class="hotel-footer">
   <div class="container">
     <div>
-      <strong>Reozix Hotel</strong><br>
+      <strong>Reozix Hotel</strong><br><br>
       Mornington Peninsula, Victoria<br>
       <a href="tel:+61359841200">+61 3 5984 1200</a>
     </div>
     <div>
-      <a href="rooms.html">Rooms</a> · <a href="index.html#about">About</a> · <a href="index.html#location">Location</a> · <a href="tel:+61359841200">Contact</a>
+      <a href="index.html#experiences">Experiences</a> · <a href="index.html#about">About</a> · <a href="index.html#faq">FAQ</a> · <a href="tel:+61359841200">Contact</a>
     </div>
   </div>
 </footer>
 
 <script src="../shared/js/utils.js"></script>
+<script src="js/data.js"></script>
 <script>
-// Check button → rooms list (S4: no inline onclick)
-document.getElementById('check-btn').addEventListener('click', function() {
-  window.location.href = 'rooms.html';
+// Rooms listing: renders from HOTEL_DATA with live stay totals (from the URL
+// stay), capacity checks against the party size, and scarcity badges.
+document.addEventListener('DOMContentLoaded', function() {
+  var ci = document.getElementById('checkin');
+  var co = document.getElementById('checkout');
+  var guestsSel = document.getElementById('guests');
+  var error = document.getElementById('dates-error');
+
+  function defaultDates() {
+    var d = new Date(); d.setDate(d.getDate() + 7);
+    var o = new Date(d); o.setDate(o.getDate() + 2);
+    return { checkin: RZ.iso(d), checkout: RZ.iso(o) };
+  }
+  var stayUrl = RZ.stayFromUrl();
+  var fb = defaultDates();
+  ci.value = stayUrl.checkin || fb.checkin;
+  co.value = stayUrl.checkout || fb.checkout;
+  if (stayUrl.guests) guestsSel.value = String(stayUrl.guests);
+  ci.min = RZ.iso(new Date());
+  ci.addEventListener('change', function() {
+    if (!ci.value) return;
+    var d = new Date(ci.value + 'T12:00'); d.setDate(d.getDate() + 1);
+    co.min = RZ.iso(d);
+  });
+
+  document.getElementById('availability').addEventListener('submit', function(e) {
+    e.preventDefault();
+    error.classList.remove('show');
+    if (!RZ.nights(ci.value, co.value)) {
+      error.textContent = !ci.value || !co.value ? 'Select both a check-in and a check-out date.' : 'Check-out must be at least one night after check-in.';
+      error.classList.add('show');
+      return;
+    }
+    window.location.search = new URLSearchParams({ checkin: ci.value, checkout: co.value, guests: guestsSel.value }).toString();
+  });
+
+  /* Stay summary strip */
+  var nights = RZ.nights(ci.value, co.value);
+  var guests = parseInt(guestsSel.value, 10) || 2;
+  if (stayUrl.checkin && stayUrl.checkout && nights) {
+    var strip = document.getElementById('stay-strip');
+    strip.style.display = '';
+    strip.innerHTML =
+      '<span><strong>' + RZ.fmtDate(ci.value) + '</strong> → <strong>' + RZ.fmtDate(co.value) + '</strong></span>' +
+      '<span class="sep">·</span>' +
+      '<span>' + nights + (nights === 1 ? ' night' : ' nights') + '</span>' +
+      '<span class="sep">·</span>' +
+      '<span>' + guests + (guests === 1 ? ' guest' : ' guests') + '</span>' +
+      '<a class="edit-link" href="#availability">Edit</a>';
+  }
+
+  /* Card rendering */
+  var grid = document.getElementById('room-grid');
+  var countEl = document.getElementById('room-count');
+
+  function roomCard(room) {
+    var left = hotelRoomsLeft(room.id, ci.value);
+    var tooSmall = guests > room.maxGuests;
+    var card = document.createElement('article');
+    card.className = 'room-card';
+    card.innerHTML =
+      '<div class="room-img">' +
+        '<img src="https://images.unsplash.com/photo-' + room.imgId + '?w=700&q=80" alt="' + room.name + '" loading="lazy">' +
+        (!tooSmall && left > 0 && left <= 2 ? '<span class="urgency">Only ' + left + (left === 1 ? ' room' : ' rooms') + ' left</span>' : '') +
+        (left === 0 ? '<span class="urgency" style="background:rgba(90,30,30,.85);">Sold out for these dates</span>' : '') +
+      '</div>' +
+      '<div class="room-info">' +
+        '<h3>' + room.name + '</h3>' +
+        '<p class="sleeps">Sleeps up to ' + room.maxGuests + '</p>' +
+        '<p class="desc">' + room.description + '</p>' +
+        '<div class="amenities-preview">' + room.amenities.slice(0, 4).map(function(a){ return '<span>' + a + '</span>'; }).join('') + '</div>' +
+        '<p class="rate-line"><span class="rate-num">' + hotelMoney(room.rate) + '</span><span class="rate-unit">AUD / night</span>' +
+          (nights > 1 ? '<span class="rate-total">· ' + hotelMoney(room.rate * nights) + ' total incl. GST</span>' : '') +
+        '</p>' +
+        (tooSmall
+          ? '<p class="too-small-msg">Too small for your party of ' + guests + ' — try the Family Suite.</p>'
+          : '<a href="room-detail.html?' + new URLSearchParams({ id: room.id, checkin: ci.value || '', checkout: co.value || '', guests: String(guests) }).toString() + '" class="btn">' +
+              (left === 0 ? 'Join waitlist' : 'View room & rates') +
+              '<span class="btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M17 7H9M17 7v8"/></svg></span></a>') +
+      '</div>';
+    return card;
+  }
+
+  function render() {
+    var rooms = HOTEL_DATA.rooms.slice();
+    var sort = document.getElementById('sort-by').value;
+    if (sort === 'price-asc') rooms.sort(function(a, b) { return a.rate - b.rate; });
+    else if (sort === 'price-desc') rooms.sort(function(a, b) { return b.rate - a.rate; });
+    else if (sort === 'size') rooms.sort(function(a, b) { return b.maxGuests - a.maxGuests || b.rate - a.rate; });
+    grid.innerHTML = '';
+    rooms.forEach(function(r) { grid.appendChild(roomCard(r)); });
+    countEl.textContent = rooms.length + ' room types · ' + nights + (nights === 1 ? ' night' : ' nights') + ' · ' + guests + (guests === 1 ? ' guest' : ' guests');
+  }
+  document.getElementById('sort-by').addEventListener('change', render);
+  render();
 });
 </script>
+<script>(function(){var s=document.getElementById("currency-select");if(!s)return;try{s.value=localStorage.getItem("hotel-currency")||"AUD";}catch(e){}s.addEventListener("change",function(){try{localStorage.setItem("hotel-currency",s.value);}catch(e){}location.reload();});})();</script>
 </body>
 </html>

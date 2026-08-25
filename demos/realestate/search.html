@@ -6,7 +6,12 @@
 <title>Property Search — Reozix Real Estate, Gold Coast</title>
 <meta name="description" content="Filter every Reozix Real Estate listing by property type, suburb, price range and bedrooms — apartments, houses, townhouses, penthouses and villas across the Gold Coast.">
 <link rel="stylesheet" href="../shared/css/reset.css">
-<link rel="stylesheet" href="css/realestate.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
+    <link rel="stylesheet" href="css/realestate.css">
 </head>
 <body data-page="search">
 
@@ -28,9 +33,31 @@
 <section class="re-section">
   <div class="container">
     <div class="results-header">
-      <h1 class="re-section-title">Search Properties</h1>
-      <p class="results-count">Showing <strong id="result-count">20</strong> of 20 properties</p>
+      <div class="results-header-row">
+        <div>
+          <h1 class="re-section-title">Search Properties</h1>
+          <p class="results-count">Showing <strong id="result-count">20</strong> of 20 properties</p>
+        </div>
+        <div class="results-controls">
+          <button type="button" id="filter-toggle" class="filter-toggle" aria-expanded="false" aria-controls="filter-sidebar">Show filters</button>
+          <div class="results-sort">
+            <label class="sr-only" for="sort-by">Sort results</label>
+            <select id="sort-by">
+              <option value="featured">Featured</option>
+              <option value="price-asc">Price · low to high</option>
+              <option value="price-desc">Price · high to low</option>
+              <option value="beds-desc">Beds · most first</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+        <!-- List / map toggle -->
+    <div class="view-toggle" role="group" aria-label="Result view">
+      <button type="button" class="view-btn active" id="view-list" aria-pressed="true">List</button>
+      <button type="button" class="view-btn" id="view-map" aria-pressed="false">Map</button>
     </div>
+    <div id="map-view" class="map-view" style="display:none;" aria-label="Map of properties"></div>
 
     <div class="search-layout">
       <!-- Filter sidebar -->
@@ -679,6 +706,17 @@
   </div>
 </section>
 
+
+<!-- Vendor conversion band -->
+<section class="re-cta-band">
+  <div class="container re-cta-inner">
+    <div>
+      <h2>Thinking of selling?</h2>
+      <p>Get a free, no-obligation market appraisal for your own property — we'll call you within 24 hours.</p>
+    </div>
+    <a href="appraisal.html" class="re-btn">Request an appraisal</a>
+  </div>
+</section>
 <footer class="re-footer">
   <div class="container">
     <div class="agency">
@@ -701,6 +739,78 @@
 </footer>
 
 <script src="../shared/js/utils.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 <script src="js/search.js"></script>
+<script src="js/favourites.js"></script>
+<script>
+// Map view — Leaflet + OpenStreetMap tiles (no API key). Pins from card data-* attrs.
+(function () {
+  var SUBURB_COORDS = {
+    'Surfers Paradise': [-28.0023, 153.4145],
+    'Broadbeach': [-28.0260, 153.4330],
+    'Burleigh Heads': [-28.0905, 153.4530],
+    'Main Beach': [-27.9950, 153.4390],
+    'Mermaid Beach': [-28.0380, 153.4420],
+    'Palm Beach': [-28.1090, 153.4620],
+    'Coolangatta': [-28.1660, 153.5380],
+    'Southport': [-27.9680, 153.4110],
+    'Hope Island': [-27.8640, 153.3560],
+    'Robina': [-28.0780, 153.3820]
+  };
+  var map = null, markers = [];
+  function ensureMap(cb) {
+    if (map) { cb(); return; }
+    map = L.map('map-view', { scrollWheelZoom: true }).setView([-28.02, 153.43], 11);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 18
+    }).addTo(map);
+    cb();
+  }
+  function updateMap() {
+    var view = document.getElementById('map-view');
+    if (!view || view.style.display === 'none') return;
+    ensureMap(function () {
+      markers.forEach(function (m) { map.removeLayer(m); });
+      markers = [];
+      document.querySelectorAll('.property-card[data-visible="1"]').forEach(function (card) {
+        var base = SUBURB_COORDS[card.dataset.suburb];
+        if (!base) return;
+        var seed = (parseInt(card.dataset.price, 10) || 0) % 40;
+        var lat = base[0] + ((seed % 7) - 3) * 0.004;
+        var lng = base[1] + ((seed % 5) - 2) * 0.004;
+        var link = card.querySelector('a[href*="property-detail.html?id="]');
+        var price = card.querySelector('.property-price');
+        var m = L.marker([lat, lng]).addTo(map)
+          .bindPopup('<strong>' + (price ? price.textContent : '') + '</strong><br>' +
+            (card.dataset.suburb || '') + '<br><a href="' + (link ? link.getAttribute('href') : '#') + '">View listing</a>');
+        markers.push(m);
+      });
+      if (markers.length) map.fitBounds(L.featureGroup(markers).getBounds().pad(0.15));
+    });
+  }
+  window.updateMap = updateMap;
+  document.addEventListener('DOMContentLoaded', function () {
+    var listBtn = document.getElementById('view-list');
+    var mapBtn = document.getElementById('view-map');
+    var view = document.getElementById('map-view');
+    if (!listBtn || !mapBtn || !view) return;
+    listBtn.addEventListener('click', function () {
+      listBtn.classList.add('active'); mapBtn.classList.remove('active');
+      listBtn.setAttribute('aria-pressed', 'true'); mapBtn.setAttribute('aria-pressed', 'false');
+      view.style.display = 'none';
+      document.querySelectorAll('.search-layout').forEach(function (el) { el.style.display = ''; });
+    });
+    mapBtn.addEventListener('click', function () {
+      mapBtn.classList.add('active'); listBtn.classList.remove('active');
+      mapBtn.setAttribute('aria-pressed', 'true'); listBtn.setAttribute('aria-pressed', 'false');
+      view.style.display = 'block';
+      document.querySelectorAll('.search-layout').forEach(function (el) { el.style.display = 'none'; });
+      updateMap();
+      setTimeout(function () { if (map) map.invalidateSize(); }, 60);
+    });
+  });
+})();
+</script>
 </body>
 </html>

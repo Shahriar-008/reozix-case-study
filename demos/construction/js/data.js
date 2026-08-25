@@ -4,7 +4,7 @@ var CONSTRUCTION_DATA = {
     location: 'Brisbane, QLD',
     phone: '+61 7 3186 2400',
     email: 'build@reozix.com.au',
-    licence: '15123456'
+    licence: '71082394'
   },
   projects: [
     {
@@ -278,11 +278,26 @@ var CONSTRUCTION_DATA = {
       status: 'in-progress'
     }
   ],
+  team: [
+    { id: 'tm-001', name: 'David Reozix', role: 'Managing Director', tenure: 'Founded the company in 2014', initials: 'DR', bio: 'Second-generation builder. Runs estimating and client relationships personally — every quote is reviewed by David before it leaves the office.' },
+    { id: 'tm-002', name: 'Sam Tuqiri', role: 'Construction Manager', tenure: 'With Reozix since 2016', initials: 'ST', bio: 'Runs the build program across all active sites. Twenty years on commercial and residential projects across South East Queensland.' },
+    { id: 'tm-003', name: 'Priya Nair', role: 'Senior Site Supervisor', tenure: 'With Reozix since 2018', initials: 'PN', bio: 'Your point of contact once work starts on site. White Card certified, QBCC Site Supervisor licensed.' },
+    { id: 'tm-004', name: "Mick O'Brien", role: 'Estimating Lead', tenure: 'With Reozix since 2017', initials: 'MO', bio: 'Produces the preliminary estimates and fixed-price quotes. If your numbers change, it is usually Mick calling to explain why.' },
+    { id: 'tm-005', name: 'Ellen Park', role: 'Design Manager', tenure: 'With Reozix since 2019', initials: 'EP', bio: 'Coordinates drawings, approvals and certifier sign-off so the build program never waits on paperwork.' },
+    { id: 'tm-006', name: 'Tom Reilly', role: 'Site Foreman', tenure: 'With Reozix since 2015', initials: 'TR', bio: 'Runs the trades on site. Fourteen years in residential construction, apprentice mentor, keeps the site diary you will see each week.' }
+  ],
+  faq: [
+    { q: 'How does your pricing work?', a: 'We provide a free preliminary estimate within 48 hours of your request. If you decide to proceed, we develop a fixed-price quote — locked to scope — within five working days of the site visit.' },
+    { q: 'Do you charge for site visits and estimates?', a: 'No. Site visits across Brisbane and the preliminary estimate are free and carry no obligation.' },
+    { q: 'Are you licensed and insured?', a: 'Yes — QBCC licensed builder (open class), $20M public liability insurance, and QBCC Home Warranty Scheme cover on every residential project over $3,300. Full details are on our Credentials page.' },
+    { q: 'Can you work from our own plans?', a: 'Absolutely. About half of our projects start from architect or building designer plans. We can also manage design and approvals end-to-end if you do not have drawings yet.' },
+    { q: 'What happens during the build?', a: 'A dedicated site supervisor, a weekly site diary with photos, and a fixed program you can see progress against. Variations only ever happen with your written sign-off.' }
+  ],
   services: [
     {
       id: 'svc-001',
       title: 'Commercial Fit-Outs',
-      icon: '🏢',
+      icon: 'building',
       description: 'Turnkey fit-outs for offices, retail and medical spaces across Brisbane\'s CBD and inner suburbs. We take your space from bare shell to move-in ready — planning, approvals, construction and handover all under one contract.',
       process: ['Initial consultation', 'Design & documentation', 'Construction & fit-out', 'Handover & aftercare'],
       timeline: '8–16 weeks',
@@ -293,7 +308,7 @@ var CONSTRUCTION_DATA = {
     {
       id: 'svc-002',
       title: 'Residential Extensions',
-      icon: '🏠',
+      icon: 'home',
       description: 'Second-storey additions, rear extensions and deck builds that give your Brisbane home the space it needs — without the cost of moving. We handle council approvals and engineer every addition to the existing structure.',
       process: ['Site consultation & feasibility', 'Design & council approvals', 'Construction', 'Handover & finishing'],
       timeline: '10–20 weeks',
@@ -304,7 +319,7 @@ var CONSTRUCTION_DATA = {
     {
       id: 'svc-003',
       title: 'New Builds',
-      icon: '🏗️',
+      icon: 'crane',
       description: 'Custom homes, duplexes and townhouse developments built to your plans or designed from the ground up. Fixed-price contracts, a dedicated site supervisor and a 10-year structural warranty on every build.',
       process: ['Design consultation', 'Council & approvals', 'Construction', 'Handover & warranty'],
       timeline: '6–10 months',
@@ -315,7 +330,7 @@ var CONSTRUCTION_DATA = {
     {
       id: 'svc-004',
       title: 'Renovations',
-      icon: '🔨',
+      icon: 'hammer',
       description: 'Kitchens, bathrooms and whole-home renovations that modernise your space without losing its character. From heritage restorations to contemporary makeovers, our licensed trades deliver clean, on-time transformations.',
       process: ['Consultation & scope', 'Design & approvals', 'Construction', 'Handover & final clean'],
       timeline: '4–10 weeks',

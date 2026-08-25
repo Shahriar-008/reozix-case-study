@@ -6,7 +6,11 @@
 <title>Property Details — Reozix Real Estate, Gold Coast</title>
 <meta name="description" content="Full listing details for Gold Coast property with photo gallery, key facts, features and the listing agent. Request a free appraisal from Reozix Real Estate.">
 <link rel="stylesheet" href="../shared/css/reset.css">
-<link rel="stylesheet" href="css/realestate.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
+    <link rel="stylesheet" href="css/realestate.css">
 </head>
 <body data-page="property-detail">
 
@@ -74,7 +78,25 @@
             <a class="view-profile" id="agent-profile-link" href="">View full profile →</a>
           </div>
 
-          <div class="appraisal-card">
+          <!-- Inspection time + request form -->
+                    <div class="inspection-card" id="inspection-card" style="display:none;">
+                      <h3>Inspection</h3>
+                      <p class="inspection-time"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg> <span id="inspection-time"></span></p>
+                      <form id="request-inspection" novalidate>
+                        <div class="field">
+                          <label for="ri-name">Name</label>
+                          <input type="text" id="ri-name" autocomplete="name" aria-required="true">
+                        </div>
+                        <div class="field">
+                          <label for="ri-email">Email</label>
+                          <input type="email" id="ri-email" autocomplete="email" aria-required="true">
+                        </div>
+                        <p class="field-error" id="ri-error" role="alert" style="display:none;"></p>
+                        <button type="submit" class="re-btn re-btn-outline">Request a private inspection</button>
+                      </form>
+                      <p class="form-success" id="ri-success" role="status" style="display:none;">Inspection request sent — the agent will confirm a time by email.</p>
+                    </div>
+                    <div class="appraisal-card">
             <h3>Want to know what this home is worth?</h3>
             <p>Get a free, no-obligation appraisal from our local Gold Coast team.</p>
             <a class="re-btn" id="appraisal-btn" href="appraisal.html">Request an Appraisal</a>
@@ -115,6 +137,7 @@
 
 <script src="../shared/js/utils.js"></script>
 <script src="js/data.js"></script>
+<script src="js/favourites.js"></script>
 <script>
 // Property detail page — renders one listing from RE_DATA based on ?id=
 (function() {
@@ -252,9 +275,21 @@
   var src = function(id, w) { return 'https://images.unsplash.com/' + id + '?w=' + w + '&q=80'; };
   var mainImg = document.getElementById('gallery-main-img');
   var thumbs = document.getElementById('gallery-thumbs');
+  var currentIdx = 0;
 
   mainImg.src = src(images[0], 1200);
   mainImg.alt = street + ' — ' + property.type + ', photo 1';
+
+  // Fullscreen lightbox over the same set
+  var lightbox = RZ.makeLightbox(
+    images.map(function(imgId, i) {
+      return { src: src(imgId, 1600), alt: street + ' — ' + property.type + ', photo ' + (i + 1) };
+    })
+  );
+  document.querySelector('.gallery-main').classList.add('lb-enabled');
+  document.querySelector('.gallery-main').addEventListener('click', function() {
+    lightbox.open(currentIdx);
+  });
 
   images.forEach(function(imgId, i) {
     var btn = document.createElement('button');
@@ -267,12 +302,14 @@
     img.loading = 'lazy';
     btn.appendChild(img);
     btn.addEventListener('click', function() {
+      currentIdx = i;
       mainImg.src = src(imgId, 1200);
       mainImg.alt = street + ' — ' + property.type + ', photo ' + (i + 1);
       var active = thumbs.querySelector('.active');
       if (active) active.classList.remove('active');
       btn.classList.add('active');
     });
+    btn.addEventListener('dblclick', function() { lightbox.open(i); });
     thumbs.appendChild(btn);
   });
 
@@ -320,6 +357,38 @@
 
   // "Request an Appraisal" CTA — pre-fills the property on the appraisal form
   document.getElementById('appraisal-btn').href = 'appraisal.html?property=' + encodeURIComponent(property.id);
+
+  // Inspection card — show the open-home window, wire the private-inspection request
+  (function () {
+    var card = document.getElementById('inspection-card');
+    if (!card) return;
+    if (property.inspection) {
+      document.getElementById('inspection-time').textContent = property.inspection;
+      card.style.display = '';
+    }
+    var form = document.getElementById('request-inspection');
+    var success = document.getElementById('ri-success');
+    var err = document.getElementById('ri-error');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('ri-name');
+      var email = document.getElementById('ri-email');
+      var bad = [];
+      if (!name.value.trim()) bad.push(name);
+      if (!/.+@.+\..+/.test(email.value.trim())) bad.push(email);
+      [name, email].forEach(function (f) { f.classList.toggle('invalid', bad.indexOf(f) !== -1); });
+      if (bad.length) {
+        err.textContent = 'Please add your name and a valid email.';
+        err.style.display = 'block';
+        bad[0].focus();
+        return;
+      }
+      err.style.display = 'none';
+      form.style.display = 'none';
+      success.style.display = 'block';
+    });
+    [name, email].forEach(function () {});
+  })();
 })();
 </script>
 </body>
