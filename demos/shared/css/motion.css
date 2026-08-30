@@ -1,0 +1,675 @@
+/* ==========================================================================
+   Reozix Shared Motion & Animation System
+   Lively, high-performance, GPU-accelerated motion for all vertical demos.
+   ========================================================================== */
+
+:root {
+  --rz-ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --rz-ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --rz-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --rz-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  --rz-dur-fast: 0.2s;
+  --rz-dur-normal: 0.4s;
+  --rz-dur-slow: 0.8s;
+  --rz-dur-gentle: 1.2s;
+}
+
+/* --------------------------------------------------------------------------
+   1. Scroll Reveal System
+   -------------------------------------------------------------------------- */
+.rz-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity var(--rz-dur-slow) var(--rz-ease-out-expo),
+              transform var(--rz-dur-slow) var(--rz-ease-out-expo),
+              filter var(--rz-dur-slow) var(--rz-ease-out-expo);
+  will-change: opacity, transform;
+}
+
+.rz-reveal.rz-reveal-left {
+  transform: translateX(-36px);
+}
+
+.rz-reveal.rz-reveal-right {
+  transform: translateX(36px);
+}
+
+.rz-reveal.rz-reveal-scale {
+  transform: scale(0.92) translateY(16px);
+}
+
+.rz-reveal.is-revealed {
+  opacity: 1;
+  transform: translate(0, 0) scale(1);
+}
+
+/* Stagger cascade helper */
+.rz-stagger-parent > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--rz-dur-slow) var(--rz-ease-out-expo),
+              transform var(--rz-dur-slow) var(--rz-ease-out-expo);
+  will-change: opacity, transform;
+}
+
+.rz-stagger-parent.is-revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.rz-stagger-parent.is-revealed > *:nth-child(1) { transition-delay: 0.04s; }
+.rz-stagger-parent.is-revealed > *:nth-child(2) { transition-delay: 0.12s; }
+.rz-stagger-parent.is-revealed > *:nth-child(3) { transition-delay: 0.20s; }
+.rz-stagger-parent.is-revealed > *:nth-child(4) { transition-delay: 0.28s; }
+.rz-stagger-parent.is-revealed > *:nth-child(5) { transition-delay: 0.36s; }
+.rz-stagger-parent.is-revealed > *:nth-child(6) { transition-delay: 0.44s; }
+.rz-stagger-parent.is-revealed > *:nth-child(7) { transition-delay: 0.52s; }
+.rz-stagger-parent.is-revealed > *:nth-child(8) { transition-delay: 0.60s; }
+
+/* --------------------------------------------------------------------------
+   2. Interactive Card Physics & Depth
+   -------------------------------------------------------------------------- */
+.rz-card-interactive {
+  transition: transform var(--rz-dur-normal) var(--rz-ease-out-expo),
+              box-shadow var(--rz-dur-normal) var(--rz-ease-out-expo),
+              border-color var(--rz-dur-fast) ease !important;
+}
+
+.rz-card-interactive:hover {
+  transform: translateY(-6px) scale(1.008);
+}
+
+.rz-img-zoom {
+  overflow: hidden;
+}
+
+.rz-img-zoom img {
+  transition: transform 0.65s var(--rz-ease-out-expo), filter 0.65s ease;
+  will-change: transform;
+}
+
+.rz-img-zoom:hover img,
+.rz-card-interactive:hover .rz-img-zoom img,
+.room-card:hover .room-img img,
+.property-card:hover .property-photo img,
+.ct-project-card:hover .ct-project-photo img,
+.project-card:hover .ct-project-photo img {
+  transform: scale(1.08);
+}
+
+/* --------------------------------------------------------------------------
+   3. Shimmer, Sweep & Metallic Highlights
+   -------------------------------------------------------------------------- */
+@keyframes rz-shimmer {
+  0% { transform: translateX(-100%) rotate(25deg); }
+  100% { transform: translateX(250%) rotate(25deg); }
+}
+
+.rz-shimmer-badge {
+  position: relative;
+  overflow: hidden;
+}
+
+.rz-shimmer-badge::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.28) 50%,
+    transparent 100%
+  );
+  animation: rz-shimmer 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   4. Ambient Floating & Hero Pan
+   -------------------------------------------------------------------------- */
+@keyframes rz-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-7px); }
+}
+
+@keyframes rz-float-subtle {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-4px) rotate(0.5deg); }
+}
+
+.rz-float {
+  animation: rz-float 4.5s ease-in-out infinite;
+}
+
+.rz-float-subtle {
+  animation: rz-float-subtle 6s ease-in-out infinite;
+}
+
+@keyframes ctHeroPan {
+  0% { transform: scale(1.02) translate(0, 0); }
+  50% { transform: scale(1.08) translate(-1.5%, -1%); }
+  100% { transform: scale(1.03) translate(1%, -0.5%); }
+}
+
+.ct-hero-bg {
+  animation: ctHeroPan 24s ease-in-out infinite alternate !important;
+  will-change: transform;
+}
+
+/* --------------------------------------------------------------------------
+   5. Live Status Radar Pulse
+   -------------------------------------------------------------------------- */
+@keyframes rz-pulse-ring {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  70% { transform: scale(2.4); opacity: 0; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+@keyframes rz-pulse-dot {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.rz-live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 10px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  position: relative;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.rz-pulse-dot {
+  position: relative;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10b981;
+  display: inline-block;
+}
+
+.rz-pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: 50%;
+  background: inherit;
+  animation: rz-pulse-ring 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+}
+
+.rz-pulse-dot.pulse-gold { background: #d4a853; }
+.rz-pulse-dot.pulse-blue { background: #4a90d9; }
+.rz-pulse-dot.pulse-orange { background: #e8752a; }
+
+/* --------------------------------------------------------------------------
+   6. Live Projects Continuous Scrolling Marquee Ticker
+   -------------------------------------------------------------------------- */
+@keyframes rzTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.ct-ticker-wrap {
+  width: 100%;
+  background: #141311;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(232, 117, 42, 0.35);
+  overflow: hidden;
+  padding: 12px 0;
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  display: flex;
+  position: relative;
+  z-index: 10;
+}
+
+.ct-ticker-track {
+  display: flex;
+  white-space: nowrap;
+  animation: rzTicker 38s linear infinite;
+  width: max-content;
+}
+
+.ct-ticker-wrap:hover .ct-ticker-track {
+  animation-play-state: paused;
+}
+
+.ct-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 28px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.ct-ticker-item strong {
+  color: #fff;
+}
+
+.ct-ticker-item .ticker-tag {
+  background: rgba(232, 117, 42, 0.2);
+  color: #e8752a;
+  border: 1px solid rgba(232, 117, 42, 0.4);
+  font-size: 0.7rem;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+.ct-ticker-sep {
+  color: rgba(255, 255, 255, 0.25);
+  margin-left: 28px;
+}
+
+/* --------------------------------------------------------------------------
+   7. Button & Action Physics
+   -------------------------------------------------------------------------- */
+.rz-btn-animated {
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--rz-dur-fast) var(--rz-ease-spring),
+              box-shadow var(--rz-dur-normal) var(--rz-ease-out-expo),
+              background-color var(--rz-dur-fast) ease !important;
+}
+
+.rz-btn-animated:active {
+  transform: scale(0.96) !important;
+}
+
+.rz-btn-animated .btn-arrow,
+.rz-btn-animated svg {
+  transition: transform var(--rz-dur-normal) var(--rz-ease-spring);
+}
+
+.rz-btn-animated:hover .btn-arrow,
+.rz-btn-animated:hover svg {
+  transform: translate(3px, -2px);
+}
+
+/* --------------------------------------------------------------------------
+   8. Interactive Heart Bookmark (Real Estate / Hotel)
+   -------------------------------------------------------------------------- */
+@keyframes rz-heart-pop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.4); }
+  65% { transform: scale(0.85); }
+  100% { transform: scale(1); }
+}
+
+@keyframes rz-heart-burst {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+.rz-favorite-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  transition: transform var(--rz-dur-fast) var(--rz-ease-spring),
+              background var(--rz-dur-fast) ease,
+              color var(--rz-dur-fast) ease;
+}
+
+.rz-favorite-btn:hover {
+  transform: scale(1.12);
+  background: #ffffff;
+  color: #e11d48;
+}
+
+.rz-favorite-btn svg {
+  width: 18px;
+  height: 18px;
+  transition: transform var(--rz-dur-fast) ease, fill var(--rz-dur-fast) ease;
+}
+
+.rz-favorite-btn.is-active {
+  color: #e11d48;
+}
+
+.rz-favorite-btn.is-active svg {
+  fill: #e11d48;
+  animation: rz-heart-pop 0.45s var(--rz-ease-spring) forwards;
+}
+
+.rz-favorite-btn.is-popping::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(225, 29, 72, 0.35);
+  animation: rz-heart-burst 0.5s ease-out forwards;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   9. Reusable Dynamic Toast Notification System
+   -------------------------------------------------------------------------- */
+.rz-toast-container {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.rz-toast {
+  pointer-events: auto;
+  min-width: 260px;
+  max-width: 380px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  background: #1a1a1a;
+  color: #ffffff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 2px 6px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  transition: transform 0.35s var(--rz-ease-spring), opacity 0.3s ease;
+}
+
+.rz-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.rz-toast.toast-hotel {
+  background: #221c12;
+  border-color: rgba(212, 168, 83, 0.3);
+}
+
+.rz-toast.toast-realestate {
+  background: #14283a;
+  border-color: rgba(74, 144, 217, 0.3);
+}
+
+.rz-toast.toast-construction {
+  background: #1c1a17;
+  border-color: rgba(232, 117, 42, 0.3);
+}
+
+.rz-toast-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   10. Interactive Before / After Split Slider
+   -------------------------------------------------------------------------- */
+.rz-compare-container {
+  position: relative;
+  width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  user-select: none;
+  touch-action: pan-y;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+.rz-compare-after {
+  width: 100%;
+  display: block;
+}
+
+.rz-compare-before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+  transition: clip-path 0.05s linear;
+}
+
+.rz-compare-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 3px;
+  background: #ffffff;
+  cursor: ew-resize;
+  transform: translateX(-50%);
+  z-index: 10;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: left 0.05s linear;
+}
+
+.rz-compare-knob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #e8752a;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  font-size: 0.8rem;
+  font-weight: 700;
+  border: 2px solid #ffffff;
+}
+
+.rz-compare-badge {
+  position: absolute;
+  top: 14px;
+  z-index: 8;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: rgba(0, 0, 0, 0.65);
+  backdrop-filter: blur(4px);
+  color: #ffffff;
+  pointer-events: none;
+}
+
+.rz-compare-badge.badge-before { left: 14px; }
+.rz-compare-badge.badge-after { right: 14px; }
+
+/* --------------------------------------------------------------------------
+   11. Interactive Quick Estimator Widget (Construction)
+   -------------------------------------------------------------------------- */
+.ct-quick-calc {
+  background: linear-gradient(135deg, #22201d 0%, #171614 100%);
+  border: 1px solid rgba(232, 117, 42, 0.3);
+  border-radius: 18px;
+  padding: 36px;
+  color: #fff;
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.35);
+  margin: 40px auto 0;
+  max-width: 960px;
+}
+
+.ct-calc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  align-items: center;
+}
+
+.ct-calc-field label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.ct-calc-field select,
+.ct-calc-field input[type="range"] {
+  width: 100%;
+}
+
+.ct-calc-select {
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ct-calc-select:focus {
+  outline: none;
+  border-color: #e8752a;
+  box-shadow: 0 0 0 3px rgba(232, 117, 42, 0.25);
+}
+
+.ct-calc-select option {
+  background: #1c1a17;
+  color: #fff;
+}
+
+.ct-range-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 8px;
+}
+
+.ct-range-val {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #e8752a;
+}
+
+.ct-calc-output-box {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ct-output-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 12px;
+}
+
+.ct-output-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.ct-output-label {
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.ct-output-val {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.ct-output-val.accent {
+  color: #e8752a;
+}
+
+@media (max-width: 768px) {
+  .ct-calc-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12. Form Focus & Error Shakes
+   -------------------------------------------------------------------------- */
+@keyframes rz-shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+.rz-shake {
+  animation: rz-shake 0.4s ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   13. Header Depth On Scroll
+   -------------------------------------------------------------------------- */
+.nav-scrolled {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  transition: background 0.3s ease, box-shadow 0.3s ease, padding 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   14. Reduced Motion Fallback
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .rz-reveal,
+  .rz-reveal.rz-reveal-left,
+  .rz-reveal.rz-reveal-right,
+  .rz-reveal.rz-reveal-scale,
+  .rz-stagger-parent > * {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  
+  .rz-float,
+  .rz-float-subtle,
+  .ct-hero-bg,
+  .ct-ticker-track,
+  .rz-shimmer-badge::after,
+  .rz-pulse-dot::before {
+    animation: none !important;
+  }
+  
+  .rz-favorite-btn.is-active svg {
+    animation: none !important;
+  }
+}

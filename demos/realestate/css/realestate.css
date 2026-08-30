@@ -891,3 +891,83 @@ body { font-family: var(--re-font); letter-spacing: -0.005em; }
   color: #fff; display: inline-flex; align-items: center; justify-content: center;
   font-weight: 700; font-size: 0.875rem; letter-spacing: 0.02em;
 }
+
+/* ---- Real Estate Motion Enhancements ---- */
+.property-card {
+  position: relative;
+  transition: transform var(--rz-dur-normal) var(--rz-ease-out-expo),
+              box-shadow var(--rz-dur-normal) var(--rz-ease-out-expo) !important;
+}
+
+.property-card:hover {
+  transform: translateY(-6px) scale(1.008) !important;
+  box-shadow: 0 16px 36px rgba(20, 40, 58, 0.12) !important;
+}
+
+.property-card .price-badge {
+  transition: transform var(--rz-dur-fast) var(--rz-ease-spring);
+}
+
+.property-card:hover .price-badge {
+  transform: scale(1.05);
+}
+
+.property-card .prop-features .feature {
+  transition: transform var(--rz-dur-fast) ease, background var(--rz-dur-fast) ease, color var(--rz-dur-fast) ease;
+}
+
+.property-card:hover .prop-features .feature {
+  background: var(--re-accent-light);
+  color: var(--re-accent-dark);
+}
+
+.re-hero .search-bar {
+  transition: transform var(--rz-dur-normal) var(--rz-ease-out-expo),
+              box-shadow var(--rz-dur-normal) var(--rz-ease-out-expo);
+}
+
+.re-hero .search-bar:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 48px rgba(74, 144, 217, 0.25);
+}
+
+.suburb-card {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--re-shadow);
+  transition: transform var(--rz-dur-normal) var(--rz-ease-out-expo),
+              box-shadow var(--rz-dur-normal) var(--rz-ease-out-expo);
+}
+
+.suburb-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 36px rgba(20, 40, 58, 0.16);
+}
+
+.suburb-card img {
+  transition: transform 0.75s var(--rz-ease-out-expo);
+}
+
+.suburb-card:hover img {
+  transform: scale(1.08);
+}
+
+.agent-card {
+  transition: transform var(--rz-dur-normal) var(--rz-ease-out-expo),
+              box-shadow var(--rz-dur-normal) var(--rz-ease-out-expo);
+}
+
+.agent-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 32px rgba(20, 40, 58, 0.12);
+}
+
+.agent-card .agent-photo img {
+  transition: transform 0.6s var(--rz-ease-out-expo);
+}
+
+.agent-card:hover .agent-photo img {
+  transform: scale(1.05);
+}
+

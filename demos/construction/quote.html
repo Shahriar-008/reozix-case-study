@@ -67,6 +67,7 @@
         <div class="wstep"><span class="wn">2</span> Contact</div>
         <div class="wstep"><span class="wn">3</span> Review</div>
       </div>
+      <div class="ct-progress-track" style="height:6px;background:#e2e8f0;border-radius:100px;overflow:hidden;margin-bottom:28px;"><div class="ct-progress-fill" id="wizard-progress-bar" style="width:33.33%;height:100%;"></div></div>
 
       <form id="quote-form" class="ct-quote-form" novalidate>
         <!-- Step 1: project -->
@@ -278,6 +279,10 @@
 
   function showStep(n) {
     current = n;
+    var progressBar = document.getElementById('wizard-progress-bar');
+    if (progressBar) {
+      progressBar.style.width = (n === 1 ? '33.33%' : n === 2 ? '66.66%' : '100%');
+    }
     panels.forEach(function (p) { p.style.display = parseInt(p.getAttribute('data-step'), 10) === n ? 'block' : 'none'; });
     steps.forEach(function (s, i) {
       s.className = 'wstep';

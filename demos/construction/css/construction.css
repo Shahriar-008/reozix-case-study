@@ -906,3 +906,179 @@ h1, h2, h3, .ct-page-kicker { font-family: var(--ct-font-display); }
   .ct-quote-wrap { padding: 28px 22px 32px; }
   .ct-quote-form .ct-form-row { grid-template-columns: 1fr; gap: 0; }
 }
+
+
+/* ---- Construction Motion Enhancements ---- */
+.ct-hero { position: relative; overflow: hidden; }
+.ct-hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-size: 32px 32px;
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  pointer-events: none; z-index: 1;
+}
+.ct-stat { transition: transform var(--rz-dur-fast) var(--rz-ease-spring); }
+.ct-stat:hover { transform: translateY(-3px); }
+.ct-project-card {
+  position: relative; border-radius: 14px; overflow: hidden;
+  transition: transform var(--rz-dur-normal) var(--rz-ease-out-expo), box-shadow var(--rz-dur-normal) var(--rz-ease-out-expo), border-color var(--rz-dur-fast) ease !important;
+}
+.ct-project-card:hover {
+  transform: translateY(-6px) scale(1.008) !important;
+  box-shadow: 0 16px 36px rgba(26, 26, 26, 0.12) !important;
+  border-color: rgba(192, 90, 18, 0.35) !important;
+}
+.ct-project-photo img { transition: transform 0.75s var(--rz-ease-out-expo) !important; }
+.ct-project-card:hover .ct-project-photo img { transform: scale(1.06) !important; }
+.ct-budget-fill { transition: width 1.2s var(--rz-ease-out-expo); }
+.ct-progress-fill {
+  background: linear-gradient(90deg, #c05a12, #e8752a, #f97316);
+  background-size: 200% 100%;
+  animation: rz-progress-glow 3s linear infinite;
+  transition: width 0.6s var(--rz-ease-out-expo);
+}
+@keyframes rz-progress-glow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.ct-woption {
+  transition: transform var(--rz-dur-fast) var(--rz-ease-spring), border-color var(--rz-dur-fast) ease, box-shadow var(--rz-dur-normal) var(--rz-ease-out-expo) !important;
+}
+.ct-woption:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 10px 24px rgba(192, 90, 18, 0.12);
+}
+.ct-woption.is-selected {
+  transform: translateY(-4px) scale(1.02);
+  border-color: var(--ct-accent) !important;
+  box-shadow: 0 12px 28px rgba(192, 90, 18, 0.18);
+}
+.ct-service-card {
+  transition: transform var(--rz-dur-normal) var(--rz-ease-out-expo), box-shadow var(--rz-dur-normal) var(--rz-ease-out-expo);
+}
+.ct-service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 32px rgba(26, 26, 26, 0.08);
+}
+
+
+/* ==========================================================================
+   Budget Bars & Card Hover Dynamics (Feature 5)
+   ========================================================================== */
+.ct-budget-bar {
+  margin: 14px 0 12px;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.ct-project-card:hover .ct-budget-bar {
+  border-color: rgba(232, 117, 42, 0.4);
+  background: #fff8f3;
+}
+
+.ct-budget-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+  font-size: 0.8125rem;
+}
+
+.ct-budget-label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.ct-budget-value {
+  font-weight: 700;
+  color: #1a1a1a;
+  font-size: 0.9375rem;
+}
+
+.ct-budget-track {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ct-budget-fill {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, #e8752a, #f97316, #fb923c);
+  background-size: 200% 100%;
+  animation: rz-progress-glow 2.5s linear infinite;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  box-shadow: 0 0 8px rgba(232, 117, 42, 0.4);
+}
+
+.ct-budget-fill-4 { width: 4%; }
+.ct-budget-fill-5 { width: 5%; }
+.ct-budget-fill-10 { width: 10%; }
+.ct-budget-fill-13 { width: 13%; }
+.ct-budget-fill-16 { width: 16%; }
+.ct-budget-fill-20 { width: 20%; }
+.ct-budget-fill-24 { width: 24%; }
+.ct-budget-fill-26 { width: 26%; }
+.ct-budget-fill-46 { width: 46%; }
+.ct-budget-fill-60 { width: 60%; }
+.ct-budget-fill-75 { width: 75%; }
+.ct-budget-fill-88 { width: 88%; }
+.ct-budget-fill-100 { width: 100%; }
+
+/* ==========================================================================
+   Instant Project Estimator Widget (Feature 4)
+   ========================================================================== */
+.ct-quick-calc {
+  background: linear-gradient(135deg, #1c1a17 0%, #11100e 100%);
+  border: 1px solid rgba(232, 117, 42, 0.4);
+  border-radius: 20px;
+  padding: 38px 40px;
+  color: #fff;
+  box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.ct-quick-calc::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(232, 117, 42, 0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ct-calc-presets {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.ct-calc-preset-btn {
+  padding: 5px 12px;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ct-calc-preset-btn:hover {
+  background: rgba(232, 117, 42, 0.25);
+  border-color: #e8752a;
+  color: #fff;
+  transform: translateY(-1px);
+}

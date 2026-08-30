@@ -1,0 +1,656 @@
+/* =====================================================================
+   Reozix Demos — Shared Corner Contact & Enquiry Widget Styles
+   Floating bottom-right chat-style interface that dynamically adapts
+   to Hotel, Real Estate, and Construction aesthetics.
+   ===================================================================== */
+
+/* Container wrapper pinned to bottom-right corner */
+.rz-contact-dock {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  pointer-events: none;
+}
+
+.rz-contact-dock * {
+  box-sizing: border-box;
+}
+
+/* Floating Launcher Trigger */
+.rz-contact-launcher {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  background: var(--rz-c-btn-bg, #1a2530);
+  color: var(--rz-c-btn-text, #ffffff);
+  border: 1px solid var(--rz-c-border, rgba(0, 0, 0, 0.08));
+  border-radius: var(--rz-c-btn-radius, 100px);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  transition: transform 0.25s cubic-bezier(0.32, 0.72, 0, 1), box-shadow 0.25s ease, background 0.2s ease;
+  position: relative;
+  user-select: none;
+}
+
+.rz-contact-launcher:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.24), 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.rz-contact-launcher:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.rz-contact-launcher .rz-icon-wrapper {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--rz-c-accent-tint, rgba(255, 255, 255, 0.15));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--rz-c-accent, #ffffff);
+}
+
+.rz-contact-launcher svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Online Pulse Indicator */
+.rz-online-dot {
+  width: 9px;
+  height: 9px;
+  background-color: #22c55e;
+  border-radius: 50%;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 2px var(--rz-c-btn-bg, #1a2530);
+}
+
+.rz-online-dot::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  background-color: rgba(34, 197, 94, 0.45);
+  animation: rz-pulse 2s infinite ease-out;
+}
+
+@keyframes rz-pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+/* Floating Chat Popup Card */
+.rz-contact-card {
+  pointer-events: auto;
+  width: 370px;
+  max-width: calc(100vw - 32px);
+  max-height: min(600px, calc(100vh - 95px));
+  background: var(--rz-c-surface, #ffffff);
+  color: var(--rz-c-text, #1a2530);
+  border-radius: var(--rz-c-card-radius, 16px);
+  border: 1px solid var(--rz-c-border, #e2e8f0);
+  box-shadow: 0 20px 48px -12px rgba(0, 0, 0, 0.22), 0 4px 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 12px;
+  opacity: 0;
+  transform: translateY(16px) scale(0.95);
+  transform-origin: bottom right;
+  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s;
+  visibility: hidden;
+  position: relative;
+}
+
+.rz-contact-dock.is-open .rz-contact-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+}
+
+/* Modal Header */
+.rz-card-header {
+  background: var(--rz-c-header-bg, #14283a);
+  color: var(--rz-c-header-text, #ffffff);
+  padding: 14px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  border-bottom: 1px solid var(--rz-c-header-border, rgba(255, 255, 255, 0.1));
+}
+
+.rz-header-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rz-avatar-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--rz-c-avatar-bg, rgba(255, 255, 255, 0.12));
+  color: var(--rz-c-accent, #ffffff);
+  border: 1.5px solid var(--rz-c-accent, rgba(255, 255, 255, 0.3));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.rz-avatar-badge .rz-online-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  box-shadow: 0 0 0 2px var(--rz-c-header-bg, #14283a);
+}
+
+.rz-header-info h4 {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.25;
+  color: inherit;
+}
+
+.rz-header-info p {
+  font-size: 0.72rem;
+  color: var(--rz-c-header-sub, rgba(255, 255, 255, 0.7));
+  margin: 2px 0 0 0;
+}
+
+.rz-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.rz-header-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rz-c-header-text, #ffffff);
+  opacity: 0.75;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.15s, background 0.15s;
+}
+
+.rz-header-btn:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Quick Hotline Strip inside widget */
+.rz-hotline-strip {
+  background: var(--rz-c-hotline-bg, rgba(0, 0, 0, 0.03));
+  padding: 6px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--rz-c-border, #e2e8f0);
+  font-size: 0.72rem;
+}
+
+.rz-hotline-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--rz-c-text-muted, #64748b);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.15s;
+}
+
+.rz-hotline-link:hover {
+  color: var(--rz-c-accent, #4a90d9);
+}
+
+.rz-hotline-link svg {
+  width: 12px;
+  height: 12px;
+  opacity: 0.8;
+}
+
+/* Card Body & Scroll Area */
+.rz-card-body {
+  padding: 14px 18px 18px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  flex: 1;
+}
+
+/* Custom Scrollbar for Card */
+.rz-card-body::-webkit-scrollbar {
+  width: 5px;
+}
+.rz-card-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.rz-card-body::-webkit-scrollbar-thumb {
+  background: var(--rz-c-border, #cbd5e1);
+  border-radius: 10px;
+}
+
+/* Section Subhead */
+.rz-section-subhead {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--rz-c-text-muted, #64748b);
+  margin-bottom: 6px;
+}
+
+/* Topic Chips Selector */
+.rz-topic-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-bottom: 12px;
+}
+
+.rz-topic-chip {
+  padding: 5px 10px;
+  background: var(--rz-c-chip-bg, #f1f5f9);
+  color: var(--rz-c-text, #334155);
+  border: 1px solid var(--rz-c-chip-border, transparent);
+  border-radius: var(--rz-c-btn-radius, 100px);
+  font-size: 0.72rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  user-select: none;
+  text-align: left;
+}
+
+.rz-topic-chip:hover {
+  background: var(--rz-c-chip-hover, #e2e8f0);
+}
+
+.rz-topic-chip.is-active {
+  background: var(--rz-c-accent, #4a90d9);
+  color: #ffffff;
+  border-color: var(--rz-c-accent, #4a90d9);
+  box-shadow: 0 2px 8px -2px var(--rz-c-accent, rgba(74, 144, 217, 0.4));
+}
+
+/* Form Styles */
+.rz-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.rz-form-row {
+  display: flex;
+  gap: 8px;
+}
+
+.rz-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  position: relative;
+}
+
+.rz-form-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--rz-c-text, #334155);
+}
+
+.rz-form-input,
+.rz-form-textarea {
+  width: 100%;
+  padding: 8px 11px;
+  background: var(--rz-c-input-bg, #f8fafc);
+  border: 1px solid var(--rz-c-border, #cbd5e1);
+  border-radius: var(--rz-c-input-radius, 8px);
+  font-size: 0.8125rem;
+  font-family: inherit;
+  color: var(--rz-c-text, #1e293b);
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.rz-form-input:focus,
+.rz-form-textarea:focus {
+  outline: none;
+  border-color: var(--rz-c-accent, #4a90d9);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px var(--rz-c-accent-tint, rgba(74, 144, 217, 0.15));
+}
+
+.rz-form-textarea {
+  resize: vertical;
+  min-height: 56px;
+  line-height: 1.35;
+}
+
+.rz-form-group.has-error .rz-form-input,
+.rz-form-group.has-error .rz-form-textarea {
+  border-color: #ef4444;
+  background: #fffafa;
+}
+
+.rz-error-text {
+  font-size: 0.7rem;
+  color: #ef4444;
+  display: none;
+  margin-top: 2px;
+}
+
+.rz-form-group.has-error .rz-error-text {
+  display: block;
+}
+
+/* Quick Prompt Suggestions */
+.rz-quick-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: -2px;
+  margin-bottom: 4px;
+}
+
+.rz-quick-tag {
+  padding: 3px 8px;
+  font-size: 0.7rem;
+  background: var(--rz-c-chip-bg, #f1f5f9);
+  border: 1px dashed var(--rz-c-border, #cbd5e1);
+  border-radius: 4px;
+  color: var(--rz-c-text-muted, #64748b);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.rz-quick-tag:hover {
+  background: var(--rz-c-accent-tint, rgba(74, 144, 217, 0.1));
+  color: var(--rz-c-accent, #4a90d9);
+  border-color: var(--rz-c-accent, #4a90d9);
+}
+
+/* Submit Button */
+.rz-submit-btn {
+  width: 100%;
+  padding: 11px 16px;
+  background: var(--rz-c-accent, #4a90d9);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--rz-c-btn-radius, 100px);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 14px -3px var(--rz-c-accent, rgba(74, 144, 217, 0.4));
+}
+
+.rz-submit-btn:hover {
+  background: var(--rz-c-accent-dark, #3a7bc8);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px -3px var(--rz-c-accent, rgba(74, 144, 217, 0.5));
+}
+
+.rz-submit-btn:active {
+  transform: translateY(0);
+}
+
+.rz-submit-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Spinner */
+.rz-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: rz-spin 0.7s linear infinite;
+  display: none;
+}
+
+.rz-submit-btn.is-loading .rz-spinner {
+  display: inline-block;
+}
+.rz-submit-btn.is-loading .rz-btn-text,
+.rz-submit-btn.is-loading svg {
+  display: none;
+}
+
+@keyframes rz-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Success Confirmation State */
+.rz-success-state {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 12px;
+}
+
+.rz-success-state.is-visible {
+  display: flex;
+}
+
+.rz-success-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--rz-c-accent-tint, rgba(34, 197, 94, 0.12));
+  color: var(--rz-c-accent, #22c55e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.rz-success-icon svg {
+  width: 28px;
+  height: 28px;
+}
+
+.rz-success-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--rz-c-text, #1e293b);
+}
+
+.rz-success-desc {
+  font-size: 0.8125rem;
+  color: var(--rz-c-text-muted, #64748b);
+  line-height: 1.45;
+  margin-bottom: 16px;
+}
+
+.rz-ref-box {
+  background: var(--rz-c-input-bg, #f1f5f9);
+  border: 1px dashed var(--rz-c-border, #cbd5e1);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--rz-c-text, #334155);
+  margin-bottom: 18px;
+}
+
+.rz-success-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.rz-success-actions button {
+  flex: 1;
+  padding: 9px 12px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  border-radius: var(--rz-c-btn-radius, 100px);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.rz-btn-secondary {
+  background: var(--rz-c-chip-bg, #f1f5f9);
+  color: var(--rz-c-text, #334155);
+  border: 1px solid var(--rz-c-border, #cbd5e1);
+}
+
+.rz-btn-secondary:hover {
+  background: var(--rz-c-chip-hover, #e2e8f0);
+}
+
+/* =====================================================================
+   VERTICAL THEME OVERRIDES
+   ===================================================================== */
+
+/* 1. HOTEL THEME (Warm paper, espresso, Cormorant Garamond, Gold) */
+.rz-contact-dock[data-vertical="hotel"] {
+  --rz-c-surface: #fffdf9;
+  --rz-c-text: #221c12;
+  --rz-c-text-muted: #6d6355;
+  --rz-c-accent: #a8863d;
+  --rz-c-accent-dark: #8c6f2f;
+  --rz-c-accent-tint: rgba(168, 134, 61, 0.12);
+  --rz-c-border: #e7e1d4;
+  --rz-c-header-bg: #221c12;
+  --rz-c-header-text: #fffdf9;
+  --rz-c-header-sub: rgba(255, 253, 249, 0.72);
+  --rz-c-header-border: rgba(168, 134, 61, 0.25);
+  --rz-c-btn-bg: #221c12;
+  --rz-c-btn-text: #fffdf9;
+  --rz-c-btn-radius: 100px;
+  --rz-c-card-radius: 18px;
+  --rz-c-input-bg: #f7f4ee;
+  --rz-c-input-radius: 10px;
+  --rz-c-chip-bg: #f3efe6;
+  --rz-c-chip-hover: #eae3d4;
+  --rz-c-hotline-bg: #f9f6f0;
+}
+
+.rz-contact-dock[data-vertical="hotel"] .rz-header-info h4,
+.rz-contact-dock[data-vertical="hotel"] .rz-success-title {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.1875rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* 2. REAL ESTATE THEME (Coastal Azure, Crisp White, Slate) */
+.rz-contact-dock[data-vertical="realestate"] {
+  --rz-c-surface: #ffffff;
+  --rz-c-text: #1a2530;
+  --rz-c-text-muted: #64748b;
+  --rz-c-accent: #4a90d9;
+  --rz-c-accent-dark: #3a7bc8;
+  --rz-c-accent-tint: rgba(74, 144, 217, 0.12);
+  --rz-c-border: #e2e8f0;
+  --rz-c-header-bg: #14283a;
+  --rz-c-header-text: #ffffff;
+  --rz-c-header-sub: rgba(255, 255, 255, 0.75);
+  --rz-c-header-border: rgba(74, 144, 217, 0.3);
+  --rz-c-btn-bg: #14283a;
+  --rz-c-btn-text: #ffffff;
+  --rz-c-btn-radius: 100px;
+  --rz-c-card-radius: 14px;
+  --rz-c-input-bg: #f8fafc;
+  --rz-c-input-radius: 8px;
+  --rz-c-chip-bg: #f1f5f9;
+  --rz-c-chip-hover: #e2e8f0;
+  --rz-c-hotline-bg: #f8fafc;
+}
+
+/* 3. CONSTRUCTION THEME (Industrial Builder Orange, Slate Charcoal, Archivo) */
+.rz-contact-dock[data-vertical="construction"] {
+  --rz-c-surface: #ffffff;
+  --rz-c-text: #111827;
+  --rz-c-text-muted: #4b5563;
+  --rz-c-accent: #e8752a;
+  --rz-c-accent-dark: #c05a12;
+  --rz-c-accent-tint: rgba(232, 117, 42, 0.12);
+  --rz-c-border: #e5e7eb;
+  --rz-c-header-bg: #1b1a18;
+  --rz-c-header-text: #ffffff;
+  --rz-c-header-sub: rgba(255, 255, 255, 0.7);
+  --rz-c-header-border: rgba(232, 117, 42, 0.4);
+  --rz-c-btn-bg: #1b1a18;
+  --rz-c-btn-text: #ffffff;
+  --rz-c-btn-radius: 8px;
+  --rz-c-card-radius: 10px;
+  --rz-c-input-bg: #f9fafb;
+  --rz-c-input-radius: 6px;
+  --rz-c-chip-bg: #f3f4f6;
+  --rz-c-chip-hover: #e5e7eb;
+  --rz-c-hotline-bg: #f9fafb;
+}
+
+.rz-contact-dock[data-vertical="construction"] .rz-header-info h4,
+.rz-contact-dock[data-vertical="construction"] .rz-success-title {
+  font-family: 'Archivo', 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+/* Prevent overlap with Construction sticky bottom bar */
+body:has(.ct-sticky-bar) .rz-contact-dock {
+  bottom: 82px;
+}
+
+/* =====================================================================
+   MOBILE & RESPONSIVE ADJUSTMENTS
+   ===================================================================== */
+@media (max-width: 480px) {
+  .rz-contact-dock {
+    bottom: 16px;
+    right: 16px;
+  }
+  
+  body:has(.ct-sticky-bar) .rz-contact-dock {
+    bottom: 74px;
+    right: 12px;
+  }
+  
+  .rz-contact-card {
+    width: calc(100vw - 32px);
+    max-height: calc(100vh - 100px);
+    border-radius: 14px;
+  }
+  
+  .rz-contact-launcher {
+    padding: 10px 16px;
+    font-size: 0.875rem;
+  }
+}

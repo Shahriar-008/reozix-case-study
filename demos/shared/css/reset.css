@@ -1,4 +1,6 @@
 /* Shared reset and base — used by all three Reozix demo sites */
+@import 'contact-popup.css';
+@import 'motion.css';
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 body {

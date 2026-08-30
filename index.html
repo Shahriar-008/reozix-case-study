@@ -6,6 +6,7 @@
 <title>Reozix — Vertical Demo Portfolio</title>
 <meta name="description" content="Reozix-built demonstration platforms for Boutique Hotel, Real Estate, and Construction — working demos with real Lighthouse scores.">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="demos/shared/css/motion.css">
 <style>
   :root {
     --bg: #fafafa;
@@ -29,6 +30,7 @@
   header.site-header {
     border-bottom: 1px solid var(--border);
     background: var(--surface);
+    transition: box-shadow 0.3s ease;
   }
   header.site-header .inner {
     max-width: 1040px;
@@ -70,23 +72,32 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-top: 4px solid var(--accent);
-    border-radius: 10px;
-    padding: 1.5rem 1.5rem 1.25rem;
+    border-radius: 12px;
+    padding: 1.6rem 1.5rem 1.35rem;
     text-decoration: none;
     color: var(--ink);
-    transition: box-shadow 0.15s ease, transform 0.15s ease;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.4s var(--rz-ease-out-expo), transform 0.4s var(--rz-ease-out-expo), border-color 0.2s ease;
   }
-  .card:hover { box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08); transform: translateY(-2px); }
+  .card:hover {
+    box-shadow: 0 16px 36px -8px var(--accent-glow, rgba(0, 0, 0, 0.12));
+    transform: translateY(-6px) scale(1.01);
+  }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+  }
   .card .eyebrow {
     font-size: 0.72rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
     color: var(--accent);
-    margin-bottom: 0.6rem;
   }
   .card h2 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-  .card p { color: var(--muted); font-size: 0.95rem; flex-grow: 1; }
+  .card p { color: var(--muted); font-size: 0.95rem; flex-grow: 1; line-height: 1.55; }
   .card .meta {
     margin-top: 1rem;
     font-size: 0.8rem;
@@ -122,7 +133,7 @@
 </header>
 
 <main>
-  <section class="intro">
+  <section class="intro rz-reveal">
     <h1>What Reozix builds, demonstrated per industry</h1>
     <p>
       These are Reozix-built <strong>demonstration platforms</strong> — working vertical demos that show the engineering
@@ -135,35 +146,44 @@
     </p>
   </section>
 
-  <section class="cards">
-    <a class="card" href="case-studies/reozix-hotel.html" style="--accent: #d4a853">
-      <div class="eyebrow">Boutique Hotel</div>
+  <section class="cards rz-stagger-parent">
+    <a class="card" href="case-studies/reozix-hotel.html" style="--accent: #d4a853; --accent-glow: rgba(212, 168, 83, 0.25);">
+      <div class="card-top">
+        <span class="eyebrow">Boutique Hotel</span>
+        <span class="rz-live-badge"><span class="rz-pulse-dot pulse-gold"></span> Live Demo</span>
+      </div>
       <h2>Reozix Hotel</h2>
       <p>
         A booking-first hotel platform with a direct booking engine, no-code CMS, and sub-2-second mobile performance —
         built to win back channel share from the OTAs.
       </p>
-      <div class="meta"><strong>98</strong> Lighthouse Performance · <strong>2.4s</strong> TTI</div>
+      <div class="meta"><strong class="stat-num" data-countup>98</strong> Lighthouse Performance · <strong>2.4s</strong> TTI</div>
     </a>
 
-    <a class="card" href="case-studies/reozix-realestate.html" style="--accent: #4a90d9">
-      <div class="eyebrow">Real Estate</div>
+    <a class="card" href="case-studies/reozix-realestate.html" style="--accent: #4a90d9; --accent-glow: rgba(74, 144, 217, 0.25);">
+      <div class="card-top">
+        <span class="eyebrow">Real Estate</span>
+        <span class="rz-live-badge"><span class="rz-pulse-dot pulse-blue"></span> Live Demo</span>
+      </div>
       <h2>Reozix Real Estate</h2>
       <p>
         A listings platform with instant Meilisearch property search, structured appraisal flow, and agent profiles —
         built for agencies who compete against the big portals.
       </p>
-      <div class="meta"><strong>100</strong> Lighthouse Performance · <strong>1.4s</strong> TTI</div>
+      <div class="meta"><strong class="stat-num" data-countup>100</strong> Lighthouse Performance · <strong>1.4s</strong> TTI</div>
     </a>
 
-    <a class="card" href="case-studies/reozix-construction.html" style="--accent: #e8752a">
-      <div class="eyebrow">Construction</div>
+    <a class="card" href="case-studies/reozix-construction.html" style="--accent: #e8752a; --accent-glow: rgba(232, 117, 42, 0.25);">
+      <div class="card-top">
+        <span class="eyebrow">Construction</span>
+        <span class="rz-live-badge"><span class="rz-pulse-dot pulse-orange"></span> Live Demo</span>
+      </div>
       <h2>Reozix Construction</h2>
       <p>
         A portfolio-and-quote platform with structured project metadata, a qualifying quote flow, and trust signal
         architecture — built for the industry's long, credibility-first sales cycle.
       </p>
-      <div class="meta"><strong>93</strong> Lighthouse Performance · <strong>3.1s</strong> TTI</div>
+      <div class="meta"><strong class="stat-num" data-countup>93</strong> Lighthouse Performance · <strong>3.1s</strong> TTI</div>
     </a>
   </section>
 </main>
@@ -175,5 +195,6 @@
   </div>
 </footer>
 
+<script src="demos/shared/js/utils.js"></script>
 </body>
 </html>

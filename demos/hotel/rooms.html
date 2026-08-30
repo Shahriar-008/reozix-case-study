@@ -180,8 +180,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var card = document.createElement('article');
     card.className = 'room-card';
     card.innerHTML =
-      '<div class="room-img">' +
+      '<div class="room-img rz-img-zoom">' +
         '<img src="https://images.unsplash.com/photo-' + room.imgId + '?w=700&q=80" alt="' + room.name + '" loading="lazy">' +
+        '<button type="button" class="rz-favorite-btn" aria-label="Save to shortlist" data-item-title="' + room.name + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></button>' +
         (!tooSmall && left > 0 && left <= 2 ? '<span class="urgency">Only ' + left + (left === 1 ? ' room' : ' rooms') + ' left</span>' : '') +
         (left === 0 ? '<span class="urgency" style="background:rgba(90,30,30,.85);">Sold out for these dates</span>' : '') +
       '</div>' +

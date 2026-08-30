@@ -50,6 +50,7 @@
       </button>
     <div class="nav-links">
       <a href="index.html" aria-current="page">Home</a>
+      <a href="#quick-estimator">⚡ Estimator</a>
       <a href="portfolio.html">Portfolio</a>
       <a href="services.html">Services</a>
       <a href="credentials.html">Credentials</a>
@@ -67,11 +68,13 @@
   <div class="ct-hero-bg ct-hero-bg--site"></div>
   <div class="ct-container">
     <div class="ct-hero-content">
+      <div style="margin-bottom:14px;"><span class="rz-live-badge rz-shimmer-badge" style="background:rgba(0,0,0,0.45);color:#fff;border:1px solid rgba(232,117,42,0.4);backdrop-filter:blur(6px);"><span class="rz-pulse-dot pulse-orange"></span> Estimator Active Today · 4 Sites In Progress</span></div>
       <span class="ct-hero-kicker">QBCC Licensed Builders — Brisbane QLD</span>
       <h1>Building Brisbane's Future</h1>
       <p class="ct-hero-sub">From full-floor commercial fit-outs to custom homes and heritage renovations, Reozix Construction delivers quality builds across Brisbane — on time, on budget, and built to last.</p>
       <div class="ct-hero-actions">
-        <a href="portfolio.html" class="ct-btn">View Our Work</a>
+        <a href="#quick-estimator" class="ct-btn" style="background:#e8752a;color:#fff;">⚡ Instant Estimator</a>
+        <a href="portfolio.html" class="ct-btn ct-btn-outline">View Our Work</a>
         <a href="quote.html" class="ct-btn ct-btn-outline">Get a Quote</a>
       </div>
     </div>
@@ -97,6 +100,33 @@
     </div>
   </div>
 </section>
+
+<!-- Live Site Operations Ticker -->
+<div class="ct-ticker-wrap" aria-label="Live construction site status">
+  <div class="ct-ticker-track">
+    <span class="ct-ticker-item"><span class="ticker-tag">LIVE SITE</span> <strong>42 Charlotte St, Brisbane CBD</strong> — Level 12 Fit-out 85% completed</span>
+    <span class="ct-ticker-sep">•</span>
+    <span class="ct-ticker-item"><span class="ticker-tag">FRAMING</span> <strong>18 Latitude St, Paddington</strong> — 2nd Storey timber framing underway</span>
+    <span class="ct-ticker-sep">•</span>
+    <span class="ct-ticker-item"><span class="ticker-tag">FIT-OUT</span> <strong>95 Wickham St, Fortitude Valley</strong> — Medical consulting suites MEP rough-in</span>
+    <span class="ct-ticker-sep">•</span>
+    <span class="ct-ticker-item"><span class="ticker-tag">HANDOVER</span> <strong>Bulimba Queenslander</strong> — Final architectural defect review passed</span>
+    <span class="ct-ticker-sep">•</span>
+    <span class="ct-ticker-item"><span class="ticker-tag">QBCC LICENSED</span> <strong>10-Year Structural Warranty</strong> — Certified Brisbane Quality Builder</span>
+    <span class="ct-ticker-sep">•</span>
+    <!-- Duplicate for infinite seamless scroll -->
+    <span class="ct-ticker-item"><span class="ticker-tag">LIVE SITE</span> <strong>42 Charlotte St, Brisbane CBD</strong> — Level 12 Fit-out 85% completed</span>
+    <span class="ct-ticker-sep">•</span>
+    <span class="ct-ticker-item"><span class="ticker-tag">FRAMING</span> <strong>18 Latitude St, Paddington</strong> — 2nd Storey timber framing underway</span>
+    <span class="ct-ticker-sep">•</span>
+    <span class="ct-ticker-item"><span class="ticker-tag">FIT-OUT</span> <strong>95 Wickham St, Fortitude Valley</strong> — Medical consulting suites MEP rough-in</span>
+    <span class="ct-ticker-sep">•</span>
+    <span class="ct-ticker-item"><span class="ticker-tag">HANDOVER</span> <strong>Bulimba Queenslander</strong> — Final architectural defect review passed</span>
+    <span class="ct-ticker-sep">•</span>
+    <span class="ct-ticker-item"><span class="ticker-tag">QBCC LICENSED</span> <strong>10-Year Structural Warranty</strong> — Certified Brisbane Quality Builder</span>
+    <span class="ct-ticker-sep">•</span>
+  </div>
+</div>
 
 <!-- Featured projects -->
 <section class="ct-section" id="featured">
@@ -259,6 +289,29 @@
   </div>
 </section>
 
+<!-- Interactive Renovation Before & After Spotlight -->
+<section class="ct-section" style="padding-top:0;">
+  <div class="ct-container">
+    <span class="ct-section-kicker">Renovation Spotlight</span>
+    <h2 class="ct-section-title">Before &amp; After Transformation</h2>
+    <p class="ct-section-sub">Drag or swipe the interactive split handle to compare the Paddington heritage restoration before and after completion.</p>
+    <div style="max-width: 900px; margin: 32px auto 0;">
+      <div class="rz-compare-container" aria-label="Before and after renovation comparison slider">
+        <img class="rz-compare-after" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="Queenslander After Renovation">
+        <div class="rz-compare-before">
+          <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80" alt="Queenslander Before Renovation" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div class="rz-compare-handle">
+          <div class="rz-compare-knob">◀ ▶</div>
+        </div>
+        <span class="rz-compare-badge badge-before">Before</span>
+        <span class="rz-compare-badge badge-after">After</span>
+      </div>
+      <p style="text-align:center;font-size:0.8125rem;color:var(--ct-text-secondary);margin-top:12px;">← Drag or swipe slider to inspect construction transformation →</p>
+    </div>
+  </div>
+</section>
+
 <!-- Services overview -->
 <section class="ct-section alt" id="services">
   <div class="ct-container">
@@ -290,6 +343,68 @@
         <h3>Renovations</h3>
         <p>Kitchens, bathrooms and whole-home renovations that modernise your space without losing its character — from heritage to contemporary.</p>
         <a href="services.html#svc-004" class="ct-service-link">Learn More →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Project Estimator Interactive Widget (Feature 4) -->
+<section class="ct-section" id="quick-estimator" style="padding-top:0;">
+  <div class="ct-container">
+    <div class="ct-quick-calc">
+      <span class="ct-section-kicker" style="color:#e8752a;">⚡ Instant Cost Estimator</span>
+      <h2 style="font-size:2rem;margin-bottom:8px;letter-spacing:-0.02em;">Estimate Your Brisbane Build in Seconds</h2>
+      <p style="color:rgba(255,255,255,0.7);font-size:0.9375rem;margin-bottom:28px;">Select your build category and approximate floor area to see typical Brisbane price ranges and delivery timeframes in real time.</p>
+      
+      <div class="ct-calc-grid">
+        <div>
+          <div class="ct-calc-field" style="margin-bottom:20px;">
+            <label for="calc-type">Build Category</label>
+            <select class="ct-calc-select" id="calc-type">
+              <option value="fitout">Commercial Office &amp; Retail Fit-Out</option>
+              <option value="extension">Residential 2nd Storey Extension</option>
+              <option value="newbuild">Custom New Home &amp; Duplex Build</option>
+              <option value="renovation">Whole-Home Queenslander Renovation</option>
+            </select>
+          </div>
+          <div class="ct-calc-field">
+            <div class="ct-range-row">
+              <label for="calc-sqm" style="margin-bottom:0;">Floor Area (Square Metres)</label>
+              <span class="ct-range-val" id="calc-sqm-val">150 m²</span>
+            </div>
+            <input type="range" id="calc-sqm" min="30" max="600" step="10" value="150" style="accent-color:#e8752a;cursor:pointer;">
+            <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:rgba(255,255,255,0.45);margin-top:6px;">
+              <span>30 m² (Small)</span>
+              <span>300 m² (Medium)</span>
+              <span>600 m² (Large)</span>
+            </div>
+          </div>
+          <div class="ct-calc-presets">
+            <span style="font-size:0.75rem;color:rgba(255,255,255,0.5);display:flex;align-items:center;">Quick Presets:</span>
+            <button type="button" class="ct-calc-preset-btn" data-type="fitout" data-sqm="120">120m² Office</button>
+            <button type="button" class="ct-calc-preset-btn" data-type="extension" data-sqm="220">220m² 2nd Storey</button>
+            <button type="button" class="ct-calc-preset-btn" data-type="newbuild" data-sqm="450">450m² Custom Build</button>
+            <button type="button" class="ct-calc-preset-btn" data-type="renovation" data-sqm="180">180m² Queenslander</button>
+          </div>
+        </div>
+        
+        <div class="ct-calc-output-box">
+          <div class="ct-output-row">
+            <div>
+              <div class="ct-output-label">Estimated Budget Guide</div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.45);">Based on recent Brisbane builds</div>
+            </div>
+            <div class="ct-output-val accent"><span id="calc-cost-min">$135,000</span> – <span id="calc-cost-max">$225,000</span></div>
+          </div>
+          <div class="ct-output-row">
+            <div>
+              <div class="ct-output-label">Typical Delivery Timeframe</div>
+              <div style="font-size:0.75rem;color:rgba(255,255,255,0.45);">From site mobilization to handover</div>
+            </div>
+            <div class="ct-output-val" id="calc-time-val">8–12 weeks</div>
+          </div>
+          <a href="quote.html" class="ct-btn" style="width:100%;margin-top:8px;text-align:center;">Request Site Inspection &amp; Fixed Quote →</a>
+        </div>
       </div>
     </div>
   </div>
@@ -341,6 +456,7 @@
       <a href="portfolio.html">Portfolio</a>
       <a href="services.html">Services</a>
       <a href="credentials.html">Credentials</a>
+      <a href="team.html">Team</a>
       <a href="quote.html">Get a Quote</a>
     </div>
   </div>
