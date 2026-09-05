@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reozix — Standalone Demos Admin Dashboard</title>
+  <meta name="description" content="Customizable administration dashboard for Reozix vertical demos — manage website details, inventory, inquiries, and branding.">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<div class="admin-layout">
+  <!-- Sidebar -->
+  <aside class="admin-sidebar" id="admin-sidebar">
+    <div class="sidebar-brand">
+      <a href="index.html" class="sidebar-logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+        <span>reozix</span>
+        <span class="logo-badge">Admin</span>
+      </a>
+    </div>
+
+    <nav class="sidebar-nav">
+      <span class="nav-section-label">Management</span>
+      <button class="nav-tab-btn is-active" data-tab="overview">
+        <span class="nav-icon">📊</span>
+        <span>Overview</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="website-details">
+        <span class="nav-icon">⚙️</span>
+        <span>Website Details</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="inventory">
+        <span class="nav-icon">📦</span>
+        <span id="nav-inventory-label">Rooms & Catalog</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="testimonials">
+        <span class="nav-icon">⭐</span>
+        <span>Reviews & FAQs</span>
+      </button>
+      <button class="nav-tab-btn" data-tab="leads">
+        <span class="nav-icon">📥</span>
+        <span>Leads & Inquiries</span>
+        <span class="nav-counter" id="sidebar-leads-count" style="display:none;">0</span>
+      </button>
+
+      <span class="nav-section-label" style="margin-top:10px;">System</span>
+      <button class="nav-tab-btn" data-tab="system-data">
+        <span class="nav-icon">🛠️</span>
+        <span>Backup & Data</span>
+      </button>
+      <a href="../index.html" class="nav-tab-btn" style="text-decoration:none;">
+        <span class="nav-icon">🚀</span>
+        <span>Demo Portal Hub</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar" id="sidebar-user-avatar">RH</div>
+        <div class="user-info">
+          <span class="user-name" id="sidebar-user-name">Reozix Hotel</span>
+          <span class="user-role" id="sidebar-user-role">Administrator</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <div class="admin-main">
+    <!-- Top Header -->
+    <header class="admin-header">
+      <div class="header-left">
+        <button class="sidebar-toggle-btn" id="sidebar-toggle-btn" aria-label="Toggle Navigation">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+
+        <!-- Vertical Switcher -->
+        <div class="vertical-switcher" id="vertical-switcher">
+          <button class="vert-btn is-active" data-vertical="hotel">
+            <span>🏨</span> <span class="v-label">Hotel</span>
+          </button>
+          <button class="vert-btn" data-vertical="realestate">
+            <span>🏢</span> <span class="v-label">Real Estate</span>
+          </button>
+          <button class="vert-btn" data-vertical="construction">
+            <span>🏗️</span> <span class="v-label">Construction</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button class="btn-icon-square" id="theme-toggle-btn" title="Toggle Light/Dark Theme">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        </button>
+
+        <a href="../hotel/index.html" target="_blank" class="btn-header-action btn-live-view" id="live-site-link">
+          <span>View Live Site</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Workspace -->
+    <main class="admin-content">
+
+      <!-- ============================================================== -->
+      <!-- TAB 1: OVERVIEW -->
+      <!-- ============================================================== -->
+      <section class="tab-pane is-active" id="pane-overview">
+        <div class="pane-head">
+          <div>
+            <h1 class="pane-title" id="overview-welcome">Reozix Hotel Overview</h1>
+            <p class="pane-desc">Real-time telemetry, active inventory status, and recent customer inquiries.</p>
+          </div>
+          <div>
+            <button class="btn-primary" onclick="AdminApp.switchTab('website-details')">⚙️ Customize Site Details</button>
+          </div>
+        </div>
+
+        <!-- KPI Metrics -->
+        <div class="kpi-grid">
+          <div class="kpi-card">
+            <div class="kpi-head">
+              <span class="kpi-label" id="kpi-inv-label">Active Rooms</span>
+              <span class="kpi-icon">📦</span>
+            </div>
+            <div class="kpi-value" id="kpi-inv-val">4</div>
+            <div class="kpi-sub"><span class="trend-up">● Available Live</span> · In active catalog</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-head">
+              <span class="kpi-label">Total Inquiries</span>
+              <span class="kpi-icon">📥</span>
+            </div>
+            <div class="kpi-value" id="kpi-leads-val">1</div>
+            <div class="kpi-sub"><span class="trend-up" id="kpi-new-leads-sub">1 New</span> · Requires follow-up</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-head">
+              <span class="kpi-label" id="kpi-vol-label">Booking Value</span>
+              <span class="kpi-icon">💳</span>
+            </div>
+            <div class="kpi-value" id="kpi-vol-val">$1,140</div>
+            <div class="kpi-sub">Direct submissions processed</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="kpi-head">
+              <span class="kpi-label">Satisfaction Score</span>
+              <span class="kpi-icon">⭐</span>
+            </div>
+            <div class="kpi-value" id="kpi-score-val">9.4</div>
+            <div class="kpi-sub">Based on verified guest reviews</div>
+          </div>
+        </div>
+
+        <!-- Recent Inquiries Preview Table -->
+        <div class="panel-box">
+          <div class="panel-box-header">
+            <h2 class="panel-box-title">Recent Inquiries & Activity</h2>
+            <button class="btn-secondary" onclick="AdminApp.switchTab('leads')">View All Leads →</button>
+          </div>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Customer</th>
+                  <th>Details</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="overview-recent-tbody">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================================== -->
+      <!-- TAB 2: WEBSITE DETAILS & CUSTOMIZATION -->
+      <!-- ============================================================== -->
+      <section class="tab-pane" id="pane-website-details">
+        <div class="pane-head">
+          <div>
+            <h1 class="pane-title">Website Details & Customization</h1>
+            <p class="pane-desc">Customize site details, branding colors, contact info, hero text, and live announcement banner.</p>
+          </div>
+          <button class="btn-primary" id="save-site-details-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+            <span>Save Website Details</span>
+          </button>
+        </div>
+
+        <form id="site-details-form">
+          <!-- General Brand Info -->
+          <div class="panel-box">
+            <div class="panel-box-header">
+              <h2 class="panel-box-title">Brand & Contact Information</h2>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="detail-name">Website / Business Name</label>
+                <input type="text" id="detail-name" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="detail-tagline">Tagline / Slogan</label>
+                <input type="text" id="detail-tagline" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="detail-phone">Contact Telephone</label>
+                <input type="text" id="detail-phone" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="detail-email">Contact Email</label>
+                <input type="email" id="detail-email" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="detail-location">Region / Location Label</label>
+                <input type="text" id="detail-location" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="detail-address">Physical Street Address</label>
+                <input type="text" id="detail-address" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="detail-hours">Business / Reception Hours</label>
+                <input type="text" id="detail-hours" class="form-control">
+              </div>
+              <div class="form-group" id="group-licence" style="display:none;">
+                <label for="detail-licence">Licence / Registration #</label>
+                <input type="text" id="detail-licence" class="form-control">
+              </div>
+            </div>
+          </div>
+
+          <!-- Appearance & Brand Accent Color -->
+          <div class="panel-box">
+            <div class="panel-box-header">
+              <h2 class="panel-box-title">Brand Appearance & Theme</h2>
+            </div>
+            <div class="form-group">
+              <label>Primary Brand Accent Color</label>
+              <div class="color-picker-row">
+                <input type="color" id="detail-accent-color" class="color-swatch-input">
+                <input type="text" id="detail-accent-hex" class="form-control" style="width:120px;" maxlength="7">
+                <div class="preset-colors">
+                  <button type="button" class="preset-chip" style="background:#d4a853;" title="Hotel Gold (#d4a853)" data-color="#d4a853"></button>
+                  <button type="button" class="preset-chip" style="background:#4a90d9;" title="Ocean Blue (#4a90d9)" data-color="#4a90d9"></button>
+                  <button type="button" class="preset-chip" style="background:#e8752a;" title="Builder Orange (#e8752a)" data-color="#e8752a"></button>
+                  <button type="button" class="preset-chip" style="background:#10b981;" title="Emerald Green (#10b981)" data-color="#10b981"></button>
+                  <button type="button" class="preset-chip" style="background:#8b5cf6;" title="Prestige Purple (#8b5cf6)" data-color="#8b5cf6"></button>
+                  <button type="button" class="preset-chip" style="background:#ef4444;" title="Crimson Red (#ef4444)" data-color="#ef4444"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Section Customizer -->
+          <div class="panel-box">
+            <div class="panel-box-header">
+              <h2 class="panel-box-title">Homepage Hero Section</h2>
+            </div>
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="detail-hero-kicker">Hero Kicker Badge / Subtext</label>
+                <input type="text" id="detail-hero-kicker" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="detail-hero-score">Rating Score</label>
+                <input type="text" id="detail-hero-score" class="form-control">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="detail-hero-title">Main Hero Headline</label>
+              <input type="text" id="detail-hero-title" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="detail-hero-subtitle">Hero Subtitle / Description</label>
+              <textarea id="detail-hero-subtitle" class="form-control" rows="2"></textarea>
+            </div>
+          </div>
+
+          <!-- Announcement Banner Customizer -->
+          <div class="panel-box">
+            <div class="panel-box-header">
+              <h2 class="panel-box-title">Top Announcement / Promotional Banner</h2>
+            </div>
+            <div class="toggle-switch-row">
+              <div>
+                <strong>Enable Announcement Strip</strong>
+                <p style="font-size:0.8rem; color:var(--text-muted);">Displays a promotional strip at the very top of all public pages.</p>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="detail-announce-enabled">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="detail-announce-badge">Badge Text</label>
+                <input type="text" id="detail-announce-badge" class="form-control" placeholder="e.g. Special Offer">
+              </div>
+              <div class="form-group" style="grid-column: span 2;">
+                <label for="detail-announce-text">Message Text</label>
+                <input type="text" id="detail-announce-text" class="form-control" placeholder="e.g. Complimentary cellar tasting for bookings this week">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="detail-announce-link">Action Link URL</label>
+              <input type="text" id="detail-announce-link" class="form-control" placeholder="e.g. booking.html or quote.html">
+            </div>
+          </div>
+        </form>
+      </section>
+
+
+      <!-- ============================================================== -->
+      <!-- TAB 3: CATALOG & INVENTORY MANAGEMENT -->
+      <!-- ============================================================== -->
+      <section class="tab-pane" id="pane-inventory">
+        <div class="pane-head">
+          <div>
+            <h1 class="pane-title" id="inventory-pane-title">Catalog & Inventory</h1>
+            <p class="pane-desc">Manage room suites, properties, projects, and rate plans.</p>
+          </div>
+          <button class="btn-primary" id="add-item-btn">+ Add New Item</button>
+        </div>
+
+        <!-- Dynamic Subtabs -->
+        <div class="subtabs-bar" id="inventory-subtabs">
+          <!-- Populated per vertical -->
+        </div>
+
+        <!-- Inventory Data Table -->
+        <div class="panel-box">
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead id="inventory-table-head">
+                <!-- Headers populated dynamically -->
+              </thead>
+              <tbody id="inventory-table-body">
+                <!-- Items populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================================== -->
+      <!-- TAB 4: TESTIMONIALS & FAQS -->
+      <!-- ============================================================== -->
+      <section class="tab-pane" id="pane-testimonials">
+        <div class="pane-head">
+          <div>
+            <h1 class="pane-title">Customer Reviews & FAQs</h1>
+            <p class="pane-desc">Manage public testimonials, guest scores, and frequently asked questions.</p>
+          </div>
+          <button class="btn-primary" id="add-review-btn">+ Add Review</button>
+        </div>
+
+        <!-- Reviews Panel -->
+        <div class="panel-box">
+          <div class="panel-box-header">
+            <h2 class="panel-box-title">Customer Testimonials</h2>
+          </div>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Author</th>
+                  <th>Rating / Stay</th>
+                  <th>Review Snippet</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="reviews-table-body">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- FAQs Panel -->
+        <div class="panel-box">
+          <div class="panel-box-header">
+            <h2 class="panel-box-title">Frequently Asked Questions</h2>
+            <button class="btn-secondary" id="add-faq-btn">+ Add FAQ</button>
+          </div>
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th style="width:35%;">Question</th>
+                  <th>Answer</th>
+                  <th style="width:120px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="faq-table-body">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================================== -->
+      <!-- TAB 5: LEADS & INQUIRIES (CRM) -->
+      <!-- ============================================================== -->
+      <section class="tab-pane" id="pane-leads">
+        <div class="pane-head">
+          <div>
+            <h1 class="pane-title">Leads & Inquiries CRM</h1>
+            <p class="pane-desc">Track and follow up on customer bookings, appraisal inquiries, quotes, and messages.</p>
+          </div>
+          <div style="display:flex; gap:10px;">
+            <button class="btn-secondary" id="export-leads-csv-btn">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Export CSV</span>
+            </button>
+            <button class="btn-primary" id="populate-sample-leads-btn">⚡ Test Sample Lead</button>
+          </div>
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="panel-box" style="padding:16px 20px; margin-bottom:18px;">
+          <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap;">
+            <div class="form-group" style="margin-bottom:0; flex:1; min-width:200px;">
+              <input type="text" id="leads-search-input" class="form-control" placeholder="Search customer name, email, or details...">
+            </div>
+            <div class="form-group" style="margin-bottom:0; width:180px;">
+              <select id="leads-filter-status" class="form-control">
+                <option value="all">All Statuses</option>
+                <option value="new">New</option>
+                <option value="contacted">Contacted</option>
+                <option value="in-progress">In Progress</option>
+                <option value="closed">Closed</option>
+              </select>
+            </div>
+            <div class="form-group" style="margin-bottom:0; width:180px;">
+              <select id="leads-filter-vertical" class="form-control">
+                <option value="all">All Verticals</option>
+                <option value="hotel">Hotel Only</option>
+                <option value="realestate">Real Estate Only</option>
+                <option value="construction">Construction Only</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leads Table -->
+        <div class="panel-box">
+          <div class="table-wrap">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Type</th>
+                  <th>Customer</th>
+                  <th>Details / Scope</th>
+                  <th>Amount</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="leads-table-body">
+                <!-- Populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ============================================================== -->
+      <!-- TAB 6: SYSTEM & DATA MANAGEMENT -->
+      <!-- ============================================================== -->
+      <section class="tab-pane" id="pane-system-data">
+        <div class="pane-head">
+          <div>
+            <h1 class="pane-title">Backup & Data Management</h1>
+            <p class="pane-desc">Export customized site configuration, restore backups, or reset back to factory defaults.</p>
+          </div>
+        </div>
+
+        <div class="form-grid-2">
+          <!-- Backup Export -->
+          <div class="panel-box">
+            <div class="panel-box-header">
+              <h2 class="panel-box-title">Export Site State</h2>
+            </div>
+            <p style="font-size:0.875rem; color:var(--text-muted); margin-bottom:16px;">
+              Download a complete JSON snapshot containing all your customized website details, catalog items, and inquiry leads.
+            </p>
+            <button class="btn-primary" id="export-json-backup-btn">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              <span>Download JSON Backup</span>
+            </button>
+          </div>
+
+          <!-- Backup Import -->
+          <div class="panel-box">
+            <div class="panel-box-header">
+              <h2 class="panel-box-title">Restore from Backup</h2>
+            </div>
+            <p style="font-size:0.875rem; color:var(--text-muted); margin-bottom:16px;">
+              Upload a previously exported JSON backup file to restore all website details and catalog items.
+            </p>
+            <input type="file" id="import-json-file" accept=".json" style="display:none;">
+            <button class="btn-secondary" onclick="document.getElementById('import-json-file').click()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+              <span>Upload JSON File</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Factory Reset -->
+        <div class="panel-box" style="border-color: rgba(239, 68, 68, 0.3);">
+          <div class="panel-box-header">
+            <h2 class="panel-box-title" style="color:var(--danger);">Factory Reset Demo Data</h2>
+          </div>
+          <p style="font-size:0.875rem; color:var(--text-muted); margin-bottom:16px;">
+            Reset the current vertical or all verticals back to the original demo dataset. This action will clear any custom names, prices, or added items.
+          </p>
+          <div style="display:flex; gap:12px;">
+            <button class="btn-danger" id="reset-current-vertical-btn">Reset Current Vertical</button>
+            <button class="btn-danger" id="reset-all-verticals-btn">Reset Entire Suite</button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- UNIVERSAL EDIT / ADD ITEM MODAL -->
+<!-- ============================================================== -->
+<div class="modal-backdrop" id="item-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 class="modal-title" id="item-modal-title">Edit Item</h3>
+      <button class="modal-close-btn" onclick="AdminApp.closeModal('item-modal')">✕</button>
+    </div>
+    <form id="item-modal-form">
+      <div class="modal-body" id="item-modal-body">
+        <!-- Fields injected dynamically based on entity type -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-secondary" onclick="AdminApp.closeModal('item-modal')">Cancel</button>
+        <button type="submit" class="btn-primary" id="item-modal-save-btn">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ============================================================== -->
+<!-- LEAD DETAIL INSPECTION MODAL -->
+<!-- ============================================================== -->
+<div class="modal-backdrop" id="lead-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 class="modal-title" id="lead-modal-title">Lead Details</h3>
+      <button class="modal-close-btn" onclick="AdminApp.closeModal('lead-modal')">✕</button>
+    </div>
+    <div class="modal-body" id="lead-modal-body">
+      <!-- Details rendered dynamically -->
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn-danger" id="lead-modal-delete-btn">Delete Lead</button>
+      <button type="button" class="btn-secondary" onclick="AdminApp.closeModal('lead-modal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- Scripts -->
+<script src="../shared/js/site-store.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

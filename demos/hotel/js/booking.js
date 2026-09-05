@@ -361,6 +361,31 @@ function syncCardFields() {
   $('confirm-total').textContent = hotelMoney(q.total) + ' AUD';
   $('confirm-payment').textContent = state.payment === 'online' ? 'Paid online now' : 'Due on arrival';
   $('confirm-email').textContent = $('guest-email').value.trim();
+
+  // Save to SiteStore CRM leads
+  if (window.SiteStore) {
+    try {
+      window.SiteStore.addLead({
+        vertical: 'hotel',
+        type: 'booking',
+        title: state.room.name + ' (' + q.nights + (q.nights === 1 ? ' night' : ' nights') + ')',
+        name: (($('guest-first') ? $('guest-first').value : '') + ' ' + ($('guest-last') ? $('guest-last').value : '')).trim() || 'Guest',
+        email: $('guest-email').value.trim(),
+        phone: $('guest-phone') ? $('guest-phone').value.trim() : '',
+        amount: q.total,
+        details: {
+          room: state.room.name,
+          plan: state.plan.name,
+          checkin: state.checkin,
+          checkout: state.checkout,
+          guests: state.guests,
+          extras: extras,
+          payment: state.payment === 'online' ? 'Paid online now' : 'Due on arrival'
+        }
+      });
+    } catch (e) {}
+  }
+
   showStep(4);
 }
 

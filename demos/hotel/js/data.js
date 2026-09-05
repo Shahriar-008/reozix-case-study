@@ -153,3 +153,23 @@ window.hotelMoney = function (n) {
 window.hotelCurrency = function () {
   try { return localStorage.getItem('hotel-currency') || 'AUD'; } catch (e) { return 'AUD'; }
 };
+
+// Sync with SiteStore if present
+if (typeof window !== 'undefined' && window.SiteStore) {
+  try {
+    var stored = window.SiteStore.get('hotel');
+    if (stored) {
+      if (stored.details) {
+        HOTEL_DATA.hotel = stored.details;
+        HOTEL_DATA.taxNote = stored.details.taxNote || HOTEL_DATA.taxNote;
+      }
+      if (stored.rooms && stored.rooms.length) HOTEL_DATA.rooms = stored.rooms;
+      if (stored.ratePlans && stored.ratePlans.length) HOTEL_DATA.ratePlans = stored.ratePlans;
+      if (stored.extras && stored.extras.length) HOTEL_DATA.extras = stored.extras;
+      if (stored.directBookingPerks && stored.directBookingPerks.length) HOTEL_DATA.directBookingPerks = stored.directBookingPerks;
+      if (stored.reviews && stored.reviews.length) HOTEL_DATA.reviews = stored.reviews;
+      if (stored.experiences && stored.experiences.length) HOTEL_DATA.experiences = stored.experiences;
+      if (stored.faq && stored.faq.length) HOTEL_DATA.faq = stored.faq;
+    }
+  } catch (e) {}
+}

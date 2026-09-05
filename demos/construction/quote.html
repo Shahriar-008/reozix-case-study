@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
 <link rel="stylesheet" href="../shared/css/reset.css">
+<link rel="stylesheet" href="../shared/css/admin-bar.css">
 <link rel="stylesheet" href="css/construction.css">
 <style>
   .ct-quote-wrap { max-width: 760px; margin: 0 auto; }
@@ -250,6 +251,7 @@
 </footer>
 
 <script src="../shared/js/utils.js"></script>
+<script src="../shared/js/site-store.js"></script>
 <script src="js/data.js"></script>
 <script src="js/icons.js"></script>
 <script>
@@ -360,6 +362,31 @@
     if (f.honeypot.value) return; // bot — pretend success, send nothing
     var ref = 'QC-' + Date.now().toString(36).toUpperCase().slice(-6);
     document.getElementById('quote-ref').textContent = ref;
+
+    // Save to SiteStore CRM leads
+    if (window.SiteStore) {
+      try {
+        var budgetVal = f.budget.value;
+        var numBudget = parseInt(budgetVal.replace(/[^0-9]/g, ''), 10) || null;
+        window.SiteStore.addLead({
+          vertical: 'construction',
+          type: 'quote',
+          title: 'Quote: ' + (f.type.value || 'Commercial Fit-Out') + ' (' + (f.suburb ? f.suburb.value : 'Brisbane') + ')',
+          name: f.name.value.trim(),
+          email: f.email.value.trim(),
+          phone: f.phone.value.trim(),
+          amount: numBudget,
+          details: {
+            projectType: f.type.value,
+            budgetRange: f.budget.value,
+            address: f.address.value + ' ' + f.postcode.value,
+            timeline: f.timeline.value,
+            details: f.details ? f.details.value : ''
+          }
+        });
+      } catch (err) {}
+    }
+
     form.style.display = 'none';
     document.querySelector('.ct-wizard-steps').style.display = 'none';
     document.getElementById('quote-success').style.display = 'block';
@@ -382,5 +409,6 @@
   }
 })();
 </script>
+<script src="../shared/js/site-sync.js"></script>
 </body>
 </html>

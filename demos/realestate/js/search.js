@@ -156,7 +156,59 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+function renderDynamicProperties() {
+  if (!window.RE_DATA || !window.RE_DATA.properties) return;
+  var grid = document.querySelector('.property-grid');
+  if (!grid) return;
+
+  var existingCards = grid.querySelectorAll('.property-card');
+  var existingIds = [];
+  existingCards.forEach(function(c) {
+    var a = c.querySelector('a[href*="id="]');
+    if (a) {
+      var m = a.getAttribute('href').match(/id=([^&]+)/);
+      if (m) existingIds.push(m[1]);
+    }
+  });
+
+  var props = window.RE_DATA.properties;
+  var mismatch = props.some(function(p) { return existingIds.indexOf(p.id) === -1; }) || existingCards.length !== props.length;
+
+  if (mismatch && props.length > 0) {
+    grid.innerHTML = props.map(function(p) {
+      var img = p.imgUrl || 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80';
+      var priceFmt = p.price ? '$' + p.price.toLocaleString('en-AU') : 'Contact Agent';
+      return [
+        '<div class="property-card" data-type="' + (p.type || 'Apartment') + '" data-suburb="' + (p.suburb || '') + '" data-beds="' + (p.beds || 0) + '" data-baths="' + (p.baths || 0) + '" data-price="' + (p.price || 0) + '">',
+        '  <a href="property-detail.html?id=' + p.id + '" class="property-photo-wrap" aria-label="View ' + p.address + '">',
+        '    <div class="property-photo">',
+        '      <img src="' + img + '" alt="Property photo" loading="lazy" class="cover-img">',
+        '      <span class="price-badge">' + priceFmt + '</span>',
+        '      <span class="type-badge">' + (p.type || 'Property') + '</span>',
+        '      <span class="photo-count">' + (p.photos || 5) + ' photos</span>',
+        '    </div>',
+        '  </a>',
+        '  <div class="card-body">',
+        '    <a href="property-detail.html?id=' + p.id + '" class="prop-address">' + p.address + '</a>',
+        '    <p class="prop-suburb">' + p.suburb + '</p>',
+        '    <div class="prop-stats">',
+        '      <span class="stat"><span class="stat-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h20"/><path d="M2 16h20"/><path d="M22 4v16"/><path d="M6 8v4"/><path d="M18 8v4"/></svg></span> ' + (p.beds || 0) + '</span>',
+        '      <span class="stat"><span class="stat-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h16a1 1 0 0 1 1 1v3a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-3a1 1 0 0 1 1-1z"/><path d="M6 12V5a2 2 0 0 1 2-2h3v2.25"/><path d="M4 21l1-1.5"/><path d="M20 21l-1-1.5"/></svg></span> ' + (p.baths || 0) + '</span>',
+        '      <span class="stat"><span class="stat-icon" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="7" rx="1"/><circle cx="6.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/><path d="M5 13l1.5-5h11l1.5 5"/></svg></span> ' + (p.cars || 0) + '</span>',
+        '    </div>',
+        '    <div class="prop-features">',
+        (p.features || []).slice(0, 3).map(function(f) { return '<span class="feature">' + f + '</span>'; }).join(''),
+        '    </div>',
+        '    <div class="prop-inspection">' + (p.inspection || 'By Appointment') + '</div>',
+        '  </div>',
+        '</div>'
+      ].join('');
+    }).join('');
+  }
+}
+
   // Pre-fill from the homepage search bar and apply the filters on load.
+  renderDynamicProperties();
   prefillFromUrl();
   filterProperties();
 });

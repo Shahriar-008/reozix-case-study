@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reozix — Standalone Demonstration Platforms & Admin Portal</title>
+  <meta name="description" content="Experience Reozix's three standalone vertical platforms with a customizable, full-featured Admin Dashboard for managing site details, catalog items, and CRM leads.">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="shared/css/reset.css">
+  <link rel="stylesheet" href="shared/css/admin-bar.css">
+  <style>
+    :root {
+      --bg: #090b0e;
+      --surface: #11141a;
+      --card: #171b23;
+      --card-hover: #1f2530;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      --text: #f3f4f6;
+      --text-muted: #9ca3af;
+      --hotel: #d4a853;
+      --realestate: #4a90d9;
+      --construction: #e8752a;
+      --radius: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Ambient Background Glow */
+    .ambient-glow {
+      position: fixed;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(74, 144, 217, 0.12) 0%, rgba(212, 168, 83, 0.08) 45%, rgba(0,0,0,0) 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Header */
+    header.portal-header {
+      border-bottom: 1px solid var(--border);
+      background: rgba(17, 20, 26, 0.85);
+      backdrop-filter: blur(16px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .portal-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .portal-badge {
+      background: rgba(255, 255, 255, 0.1);
+      color: #e5e7eb;
+      font-size: 0.725rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-admin-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 8px 16px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+    .btn-admin-pill:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.1);
+    }
+
+    /* Hero */
+    main.portal-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+    .portal-hero {
+      text-align: center;
+      max-width: 840px;
+      margin: 0 auto 56px;
+    }
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #93c5fd;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .hero-kicker-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+    .portal-hero h1 {
+      font-size: 2.75rem;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+      font-weight: 800;
+    }
+    .portal-hero h1 span {
+      background: linear-gradient(135deg, #fff 30%, #9ca3af 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .portal-hero p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto 28px;
+    }
+
+    /* Admin Announcement Feature Banner */
+    .admin-feature-card {
+      background: linear-gradient(135deg, rgba(23, 27, 35, 0.9) 0%, rgba(31, 37, 48, 0.7) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius);
+      padding: 28px 36px;
+      margin-bottom: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      position: relative;
+      overflow: hidden;
+    }
+    .admin-feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; width: 4px; height: 100%;
+      background: linear-gradient(180deg, #d4a853, #4a90d9, #e8752a);
+    }
+    .feature-left h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .feature-left p {
+      font-size: 0.925rem;
+      color: var(--text-muted);
+      max-width: 680px;
+    }
+    .feature-badges {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .f-badge {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: #e5e7eb;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+
+    /* Vertical Demo Cards Grid */
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+    .platform-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+    .platform-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--border-strong);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    }
+    .card-top-bar {
+      height: 6px;
+      width: 100%;
+    }
+    .card-body {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .platform-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .platform-eyebrow {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .platform-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .platform-desc {
+      font-size: 0.925rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .features-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .features-list li {
+      font-size: 0.85rem;
+      color: #d1d5db;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .features-list li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 800;
+    }
+    .card-stats {
+      background: rgba(0, 0, 0, 0.25);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-bottom: 22px;
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+    }
+    .stat-box strong {
+      display: block;
+      font-size: 1.15rem;
+      color: #fff;
+    }
+    .stat-box span {
+      font-size: 0.725rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .card-actions {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-launch {
+      flex: 1;
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-align: center;
+      text-decoration: none;
+      color: #111;
+      transition: filter 0.15s ease, transform 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-launch:hover {
+      filter: brightness(1.1);
+      transform: translateY(-1px);
+    }
+    .btn-card-admin {
+      padding: 11px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.875rem;
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid var(--border);
+      color: #f3f4f6;
+      transition: background 0.15s ease, border-color 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .btn-card-admin:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: var(--border-strong);
+    }
+
+    footer.portal-footer {
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      padding: 24px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="ambient-glow" aria-hidden="true"></div>
+
+<!-- Header -->
+<header class="portal-header">
+  <div class="header-inner">
+    <a href="../index.html" class="portal-logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+      <span>reozix</span>
+      <span class="portal-badge">Standalone Demos</span>
+    </a>
+
+    <div class="header-actions">
+      <a href="admin/index.html" class="btn-admin-pill">
+        <span>⚙️ Open Admin Dashboard</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main class="portal-content">
+
+  <!-- Hero -->
+  <section class="portal-hero">
+    <div class="hero-kicker">
+      <span class="hero-kicker-dot"></span>
+      <span>Live Production-Grade Standalone Demos</span>
+    </div>
+    <h1>Standalone Demo Platforms<br><span>with Full Admin Control</span></h1>
+    <p>
+      Launch fully functioning web applications built for three core industries. Customize business names, contact details, accent colors, catalog listings, and manage incoming leads in real-time.
+    </p>
+  </section>
+
+  <!-- Admin Feature Banner -->
+  <div class="admin-feature-card">
+    <div class="feature-left">
+      <h2>Unified Administration & Customization Center</h2>
+      <p>
+        Every site detail can be edited from the centralized Admin Dashboard — instantly updating live pages with zero server dependencies or setup.
+      </p>
+      <div class="feature-badges">
+        <span class="f-badge">⚡ Real-Time Live Sync</span>
+        <span class="f-badge">🎨 Theme Color Customizer</span>
+        <span class="f-badge">📦 Catalog CRUD Engine</span>
+        <span class="f-badge">📥 CRM Lead Tracker</span>
+        <span class="f-badge">💾 JSON Backup & Restore</span>
+      </div>
+    </div>
+    <div>
+      <a href="admin/index.html" class="btn-admin-pill" style="padding:12px 24px; font-size:0.95rem;">
+        <span>Launch Admin Dashboard ⚡</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 3 Standalone Platforms -->
+  <div class="platforms-grid">
+
+    <!-- Boutique Hotel -->
+    <article class="platform-card" style="--accent: var(--hotel);">
+      <div class="card-top-bar" style="background: var(--hotel);"></div>
+      <div class="card-body">
+        <div class="platform-header">
+          <span class="platform-eyebrow" style="color: var(--hotel);">Hospitality & Suites</span>
+          <span class="portal-badge">Live Demo</span>
+        </div>
+        <h2 class="platform-title" id="card-title-hotel">Reozix Hotel</h2>
+        <p class="platform-desc" id="card-desc-hotel">
+          A direct-booking boutique hotel accommodation platform with multi-currency pricing, room suite details, stay extras upselling, and instant checkout simulation.
+        </p>
+        <ul class="features-list">
+          <li>Direct booking engine with 4-step wizard</li>
+          <li>Rate plans: Flexible, Saver &amp; Breakfast</li>
+          <li>Deterministic room availability logic</li>
+          <li>Integrated concierge corner popup desk</li>
+        </ul>
+        <div class="card-stats">
+          <div class="stat-box">
+            <strong id="stat-rooms-count">4</strong>
+            <span>Active Suites</span>
+          </div>
+          <div class="stat-box">
+            <strong id="stat-hotel-leads">1</strong>
+            <span>Bookings</span>
+          </div>
+          <div class="stat-box">
+            <strong>9.4</strong>
+            <span>Guest Score</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="hotel/index.html" class="btn-launch" style="background: var(--hotel);">Launch Hotel ↗</a>
+          <a href="admin/index.html?vertical=hotel" class="btn-card-admin">⚙️ Customize</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Real Estate Agency -->
+    <article class="platform-card" style="--accent: var(--realestate);">
+      <div class="card-top-bar" style="background: var(--realestate);"></div>
+      <div class="card-body">
+        <div class="platform-header">
+          <span class="platform-eyebrow" style="color: var(--realestate);">Prestige Agency</span>
+          <span class="portal-badge">Live Demo</span>
+        </div>
+        <h2 class="platform-title" id="card-title-realestate">Reozix Real Estate</h2>
+        <p class="platform-desc" id="card-desc-realestate">
+          A luxury property search and listings platform with multi-attribute filtering, interactive map/list toggles, agent directories, and free market appraisal requests.
+        </p>
+        <ul class="features-list">
+          <li>Instant client-side multi-parameter filtering</li>
+          <li>Interactive Leaflet map &amp; photo galleries</li>
+          <li>Specialist agent profiles with settled listings</li>
+          <li>Digital market appraisal lead funnel</li>
+        </ul>
+        <div class="card-stats">
+          <div class="stat-box">
+            <strong id="stat-props-count">6</strong>
+            <span>Properties</span>
+          </div>
+          <div class="stat-box">
+            <strong id="stat-re-leads">1</strong>
+            <span>Appraisals</span>
+          </div>
+          <div class="stat-box">
+            <strong>4.95</strong>
+            <span>Agent Rating</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="realestate/index.html" class="btn-launch" style="background: var(--realestate); color:#fff;">Launch Real Estate ↗</a>
+          <a href="admin/index.html?vertical=realestate" class="btn-card-admin">⚙️ Customize</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Construction Builder -->
+    <article class="platform-card" style="--accent: var(--construction);">
+      <div class="card-top-bar" style="background: var(--construction);"></div>
+      <div class="card-body">
+        <div class="platform-header">
+          <span class="platform-eyebrow" style="color: var(--construction);">Commercial &amp; Residential</span>
+          <span class="portal-badge">Live Demo</span>
+        </div>
+        <h2 class="platform-title" id="card-title-construction">Reozix Construction</h2>
+        <p class="platform-desc" id="card-desc-construction">
+          A commercial builder portfolio platform with detailed project budget and timeline metadata, an interactive cost estimator, and fixed-price quote wizard.
+        </p>
+        <ul class="features-list">
+          <li>3-step preliminary quote calculation wizard</li>
+          <li>Interactive square-meterage cost estimator</li>
+          <li>Delivered commercial &amp; residential portfolio</li>
+          <li>QBCC licence verification and credentials</li>
+        </ul>
+        <div class="card-stats">
+          <div class="stat-box">
+            <strong id="stat-proj-count">4</strong>
+            <span>Projects</span>
+          </div>
+          <div class="stat-box">
+            <strong id="stat-ct-leads">1</strong>
+            <span>Quotes</span>
+          </div>
+          <div class="stat-box">
+            <strong>$20M</strong>
+            <span>Insured</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <a href="construction/index.html" class="btn-launch" style="background: var(--construction); color:#fff;">Launch Construction ↗</a>
+          <a href="admin/index.html?vertical=construction" class="btn-card-admin">⚙️ Customize</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+
+</main>
+
+<footer class="portal-footer">
+  <div style="max-width:1200px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+    <div><strong>reozix</strong> &nbsp; Standalone Vertical Demonstration Suite &amp; Admin Hub</div>
+    <div>Australia · Canada · Open Web Platforms</div>
+  </div>
+</footer>
+
+<script src="shared/js/site-store.js"></script>
+<script>
+  // Update live counts from SiteStore
+  document.addEventListener('DOMContentLoaded', function() {
+    if (!window.SiteStore) return;
+
+    var h = window.SiteStore.get('hotel');
+    if (h) {
+      if (h.details.name) document.getElementById('card-title-hotel').textContent = h.details.name;
+      if (h.details.tagline) document.getElementById('card-desc-hotel').textContent = h.details.tagline;
+      document.getElementById('stat-rooms-count').textContent = (h.rooms || []).length;
+    }
+    var hLeads = window.SiteStore.getLeads('hotel');
+    document.getElementById('stat-hotel-leads').textContent = hLeads.length;
+
+    var re = window.SiteStore.get('realestate');
+    if (re) {
+      if (re.details.name) document.getElementById('card-title-realestate').textContent = re.details.name;
+      if (re.details.tagline) document.getElementById('card-desc-realestate').textContent = re.details.tagline;
+      document.getElementById('stat-props-count').textContent = (re.properties || []).length;
+    }
+    var reLeads = window.SiteStore.getLeads('realestate');
+    document.getElementById('stat-re-leads').textContent = reLeads.length;
+
+    var ct = window.SiteStore.get('construction');
+    if (ct) {
+      if (ct.details.name) document.getElementById('card-title-construction').textContent = ct.details.name;
+      if (ct.details.tagline) document.getElementById('card-desc-construction').textContent = ct.details.tagline;
+      document.getElementById('stat-proj-count').textContent = (ct.projects || []).length;
+    }
+    var ctLeads = window.SiteStore.getLeads('construction');
+    document.getElementById('stat-ct-leads').textContent = ctLeads.length;
+  });
+</script>
+</body>
+</html>

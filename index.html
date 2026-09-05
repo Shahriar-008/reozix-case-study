@@ -120,6 +120,161 @@
     justify-content: space-between;
     gap: 1rem;
     flex-wrap: wrap;
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .nav-btn-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    transition: all 0.2s ease;
+  }
+  .nav-btn-link:hover {
+    border-color: #999;
+    background: #f0f0f0;
+  }
+  .admin-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #11141c 0%, #1c2234 100%);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.45rem 1rem;
+    border-radius: 9999px;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: all 0.25s ease;
+  }
+  .admin-pill-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    border-color: #6366f1;
+    color: #fff;
+  }
+  .admin-pill-badge {
+    background: #6366f1;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+  .standalone-banner {
+    margin-bottom: 2.5rem;
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1f2430 100%);
+    color: #ffffff;
+    border-radius: 16px;
+    padding: 2rem 2.25rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 16px 36px rgba(0,0,0,0.15);
+  }
+  .banner-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #818cf8;
+    background: rgba(99, 102, 241, 0.15);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    padding: 4px 10px;
+    border-radius: 9999px;
+    margin-bottom: 1rem;
+  }
+  .banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .banner-text {
+    flex: 1 1 500px;
+  }
+  .banner-text h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+  }
+  .banner-text p {
+    color: #94a3b8;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .banner-ctas {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  .banner-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.75rem 1.4rem;
+    background: #6366f1;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .banner-btn-primary:hover {
+    background: #4f46e5;
+    transform: translateY(-2px);
+  }
+  .banner-btn-admin {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0.75rem 1.4rem;
+    background: rgba(255,255,255,0.08);
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .banner-btn-admin:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: #818cf8;
+    transform: translateY(-2px);
+  }
+  .card-action-links {
+    margin-top: 0.85rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .card-action-links a {
+    color: var(--accent);
+    text-decoration: none;
+  }
+  .card-action-links a:hover {
+    text-decoration: underline;
   }
 </style>
 </head>
@@ -128,11 +283,31 @@
 <header class="site-header">
   <div class="inner">
     <a class="logo" href="index.html">reozix <span>— Vertical Demo Portfolio</span></a>
-    <span class="tagline">Enterprise Software. Refined.</span>
+    <div class="header-actions">
+      <a href="demos/index.html" class="nav-btn-link">Explore Live Demos</a>
+      <a href="demos/admin/index.html" class="admin-pill-btn">
+        <span class="admin-pill-badge">ADMIN</span> Launch Dashboard ⚡
+      </a>
+    </div>
   </div>
 </header>
 
 <main>
+  <!-- Standalone Demo Suite & Live Admin Banner -->
+  <div class="standalone-banner rz-reveal">
+    <div class="banner-badge">✨ Standalone Suite &amp; Customizable Admin</div>
+    <div class="banner-content">
+      <div class="banner-text">
+        <h2>Zero-Backend Interactive Demos with Unified Admin</h2>
+        <p>Explore all 3 working demo platforms or launch the executive Admin Dashboard to customize branding colors, site copy, inventory catalogs, and manage live CRM inquiries with instant cross-tab persistence.</p>
+      </div>
+      <div class="banner-ctas">
+        <a href="demos/index.html" class="banner-btn-primary">Browse All Demos &rarr;</a>
+        <a href="demos/admin/index.html" class="banner-btn-admin">⚡ Open Admin Dashboard</a>
+      </div>
+    </div>
+  </div>
+
   <section class="intro rz-reveal">
     <h1>What Reozix builds, demonstrated per industry</h1>
     <p>
@@ -147,33 +322,41 @@
   </section>
 
   <section class="cards rz-stagger-parent">
-    <a class="card" href="case-studies/reozix-hotel.html" style="--accent: #d4a853; --accent-glow: rgba(212, 168, 83, 0.25);">
+    <div class="card" style="--accent: #d4a853; --accent-glow: rgba(212, 168, 83, 0.25);">
       <div class="card-top">
         <span class="eyebrow">Boutique Hotel</span>
         <span class="rz-live-badge"><span class="rz-pulse-dot pulse-gold"></span> Live Demo</span>
       </div>
       <h2>Reozix Hotel</h2>
       <p>
-        A booking-first hotel platform with a direct booking engine, no-code CMS, and sub-2-second mobile performance —
+        A booking-first hotel platform with a direct booking engine, customizable CMS, and sub-2-second mobile performance —
         built to win back channel share from the OTAs.
       </p>
       <div class="meta"><strong class="stat-num" data-countup>98</strong> Lighthouse Performance · <strong>2.4s</strong> TTI</div>
-    </a>
+      <div class="card-action-links">
+        <a href="demos/hotel/index.html">Launch Hotel Site &rarr;</a>
+        <a href="case-studies/reozix-hotel.html" style="color: var(--muted); font-weight: normal;">Read Case Study</a>
+      </div>
+    </div>
 
-    <a class="card" href="case-studies/reozix-realestate.html" style="--accent: #4a90d9; --accent-glow: rgba(74, 144, 217, 0.25);">
+    <div class="card" style="--accent: #4a90d9; --accent-glow: rgba(74, 144, 217, 0.25);">
       <div class="card-top">
         <span class="eyebrow">Real Estate</span>
         <span class="rz-live-badge"><span class="rz-pulse-dot pulse-blue"></span> Live Demo</span>
       </div>
       <h2>Reozix Real Estate</h2>
       <p>
-        A listings platform with instant Meilisearch property search, structured appraisal flow, and agent profiles —
+        A listings platform with instant property search, structured appraisal flow, and agent profiles —
         built for agencies who compete against the big portals.
       </p>
       <div class="meta"><strong class="stat-num" data-countup>100</strong> Lighthouse Performance · <strong>1.4s</strong> TTI</div>
-    </a>
+      <div class="card-action-links">
+        <a href="demos/realestate/index.html">Launch Real Estate Site &rarr;</a>
+        <a href="case-studies/reozix-realestate.html" style="color: var(--muted); font-weight: normal;">Read Case Study</a>
+      </div>
+    </div>
 
-    <a class="card" href="case-studies/reozix-construction.html" style="--accent: #e8752a; --accent-glow: rgba(232, 117, 42, 0.25);">
+    <div class="card" style="--accent: #e8752a; --accent-glow: rgba(232, 117, 42, 0.25);">
       <div class="card-top">
         <span class="eyebrow">Construction</span>
         <span class="rz-live-badge"><span class="rz-pulse-dot pulse-orange"></span> Live Demo</span>
@@ -184,14 +367,22 @@
         architecture — built for the industry's long, credibility-first sales cycle.
       </p>
       <div class="meta"><strong class="stat-num" data-countup>93</strong> Lighthouse Performance · <strong>3.1s</strong> TTI</div>
-    </a>
+      <div class="card-action-links">
+        <a href="demos/construction/index.html">Launch Construction Site &rarr;</a>
+        <a href="case-studies/reozix-construction.html" style="color: var(--muted); font-weight: normal;">Read Case Study</a>
+      </div>
+    </div>
   </section>
 </main>
 
 <footer>
   <div class="inner">
     <div><strong>reozix</strong> &nbsp; Enterprise Software. Refined.</div>
-    <div>Australia · Canada · Vertical demonstration portfolio</div>
+    <div style="display:flex;gap:1.25rem;flex-wrap:wrap;align-items:center;">
+      <a href="demos/index.html" style="color:inherit;text-decoration:underline;">Demo Portal</a>
+      <a href="demos/admin/index.html" style="color:inherit;text-decoration:underline;">⚡ Admin Dashboard</a>
+      <span>Australia · Canada</span>
+    </div>
   </div>
 </footer>
 

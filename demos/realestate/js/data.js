@@ -439,3 +439,27 @@ var RE_DATA = {
     }
   ]
 };
+
+// Sync with SiteStore if present
+if (typeof window !== 'undefined' && window.SiteStore) {
+  try {
+    var storedRe = window.SiteStore.get('realestate');
+    if (storedRe) {
+      if (storedRe.details) {
+        RE_DATA.agency = storedRe.details;
+      }
+      if (storedRe.properties && storedRe.properties.length) {
+        RE_DATA.properties = storedRe.properties;
+      }
+      if (storedRe.agents && storedRe.agents.length) {
+        RE_DATA.agents = storedRe.agents;
+      }
+      if (storedRe.reviews && storedRe.reviews.length) {
+        RE_DATA.reviews = storedRe.reviews;
+      }
+      if (storedRe.faq && storedRe.faq.length) {
+        RE_DATA.faq = storedRe.faq;
+      }
+    }
+  } catch (e) {}
+}

@@ -6,11 +6,8 @@
 <title>Request a Free Property Appraisal — Reozix Real Estate, Gold Coast</title>
 <meta name="description" content="Get a free, no-obligation market appraisal for your Gold Coast property. A local Reozix Real Estate agent will contact you within 24 hours.">
 <link rel="stylesheet" href="../shared/css/reset.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
-        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
-    <link rel="stylesheet" href="css/realestate.css">
+<link rel="stylesheet" href="../shared/css/admin-bar.css">
+<link rel="stylesheet" href="css/realestate.css">
 </head>
 <body data-page="appraisal">
 
@@ -226,8 +223,10 @@
   </div>
 </footer>
 
+<script src="../shared/js/site-store.js"></script>
 <script src="../shared/js/utils.js"></script>
 <script src="js/data.js"></script>
+<script src="../shared/js/site-sync.js"></script>
 <script>
 // Appraisal form — URL pre-fill, suburb dropdown, validation and success state.
 (function() {
@@ -323,6 +322,28 @@
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       if (!validate()) return;
+
+      if (window.SiteStore) {
+        try {
+          window.SiteStore.addLead({
+            vertical: 'realestate',
+            type: 'appraisal',
+            title: 'Appraisal: ' + (document.getElementById('address') ? document.getElementById('address').value : 'Property') + ', ' + (document.getElementById('suburb') ? document.getElementById('suburb').value : ''),
+            name: document.getElementById('name') ? document.getElementById('name').value.trim() : 'Prospective Seller',
+            email: document.getElementById('email') ? document.getElementById('email').value.trim() : '',
+            phone: document.getElementById('phone') ? document.getElementById('phone').value.trim() : '',
+            amount: null,
+            details: {
+              address: document.getElementById('address') ? document.getElementById('address').value.trim() : '',
+              suburb: document.getElementById('suburb') ? document.getElementById('suburb').value.trim() : '',
+              propertyType: document.getElementById('type') ? document.getElementById('type').value : '',
+              beds: document.getElementById('beds') ? document.getElementById('beds').value : '',
+              timeline: document.getElementById('timeline') ? document.getElementById('timeline').value : ''
+            }
+          });
+        } catch (e) {}
+      }
+
       form.style.display = 'none';
       var success = document.getElementById('success-panel');
       success.style.display = 'block';

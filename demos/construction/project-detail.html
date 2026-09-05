@@ -6,6 +6,7 @@
 <title>Project Details — Reozix Construction, Brisbane</title>
 <meta name="description" content="Project case study for a Reozix Construction build in Brisbane — photo gallery, budget, duration, floor area, scope and client testimonial for every commercial and residential project.">
 <link rel="stylesheet" href="../shared/css/reset.css">
+<link rel="stylesheet" href="../shared/css/admin-bar.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 16 16%27%3E%3Crect width=%2716%27 height=%2716%27 rx=%273%27 fill=%27%23c05a12%27/%3E%3Ctext x=%278%27 y=%2712%27 text-anchor=%27middle%27 font-family=%27Georgia%27 font-size=%2711%27 fill=%27%23fff%27%3EC%3C/text%3E%3C/svg%3E">
@@ -148,6 +149,7 @@
   <a href="quote.html" class="ct-btn">Get a Quote</a>
 </div>
 <script src="../shared/js/utils.js"></script>
+<script src="../shared/js/site-store.js"></script>
 <script src="js/icons.js"></script>
 <script src="js/data.js"></script>
 <script>
@@ -269,6 +271,9 @@
     return pool[(projectIndex + index) % pool.length];
   }
   function photoSrc(id, w, h) {
+    if (project.image && project.image.startsWith('http') && id === pool[projectIndex % pool.length]) {
+      return project.image;
+    }
     return 'https://images.unsplash.com/' + id + '?w=' + w + '&h=' + h + '&fit=crop';
   }
 
@@ -328,23 +333,30 @@
   });
 
   // Scope description
-  document.getElementById('detail-desc').textContent = project.description;
+  document.getElementById('detail-desc').textContent = project.description || '';
 
   // Key features
   var features = document.getElementById('feature-list');
-  project.features.forEach(function(feature) {
+  (project.features || []).forEach(function(feature) {
     var li = document.createElement('li');
     li.textContent = feature;
     features.appendChild(li);
   });
 
   // Client testimonial (quote + client name + role)
-  document.getElementById('testimonial-quote').textContent = '“' + project.testimonial.quote + '”';
-  var cite = document.getElementById('testimonial-client');
-  cite.textContent = project.testimonial.client;
-  var role = document.createElement('span');
-  role.textContent = project.testimonial.role;
-  cite.appendChild(role);
+  if (project.testimonial && project.testimonial.quote) {
+    document.getElementById('testimonial-quote').textContent = '“' + project.testimonial.quote + '”';
+    var cite = document.getElementById('testimonial-client');
+    cite.textContent = project.testimonial.client || '';
+    if (project.testimonial.role) {
+      var role = document.createElement('span');
+      role.textContent = project.testimonial.role;
+      cite.appendChild(role);
+    }
+  } else {
+    var tCard = document.getElementById('testimonial-quote') ? document.getElementById('testimonial-quote').closest('.ct-testimonial-card') : null;
+    if (tCard) tCard.style.display = 'none';
+  }
 
   // Stats sidebar
   var note = 'Status: ' + statusLabel(project.status);
@@ -352,13 +364,14 @@
     note += ' — expected ' + completedYear(project.completed);
   }
   document.getElementById('stats-note').textContent = note;
-  document.getElementById('stat-budget').textContent = formatCurrency(project.budget);
-  document.getElementById('stat-duration').textContent = project.duration;
-  document.getElementById('stat-sqm').textContent = formatNumber(project.sqm) + ' sqm';
-  document.getElementById('stat-location').textContent = project.suburb;
+  document.getElementById('stat-budget').textContent = formatCurrency(project.budget || 0);
+  document.getElementById('stat-duration').textContent = project.duration || '—';
+  document.getElementById('stat-sqm').textContent = formatNumber(project.sqm || 0) + ' sqm';
+  document.getElementById('stat-location').textContent = project.suburb || 'Brisbane';
   document.getElementById('stat-year').textContent = completedYear(project.completed);
   document.getElementById('enquire-link').href = 'quote.html?project=' + project.id;
 })();
 </script>
+<script src="../shared/js/site-sync.js"></script>
 </body>
 </html>

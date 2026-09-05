@@ -360,6 +360,73 @@ var CONSTRUCTION_DATA = {
       record: 'No lost-time injuries in the past 24 months',
       inductions: 'All site personnel inducted and White Card certified'
     },
+  services: [
+    {
+      id: 'svc-001',
+      title: 'Commercial Fit-Outs',
+      icon: 'building',
+      description: 'Turnkey fit-outs for offices, retail and medical spaces across Brisbane\'s CBD and inner suburbs. We take your space from bare shell to move-in ready — planning, approvals, construction and handover all under one contract.',
+      process: ['Initial consultation', 'Design & documentation', 'Construction & fit-out', 'Handover & aftercare'],
+      timeline: '8–16 weeks',
+      priceRange: '$250K–$2M',
+      includes: ['Demolition & strip-out', 'Full design & construction', 'Commercial-grade finishes', 'End-of-trip & amenities', 'Move-in ready handover', 'Defects liability period'],
+      projects: ['proj-001', 'proj-002', 'proj-003']
+    },
+    {
+      id: 'svc-002',
+      title: 'Residential Extensions',
+      icon: 'home',
+      description: 'Second-storey additions, rear extensions and deck builds that give your Brisbane home the space it needs — without the cost of moving. We handle council approvals and engineer every addition to the existing structure.',
+      process: ['Site consultation & feasibility', 'Design & council approvals', 'Construction', 'Handover & finishing'],
+      timeline: '10–20 weeks',
+      priceRange: '$80K–$400K',
+      includes: ['Council approval assistance', 'Structural engineering', 'Full construction', 'Flooring & finishes', 'Painting & joinery', 'Garden reinstatement'],
+      projects: ['proj-005', 'proj-007', 'proj-008']
+    },
+    {
+      id: 'svc-003',
+      title: 'New Builds',
+      icon: 'crane',
+      description: 'Custom homes, duplexes and townhouse developments built to your plans or designed from the ground up. Fixed-price contracts, a dedicated site supervisor and a 10-year structural warranty on every build.',
+      process: ['Design consultation', 'Council & approvals', 'Construction', 'Handover & warranty'],
+      timeline: '6–10 months',
+      priceRange: '$400K–$3M',
+      includes: ['Custom architectural design', 'Fixed-price contract', 'Dedicated site supervisor', 'Premium materials', '10-year structural warranty', 'Landscaping'],
+      projects: ['proj-009', 'proj-010', 'proj-011']
+    },
+    {
+      id: 'svc-004',
+      title: 'Renovations',
+      icon: 'hammer',
+      description: 'Kitchens, bathrooms and whole-home renovations that modernise your space without losing its character. From heritage restorations to contemporary makeovers, our licensed trades deliver clean, on-time transformations.',
+      process: ['Consultation & scope', 'Design & approvals', 'Construction', 'Handover & final clean'],
+      timeline: '4–10 weeks',
+      priceRange: '$80K–$600K',
+      includes: ['Detailed scope & fixed quote', 'Design & approvals', 'Licensed trades', 'Kitchen & bathroom specialists', 'Finish & detail work', 'Final clean'],
+      projects: ['proj-014', 'proj-015', 'proj-016']
+    }
+  ],
+  credentials: {
+    licence: {
+      number: '15123456',
+      title: 'QBCC Builder Licence',
+      class: 'Open — Unlimited'
+    },
+    insurance: [
+      { type: 'Public Liability', cover: '$20M' },
+      { type: 'Home Warranty', cover: 'Per QBCC scheme' },
+      { type: 'Contract Works', cover: 'Full project value' }
+    ],
+    memberships: [
+      { name: 'Master Builders Queensland', since: '2014' },
+      { name: 'Housing Industry Association', since: '2016' },
+      { name: 'Australian Institute of Building', since: '2018' }
+    ],
+    safety: {
+      scheme: 'WorkCover Queensland',
+      record: 'No lost-time injuries in the past 24 months',
+      inductions: 'All site personnel inducted and White Card certified'
+    },
     stats: {
       projectsCompleted: 140,
       yearsOperating: 12,
@@ -369,3 +436,33 @@ var CONSTRUCTION_DATA = {
     }
   }
 };
+
+// Sync with SiteStore if present
+if (typeof window !== 'undefined' && window.SiteStore) {
+  try {
+    var storedCt = window.SiteStore.get('construction');
+    if (storedCt) {
+      if (storedCt.details) {
+        CONSTRUCTION_DATA.agency = storedCt.details;
+        if (storedCt.details.licence) {
+          CONSTRUCTION_DATA.agency.licence = storedCt.details.licence;
+        }
+      }
+      if (storedCt.projects && storedCt.projects.length) {
+        CONSTRUCTION_DATA.projects = storedCt.projects;
+      }
+      if (storedCt.services && storedCt.services.length) {
+        CONSTRUCTION_DATA.services = storedCt.services;
+      }
+      if (storedCt.team && storedCt.team.length) {
+        CONSTRUCTION_DATA.team = storedCt.team;
+      }
+      if (storedCt.credentials) {
+        CONSTRUCTION_DATA.credentials = storedCt.credentials;
+      }
+      if (storedCt.faq && storedCt.faq.length) {
+        CONSTRUCTION_DATA.faq = storedCt.faq;
+      }
+    }
+  } catch (e) {}
+}

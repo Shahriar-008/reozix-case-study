@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap"></noscript>
 <link rel="stylesheet" href="../shared/css/reset.css">
+<link rel="stylesheet" href="../shared/css/admin-bar.css">
 <link rel="stylesheet" href="css/hotel.css">
 </head>
 <body>
@@ -234,8 +235,10 @@
   </div>
 </footer>
 
+<script src="../shared/js/site-store.js"></script>
 <script src="../shared/js/utils.js"></script>
 <script src="js/data.js"></script>
+<script src="../shared/js/site-sync.js"></script>
 <script src="js/booking.js"></script>
 <script>(function(){var s=document.getElementById("currency-select");if(!s)return;try{s.value=localStorage.getItem("hotel-currency")||"AUD";}catch(e){}s.addEventListener("change",function(){try{localStorage.setItem("hotel-currency",s.value);}catch(e){}location.reload();});})();</script>
 </body>
