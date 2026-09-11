@@ -61,7 +61,21 @@
 
 <!-- Hero + stats -->
 <section class="ct-hero">
-  <div class="ct-hero-bg ct-hero-bg--site"></div>
+  <!-- Dynamic Construction Motion Background -->
+  <div class="ct-hero-media" aria-hidden="true">
+    <video class="ct-hero-video" id="ct-hero-video" autoplay muted loop playsinline preload="auto" poster="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=80">
+      <source src="videos/construction-hero.mp4" type="video/mp4">
+    </video>
+    <div class="ct-hero-overlay"></div>
+    <div class="ct-hero-grid"></div>
+    <div class="ct-hero-hud">
+      <span class="hud-cross cross-tl">+</span>
+      <span class="hud-cross cross-tr">+</span>
+      <span class="hud-cross cross-br">+</span>
+      <span class="hud-cross cross-bl">+</span>
+      <span class="hud-coords">27°28'04"S 153°01'40"E · BRISBANE ACTIVE SECTOR</span>
+    </div>
+  </div>
   <div class="ct-container">
     <div class="ct-hero-split">
       <div class="ct-hero-content">
@@ -99,13 +113,22 @@
             <span class="spec-label">INSURANCE</span>
             <span class="spec-val">$20,000,000 Public Liability</span>
           </div>
-          <div class="spec-drafting-line"></div>
-          <div class="spec-live-item">
-            <div class="spec-live-pill">FEATURED MILESTONE</div>
-            <p><strong>Meridian Tower Executive Office Fit-Out</strong><br>1,350 m² · 14 WKS · $1.45M AUD · Defect Free</p>
-          </div>
+        </div>
+        <div class="spec-card-milestone">
+          <span class="milestone-tag">FEATURED MILESTONE</span>
+          <strong>Meridian Tower Executive Office Fit-Out</strong>
+          <span>1,350 m² · 14 WKS · $1.45M AUD · Defect Free</span>
         </div>
       </aside>
+    </div>
+
+    <!-- Live Reel Motion Control -->
+    <div class="ct-hero-motion-control">
+      <button type="button" class="ct-hero-motion-btn" id="ct-motion-btn" aria-label="Toggle site motion video">
+        <span class="ct-motion-dot" id="ct-motion-dot"></span>
+        <span class="ct-motion-label">LIVE SITE REEL</span>
+        <span class="ct-motion-action" id="ct-motion-action">❚❚ PAUSE</span>
+      </button>
     </div>
   </div>
   <div class="ct-stat-bar">
@@ -525,6 +548,31 @@ document.addEventListener('DOMContentLoaded', function () {
       btn.setAttribute('aria-expanded', String(open));
     });
   });
+
+  // Live site reel motion toggle
+  var video = document.getElementById('ct-hero-video');
+  var motionBtn = document.getElementById('ct-motion-btn');
+  var motionDot = document.getElementById('ct-motion-dot');
+  var motionAction = document.getElementById('ct-motion-action');
+
+  if (video && motionBtn) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      video.pause();
+      if (motionDot) motionDot.classList.add('paused');
+      if (motionAction) motionAction.textContent = '▶ PLAY';
+    }
+    motionBtn.addEventListener('click', function () {
+      if (video.paused) {
+        video.play();
+        if (motionDot) motionDot.classList.remove('paused');
+        if (motionAction) motionAction.textContent = '❚❚ PAUSE';
+      } else {
+        video.pause();
+        if (motionDot) motionDot.classList.add('paused');
+        if (motionAction) motionAction.textContent = '▶ PLAY';
+      }
+    });
+  }
 });
 </script>
 </body>
