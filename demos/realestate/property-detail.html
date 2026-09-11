@@ -3,28 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Property Details — Reozix Real Estate, Gold Coast</title>
+<title>Property Details - Reozix Real Estate, Gold Coast</title>
 <meta name="description" content="Full listing details for Gold Coast property with photo gallery, key facts, features and the listing agent. Request a free appraisal from Reozix Real Estate.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
 <link rel="stylesheet" href="../shared/css/reset.css">
 <link rel="stylesheet" href="../shared/css/admin-bar.css">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
-        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
-    <link rel="stylesheet" href="css/realestate.css">
+<link rel="stylesheet" href="css/realestate.css">
 </head>
 <body data-page="property-detail">
 
 <nav class="re-nav">
   <div class="container">
     <a href="index.html" class="logo">Reozix <span>Real Estate</span></a>
-    <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
     <div class="nav-links">
       <a href="index.html">Home</a>
-      <a href="search.html">Search</a>
+      <a href="search.html">Properties</a>
+      <a href="index.html#enclaves">Enclaves</a>
       <a href="agents.html">Agents</a>
       <a href="appraisal.html">Appraisal</a>
-      <a href="tel:+61755923400">+61 7 5592 3400</a>
+      <a href="tel:+61755923400" class="nav-phone-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +61 7 5592 3400
+      </a>
     </div>
   </div>
 </nav>
@@ -51,7 +60,7 @@
         <div class="detail-main">
           <div class="gallery">
             <div class="gallery-main">
-              <img id="gallery-main-img" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=80" alt="Property photo — Reozix Real Estate">
+              <img id="gallery-main-img" src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&q=80" alt="Property photo - Reozix Real Estate">
             </div>
             <div class="gallery-thumbs" id="gallery-thumbs"></div>
           </div>
@@ -62,42 +71,43 @@
           <h2 class="detail-heading">About this property</h2>
           <p class="prop-description" id="prop-description"></p>
 
-          <h2 class="detail-heading">Property features</h2>
+          <h2 class="detail-heading">Features</h2>
           <div class="prop-features" id="prop-features"></div>
         </div>
 
-        <!-- Sidebar: listing agent + appraisal CTA -->
+        <!-- Sidebar column: Listing agent + Inspection / Appraisal -->
         <aside class="detail-sidebar">
           <div class="listing-agent">
-            <div class="agent-photo" id="agent-photo" aria-hidden="true"></div>
+            <div class="agent-photo" id="agent-photo"></div>
             <h3 id="agent-name"></h3>
             <p class="role" id="agent-role"></p>
             <div class="agent-contact">
               <a id="agent-phone" href="tel:"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg> <span id="agent-phone-text"></span></a>
               <a id="agent-email" href="mailto:"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> <span id="agent-email-text"></span></a>
             </div>
-            <a class="view-profile" id="agent-profile-link" href="">View full profile →</a>
+            <a class="view-profile" id="agent-profile-link" href="agent-detail.html">View Agent Profile →</a>
           </div>
 
-          <!-- Inspection time + request form -->
-                    <div class="inspection-card" id="inspection-card" style="display:none;">
-                      <h3>Inspection</h3>
-                      <p class="inspection-time"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg> <span id="inspection-time"></span></p>
-                      <form id="request-inspection" novalidate>
-                        <div class="field">
-                          <label for="ri-name">Name</label>
-                          <input type="text" id="ri-name" autocomplete="name" aria-required="true">
-                        </div>
-                        <div class="field">
-                          <label for="ri-email">Email</label>
-                          <input type="email" id="ri-email" autocomplete="email" aria-required="true">
-                        </div>
-                        <p class="field-error" id="ri-error" role="alert" style="display:none;"></p>
-                        <button type="submit" class="re-btn re-btn-outline">Request a private inspection</button>
-                      </form>
-                      <p class="form-success" id="ri-success" role="status" style="display:none;">Inspection request sent — the agent will confirm a time by email.</p>
-                    </div>
-                    <div class="appraisal-card">
+          <!-- Inspection card -->
+          <div class="inspection-card" id="inspection-card" style="display:none;">
+            <h3>Upcoming Open Inspection</h3>
+            <p class="inspection-time" id="inspection-time"></p>
+            <form id="request-inspection" novalidate>
+              <div class="field">
+                <label for="ri-name">Your Name</label>
+                <input type="text" id="ri-name" placeholder="Full name" required>
+              </div>
+              <div class="field">
+                <label for="ri-email">Your Email</label>
+                <input type="email" id="ri-email" placeholder="Email address" required>
+              </div>
+              <p class="field-error" id="ri-error" style="display:none;"></p>
+              <button type="submit" class="re-btn-outline re-btn" style="width:100%;">Register for Inspection</button>
+            </form>
+            <p class="form-success" id="ri-success" role="status" style="display:none;">Inspection request sent - the agent will confirm a time by email.</p>
+          </div>
+
+          <div class="appraisal-card">
             <h3>Want to know what this home is worth?</h3>
             <p>Get a free, no-obligation appraisal from our local Gold Coast team.</p>
             <a class="re-btn" id="appraisal-btn" href="appraisal.html">Request an Appraisal</a>
@@ -115,24 +125,43 @@
   </div>
 </section>
 
+<!-- Footer -->
 <footer class="re-footer">
   <div class="container">
     <div class="agency">
       <strong>Reozix Real Estate</strong>
-      <p>Gold Coast, QLD</p>
-      <a href="tel:+61755923400">+61 7 5592 3400</a>
-      <a href="mailto:hello@reozixrealestate.com.au">hello@reozixrealestate.com.au</a>
+      <p>Premier coastal residential sales and property management across the Gold Coast, Queensland.</p>
+      <a href="tel:+61755923400" class="contact-item">+61 7 5592 3400</a>
+      <a href="mailto:hello@reozixrealestate.com.au" class="contact-item">hello@reozixrealestate.com.au</a>
     </div>
+
     <div class="footer-links">
-      <h4>Quick links</h4>
+      <h4>Direct Navigation</h4>
       <a href="index.html">Home</a>
-      <a href="search.html">Search</a>
-      <a href="agents.html">Agents</a>
-      <a href="appraisal.html">Appraisal</a>
+      <a href="search.html">All Properties</a>
+      <a href="agents.html">Our Agents</a>
+      <a href="appraisal.html">Property Appraisal</a>
     </div>
-  </div>
-  <div class="container">
-    <p class="footer-bottom">© 2026 Reozix Real Estate. All rights reserved.</p>
+
+    <div class="footer-links">
+      <h4>Coast Enclaves</h4>
+      <a href="search.html?suburb=Surfers%20Paradise">Surfers Paradise</a>
+      <a href="search.html?suburb=Broadbeach">Broadbeach</a>
+      <a href="search.html?suburb=Burleigh%20Heads">Burleigh Heads</a>
+      <a href="search.html?suburb=Main%20Beach">Main Beach</a>
+      <a href="search.html?suburb=Hope%20Island">Hope Island</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>Office & Hours</h4>
+      <p style="color:var(--re-slate-400); margin:0;">Level 2, 42 The Esplanade<br>Surfers Paradise QLD 4217</p>
+      <p style="color:var(--re-slate-400); margin-top:8px;">Mon - Fri: 8:30am - 5:30pm<br>Sat: 9:00am - 4:00pm</p>
+    </div>
+
+    <div class="footer-bottom-wrap">
+      <p>© 2026 Reozix Real Estate. All rights reserved.</p>
+      <p>Gold Coast Residential Prestige Agency</p>
+    </div>
   </div>
 </footer>
 
@@ -142,7 +171,7 @@
 <script src="../shared/js/site-sync.js"></script>
 <script src="js/favourites.js"></script>
 <script>
-// Property detail page — renders one listing from RE_DATA based on ?id=
+// Property detail page - renders one listing from RE_DATA based on ?id=
 (function() {
   var params = new URLSearchParams(window.location.search);
   var propId = params.get('id');
@@ -156,9 +185,9 @@
   var detail = document.getElementById('detail-content');
   var notFound = document.getElementById('not-found');
 
-  // No match (or no ?id=) → show "Property not found"
+  // No match (or no ?id=) -> show "Property not found"
   if (!property) {
-    document.title = 'Property not found — Reozix Real Estate';
+    document.title = 'Property not found - Reozix Real Estate';
     detail.style.display = 'none';
     notFound.classList.remove('is-hidden');
     return;
@@ -180,7 +209,7 @@
   }
 
   // Page title + head
-  document.title = street + ' — Reozix Real Estate';
+  document.title = street + ' - Reozix Real Estate';
   document.getElementById('prop-type').textContent = property.type;
   document.getElementById('prop-street').textContent = street;
   document.getElementById('prop-location').textContent = location;
@@ -219,7 +248,7 @@
     features.appendChild(chip);
   });
 
-  // Photo gallery — Unsplash set keyed by property type, sliced to the listing's photo count
+  // Photo gallery - Unsplash set keyed by property type, sliced to the listing's photo count
   var galleries = {
     'Apartment': [
       'photo-1522708323590-d24dbb6b0267',
@@ -281,12 +310,12 @@
   var currentIdx = 0;
 
   mainImg.src = src(images[0], 1200);
-  mainImg.alt = street + ' — ' + property.type + ', photo 1';
+  mainImg.alt = street + ' - ' + property.type + ', photo 1';
 
   // Fullscreen lightbox over the same set
   var lightbox = RZ.makeLightbox(
     images.map(function(imgId, i) {
-      return { src: src(imgId, 1600), alt: street + ' — ' + property.type + ', photo ' + (i + 1) };
+      return { src: src(imgId, 1600), alt: street + ' - ' + property.type + ', photo ' + (i + 1) };
     })
   );
   document.querySelector('.gallery-main').classList.add('lb-enabled');
@@ -307,7 +336,7 @@
     btn.addEventListener('click', function() {
       currentIdx = i;
       mainImg.src = src(imgId, 1200);
-      mainImg.alt = street + ' — ' + property.type + ', photo ' + (i + 1);
+      mainImg.alt = street + ' - ' + property.type + ', photo ' + (i + 1);
       var active = thumbs.querySelector('.active');
       if (active) active.classList.remove('active');
       btn.classList.add('active');
@@ -316,7 +345,7 @@
     thumbs.appendChild(btn);
   });
 
-  // Listing agent — match RE_DATA.agents by the property's agentId
+  // Listing agent - match RE_DATA.agents by the property's agentId
   var agent = null;
   var agents = (RE_DATA && RE_DATA.agents) || [];
   for (var j = 0; j < agents.length; j++) {
@@ -358,10 +387,10 @@
     document.getElementById('agent-profile-link').href = 'agent-detail.html?id=' + encodeURIComponent(agent.id);
   }
 
-  // "Request an Appraisal" CTA — pre-fills the property on the appraisal form
+  // Request an Appraisal CTA - pre-fills the property on the appraisal form
   document.getElementById('appraisal-btn').href = 'appraisal.html?property=' + encodeURIComponent(property.id);
 
-  // Inspection card — show the open-home window, wire the private-inspection request
+  // Inspection card - show the open-home window, wire the private-inspection request
   (function () {
     var card = document.getElementById('inspection-card');
     if (!card) return;
@@ -390,7 +419,6 @@
       form.style.display = 'none';
       success.style.display = 'block';
     });
-    [name, email].forEach(function () {});
   })();
 })();
 </script>

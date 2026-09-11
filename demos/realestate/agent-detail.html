@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agent Profile — Reozix Real Estate, Gold Coast</title>
+<title>Agent Profile - Reozix Real Estate, Gold Coast</title>
 <meta name="description" content="Full agent profile with specialisations, recent sales history and a direct contact form. Reozix Real Estate, Gold Coast.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
 <link rel="stylesheet" href="../shared/css/reset.css">
 <link rel="stylesheet" href="../shared/css/admin-bar.css">
 <link rel="stylesheet" href="css/realestate.css">
@@ -14,13 +17,23 @@
 <nav class="re-nav">
   <div class="container">
     <a href="index.html" class="logo">Reozix <span>Real Estate</span></a>
-    <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
     <div class="nav-links">
       <a href="index.html">Home</a>
-      <a href="search.html">Search</a>
+      <a href="search.html">Properties</a>
+      <a href="index.html#enclaves">Enclaves</a>
       <a href="agents.html">Agents</a>
       <a href="appraisal.html">Appraisal</a>
-      <a href="tel:+61755923400">+61 7 5592 3400</a>
+      <a href="tel:+61755923400" class="nav-phone-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +61 7 5592 3400
+      </a>
     </div>
   </div>
 </nav>
@@ -58,32 +71,33 @@
               <tbody id="sales-rows"></tbody>
             </table>
           </div>
+
+          <!-- Contact form -->
+          <div class="agent-contact-form">
+            <h3>Send a direct message</h3>
+            <form id="contact-form" novalidate>
+              <div class="form-row">
+                <div class="field">
+                  <label for="cf-name">Your name</label>
+                  <input type="text" id="cf-name" name="name" required>
+                </div>
+                <div class="field">
+                  <label for="cf-email">Your email</label>
+                  <input type="email" id="cf-email" name="email" required>
+                </div>
+              </div>
+              <div class="field full">
+                <label for="cf-message">Message</label>
+                <textarea id="cf-message" name="message" rows="4" placeholder="I'm interested in buying/selling on the Gold Coast..." required></textarea>
+              </div>
+              <button type="submit" class="re-btn">Send message</button>
+            </form>
+            <div class="form-success" id="form-success">
+              <strong>Message sent.</strong> The agent will be in touch shortly.
+            </div>
+          </div>
         </div>
       </div>
-
-      <form class="appraisal-form agent-contact-form" id="contact-form" novalidate>
-        <h3>Send a message to <span id="contact-agent">this agent</span></h3>
-        <p class="form-intro">Tell us what you're looking for and we'll get back to you within 24 hours.</p>
-        <div class="form-row">
-          <div class="field">
-            <label for="cf-name">Name</label>
-            <input type="text" id="cf-name" placeholder="Your name" required>
-          </div>
-          <div class="field">
-            <label for="cf-email">Email</label>
-            <input type="email" id="cf-email" placeholder="you@example.com" required>
-          </div>
-          <div class="field full">
-            <label for="cf-message">Message</label>
-            <textarea id="cf-message" placeholder="How can we help?" required></textarea>
-          </div>
-        </div>
-        <div class="submit-row">
-          <button type="submit" class="re-btn">Send message</button>
-          <p class="submit-note">We'll reply within 24 hours.</p>
-        </div>
-        <p class="form-success" id="form-success" role="status">Thanks — your message has been sent to <span id="success-agent"></span>. We'll be in touch soon.</p>
-      </form>
 
     </div>
 
@@ -96,24 +110,43 @@
   </div>
 </section>
 
+<!-- Footer -->
 <footer class="re-footer">
   <div class="container">
     <div class="agency">
       <strong>Reozix Real Estate</strong>
-      <p>Gold Coast, QLD</p>
-      <a href="tel:+61755923400">+61 7 5592 3400</a>
-      <a href="mailto:hello@reozixrealestate.com.au">hello@reozixrealestate.com.au</a>
+      <p>Premier coastal residential sales and property management across the Gold Coast, Queensland.</p>
+      <a href="tel:+61755923400" class="contact-item">+61 7 5592 3400</a>
+      <a href="mailto:hello@reozixrealestate.com.au" class="contact-item">hello@reozixrealestate.com.au</a>
     </div>
+
     <div class="footer-links">
-      <h4>Quick links</h4>
+      <h4>Direct Navigation</h4>
       <a href="index.html">Home</a>
-      <a href="search.html">Search</a>
-      <a href="agents.html">Agents</a>
-      <a href="appraisal.html">Appraisal</a>
+      <a href="search.html">All Properties</a>
+      <a href="agents.html">Our Agents</a>
+      <a href="appraisal.html">Property Appraisal</a>
     </div>
-  </div>
-  <div class="container">
-    <p class="footer-bottom">© 2026 Reozix Real Estate. All rights reserved.</p>
+
+    <div class="footer-links">
+      <h4>Coast Enclaves</h4>
+      <a href="search.html?suburb=Surfers%20Paradise">Surfers Paradise</a>
+      <a href="search.html?suburb=Broadbeach">Broadbeach</a>
+      <a href="search.html?suburb=Burleigh%20Heads">Burleigh Heads</a>
+      <a href="search.html?suburb=Main%20Beach">Main Beach</a>
+      <a href="search.html?suburb=Hope%20Island">Hope Island</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>Office & Hours</h4>
+      <p style="color:var(--re-slate-400); margin:0;">Level 2, 42 The Esplanade<br>Surfers Paradise QLD 4217</p>
+      <p style="color:var(--re-slate-400); margin-top:8px;">Mon - Fri: 8:30am - 5:30pm<br>Sat: 9:00am - 4:00pm</p>
+    </div>
+
+    <div class="footer-bottom-wrap">
+      <p>© 2026 Reozix Real Estate. All rights reserved.</p>
+      <p>Gold Coast Residential Prestige Agency</p>
+    </div>
   </div>
 </footer>
 
@@ -122,7 +155,7 @@
 <script src="js/data.js"></script>
 <script src="../shared/js/site-sync.js"></script>
 <script>
-// Agent detail page — renders one agent from RE_DATA based on ?id=
+// Agent detail page - renders one agent from RE_DATA based on ?id=
 (function() {
   var params = new URLSearchParams(window.location.search);
   var agentId = params.get('id');
@@ -136,14 +169,19 @@
   var profileWrap = document.getElementById('profile-wrap');
   var notFound = document.getElementById('not-found');
 
-  // No match (or no ?id=) → show "Agent not found"
+  // No match (or no ?id=) -> show "Agent not found"
   if (!agent) {
-    document.title = 'Agent not found — Reozix Real Estate';
+    document.title = 'Agent not found - Reozix Real Estate';
     profileWrap.style.display = 'none';
     notFound.classList.remove('is-hidden');
     return;
   }
 
+  // Page title
+  document.title = agent.name + ' - Reozix Real Estate';
+
+  // Agent details
+  var photoEl = document.getElementById('agent-photo');
   var agentPhotos = {
     'agent-001': 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
     'agent-002': 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&q=80',
@@ -158,28 +196,6 @@
     'agent-011': 'https://images.unsplash.com/photo-1507591064344-4c6ce005b128?w=400&q=80',
     'agent-012': 'https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=400&q=80'
   };
-
-  function initials(name) {
-    var parts = name.split(' ');
-    return (parts[0] ? parts[0][0] : '') + (parts[parts.length - 1] ? parts[parts.length - 1][0] : '');
-  }
-
-  function formatPrice(n) {
-    return '$' + n.toLocaleString('en-AU');
-  }
-
-  function formatDate(s) {
-    var parts = String(s).split('-');
-    if (parts.length !== 2) return String(s);
-    var months = ['January', 'February', 'March', 'April', 'May', 'June',
-      'July', 'August', 'September', 'October', 'November', 'December'];
-    var m = parseInt(parts[1], 10) - 1;
-    return (months[m] || parts[1]) + ' ' + parts[0];
-  }
-
-  // Page title + profile head
-  document.title = agent.name + ' — Reozix Real Estate';
-  var photoEl = document.getElementById('agent-photo');
   var photoUrl = agentPhotos[agent.id];
   if (photoUrl) {
     var img = document.createElement('img');
@@ -189,34 +205,42 @@
     photoEl.textContent = '';
     photoEl.appendChild(img);
   } else {
-    photoEl.textContent = initials(agent.name);
+    var initials = agent.name.split(' ').map(function(p) { return p[0]; }).join('');
+    photoEl.textContent = initials;
   }
   document.getElementById('agent-name').textContent = agent.name;
   document.getElementById('agent-role').textContent = agent.role;
   document.getElementById('agent-bio').textContent = agent.bio;
 
-  // Phone + email links
+  // Contact links
   var phoneEl = document.getElementById('agent-phone');
   phoneEl.href = 'tel:' + agent.phone.replace(/[^+\d]/g, '');
   document.getElementById('agent-phone-text').textContent = agent.phone;
+
   var emailEl = document.getElementById('agent-email');
   emailEl.href = 'mailto:' + agent.email;
   document.getElementById('agent-email-text').textContent = agent.email;
 
-  // Contact form heading + success message carry the agent's name
-  document.getElementById('contact-agent').textContent = agent.name;
-  document.getElementById('success-agent').textContent = agent.name;
-
   // Specialisations
-  var specs = document.getElementById('agent-specializations');
-  agent.specializations.forEach(function(s) {
-    var tag = document.createElement('span');
-    tag.className = 'tag';
-    tag.textContent = s;
-    specs.appendChild(tag);
+  var specsEl = document.getElementById('agent-specializations');
+  (agent.specializations || []).forEach(function(spec) {
+    var span = document.createElement('span');
+    span.className = 'tag';
+    span.textContent = spec;
+    specsEl.appendChild(span);
   });
 
-  // Recent sales (address, price, date)
+  // Format helpers
+  function formatPrice(n) {
+    return '$' + n.toLocaleString('en-AU');
+  }
+  function formatDate(d) {
+    var parts = d.split('-');
+    var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    return months[parseInt(parts[1], 10) - 1] + ' ' + parts[0];
+  }
+
+  // Sales table
   var tbody = document.getElementById('sales-rows');
   (agent.recentSales || []).forEach(function(sale) {
     var tr = document.createElement('tr');
@@ -238,8 +262,7 @@
     tbody.appendChild(tr);
   });
 
-  // Contact form — validated (name, email format, message), inline errors,
-  // aria-invalid + focus management, live error clearing.
+  // Contact form - validated (name, email format, message)
   var form = document.getElementById('contact-form');
   var success = document.getElementById('form-success');
 

@@ -77,22 +77,24 @@
     if (p.indexOf('/construction') !== -1 || document.querySelector('.ct-nav') || document.querySelector('link[href*="construction.css"]')) {
       return 'construction';
     }
-    return 'hotel';
+    return null;
   }
 
   function ContactPopupManager() {
     this.verticalId = detectVertical();
-    this.config = VERTICALS[this.verticalId] || VERTICALS.hotel;
+    if (!this.verticalId) return;
+    this.config = VERTICALS[this.verticalId];
     this.dockEl = null;
     this.cardEl = null;
     this.formEl = null;
     this.launcherEl = null;
     this.isOpen = false;
-    this.selectedTopic = this.config.topics[0].id;
+    this.selectedTopic = this.config && this.config.topics ? this.config.topics[0].id : '';
     this.lastActiveElement = null;
   }
 
   ContactPopupManager.prototype.init = function() {
+    if (!this.verticalId || !this.config) return;
     if (document.getElementById('rz-contact-dock')) return;
     this.render();
     this.bindEvents();
@@ -106,11 +108,11 @@
     dock.setAttribute('data-vertical', this.verticalId);
 
     // SVGs
-    var chatIconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>';
+    var chatIconSvg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>';
     var closeIconSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
-    var phoneIconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>';
-    var mailIconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>';
-    var checkIconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+    var phoneIconSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>';
+    var mailIconSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>';
+    var checkIconSvg = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
     var sendArrowSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>';
 
     // Build Topic Chips HTML
@@ -369,12 +371,14 @@
   };
 
   ContactPopupManager.prototype.resetForm = function() {
+    if (!this.dockEl) return;
     this.formEl.reset();
     this.dockEl.querySelector('.rz-form-container').style.display = 'block';
     this.dockEl.querySelector('#rz-success-state').classList.remove('is-visible');
   };
 
   ContactPopupManager.prototype.open = function(opts) {
+    if (!this.dockEl) return;
     opts = opts || {};
     this.lastActiveElement = document.activeElement;
     this.isOpen = true;
@@ -398,6 +402,7 @@
   };
 
   ContactPopupManager.prototype.close = function() {
+    if (!this.dockEl) return;
     this.isOpen = false;
     this.dockEl.classList.remove('is-open');
     this.launcherEl.setAttribute('aria-expanded', 'false');
@@ -407,6 +412,7 @@
   };
 
   ContactPopupManager.prototype.toggle = function() {
+    if (!this.dockEl) return;
     if (this.isOpen) {
       this.close();
     } else {
@@ -419,23 +425,32 @@
   window.RZ.contactPopup = new ContactPopupManager();
 
   // Auto-init on DOMContentLoaded
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
+  var runInit = function() {
+    if (window.RZ.contactPopup && typeof window.RZ.contactPopup.init === 'function') {
       window.RZ.contactPopup.init();
-    });
+    }
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', runInit);
   } else {
-    window.RZ.contactPopup.init();
+    runInit();
   }
 
   // Helper shortcuts
   window.RZ.openContact = function(opts) {
-    window.RZ.contactPopup.open(opts);
+    if (window.RZ.contactPopup && typeof window.RZ.contactPopup.open === 'function') {
+      window.RZ.contactPopup.open(opts);
+    }
   };
   window.RZ.closeContact = function() {
-    window.RZ.contactPopup.close();
+    if (window.RZ.contactPopup && typeof window.RZ.contactPopup.close === 'function') {
+      window.RZ.contactPopup.close();
+    }
   };
   window.RZ.toggleContact = function() {
-    window.RZ.contactPopup.toggle();
+    if (window.RZ.contactPopup && typeof window.RZ.contactPopup.toggle === 'function') {
+      window.RZ.contactPopup.toggle();
+    }
   };
 
 })(window, document);

@@ -1,4 +1,4 @@
-// search.js — instant client-side filtering for the Real Estate search page.
+// search.js - instant client-side filtering for the Real Estate search page.
 // Extends the base filterProperties() sketch to work with checkbox filters,
 // a price range, sorting, dynamic filter counts, a no-results state, and
 // pre-fill from the homepage query string (?suburb=&type=&min_price=&max_price=).
@@ -49,7 +49,7 @@ function filterProperties() {
   updateMap();
 }
 
-/* Sorting — reorders visible cards inside the results grid. */
+/* Sorting - reorders visible cards inside the results grid. */
 function applySort() {
   var grid = document.querySelector('.results-grid') || document.querySelector('.property-grid');
   if (!grid) return;
@@ -68,7 +68,7 @@ function applySort() {
   cards.forEach(function(card) { grid.appendChild(card); });
 }
 
-/* Dynamic filter counts — recomputed from the visible dataset on every change. */
+/* Dynamic filter counts - recomputed from the visible dataset on every change. */
 function updateFilterCounts() {
   var cards = Array.prototype.slice.call(document.querySelectorAll('.property-card'));
   document.querySelectorAll('.filter-group[data-filter-group]').forEach(function(group) {
@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var sort = document.getElementById('sort-by');
   if (sort) sort.addEventListener('change', filterProperties);
 
-  // Clear Filters button — reset every filter and show all properties.
+  // Clear Filters button - reset every filter and show all properties.
   document.getElementById('clear-filters').addEventListener('click', function() {
     document.querySelectorAll('.filter-input').forEach(function(cb) { cb.checked = false; });
     document.getElementById('filter-beds').value = '';

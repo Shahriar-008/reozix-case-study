@@ -136,7 +136,7 @@ var CONSTRUCTION_DATA = {
       duration: '34 weeks',
       sqm: 420,
       description: 'Four-bedroom custom residence on a corner allotment in New Farm, with a double-height entry, pool and basement carpark for three cars. Cantilevered upper level, full-height glazing and a mineral-finished swimming pool wrapped by a landscaped garden.',
-      testimonial: { quote: 'Our vision was ambitious — a floating upper floor over a pool in the middle of New Farm. Reozix engineered and built it flawlessly.', client: 'Anthony & Renee Callis', role: 'Homeowners' },
+      testimonial: { quote: 'Our vision was ambitious: a floating upper floor over a pool in the middle of New Farm. Reozix engineered and built it flawlessly.', client: 'Anthony & Renee Callis', role: 'Homeowners' },
       photos: 9,
       features: ['Double-height entry', 'Cantilevered upper level', 'Basement carpark', 'Mineral-finished pool', 'Landscaped garden'],
       completed: '2026-02',
@@ -271,7 +271,7 @@ var CONSTRUCTION_DATA = {
       duration: '6 weeks',
       sqm: 35,
       description: 'Renovation of a three-piece bathroom and adjacent laundry in a West End apartment, with large-format porcelain tiles, a freestanding bath and a combined laundry utility wall. Waterproofing and re-plumbing completed to current codes.',
-      testimonial: { quote: 'We\'ve been kept in the loop at every stage — weekly updates and photos. Halfway through and the standard of work is exactly what we hoped for.', client: 'Megan Delaney', role: 'Apartment Owner' },
+      testimonial: { quote: 'We\'ve been kept in the loop at every stage, with weekly updates and photos. Halfway through and the standard of work is exactly what we hoped for.', client: 'Megan Delaney', role: 'Apartment Owner' },
       photos: 5,
       features: ['Large-format porcelain tiles', 'Freestanding bath', 'Combined laundry wall', 'Re-waterproofing', 'Re-plumbing'],
       completed: '2026-09',
@@ -279,7 +279,7 @@ var CONSTRUCTION_DATA = {
     }
   ],
   team: [
-    { id: 'tm-001', name: 'David Reozix', role: 'Managing Director', tenure: 'Founded the company in 2014', initials: 'DR', bio: 'Second-generation builder. Runs estimating and client relationships personally — every quote is reviewed by David before it leaves the office.' },
+    { id: 'tm-001', name: 'David Reozix', role: 'Managing Director', tenure: 'Founded the company in 2014', initials: 'DR', bio: 'Second-generation builder. Runs estimating and client relationships personally. Every quote is reviewed by David before it leaves the office.' },
     { id: 'tm-002', name: 'Sam Tuqiri', role: 'Construction Manager', tenure: 'With Reozix since 2016', initials: 'ST', bio: 'Runs the build program across all active sites. Twenty years on commercial and residential projects across South East Queensland.' },
     { id: 'tm-003', name: 'Priya Nair', role: 'Senior Site Supervisor', tenure: 'With Reozix since 2018', initials: 'PN', bio: 'Your point of contact once work starts on site. White Card certified, QBCC Site Supervisor licensed.' },
     { id: 'tm-004', name: "Mick O'Brien", role: 'Estimating Lead', tenure: 'With Reozix since 2017', initials: 'MO', bio: 'Produces the preliminary estimates and fixed-price quotes. If your numbers change, it is usually Mick calling to explain why.' },
@@ -287,9 +287,9 @@ var CONSTRUCTION_DATA = {
     { id: 'tm-006', name: 'Tom Reilly', role: 'Site Foreman', tenure: 'With Reozix since 2015', initials: 'TR', bio: 'Runs the trades on site. Fourteen years in residential construction, apprentice mentor, keeps the site diary you will see each week.' }
   ],
   faq: [
-    { q: 'How does your pricing work?', a: 'We provide a free preliminary estimate within 48 hours of your request. If you decide to proceed, we develop a fixed-price quote — locked to scope — within five working days of the site visit.' },
+    { q: 'How does your pricing work?', a: 'We provide a free preliminary estimate within 48 hours of your request. If you decide to proceed, we develop a fixed-price quote, locked to scope, within five working days of the site visit.' },
     { q: 'Do you charge for site visits and estimates?', a: 'No. Site visits across Brisbane and the preliminary estimate are free and carry no obligation.' },
-    { q: 'Are you licensed and insured?', a: 'Yes — QBCC licensed builder (open class), $20M public liability insurance, and QBCC Home Warranty Scheme cover on every residential project over $3,300. Full details are on our Credentials page.' },
+    { q: 'Are you licensed and insured?', a: 'Yes: QBCC licensed builder (open class), $20M public liability insurance, and QBCC Home Warranty Scheme cover on every residential project over $3,300. Full details are on our Credentials page.' },
     { q: 'Can you work from our own plans?', a: 'Absolutely. About half of our projects start from architect or building designer plans. We can also manage design and approvals end-to-end if you do not have drawings yet.' },
     { q: 'What happens during the build?', a: 'A dedicated site supervisor, a weekly site diary with photos, and a fixed program you can see progress against. Variations only ever happen with your written sign-off.' }
   ],
@@ -298,7 +298,7 @@ var CONSTRUCTION_DATA = {
       id: 'svc-001',
       title: 'Commercial Fit-Outs',
       icon: 'building',
-      description: 'Turnkey fit-outs for offices, retail and medical spaces across Brisbane\'s CBD and inner suburbs. We take your space from bare shell to move-in ready — planning, approvals, construction and handover all under one contract.',
+      description: 'Turnkey fit-outs for offices, retail and medical spaces across Brisbane\'s CBD and inner suburbs. We take your space from bare shell to move-in ready, managing planning, approvals, construction and handover all under one contract.',
       process: ['Initial consultation', 'Design & documentation', 'Construction & fit-out', 'Handover & aftercare'],
       timeline: '8–16 weeks',
       priceRange: '$250K–$2M',
@@ -309,7 +309,7 @@ var CONSTRUCTION_DATA = {
       id: 'svc-002',
       title: 'Residential Extensions',
       icon: 'home',
-      description: 'Second-storey additions, rear extensions and deck builds that give your Brisbane home the space it needs — without the cost of moving. We handle council approvals and engineer every addition to the existing structure.',
+      description: 'Second-storey additions, rear extensions and deck builds that give your Brisbane home the space it needs, eliminating the cost of moving. We handle council approvals and engineer every addition to the existing structure.',
       process: ['Site consultation & feasibility', 'Design & council approvals', 'Construction', 'Handover & finishing'],
       timeline: '10–20 weeks',
       priceRange: '$80K–$400K',
@@ -343,74 +343,7 @@ var CONSTRUCTION_DATA = {
     licence: {
       number: '15123456',
       title: 'QBCC Builder Licence',
-      class: 'Open — Unlimited'
-    },
-    insurance: [
-      { type: 'Public Liability', cover: '$20M' },
-      { type: 'Home Warranty', cover: 'Per QBCC scheme' },
-      { type: 'Contract Works', cover: 'Full project value' }
-    ],
-    memberships: [
-      { name: 'Master Builders Queensland', since: '2014' },
-      { name: 'Housing Industry Association', since: '2016' },
-      { name: 'Australian Institute of Building', since: '2018' }
-    ],
-    safety: {
-      scheme: 'WorkCover Queensland',
-      record: 'No lost-time injuries in the past 24 months',
-      inductions: 'All site personnel inducted and White Card certified'
-    },
-  services: [
-    {
-      id: 'svc-001',
-      title: 'Commercial Fit-Outs',
-      icon: 'building',
-      description: 'Turnkey fit-outs for offices, retail and medical spaces across Brisbane\'s CBD and inner suburbs. We take your space from bare shell to move-in ready — planning, approvals, construction and handover all under one contract.',
-      process: ['Initial consultation', 'Design & documentation', 'Construction & fit-out', 'Handover & aftercare'],
-      timeline: '8–16 weeks',
-      priceRange: '$250K–$2M',
-      includes: ['Demolition & strip-out', 'Full design & construction', 'Commercial-grade finishes', 'End-of-trip & amenities', 'Move-in ready handover', 'Defects liability period'],
-      projects: ['proj-001', 'proj-002', 'proj-003']
-    },
-    {
-      id: 'svc-002',
-      title: 'Residential Extensions',
-      icon: 'home',
-      description: 'Second-storey additions, rear extensions and deck builds that give your Brisbane home the space it needs — without the cost of moving. We handle council approvals and engineer every addition to the existing structure.',
-      process: ['Site consultation & feasibility', 'Design & council approvals', 'Construction', 'Handover & finishing'],
-      timeline: '10–20 weeks',
-      priceRange: '$80K–$400K',
-      includes: ['Council approval assistance', 'Structural engineering', 'Full construction', 'Flooring & finishes', 'Painting & joinery', 'Garden reinstatement'],
-      projects: ['proj-005', 'proj-007', 'proj-008']
-    },
-    {
-      id: 'svc-003',
-      title: 'New Builds',
-      icon: 'crane',
-      description: 'Custom homes, duplexes and townhouse developments built to your plans or designed from the ground up. Fixed-price contracts, a dedicated site supervisor and a 10-year structural warranty on every build.',
-      process: ['Design consultation', 'Council & approvals', 'Construction', 'Handover & warranty'],
-      timeline: '6–10 months',
-      priceRange: '$400K–$3M',
-      includes: ['Custom architectural design', 'Fixed-price contract', 'Dedicated site supervisor', 'Premium materials', '10-year structural warranty', 'Landscaping'],
-      projects: ['proj-009', 'proj-010', 'proj-011']
-    },
-    {
-      id: 'svc-004',
-      title: 'Renovations',
-      icon: 'hammer',
-      description: 'Kitchens, bathrooms and whole-home renovations that modernise your space without losing its character. From heritage restorations to contemporary makeovers, our licensed trades deliver clean, on-time transformations.',
-      process: ['Consultation & scope', 'Design & approvals', 'Construction', 'Handover & final clean'],
-      timeline: '4–10 weeks',
-      priceRange: '$80K–$600K',
-      includes: ['Detailed scope & fixed quote', 'Design & approvals', 'Licensed trades', 'Kitchen & bathroom specialists', 'Finish & detail work', 'Final clean'],
-      projects: ['proj-014', 'proj-015', 'proj-016']
-    }
-  ],
-  credentials: {
-    licence: {
-      number: '15123456',
-      title: 'QBCC Builder Licence',
-      class: 'Open — Unlimited'
+      class: 'Open / Unlimited'
     },
     insurance: [
       { type: 'Public Liability', cover: '$20M' },

@@ -76,7 +76,7 @@ var HOTEL_DATA = {
     },
     {
       id: 'saver',
-      name: 'Saver — non-refundable',
+      name: 'Saver: Non-refundable',
       summary: 'Our best price. No changes or refunds after booking',
       payment: 'Pay online now',
       discount: 0.14,        // 14% off base rate
@@ -98,37 +98,37 @@ var HOTEL_DATA = {
     { id: 'sparkling', name: 'Chilled sparkling on arrival', detail: 'A local méthode traditionnelle, waiting in the room', price: 55 }
   ],
   directBookingPerks: [
-    'Best rate guaranteed — we\'ll match any public price and take 10% off',
+    'Best rate guaranteed: we\'ll match any public price and take 10% off',
     'Complimentary late checkout until 1pm',
-    'Welcome drink on arrival — select from our Mornington cellar'
+    'Welcome drink on arrival · select from our Mornington cellar'
   ],
   guestScore: { overall: 9.4, count: 412, categories: [
     { label: 'Staff', score: 9.6 }, { label: 'Location', score: 9.5 },
     { label: 'Rooms', score: 9.3 }, { label: 'Breakfast', score: 9.2 }
   ]},
   reviews: [
-    { text: 'We booked direct and saved $120 compared to the Booking.com price. The room was exactly as shown — if anything, better.', author: 'Michael & Sarah T., Melbourne', score: 9.8, stay: 'Vineyard Suite', date: '3 days ago', helpful: 24 },
+    { text: 'We booked direct and saved $120 compared to the Booking.com price. The room was exactly as shown, if anything, better.', author: 'Michael & Sarah T., Melbourne', score: 9.8, stay: 'Vineyard Suite', date: '3 days ago', helpful: 24 },
     { text: 'The booking process took about 90 seconds. I\'ve spent longer waiting for the Booking.com app to load. Sunset by the mineral pool was magical.', author: 'James L., Sydney', score: 9.5, stay: 'Ocean King', date: '1 week ago', helpful: 19 },
-    { text: 'Stayed here three times now. Always book direct — the late checkout perk alone is worth it. Breakfast in the conservatory is unbeatable.', author: 'Emma R., Adelaide', score: 9.2, stay: 'Garden Queen', date: '2 weeks ago', helpful: 31 },
+    { text: 'Stayed here three times now. Always book direct · the late checkout perk alone is worth it. Breakfast in the conservatory is unbeatable.', author: 'Emma R., Adelaide', score: 9.2, stay: 'Garden Queen', date: '2 weeks ago', helpful: 31 },
     { text: 'The private cellar tasting arranged by the concierge was the highlight of our Mornington trip. Seamless service from start to finish.', author: 'David & Chloe K., Brisbane', score: 9.7, stay: 'Family Suite', date: '3 weeks ago', helpful: 15 },
     { text: 'Unbelievable acoustic calm between the vines. Freestanding bath overlooking the ridge with complimentary cellar wine was pure luxury.', author: 'Sophie W., Geelong', score: 9.9, stay: 'Vineyard Suite', date: 'Last month', helpful: 42 },
     { text: 'The sunset view over Port Phillip Bay from our private balcony was breathtaking. Complimentary local sparkling on arrival set the tone for a sublime weekend.', author: 'Harrison & Olivia M., Hobart', score: 9.6, stay: 'Ocean King', date: '1 month ago', helpful: 18 },
-    { text: 'Every detail is thoughtful — from the heated bathroom tiles to the bespoke Mornington skincare amenities. Best boutique hotel in Victoria by far.', author: 'Claire P., Perth', score: 9.8, stay: 'Vineyard Suite', date: '1 month ago', helpful: 27 },
+    { text: 'Every detail is thoughtful, from the heated bathroom tiles to the bespoke Mornington skincare amenities. Best boutique hotel in Victoria by far.', author: 'Claire P., Perth', score: 9.8, stay: 'Vineyard Suite', date: '1 month ago', helpful: 27 },
     { text: 'Direct booking was completely frictionless. No hidden resort fees or card surcharges. The 1pm late checkout allowed us to truly unwind.', author: 'Julian B., Melbourne', score: 9.4, stay: 'Garden Queen', date: '2 months ago', helpful: 11 },
     { text: 'Traveling with two kids is usually chaotic, but the Family Suite garden terrace and spacious twin configuration made it our smoothest getaway yet.', author: 'Marcus & Elena V., Canberra', score: 9.9, stay: 'Family Suite', date: '2 months ago', helpful: 35 },
     { text: 'Waking up to birdsong over the ridge and having peninsula roasted coffee delivered to the room was exceptional. We have already rebooked for autumn.', author: 'Annette G., Sydney', score: 9.5, stay: 'Ocean King', date: '3 months ago', helpful: 22 }
   ],
   experiences: [
     { title: 'Ridge cellar doors', desc: 'Five of the Peninsula\'s flagship wineries sit within ten minutes of the door. Tastings and transfers arranged at the desk.' },
-    { title: 'Bay beaches', desc: 'A ten-minute walk to safe, calm swimming water — the bay side stays glassy when the surf beaches blow out.' },
+    { title: 'Bay beaches', desc: 'A ten-minute walk to safe, calm swimming water. The bay side stays glassy when the surf beaches blow out.' },
     { title: 'Peninsula Hot Springs', desc: 'Australia\'s largest natural hot springs, twenty minutes up the hill. Evening bathing sessions bookable through reception.' }
   ],
   faq: [
     { q: 'What time is check-in and check-out?', a: 'Check-in from 2pm, check-out by 10am. Book direct and take late checkout until 1pm on us; until 2pm as a paid extra.' },
-    { q: 'When am I charged?', a: 'On Flexible and Breakfast rates you pay nothing today — your card guarantees the room and you pay on arrival. The Saver rate is paid online at booking and cannot be refunded.' },
+    { q: 'When am I charged?', a: 'On Flexible and Breakfast rates you pay nothing today: your card guarantees the room and you pay on arrival. The Saver rate is paid online at booking and cannot be refunded.' },
     { q: 'Can I cancel?', a: 'Flexible and Breakfast rates: free cancellation until 48 hours before check-in. Saver rates are non-refundable, which is why they\'re discounted.' },
-    { q: 'Is breakfast available?', a: 'Yes — choose the Breakfast-included rate and a full peninsula breakfast for two is served daily in the conservatory. Otherwise it\'s $38 per person.' },
-    { q: 'Do you have parking?', a: 'Yes, on-site parking is free for all guests — no hotel fees, ever.' }
+    { q: 'Is breakfast available?', a: 'Yes: choose the Breakfast-included rate and a full peninsula breakfast for two is served daily in the conservatory. Otherwise it\'s $38 per person.' },
+    { q: 'Do you have parking?', a: 'Yes, on-site parking is free for all guests: no hotel fees, ever.' }
   ]
 };
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reozix — Standalone Demonstration Platforms & Admin Portal</title>
+  <title>Reozix | Standalone Demonstration Platforms & Admin Portal</title>
   <meta name="description" content="Experience Reozix's three standalone vertical platforms with a customizable, full-featured Admin Dashboard for managing site details, catalog items, and CRM leads.">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,8 @@
       --hotel: #d4a853;
       --realestate: #4a90d9;
       --construction: #e8752a;
-      --radius: 16px;
+      --radius: 14px;
+      --radius-control: 8px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -177,7 +178,7 @@
       justify-content: space-between;
       gap: 24px;
       flex-wrap: wrap;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.5), 0 12px 32px -4px rgba(15, 23, 42, 0.6);
       position: relative;
       overflow: hidden;
     }
@@ -227,13 +228,13 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.4), 0 8px 24px -4px rgba(15, 23, 42, 0.5);
       transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
     }
     .platform-card:hover {
       transform: translateY(-4px);
       border-color: var(--border-strong);
-      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 4px 8px rgba(15, 23, 42, 0.4), 0 16px 36px -4px rgba(15, 23, 42, 0.6);
     }
     .card-top-bar {
       height: 6px;
@@ -404,7 +405,7 @@
     <div class="feature-left">
       <h2>Unified Administration & Customization Center</h2>
       <p>
-        Every site detail can be edited from the centralized Admin Dashboard — instantly updating live pages with zero server dependencies or setup.
+        Every site detail can be edited from the centralized Admin Dashboard, instantly updating live pages with zero server dependencies or setup.
       </p>
       <div class="feature-badges">
         <span class="f-badge">⚡ Real-Time Live Sync</span>

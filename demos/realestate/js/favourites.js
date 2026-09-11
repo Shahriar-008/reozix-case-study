@@ -1,4 +1,4 @@
-// favourites.js — saved listings for the Real Estate demo.
+// favourites.js - saved listings for the Real Estate demo.
 // Persists per-browser via localStorage ('re-favs'); wrapped in try/catch so
 // private-browsing users just get a non-persistent session instead of errors.
 //
@@ -219,7 +219,7 @@
       mount.appendChild(makeBtn(id, card));
     });
 
-    // Property detail page — heart beside the price
+    // Property detail page - heart beside the price
     var price = document.getElementById('prop-price');
     var head = document.getElementById('detail-content');
     if (price && head) {

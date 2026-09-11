@@ -105,6 +105,29 @@
     } else if (existingBar) {
       existingBar.remove();
     }
+
+    // 6. Floating Admin Gateway Dock (Demo-to-Admin Bridge)
+    renderAdminDock();
+  }
+
+  function renderAdminDock() {
+    var path = window.location.pathname.toLowerCase();
+    if (path.indexOf('/admin/') !== -1) return;
+    if (document.querySelector('.rz-admin-dock')) return;
+
+    var dock = document.createElement('a');
+    dock.className = 'rz-admin-dock';
+    dock.href = '../admin/index.html?vertical=' + encodeURIComponent(vertical);
+    dock.setAttribute('title', 'Open ' + (vertical.charAt(0).toUpperCase() + vertical.slice(1)) + ' in Admin Dashboard');
+    dock.innerHTML = [
+      '<span class="rz-admin-dock-icon">⚡</span>',
+      '<span class="rz-admin-dock-label">',
+      '  <span class="rz-admin-dock-title">Admin Console</span>',
+      '  <span class="rz-admin-dock-sub">Customize Live</span>',
+      '</span>'
+    ].join('');
+
+    document.body.appendChild(dock);
   }
 
   // Hook form submissions globally into SiteStore leads

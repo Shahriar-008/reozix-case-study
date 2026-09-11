@@ -3,29 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Property Search — Reozix Real Estate, Gold Coast</title>
-<meta name="description" content="Filter every Reozix Real Estate listing by property type, suburb, price range and bedrooms — apartments, houses, townhouses, penthouses and villas across the Gold Coast.">
+<title>Property Search - Reozix Real Estate, Gold Coast</title>
+<meta name="description" content="Filter every Reozix Real Estate listing by property type, suburb, price range and bedrooms: apartments, houses, townhouses, penthouses and villas across the Gold Coast.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
 <link rel="stylesheet" href="../shared/css/reset.css">
 <link rel="stylesheet" href="../shared/css/admin-bar.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" media="print" onload="this.media='all'">
-        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"></noscript>
-    <link rel="stylesheet" href="css/realestate.css">
+<link rel="stylesheet" href="css/realestate.css">
 </head>
 <body data-page="search">
 
 <nav class="re-nav">
   <div class="container">
     <a href="index.html" class="logo">Reozix <span>Real Estate</span></a>
-    <button class="nav-toggle" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+    <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
     <div class="nav-links">
       <a href="index.html">Home</a>
-      <a href="search.html" aria-current="page">Search</a>
+      <a href="search.html" aria-current="page">Properties</a>
+      <a href="index.html#enclaves">Enclaves</a>
       <a href="agents.html">Agents</a>
       <a href="appraisal.html">Appraisal</a>
-      <a href="tel:+61755923400">+61 7 5592 3400</a>
+      <a href="tel:+61755923400" class="nav-phone-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +61 7 5592 3400
+      </a>
     </div>
   </div>
 </nav>
@@ -45,9 +54,9 @@
             <label class="sr-only" for="sort-by">Sort results</label>
             <select id="sort-by">
               <option value="featured">Featured</option>
-              <option value="price-asc">Price · low to high</option>
-              <option value="price-desc">Price · high to low</option>
-              <option value="beds-desc">Beds · most first</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="beds-desc">Beds: Most First</option>
             </select>
           </div>
         </div>
@@ -129,7 +138,7 @@
           <h4>Price range</h4>
           <div class="price-range">
             <input type="number" id="filter-min-price" min="0" step="50000" placeholder="Min price" aria-label="Minimum price">
-            <span class="price-sep">–</span>
+            <span class="price-sep">-</span>
             <input type="number" id="filter-max-price" min="0" step="50000" placeholder="Max price" aria-label="Maximum price">
           </div>
         </div>
@@ -163,8 +172,8 @@
           <div class="property-card" data-type="Apartment" data-suburb="Surfers Paradise" data-beds="3" data-baths="2" data-price="1850000">
             <a href="property-detail.html?id=prop-001" class="property-photo-wrap" aria-label="View 12/14 The Esplanade, Surfers Paradise">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$1,850,000</span>
+                <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$1,850,000</span>
                 <span class="type-badge">Apartment</span>
                 <span class="photo-count">5 photos</span>
               </div>
@@ -190,8 +199,8 @@
           <div class="property-card" data-type="Penthouse" data-suburb="Surfers Paradise" data-beds="4" data-baths="3" data-price="2800000">
             <a href="property-detail.html?id=prop-002" class="property-photo-wrap" aria-label="View Level 47, 6 Hollywood Way, Surfers Paradise">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$2,800,000</span>
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$2,800,000</span>
                 <span class="type-badge">Penthouse</span>
                 <span class="photo-count">7 photos</span>
               </div>
@@ -217,8 +226,8 @@
           <div class="property-card" data-type="Apartment" data-suburb="Broadbeach" data-beds="2" data-baths="2" data-price="1350000">
             <a href="property-detail.html?id=prop-003" class="property-photo-wrap" aria-label="View 14/88 Surf Parade, Broadbeach">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$1,350,000</span>
+                <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$1,350,000</span>
                 <span class="type-badge">Apartment</span>
                 <span class="photo-count">5 photos</span>
               </div>
@@ -244,8 +253,8 @@
           <div class="property-card" data-type="Townhouse" data-suburb="Broadbeach" data-beds="3" data-baths="2" data-price="920000">
             <a href="property-detail.html?id=prop-004" class="property-photo-wrap" aria-label="View 3/19 Albert Avenue, Broadbeach">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1567496898669-ee935f5f647a?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$920,000</span>
+                <img src="https://images.unsplash.com/photo-1567496898669-ee935f5f647a?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$920,000</span>
                 <span class="type-badge">Townhouse</span>
                 <span class="photo-count">4 photos</span>
               </div>
@@ -271,8 +280,8 @@
           <div class="property-card" data-type="House" data-suburb="Burleigh Heads" data-beds="4" data-baths="3" data-price="2150000">
             <a href="property-detail.html?id=prop-005" class="property-photo-wrap" aria-label="View 28 West Burleigh Road, Burleigh Heads">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$2,150,000</span>
+                <img src="https://images.unsplash.com/photo-1494526585095-c41746248156?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$2,150,000</span>
                 <span class="type-badge">House</span>
                 <span class="photo-count">6 photos</span>
               </div>
@@ -298,8 +307,8 @@
           <div class="property-card" data-type="Apartment" data-suburb="Burleigh Heads" data-beds="2" data-baths="2" data-price="765000">
             <a href="property-detail.html?id=prop-006" class="property-photo-wrap" aria-label="View 6/45 James Street, Burleigh Heads">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$765,000</span>
+                <img src="https://images.unsplash.com/photo-1460317442991-0ec209397118?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$765,000</span>
                 <span class="type-badge">Apartment</span>
                 <span class="photo-count">4 photos</span>
               </div>
@@ -325,8 +334,8 @@
           <div class="property-card" data-type="House" data-suburb="Main Beach" data-beds="5" data-baths="4" data-price="2600000">
             <a href="property-detail.html?id=prop-007" class="property-photo-wrap" aria-label="View 22 Tedder Avenue, Main Beach">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$2,600,000</span>
+                <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$2,600,000</span>
                 <span class="type-badge">House</span>
                 <span class="photo-count">8 photos</span>
               </div>
@@ -352,8 +361,8 @@
           <div class="property-card" data-type="Apartment" data-suburb="Main Beach" data-beds="3" data-baths="2" data-price="1950000">
             <a href="property-detail.html?id=prop-008" class="property-photo-wrap" aria-label="View 5/12 Main Beach Parade, Main Beach">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$1,950,000</span>
+                <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$1,950,000</span>
                 <span class="type-badge">Apartment</span>
                 <span class="photo-count">6 photos</span>
               </div>
@@ -379,8 +388,8 @@
           <div class="property-card" data-type="House" data-suburb="Mermaid Beach" data-beds="4" data-baths="3" data-price="2750000">
             <a href="property-detail.html?id=prop-009" class="property-photo-wrap" aria-label="View 9 Hedges Avenue, Mermaid Beach">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$2,750,000</span>
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$2,750,000</span>
                 <span class="type-badge">House</span>
                 <span class="photo-count">8 photos</span>
               </div>
@@ -406,8 +415,8 @@
           <div class="property-card" data-type="Villa" data-suburb="Mermaid Beach" data-beds="3" data-baths="2" data-price="1650000">
             <a href="property-detail.html?id=prop-010" class="property-photo-wrap" aria-label="View 14 Markeri Street, Mermaid Beach">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$1,650,000</span>
+                <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$1,650,000</span>
                 <span class="type-badge">Villa</span>
                 <span class="photo-count">5 photos</span>
               </div>
@@ -433,8 +442,8 @@
           <div class="property-card" data-type="Apartment" data-suburb="Palm Beach" data-beds="2" data-baths="2" data-price="885000">
             <a href="property-detail.html?id=prop-011" class="property-photo-wrap" aria-label="View 12/3 Jefferson Lane, Palm Beach">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$885,000</span>
+                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$885,000</span>
                 <span class="type-badge">Apartment</span>
                 <span class="photo-count">5 photos</span>
               </div>
@@ -460,8 +469,8 @@
           <div class="property-card" data-type="Townhouse" data-suburb="Palm Beach" data-beds="3" data-baths="2" data-price="735000">
             <a href="property-detail.html?id=prop-012" class="property-photo-wrap" aria-label="View 7/22 Eleventh Avenue, Palm Beach">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$735,000</span>
+                <img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$735,000</span>
                 <span class="type-badge">Townhouse</span>
                 <span class="photo-count">4 photos</span>
               </div>
@@ -487,8 +496,8 @@
           <div class="property-card" data-type="Apartment" data-suburb="Coolangatta" data-beds="3" data-baths="2" data-price="1150000">
             <a href="property-detail.html?id=prop-013" class="property-photo-wrap" aria-label="View 21 Marine Parade, Coolangatta">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$1,150,000</span>
+                <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$1,150,000</span>
                 <span class="type-badge">Apartment</span>
                 <span class="photo-count">6 photos</span>
               </div>
@@ -514,8 +523,8 @@
           <div class="property-card" data-type="House" data-suburb="Coolangatta" data-beds="4" data-baths="2" data-price="1480000">
             <a href="property-detail.html?id=prop-014" class="property-photo-wrap" aria-label="View 9 Dutton Street, Coolangatta">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1615873968403-89e068629265?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$1,480,000</span>
+                <img src="https://images.unsplash.com/photo-1615873968403-89e068629265?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$1,480,000</span>
                 <span class="type-badge">House</span>
                 <span class="photo-count">5 photos</span>
               </div>
@@ -541,8 +550,8 @@
           <div class="property-card" data-type="Apartment" data-suburb="Southport" data-beds="2" data-baths="2" data-price="465000">
             <a href="property-detail.html?id=prop-015" class="property-photo-wrap" aria-label="View 15/4 Scarborough Street, Southport">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$465,000</span>
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$465,000</span>
                 <span class="type-badge">Apartment</span>
                 <span class="photo-count">4 photos</span>
               </div>
@@ -568,8 +577,8 @@
           <div class="property-card" data-type="Townhouse" data-suburb="Southport" data-beds="3" data-baths="1" data-price="585000">
             <a href="property-detail.html?id=prop-016" class="property-photo-wrap" aria-label="View 9/31 Bauer Street, Southport">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$585,000</span>
+                <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$585,000</span>
                 <span class="type-badge">Townhouse</span>
                 <span class="photo-count">4 photos</span>
               </div>
@@ -595,8 +604,8 @@
           <div class="property-card" data-type="House" data-suburb="Hope Island" data-beds="4" data-baths="3" data-price="1280000">
             <a href="property-detail.html?id=prop-017" class="property-photo-wrap" aria-label="View 12 Marina Quay, Hope Island">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$1,280,000</span>
+                <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$1,280,000</span>
                 <span class="type-badge">House</span>
                 <span class="photo-count">6 photos</span>
               </div>
@@ -622,8 +631,8 @@
           <div class="property-card" data-type="Villa" data-suburb="Hope Island" data-beds="3" data-baths="2" data-price="820000">
             <a href="property-detail.html?id=prop-018" class="property-photo-wrap" aria-label="View 8 Waterside Close, Hope Island">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$820,000</span>
+                <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$820,000</span>
                 <span class="type-badge">Villa</span>
                 <span class="photo-count">5 photos</span>
               </div>
@@ -649,8 +658,8 @@
           <div class="property-card" data-type="Townhouse" data-suburb="Robina" data-beds="3" data-baths="2" data-price="575000">
             <a href="property-detail.html?id=prop-019" class="property-photo-wrap" aria-label="View 21 San Maria Court, Robina">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$575,000</span>
+                <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$575,000</span>
                 <span class="type-badge">Townhouse</span>
                 <span class="photo-count">4 photos</span>
               </div>
@@ -676,8 +685,8 @@
           <div class="property-card" data-type="House" data-suburb="Robina" data-beds="4" data-baths="2" data-price="965000">
             <a href="property-detail.html?id=prop-020" class="property-photo-wrap" aria-label="View 7 Ron Penhaligon Way, Robina">
               <div class="property-photo">
-                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&q=80" alt="Property photo — Reozix Real Estate" loading="lazy" class="cover-img">
-                <span class="price-badge">$965,000</span>
+                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&q=80" alt="Property photo - Reozix Real Estate" loading="lazy" class="cover-img">
+                <span class="price-badge property-price">$965,000</span>
                 <span class="type-badge">House</span>
                 <span class="photo-count">6 photos</span>
               </div>
@@ -709,33 +718,51 @@
 
 
 <!-- Vendor conversion band -->
-<section class="re-cta-band">
-  <div class="container re-cta-inner">
-    <div>
-      <h2>Thinking of selling?</h2>
-      <p>Get a free, no-obligation market appraisal for your own property — we'll call you within 24 hours.</p>
-    </div>
-    <a href="appraisal.html" class="re-btn">Request an appraisal</a>
+<section class="appraisal-cta">
+  <div class="container">
+    <h2>Thinking of Selling on the Gold Coast?</h2>
+    <p>Request a complimentary, confidential market appraisal from our senior directors. We will analyze active buyer demand and recent street sales within 24 hours.</p>
+    <a href="appraisal.html" class="re-btn">Request a Free Appraisal</a>
   </div>
 </section>
+
+<!-- Footer -->
 <footer class="re-footer">
   <div class="container">
     <div class="agency">
       <strong>Reozix Real Estate</strong>
-      <p>Gold Coast, QLD</p>
-      <a href="tel:+61755923400">+61 7 5592 3400</a>
-      <a href="mailto:hello@reozixrealestate.com.au">hello@reozixrealestate.com.au</a>
+      <p>Premier coastal residential sales and property management across the Gold Coast, Queensland.</p>
+      <a href="tel:+61755923400" class="contact-item">+61 7 5592 3400</a>
+      <a href="mailto:hello@reozixrealestate.com.au" class="contact-item">hello@reozixrealestate.com.au</a>
     </div>
+
     <div class="footer-links">
-      <h4>Quick links</h4>
+      <h4>Direct Navigation</h4>
       <a href="index.html">Home</a>
-      <a href="search.html">Search</a>
-      <a href="agents.html">Agents</a>
-      <a href="appraisal.html">Appraisal</a>
+      <a href="search.html">All Properties</a>
+      <a href="agents.html">Our Agents</a>
+      <a href="appraisal.html">Property Appraisal</a>
     </div>
-  </div>
-  <div class="container">
-    <p class="footer-bottom">© 2026 Reozix Real Estate. All rights reserved.</p>
+
+    <div class="footer-links">
+      <h4>Coast Enclaves</h4>
+      <a href="search.html?suburb=Surfers%20Paradise">Surfers Paradise</a>
+      <a href="search.html?suburb=Broadbeach">Broadbeach</a>
+      <a href="search.html?suburb=Burleigh%20Heads">Burleigh Heads</a>
+      <a href="search.html?suburb=Main%20Beach">Main Beach</a>
+      <a href="search.html?suburb=Hope%20Island">Hope Island</a>
+    </div>
+
+    <div class="footer-links">
+      <h4>Office & Hours</h4>
+      <p style="color:var(--re-slate-400); margin:0;">Level 2, 42 The Esplanade<br>Surfers Paradise QLD 4217</p>
+      <p style="color:var(--re-slate-400); margin-top:8px;">Mon - Fri: 8:30am - 5:30pm<br>Sat: 9:00am - 4:00pm</p>
+    </div>
+
+    <div class="footer-bottom-wrap">
+      <p>© 2026 Reozix Real Estate. All rights reserved.</p>
+      <p>Gold Coast Residential Prestige Agency</p>
+    </div>
   </div>
 </footer>
 
@@ -747,7 +774,7 @@
 <script src="js/search.js"></script>
 <script src="js/favourites.js"></script>
 <script>
-// Map view — Leaflet + OpenStreetMap tiles (no API key). Pins from card data-* attrs.
+// Map view - Leaflet + OpenStreetMap tiles (no API key). Pins from card data-* attrs.
 (function () {
   var SUBURB_COORDS = {
     'Surfers Paradise': [-28.0023, 153.4145],

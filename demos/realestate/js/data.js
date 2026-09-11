@@ -16,7 +16,7 @@ var RE_DATA = {
       features: ['Ocean views', 'Pool', 'Gym', 'Concierge'],
       agentId: 'agent-001',
       photos: 5,
-      inspection: 'Sat 10:00–10:30am',
+      inspection: 'Sat 10:00-10:30am',
     },
     {
       id: 'prop-002',
@@ -25,11 +25,11 @@ var RE_DATA = {
       beds: 4, baths: 3, cars: 3,
       price: 2800000,
       suburb: 'Surfers Paradise',
-      description: 'Sky-home penthouse with uninterrupted ocean and hinterland views from every room. Four bedrooms, three designer bathrooms and a 50sqm rooftop terrace — the definitive Surfers Paradise address.',
+      description: 'Sky-home penthouse with uninterrupted ocean and hinterland views from every room. Four bedrooms, three designer bathrooms and a 50sqm rooftop terrace, offering the definitive Surfers Paradise address.',
       features: ['Rooftop terrace', 'Ocean views', 'Infinity pool', 'Concierge', 'Three car spaces'],
       agentId: 'agent-001',
       photos: 7,
-      inspection: 'Sat 11:00–11:30am',
+      inspection: 'Sat 11:00-11:30am',
     },
     {
       id: 'prop-003',
@@ -42,7 +42,7 @@ var RE_DATA = {
       features: ['Beachfront', 'Pool', 'Air conditioning', 'Secure parking'],
       agentId: 'agent-001',
       photos: 5,
-      inspection: 'Sat 9:30–10:00am',
+      inspection: 'Sat 9:30-10:00am',
     },
     {
       id: 'prop-004',
@@ -55,7 +55,7 @@ var RE_DATA = {
       features: ['Courtyard', 'Air conditioning', 'Open-plan living', 'Single garage'],
       agentId: 'agent-010',
       photos: 4,
-      inspection: 'Sat 12:00–12:30pm',
+      inspection: 'Sat 12:00-12:30pm',
     },
     {
       id: 'prop-005',
@@ -68,7 +68,7 @@ var RE_DATA = {
       features: ['Swimming pool', 'Outdoor entertaining', 'Double garage', 'Walk to beach'],
       agentId: 'agent-002',
       photos: 6,
-      inspection: 'Sun 10:00–10:30am',
+      inspection: 'Sun 10:00-10:30am',
     },
     {
       id: 'prop-006',
@@ -81,7 +81,7 @@ var RE_DATA = {
       features: ['Café precinct', 'Stone benchtops', 'Secure parking', 'Air conditioning'],
       agentId: 'agent-002',
       photos: 4,
-      inspection: 'Sat 10:30–11:00am',
+      inspection: 'Sat 10:30-11:00am',
     },
     {
       id: 'prop-007',
@@ -94,7 +94,7 @@ var RE_DATA = {
       features: ['Deep-water frontage', 'Pontoon', 'Swimming pool', 'Multiple living zones'],
       agentId: 'agent-001',
       photos: 8,
-      inspection: 'Sun 11:00–11:30am',
+      inspection: 'Sun 11:00-11:30am',
     },
     {
       id: 'prop-008',
@@ -107,7 +107,7 @@ var RE_DATA = {
       features: ['Beachfront', 'Resort pool', 'Gym', 'Ocean views'],
       agentId: 'agent-008',
       photos: 6,
-      inspection: 'Sat 9:00–9:30am',
+      inspection: 'Sat 9:00-9:30am',
     },
     {
       id: 'prop-009',
@@ -120,7 +120,7 @@ var RE_DATA = {
       features: ['Beachfront', 'Rooftop deck', 'Guest wing', 'Smart home'],
       agentId: 'agent-003',
       photos: 8,
-      inspection: 'Sat 11:30am–12pm',
+      inspection: 'Sat 11:30am-12pm',
     },
     {
       id: 'prop-010',
@@ -133,7 +133,7 @@ var RE_DATA = {
       features: ['Courtyard pool', 'Timber finishes', 'Established gardens', 'Double garage'],
       agentId: 'agent-003',
       photos: 5,
-      inspection: 'Sat 12:30–1:00pm',
+      inspection: 'Sat 12:30-1:00pm',
     },
     {
       id: 'prop-011',
@@ -154,7 +154,7 @@ var RE_DATA = {
       beds: 3, baths: 2, cars: 1,
       price: 735000,
       suburb: 'Palm Beach',
-      description: 'Practical and bright townhouse close to Palm Beach\'s patrolled surf club. Open-plan living, a sunny courtyard and a master suite with walk-in robe — perfect as a holiday or permanent home.',
+      description: 'Practical and bright townhouse close to Palm Beach\'s patrolled surf club. Open-plan living, a sunny courtyard and a master suite with walk-in robe, ideal as a holiday or permanent home.',
       features: ['Courtyard', 'Walk-in robe', 'Air conditioning', 'Near surf club'],
       agentId: 'agent-009',
       photos: 4

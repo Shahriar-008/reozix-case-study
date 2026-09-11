@@ -1,5 +1,5 @@
 // =====================================================================
-// Reozix Standalone Demos — Admin Dashboard Application Controller
+// Reozix Standalone Demos: Admin Dashboard Application Controller
 // Handles vertical switching, live customization, inventory management,
 // CRM leads tracking, and system backups.
 // =====================================================================
@@ -103,11 +103,13 @@
         colorInput.addEventListener('input', function() {
           hexInput.value = colorInput.value;
           self.applyAccentPreview(colorInput.value);
+          self.updateContrastBadges(colorInput.value);
         });
         hexInput.addEventListener('input', function() {
           if (/^#[0-9A-Fa-f]{6}$/.test(hexInput.value)) {
             colorInput.value = hexInput.value;
             self.applyAccentPreview(hexInput.value);
+            self.updateContrastBadges(hexInput.value);
           }
         });
       }
@@ -119,6 +121,7 @@
           if (colorInput) colorInput.value = c;
           if (hexInput) hexInput.value = c;
           self.applyAccentPreview(c);
+          self.updateContrastBadges(c);
         });
       });
 
@@ -288,9 +291,55 @@
       }
     },
 
+    getLuminance: function(hex) {
+      hex = hex.replace('#', '');
+      if (hex.length === 3) {
+        hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+      }
+      var r = parseInt(hex.substring(0, 2), 16) / 255;
+      var g = parseInt(hex.substring(2, 4), 16) / 255;
+      var b = parseInt(hex.substring(4, 6), 16) / 255;
+      var a = [r, g, b].map(function(v) {
+        return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+      });
+      return a[0] * 0.2126 + a[1] * 0.7152 + a[2] * 0.0722;
+    },
+
+    getContrastRatio: function(hex1, hex2) {
+      var lum1 = this.getLuminance(hex1);
+      var lum2 = this.getLuminance(hex2);
+      var brightest = Math.max(lum1, lum2);
+      var darkest = Math.min(lum1, lum2);
+      return (brightest + 0.05) / (darkest + 0.05);
+    },
+
+    updateContrastBadges: function(color) {
+      if (!color || !/^#[0-9A-Fa-f]{3,6}$/.test(color)) return;
+      var darkRatio = this.getContrastRatio(color, '#12161f');
+      var lightRatio = this.getContrastRatio(color, '#ffffff');
+
+      var darkBadge = document.getElementById('contrast-badge-dark');
+      var lightBadge = document.getElementById('contrast-badge-light');
+
+      if (darkBadge) {
+        var darkPass = darkRatio >= 4.5 ? 'AA Pass' : (darkRatio >= 3.0 ? 'Large Text Only' : 'Fail');
+        var darkClass = darkRatio >= 4.5 ? 'pass' : (darkRatio >= 3.0 ? 'warn' : 'fail');
+        darkBadge.className = 'contrast-badge ' + darkClass;
+        darkBadge.innerHTML = 'Against Dark (#12161f): <strong>' + darkRatio.toFixed(1) + ':1 (' + darkPass + ')</strong>';
+      }
+
+      if (lightBadge) {
+        var lightPass = lightRatio >= 4.5 ? 'AA Pass' : (lightRatio >= 3.0 ? 'Large Text Only' : 'Fail');
+        var lightClass = lightRatio >= 4.5 ? 'pass' : (lightRatio >= 3.0 ? 'warn' : 'fail');
+        lightBadge.className = 'contrast-badge ' + lightClass;
+        lightBadge.innerHTML = 'Against White (#ffffff): <strong>' + lightRatio.toFixed(1) + ':1 (' + lightPass + ')</strong>';
+      }
+    },
+
     applyAccentPreview: function(color) {
       document.documentElement.style.setProperty('--accent', color);
       document.documentElement.style.setProperty('--accent-glow', color + '40');
+      this.updateContrastBadges(color);
     },
 
     updateUnreadCounter: function() {
@@ -358,7 +407,7 @@
           return [
             '<tr>',
             '  <td><span class="status-badge status-' + (l.status || 'new') + '">' + (l.type || 'lead') + '</span></td>',
-            '  <td><strong>' + (l.name || 'Anonymous') + '</strong><br><small style="color:var(--text-muted);">' + (l.email || l.phone || '—') + '</small></td>',
+            '  <td><strong>' + (l.name || 'Anonymous') + '</strong><br><small style="color:var(--text-muted);">' + (l.email || l.phone || '-') + '</small></td>',
             '  <td>' + (l.title || 'General Inquiry') + '</td>',
             '  <td>' + dateStr + '</td>',
             '  <td><span class="status-badge status-' + (l.status || 'new') + '">' + (l.status || 'new') + '</span></td>',
@@ -392,6 +441,7 @@
       var accent = d.accentColor || '#d4a853';
       document.getElementById('detail-accent-color').value = accent;
       document.getElementById('detail-accent-hex').value = accent;
+      this.updateContrastBadges(accent);
 
       document.getElementById('detail-hero-kicker').value = d.heroKicker || '';
       document.getElementById('detail-hero-title').value = d.heroTitle || '';
@@ -502,7 +552,7 @@
             '  <td><strong>$' + r.rate + ' AUD</strong></td>',
             '  <td>' + r.maxGuests + ' Guests</td>',
             '  <td>' + (r.view || 'Standard') + '</td>',
-            '  <td><small>' + (r.amenities ? r.amenities.slice(0, 3).join(', ') + '...' : '—') + '</small></td>',
+            '  <td><small>' + (r.amenities ? r.amenities.slice(0, 3).join(', ') + '...' : '-') + '</small></td>',
             '  <td>',
             '    <button class="btn-secondary" style="padding:4px 8px;" onclick="AdminApp.openItemModal(\'rooms\', \'' + r.id + '\')">Edit</button> ',
             '    <button class="btn-danger" style="padding:4px 8px;" onclick="AdminApp.deleteItem(\'rooms\', \'' + r.id + '\')">Delete</button>',
@@ -536,9 +586,9 @@
             '<tr>',
             '  <td><div class="cell-flex"><img src="' + img + '" class="table-thumb" alt=""><div><strong>' + pj.title + '</strong><br><small style="color:var(--text-muted);">' + pj.suburb + '</small></div></div></td>',
             '  <td><span class="status-badge status-in-progress">' + pj.type + '</span></td>',
-            '  <td><strong>$' + (pj.budget ? pj.budget.toLocaleString('en-AU') : '—') + '</strong></td>',
-            '  <td>' + (pj.duration || '—') + '</td>',
-            '  <td>' + (pj.completed || '—') + '</td>',
+            '  <td><strong>$' + (pj.budget ? pj.budget.toLocaleString('en-AU') : '-') + '</strong></td>',
+            '  <td>' + (pj.duration || '-') + '</td>',
+            '  <td>' + (pj.completed || '-') + '</td>',
             '  <td>',
             '    <button class="btn-secondary" style="padding:4px 8px;" onclick="AdminApp.openItemModal(\'projects\', \'' + pj.id + '\')">Edit</button> ',
             '    <button class="btn-danger" style="padding:4px 8px;" onclick="AdminApp.deleteItem(\'projects\', \'' + pj.id + '\')">Delete</button>',
@@ -570,7 +620,7 @@
           return [
             '<tr>',
             '  <td><strong>' + (it.name || it.title) + '</strong></td>',
-            '  <td>' + (it.summary || it.desc || it.role || (it.price ? '$' + it.price : '—')) + '</td>',
+            '  <td>' + (it.summary || it.desc || it.role || (it.price ? '$' + it.price : '-')) + '</td>',
             '  <td>',
             '    <button class="btn-secondary" style="padding:4px 8px;" onclick="AdminApp.openItemModal(\'' + self.currentSubtab + '\', \'' + (it.id || it.name) + '\')">Edit</button> ',
             '    <button class="btn-danger" style="padding:4px 8px;" onclick="AdminApp.deleteItem(\'' + self.currentSubtab + '\', \'' + (it.id || it.name) + '\')">Delete</button>',
@@ -659,14 +709,28 @@
       if (!tbody) return;
 
       if (filtered.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; padding:40px; color:var(--text-faint);">No inquiries matching the selected filters.</td></tr>';
+        tbody.innerHTML = [
+          '<tr>',
+          '  <td colspan="7" style="padding:48px 20px; text-align:center;">',
+          '    <div style="max-width:440px; margin:0 auto; display:flex; flex-direction:column; align-items:center; gap:12px;">',
+          '      <div style="width:52px; height:52px; border-radius:14px; background:var(--bg-input); border:1px solid var(--border-subtle); display:flex; align-items:center; justify-content:center; font-size:24px;">📥</div>',
+          '      <div style="font-weight:700; font-size:1.05rem; color:var(--text-main);">No Customer Inquiries Yet</div>',
+          '      <div style="font-size:0.85rem; color:var(--text-muted); line-height:1.5;">Inquiries submitted through the guest booking form, valuation tool, or tender desk stream directly into this console.</div>',
+          '      <button type="button" class="btn-primary" style="margin-top:8px; font-size:0.825rem; padding:8px 16px;" onclick="AdminApp.addSampleLead()">',
+          '        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" style="vertical-align:middle; margin-right:4px;"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>',
+          '        <span>Generate Sample Lead</span>',
+          '      </button>',
+          '    </div>',
+          '  </td>',
+          '</tr>'
+        ].join('');
         return;
       }
 
       var self = this;
       tbody.innerHTML = filtered.map(function(l) {
         var dateStr = new Date(l.date).toLocaleDateString('en-AU', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
-        var amountStr = l.amount ? '$' + l.amount.toLocaleString('en-AU') : '—';
+        var amountStr = l.amount ? '$' + l.amount.toLocaleString('en-AU') : '-';
         return [
           '<tr>',
           '  <td><span class="status-badge status-' + l.status + '">' + (l.vertical || '') + ' · ' + (l.type || 'inquiry') + '</span></td>',
@@ -725,9 +789,9 @@
         '</div>',
         '<div class="panel-box" style="margin-bottom:16px;">',
         '  <h4>Customer Contact</h4>',
-        '  <p><strong>Name:</strong> ' + (lead.name || '—') + '</p>',
-        '  <p><strong>Email:</strong> <a href="mailto:' + lead.email + '" style="color:var(--accent);">' + (lead.email || '—') + '</a></p>',
-        '  <p><strong>Phone:</strong> <a href="tel:' + lead.phone + '" style="color:var(--accent);">' + (lead.phone || '—') + '</a></p>',
+        '  <p><strong>Name:</strong> ' + (lead.name || '-') + '</p>',
+        '  <p><strong>Email:</strong> <a href="mailto:' + lead.email + '" style="color:var(--accent);">' + (lead.email || '-') + '</a></p>',
+        '  <p><strong>Phone:</strong> <a href="tel:' + lead.phone + '" style="color:var(--accent);">' + (lead.phone || '-') + '</a></p>',
         '</div>',
         '<div class="panel-box">',
         '  <h4>Submission Payload</h4>',

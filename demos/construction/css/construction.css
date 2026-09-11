@@ -1,4 +1,4 @@
-/* Construction demo stylesheet — Reozix Construction, Brisbane QLD */
+/* Construction demo stylesheet · Reozix Construction, Brisbane QLD */
 :root {
   --ct-accent: #e8752a;
   --ct-accent-dark: #d06520;
@@ -10,6 +10,9 @@
   --ct-shadow: 0 2px 12px rgba(0,0,0,0.08);
   --ct-footer-bg: #1c1c1c;
   --ct-footer-text: #a0a0a0;
+  --ct-radius-control: 8px;
+  --ct-radius-card: 14px;
+  --ct-font-mono: "SF Mono", Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 /* Container */
@@ -39,38 +42,135 @@
 }
 .ct-nav .nav-links a:hover { color: var(--ct-accent-dark); }
 .ct-nav .nav-toggle { font-size: 1.5rem; color: var(--ct-text); line-height: 1; padding: 4px; }
-.ct-nav .ct-btn { padding: 9px 20px; font-size: 0.875rem; border-radius: 4px; }
+.ct-nav .ct-btn { padding: 9px 20px; font-size: 0.875rem; border-radius: var(--ct-radius-control); }
 
 /* Hero */
 .ct-hero {
   margin-top: 72px;
   position: relative;
   color: #fff;
-  background: linear-gradient(135deg, #22201d 0%, #141311 72%);
+  background: #141311;
+  background-image:
+    linear-gradient(rgba(232, 117, 42, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 117, 42, 0.07) 1px, transparent 1px);
+  background-size: 40px 40px;
   overflow: hidden;
-  /* Reserve layout space for the background image (CLS prevention) */
-  aspect-ratio: 16 / 7;
+}
+.ct-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(18, 17, 15, 0.95) 0%, rgba(18, 17, 15, 0.82) 50%, rgba(18, 17, 15, 0.45) 100%);
+  z-index: 0;
+  pointer-events: none;
 }
 .ct-hero .ct-hero-bg {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  opacity: 0.28;
+  opacity: 0.48;
 }
 .ct-hero .ct-hero-bg.ct-hero-bg--site {
-  background-image: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1600&q=60');
+  background-image: url('https://images.unsplash.com/photo-1541888946425-d0fbb186156f?auto=format&fit=crop&w=1600&q=80');
+}
+.ct-hero-split {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  align-items: center;
+  gap: 48px;
+  position: relative;
+  z-index: 1;
+  padding: 80px 0 60px;
 }
 .ct-hero .ct-hero-content {
   position: relative; z-index: 1;
-  padding: 100px 0 80px;
-  max-width: 720px;
+  max-width: 680px;
 }
 .ct-hero .ct-hero-kicker {
   display: inline-block;
   font-size: 0.8125rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
   color: var(--ct-accent);
   border: 1px solid rgba(232,117,42,0.5);
-  padding: 6px 14px; border-radius: 2px;
-  margin-bottom: 24px;
+  padding: 6px 14px; border-radius: var(--ct-radius-control);
+  margin-bottom: 20px;
+}
+.ct-hero-spec-card {
+  background: rgba(22, 20, 18, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(232, 117, 42, 0.35);
+  border-radius: var(--ct-radius-card);
+  padding: 24px 28px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  font-family: var(--ct-font-mono);
+}
+.spec-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.spec-card-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--ct-accent);
+  box-shadow: 0 0 10px var(--ct-accent);
+}
+.spec-card-title {
+  font-size: 0.725rem;
+  font-weight: 700;
+  color: #d9d5d0;
+  letter-spacing: 0.08em;
+}
+.spec-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+  font-size: 0.825rem;
+}
+.spec-label {
+  color: #9ca3af;
+  font-size: 0.725rem;
+  font-weight: 600;
+}
+.spec-val {
+  color: #f3f4f6;
+  font-weight: 600;
+}
+.spec-drafting-line {
+  height: 1px;
+  background: linear-gradient(90deg, var(--ct-accent), transparent);
+  margin: 16px 0;
+}
+.spec-live-item {
+  background: rgba(232, 117, 42, 0.1);
+  border: 1px solid rgba(232, 117, 42, 0.25);
+  border-radius: var(--ct-radius-control);
+  padding: 12px 16px;
+}
+.spec-live-pill {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--ct-accent);
+  letter-spacing: 0.06em;
+  margin-bottom: 4px;
+}
+.spec-live-item p {
+  font-size: 0.85rem;
+  color: #fff;
+  line-height: 1.4;
+  margin: 0;
+}
+@media (max-width: 900px) {
+  .ct-hero-split {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 60px 0 40px;
+  }
 }
 .ct-hero .ct-hero-content h1 {
   font-size: 3.25rem; font-weight: 800; letter-spacing: -0.03em;
@@ -143,7 +243,7 @@
 .ct-btn {
   display: inline-block; padding: 12px 28px;
   background: var(--ct-accent); color: #fff;
-  border-radius: 4px; font-size: 0.9375rem; font-weight: 700;
+  border-radius: var(--ct-radius-control); font-size: 0.9375rem; font-weight: 700;
   border: none; cursor: pointer; text-align: center;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
@@ -175,7 +275,7 @@
   padding: 9px 18px;
   background: var(--ct-bg);
   border: 1px solid var(--ct-border);
-  border-radius: 4px;
+  border-radius: var(--ct-radius-control);
   font-size: 0.875rem; font-weight: 600; color: var(--ct-text-secondary);
   transition: border-color 0.15s, color 0.15s, background 0.15s;
 }
@@ -192,7 +292,7 @@
 .ct-portfolio-grid .project-card {
   background: var(--ct-bg);
   border: 1px solid var(--ct-border);
-  border-radius: 8px; overflow: hidden;
+  border-radius: var(--ct-radius-card); overflow: hidden;
   box-shadow: var(--ct-shadow);
   transition: transform 0.2s, box-shadow 0.2s;
   display: flex; flex-direction: column;
@@ -208,35 +308,51 @@
 }
 /* img paints above the emoji placeholder: placeholder shows while loading,
    then the loaded photo covers it (placeholder is position:absolute) */
-.ct-project-photo img { width: 100%; height: 100%; object-fit: cover; position: relative; z-index: 1; }
 .ct-project-photo .photo-placeholder {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
-  font-size: 3rem;
+  font-size: 2.75rem;
+  background: linear-gradient(135deg, #22201d, #33302a);
+  color: #f0b27a;
+  z-index: 0;
+}
+.ct-project-photo img {
+  position: relative; z-index: 1;
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.3s;
+}
+.ct-project-card:hover .ct-project-photo img,
+.ct-portfolio-grid .project-card:hover .ct-project-photo img {
+  transform: scale(1.04);
 }
 .ct-project-type {
-  position: absolute; top: 12px; left: 12px;
-  background: var(--ct-accent); color: #fff;
-  font-size: 0.6875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
-  padding: 5px 10px; border-radius: 2px;
+  position: absolute; top: 12px; left: 12px; z-index: 2;
+  background: rgba(0,0,0,0.72); color: #fff;
+  font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  padding: 5px 10px; border-radius: 4px;
 }
 .ct-project-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
 .ct-project-title {
-  font-size: 1.125rem; font-weight: 700; letter-spacing: -0.01em;
-  margin-bottom: 2px;
+  font-size: 1.1875rem; font-weight: 700; letter-spacing: -0.01em;
+  margin-bottom: 4px;
 }
-.ct-project-title a { transition: color 0.15s; }
+.ct-project-title a { color: var(--ct-text); text-decoration: none; }
 .ct-project-title a:hover { color: var(--ct-accent-dark); }
-.ct-project-suburb { font-size: 0.875rem; color: var(--ct-text-secondary); margin-bottom: 14px; }
-
-/* Budget bar */
-.ct-budget-bar { margin-bottom: 14px; }
-.ct-budget-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
-.ct-budget-label {
-  font-size: 0.6875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em;
-  color: var(--ct-text-secondary);
+.ct-project-suburb {
+  font-size: 0.8125rem; color: var(--ct-text-secondary);
+  margin-bottom: 14px;
 }
-.ct-budget-value { font-size: 0.9375rem; font-weight: 700; color: var(--ct-accent-dark); }
+.ct-project-desc {
+  font-size: 0.875rem; line-height: 1.6; color: var(--ct-text-secondary);
+  margin-bottom: 16px;
+}
+.ct-budget-bar { margin-bottom: 14px; }
+.ct-budget-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 6px; font-size: 0.8125rem;
+}
+.ct-budget-label { color: var(--ct-text-secondary); }
+.ct-budget-value { font-weight: 800; color: var(--ct-accent-dark); font-size: 0.9375rem; }
 .ct-budget-track { height: 6px; border-radius: 999px; background: var(--ct-border); overflow: hidden; }
 .ct-budget-fill { height: 100%; background: var(--ct-accent); border-radius: 999px; }
 /* Budget-bar width utilities (replaced inline width styles) */
@@ -264,13 +380,28 @@
 .ct-big-icon { font-size: 3rem; line-height: 1; margin-bottom: 16px; }
 .ct-narrow { max-width: 460px; margin: 0 auto 28px; }
 
-/* Project meta + link */
+/* Project meta + link (Technical Drafting Grid Badges) */
 .ct-project-meta {
-  display: flex; flex-wrap: wrap; gap: 16px;
+  display: flex; flex-wrap: wrap; gap: 8px;
   padding: 12px 0; border-top: 1px solid var(--ct-border);
-  margin-bottom: 14px; font-size: 0.875rem; color: var(--ct-text-secondary);
+  margin-bottom: 14px;
 }
-.ct-project-meta .ct-meta-item { display: inline-flex; align-items: center; gap: 5px; }
+.ct-project-meta .ct-meta-item,
+.ct-project-meta .ct-meta-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--ct-surface);
+  border: 1px solid var(--ct-border);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-family: var(--ct-font-mono);
+  font-size: 0.775rem;
+  font-weight: 700;
+  color: var(--ct-text);
+  letter-spacing: 0.02em;
+}
+.ct-project-meta svg {
+  color: var(--ct-accent-dark);
+}
 .ct-project-link {
   margin-top: auto; display: inline-block;
   font-size: 0.875rem; font-weight: 700; color: var(--ct-accent-dark);
@@ -323,7 +454,7 @@
   border: 1px solid var(--ct-border); border-radius: 6px;
   font-size: 0.9375rem;
 }
-.ct-feature-list li::before { content: '✓'; font-weight: 700; color: var(--ct-accent); }
+.ct-feature-list li::before { content: 'âœ“'; font-weight: 700; color: var(--ct-accent); }
 
 /* Testimonial */
 .ct-testimonial {
@@ -431,7 +562,7 @@
 .ct-service-sidebar h3 { font-size: 1.125rem; font-weight: 700; margin-bottom: 16px; }
 .ct-includes-list { list-style: none; display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 24px; }
 .ct-includes-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 0.9375rem; }
-.ct-includes-list li::before { content: '✓'; font-weight: 700; color: var(--ct-accent); }
+.ct-includes-list li::before { content: 'âœ“'; font-weight: 700; color: var(--ct-accent); }
 .ct-price-range {
   display: inline-block; padding: 10px 16px;
   background: rgba(232,117,42,0.12);
@@ -631,15 +762,15 @@
 }
 
 /* =====================================================================
-   Upgrade pass � brand type, accessible contrast, icon system,
+   Upgrade pass — brand type, accessible contrast, icon system,
    quote wizard, team, FAQ, before/after, sticky mobile CTA.
    ===================================================================== */
 
 :root {
   --ct-font-display: 'Archivo', 'Inter', -apple-system, 'Segoe UI', sans-serif;
   --ct-ease: cubic-bezier(0.32, 0.72, 0, 1);
-  --ct-accent-strong: #b04a10;  /* small accent text � 4.6:1 on white */
-  --ct-btn-bg: #c05a12;         /* button fill � 4.6:1 with white text */
+  --ct-accent-strong: #b04a10;  /* small accent text — 4.6:1 on white */
+  --ct-btn-bg: #c05a12;         /* button fill — 4.6:1 with white text */
   --ct-btn-hover: #a84e10;
 }
 
@@ -745,7 +876,7 @@ h1, h2, h3, .ct-page-kicker { font-family: var(--ct-font-display); }
   box-shadow: 0 0 0 1px rgba(0,0,0,0.2); pointer-events: none;
 }
 .ct-ba-handle::after {
-  content: '� �'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  content: '‹ ›'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
   width: 44px; height: 44px; border-radius: 50%; background: #fff; color: var(--ct-text);
   display: flex; align-items: center; justify-content: center; font-size: 0.9375rem; font-weight: 700;
   box-shadow: 0 4px 14px rgba(0,0,0,0.3);
@@ -792,7 +923,7 @@ h1, h2, h3, .ct-page-kicker { font-family: var(--ct-font-display); }
 
 
 /* =====================================================================
-   Modern form layer — quote wizard surfaces, inputs, selects, steps
+   Modern form layer â€” quote wizard surfaces, inputs, selects, steps
    ===================================================================== */
 .ct-quote-wrap {
   background: var(--ct-surface);
